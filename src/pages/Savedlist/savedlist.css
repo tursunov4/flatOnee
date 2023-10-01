@@ -1,0 +1,13 @@
+.catalogue-banner{
+    background-image: url("../../assets/img/catalogue-banner.png");
+
+}
+.catalogue-banner > .container {
+    padding: 49px 15px;
+    height: calc(100% - 0px) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: inherit;
+    text-decoration: none;
+}

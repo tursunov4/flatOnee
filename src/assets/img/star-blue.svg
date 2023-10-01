@@ -1,0 +1,13 @@
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="fluent:star-emphasis-32-regular">
+<g id="Group">
+<path id="Vector" d="M12.5896 3.56459C13.1671 2.39384 14.8366 2.39384 15.4141 3.56459L18.0759 8.95809L24.0285 9.82259C25.32 10.0107 25.8363 11.5988 24.9009 12.5088L20.5941 16.708L21.6109 22.6361C21.8314 23.9223 20.4813 24.9032 19.3254 24.296L14.0019 21.4968L8.67838 24.2968C7.52338 24.9032 6.17238 23.9223 6.39288 22.6361L7.40963 16.708L3.10288 12.5097C2.16751 11.598 2.68288 10.0107 3.97526 9.82346L9.92788 8.95721L12.5896 3.56459Z" fill="url(#paint0_linear_889_322)"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_889_322" x1="25.3786" y1="0.683381" x2="2.45366" y2="27.3395" gradientUnits="userSpaceOnUse">
+<stop stop-color="#125EF3"/>
+<stop offset="1" stop-color="#C024E7"/>
+</linearGradient>
+</defs>
+</svg>

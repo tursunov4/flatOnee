@@ -1,0 +1,549 @@
+
+
+.addobject{
+    margin-top: 68px;
+}
+.addobject-kopleks{
+    margin-bottom: 30px;
+}
+.addobject__list2 h2{
+    margin-bottom: 13px;
+    color: var(--13, #131418);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+    
+    /* 15 Б */
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 135%; /* 20.25px */
+}
+.addobject > .container{
+    margin: 0 10%;
+    padding: 27px 0;
+}
+.addobject__wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.addobject__list1{
+    max-width: 230px;
+}
+.addobject__list1 > h2{
+    color: var(--13, #131418);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+font-family: Inter;
+font-size: 22px;
+font-style: normal;
+font-weight: 500;
+line-height: 125%; /* 27.5px */
+}
+
+.addobject__list2{
+    max-width: 590px;
+}
+
+.addobject__list3{
+    width: 150px;
+}
+.addobject__list3 > h4{
+    color: var(--13, #131418);
+/* 15 Б */
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 135%; /* 20.25px */
+mix-blend-mode: difference;
+}
+
+.addobject__list-tip{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 42px;
+}
+.addobeject__tipobj{
+    margin-bottom: 42px;
+}
+.addtip__btn1{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: var(--13, #131418);
+    font-family: Inter;
+    background: var(--f-1, #F2F2F2);
+padding: 10px;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%;
+}
+.addtip__btn1-active{
+    background-color: #131418 !important;
+    color: #F2F2F2 !important;
+}
+.tipobj__btnswrap{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 320px;
+    flex-wrap: wrap;
+}
+.addmap__mapwrap{
+    width: 100%;
+    height: 321px;
+}
+.addmap__label{
+    width: 100%;
+    position: relative;
+}
+.addmap__label > input{
+    border: none;
+    outline: none;
+    padding: 15px 0;
+    width: 70%;
+    color: var(--80, #5B5B5B);
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%;
+border-bottom: 0.6px solid var(--13, #131418);
+}
+.addobject-addhash{
+    margin-bottom: 20px;
+}
+.addmap__label > img{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.addobeject__addmap{
+    margin-bottom: 42px;
+}
+.kached__btnwrap{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.addobeject__kaches {
+    margin-bottom: 42px;
+}
+.addobeject__etaj{
+    margin-bottom: 42px;
+    
+}
+.addobeject__ploshadbtn{
+    color: var(--13, #131418);
+    padding: 6px;
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%;
+border-bottom: 0.6px solid var(--13, #131418);
+
+}
+
+.addobeject__ploshad{
+    margin-bottom: 36px;
+}
+.addobject__kalich{
+    margin-bottom: 36px;
+}
+.addobject__lift{
+    margin-bottom: 36px;
+}
+.addobject__liftbtns{
+    display: flex;
+    gap: 10px;
+}
+.addobject__fotoinput{
+    display: block;
+    width: 285px;
+    padding: 6px;
+    border-radius: 2px;
+background: var(--f-1, #F2F2F2);
+margin-bottom: 16px;
+}
+.addobject__fotolist{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.addobject__fotolistitem{
+    position: relative;
+    width: 285px;
+height: 187px;
+border-radius: 2px;
+background: #D9D9D9;
+}
+.addobject__fotolistitemimgclose{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+}
+.addobject__fotoinput{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 6px 0 0 16px;
+}
+.addobject__fotoinput >input{
+    display: none;
+}
+.addobject__foto{
+    margin-bottom: 36px;
+}
+.addobject__opisane{
+    margin-bottom: 36px;
+}
+.addobject__opisane textarea{
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 232px;
+    border-radius: 2px;
+border: 1px solid var(--13, #131418);
+color: var(--80, #5B5B5B);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+/* 15 Л */
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%;
+padding: 12px;
+}
+.addobjec__senawrap{
+    display: flex;
+    gap: 8px;
+    cursor: pointer;
+    padding: 10px;
+border-bottom: 1px solid var(--80, #5B5B5B);
+}
+.addobjec__senawrap p{
+    color: var(--13, #131418);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+/* 15 Б */
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 135%;
+}
+.addobject__sena{
+    margin-bottom: 42px;
+}
+.addobjectbtns{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 36px;
+}
+.addobjec__senawrap span{
+    color: var(--13, #131418);
+    /* 15 Л */
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 135%;
+}
+.addobjectbtns1{
+    border: none;
+    outline: none;
+    color: var(--13, #131418);
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 135%; /* 20.25px */
+padding: 18px 32px;
+
+}
+
+.addobject__udalit{
+    color: var(--ff-928-b, #F23F34);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%; /* 20.25px */
+text-decoration-line: underline;
+margin-bottom: 20px;
+cursor: pointer;
+}
+.addobject__navigate{
+    margin-top: 16px;
+}
+.addobject__navigate >li >a{
+    display: block;
+    color: var(--ff, #5B5B5B);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+/* 15 Л */
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%;
+margin-bottom: 8px;
+}
+.addobject__navigate >li >a:active{
+  text-decoration: overline;
+}
+.addobject__etaj2{
+    margin-bottom: 36px;
+}
+.addobject__sanaz{
+    margin-bottom: 36px;
+}
+.addobject__sanazbtns{
+    display: flex;
+    gap: 10px;
+}
+.addobject__snazbnts{
+    display: flex;
+    gap: 10px;
+}
+.addobject__chek{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+
+}
+.addobject__cheklistinput > input{
+
+    width: 18px;
+}
+.addobject__cheklistinput{
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.addobject__mest{
+    margin-bottom: 36px;
+}
+.addobject__nazvaniya{
+    margin-bottom: 36px;
+}
+.addobject__nazvaniya > input{
+    border: none;
+    outline: none;
+    border-bottom: 0.6px solid var(--13, #131418);
+    color: var(--80, #5B5B5B);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+    /* 15 Л */
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 135%;
+    padding: 15px 0;
+    width: 70%;
+}
+@media only screen and (max-width:460px){
+    .addobject > .container{
+        margin: 0 10px;
+        padding: 27px 0;
+    }
+}
+.addobject-addhash__list{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+     gap: 12px;
+     margin-top: 15px;
+     margin-bottom: 20px;   
+}
+.addobject-addhash__list-item{
+    display: flex;
+    align-items: center;
+  
+    gap: 15px;
+    padding: 5px;
+    border-radius: 2px;
+    background: var(--f-0-f-0-f-0, #F0F0F0);
+
+}
+.addobject-addhash__list-item > img{
+   cursor: pointer;
+}
+.addobejectploshad__label > input{
+    border: none;
+    outline: none;
+    padding: 15px 8px;
+    width: 70px;
+    color: var(--80, #5B5B5B);
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 135%;
+    border-bottom: 0.6px solid var(--13, #131418);
+}
+.addobject__etajwrap2{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+}
+.addobject__ubostva{
+    margin-bottom: 20px;
+}
+.object__ubostva-listitem{
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 8px;
+}
+.object__ubostva-listitem > p{
+    color: var(--13, #131418);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+
+/* 15 Л */
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%; /* 20.25px */
+}
+.addobject-planpentaj{
+    margin-bottom: 30px;
+}
+.addobject-planpentaj >img{
+    margin-bottom: 10px;
+}
+.addobject-plan__list{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+.addobejectploshad__label2  > input{
+    border: none;
+    outline: none;
+    padding: 15px 8px;
+    width: 150px;
+    color: var(--80, #5B5B5B);
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 135%;
+    border-bottom: 0.6px solid var(--13, #131418);
+}
+.planpentaj__p{
+    max-width: 233px;
+    color: var(--13, #131418);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%; 
+margin-bottom: 12px;
+}
+.addobject__nvm{
+    margin-bottom: 20px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.addobject__nvm  > li > div{
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
+.addobject__nvm  > li > div > h3{
+    color: var(--13, #131418);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+
+/* 15 Б */
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 135%; /* 20.25px */
+}
+.addobjectbtns{
+    margin-top: 70px;
+}
+.addkom__chekk{
+    margin: 40px 0;
+}
+.addobject__fotolistitemimg{
+    width: 100%;
+    height: 100%;
+}
+
+.addobject__sena > input{
+    border: none;
+    outline: none;
+    padding: 15px 0;
+    width: 70%;
+    color: var(--80, #5B5B5B);
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 135%;
+    border-bottom: 0.6px solid var(--13, #131418);
+}
+.addobject-addhash > form{
+    position: relative;
+}
+.addhashtag__tagslist{
+    top: 55px;
+    position: absolute;
+    display: block;
+    width: 70%;
+   height: 200px;
+   background-color: #131418;
+   overflow: auto;
+}
+.addhashtag__tagslist  > li{
+    color: #F0F0F0 !important;
+    padding: 4px 0;
+}
+.addhashtag__tagslist  > li:hover{
+    background-color: rgb(0, 92, 117);
+    color: #fff;
+}
+
+/*  
+   ('kids','Детсад'),
+    ('cafe','Кафе'),
+    ('school','Школа'),
+    ('restaran','Ресторан'),
+    ('park','Парк'),
+    ('magazin','Магазины'),
+    ('hospital','Больница'),
+    ('metro','Метро 230м'),
+    ('plyaj','Пляж 240м'),
+    ('tz','ТЦ'),
+ */
+ /* 
+ ('restaran', 'Ресторан'),
+    ('park','Парк'),
+    ('kids','Детская площадка'),
+    ('bassen','Бассейн'),
+    ('sport','Спорт площадка'),
+    ('fitnes','Фитнес центр')
+  */

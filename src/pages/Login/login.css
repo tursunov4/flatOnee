@@ -1,0 +1,119 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('../../assets/img/loginfon.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .form {
+    background: #f6f6f6;
+    padding: 33px 16px 44px;
+    width: 100%;
+    margin: 10px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 590px;
+  }
+  .form__content {
+    text-align: left;
+    max-width: 383px;
+    width: 100%;
+  }
+  .form__title {
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 125%;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .form__input {
+    width: 100%;
+    position: relative;
+  }
+  .form__input input {
+    border: none;
+    outline: none;
+    border-bottom: 0.6px solid var(--13, #131418);
+    padding: 12px 25px 12px 0px;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 150%;
+    color: var(--80, #5b5b5b);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: "ss11" on, "ss10" on, "ss09" on, "ss08" on, "ss07" on,
+      "ss06" on, "ss05" on;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  .form__input::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: 0;
+    top: 20px;
+
+    z-index: 2;
+  }
+  .form__input-info {
+    margin-bottom: 18px;
+    color: var(--13, #131418);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: "ss01" on, "ss11" on, "ss09" on, "ss08" on, "ss07" on,
+      "ss05" on, "ss04" on, "ss03" on, "ss06" on, "ss10" on, "salt" on;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 120%;
+    max-width: 230px;
+  }
+  
+  .btn {
+    border: none;
+    outline: none;
+    display: block;
+    width: 210px;
+    cursor: pointer;
+    margin: 0 auto; 
+    border-radius: 2px;
+    background: var(--13, #131418);
+    padding: 13px 32px;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    color: var(--ff, #fafafd);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: "ss11" on, "ss10" on, "ss09" on, "ss08" on, "ss07" on,
+      "ss06" on, "ss05" on;
+    text-align: center;
+  
+  }
+  .btn:hover {
+    opacity: 0.7;
+  }
+  .btn:active {
+    opacity: 1;
+  }
+  .form__btn {
+    margin-top: 22px;
+    text-align: center;
+  }
+  @media screen and (max-width: 500px) {
+    .form__content {
+      max-width: 300px;
+    }
+  }

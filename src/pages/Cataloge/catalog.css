@@ -1,0 +1,7 @@
+
+.catalugbarner2-bag{
+    background-image: url("../../assets/img/categback.png");
+}
+.catalogue-paggination__next , .catalogue-paggination__prev{
+    cursor: pointer;
+}

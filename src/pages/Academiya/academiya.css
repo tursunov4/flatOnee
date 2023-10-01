@@ -1,0 +1,124 @@
+.academiya{
+    padding: 50px 0;
+}
+.academiya > .container{
+    margin: 0 10%;
+    padding: 27px 0;
+}
+
+.academiya-wrapper{
+    max-width: 474px;
+    margin-bottom: 67px;    
+}
+
+.academiya-wrapper > h2{
+    color: var(--13, #131418);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+/* 46 Б */
+font-family: Inter;
+font-size: 46px;
+font-style: normal;
+font-weight: 500;
+line-height: 100%; /* 46px */
+margin-bottom: 32px;
+}
+.academiya-wrapper > p{
+ max-width: 381px;
+ color: #000;
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+
+/* 15 Л */
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%; /* 20.25px */
+}
+
+
+.academiya-list{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.academiya-list > li{
+    width: 50%;
+    height: 425px;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+.academiya-list__item1{
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.70) 100%), url("../../assets/img/akademikbag2.png");
+    background-size: 100%;
+    }
+.academiya-list__item2{
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.70) 100%), url("../../assets/img/akademikbag1.png");
+    background-size: 100%;
+    background-position: center;
+}
+.academiya-list > li >p{
+    max-width: 400px;
+    color: var(--F1, #F2F2F2);
+text-align: center;
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+
+font-family: Inter;
+font-size: 46px;
+font-style: normal;
+font-weight: 500;
+line-height: 100%; /* 46px */
+}
+
+@media only screen and (max-width:1201px){
+    .academiya > .container{
+        margin: 0 10px;
+        padding: 27px 0;
+    }
+    
+}
+@media only screen and (max-width:837px){
+    .academiya-list{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .academiya-list > li{
+        width: 80%;
+    }
+}
+@media only screen and (max-width:550px){
+    .academiya{
+        padding: 30px 0;
+    }
+    .academiya-wrapper{
+        margin-bottom: 40px;
+    }
+    .academiya-wrapper > h2{
+     
+    font-size: 32px;
+    margin-bottom: 20px;
+  
+    }
+    .academiya-list > li{
+        width: 100%;
+        height: 400px;
+    }    
+    .academiya-list > li >p{
+        max-width: 300px;
+        color: var(--F1, #F2F2F2);
+    text-align: center;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+    
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%; /* 46px */
+    }
+}

@@ -1,0 +1,230 @@
+
+.chervak__section .container{
+    margin: 0 10%;
+    padding: 27px 0;
+}
+.chervak__section{
+    margin-top: 62px;
+}
+.chervak__wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.chervak__list{
+    width: 80%;
+}
+.chervak__listitem{
+    padding: 24px 16px;
+    border-radius: 2px;
+background: var(--f-1, #F2F2F2);
+display: flex;
+justify-content: space-between;
+margin-bottom: 20px;
+
+}
+.chervaklistitem__img > img{
+    width: 174px;
+height: 122px;
+object-fit: cover;
+}
+.chervaklistitem__img{
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.chervaklistitem__img-text{
+    width: 50%;
+}
+.chervaklistitem__img-text >h4{
+    color: var(--13, #131418);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+/* 22 Б */
+font-family: Inter;
+font-size: 22px;
+font-style: normal;
+font-weight: 500;
+line-height: 125%;
+margin-bottom: 10px;
+overflow: hidden;
+text-overflow: ellipsis !important;
+display: -webkit-box;
+-webkit-line-clamp: 1 !important;
+-webkit-box-orient: vertical;
+}
+.chervaklistitem__img-text > p{
+    overflow: hidden;
+    color: #5B5B5B;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+    text-overflow: ellipsis;
+    /* 15 Л */
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 135%; /* 20.25px */
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical;
+}
+.chervak__text> h2{
+
+    color: var(--13, #131418);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+/* 22 Б */
+font-family: Inter;
+font-size: 22px;
+font-style: normal;
+font-weight: 500;
+line-height: 125%; /* 27.5px */
+}
+.chervak__btns{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.chervak__izmenit{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: var(--ff, #FAFAFD);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+/* 15 Б */
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 135%; /* 20.25px */
+padding: 18px 32px;
+border-radius: 2px;
+background: var(--13, #131418);
+}
+.chervak__delete{
+    cursor: pointer;
+    color: var(--ff-928-b, #F23F34);
+text-align: right;
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%; /* 20.25px */
+text-decoration-line: underline;
+}
+
+@media only screen and (max-width:965px){
+    .chervak__wrapper{
+        flex-direction: column;
+    }
+    .chervak__list{
+        width: 100%;
+    }
+
+}
+@media only screen and (max-width:705px){
+    .container{
+        padding: 10px 0;
+    }
+    .addobject__wrapper{
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+    }
+    .addobject__list1{
+        width: 100%;
+        text-align: start;
+    }
+    .addobject__fotolist{
+        justify-content:space-around;
+        gap: 10px;
+    }
+    .addobject__fotolistitem{
+        width: 173px;
+height: 146px;
+    }
+    .addobject__list3{
+        display: none;
+    }
+}
+@media only screen and (max-width:440px){
+    .addobject__list2  h2{
+        color: var(--13, #131418);
+        font-variant-numeric: lining-nums proportional-nums;
+        font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+        /* 15 Л */
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 135%; /* 20.25px */
+    }
+    .addobject__list2 > h2{
+        color: var(--13, #131418);
+        font-variant-numeric: lining-nums proportional-nums;
+        font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+        /* 22 Б */
+        font-family: Inter;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 125%; /* 27.5px */
+        margin-bottom: 20px;
+    }
+    .addobject__nazvaniya >input{
+        width: 100%;
+    }
+}
+@media only screen and (max-width:740px){
+.chervaklistitem__img > img{
+  display: none;
+}
+.chervaklistitem__img-text{
+    width: 95%;
+}
+.chervaklistitem__img-text > p{
+    font-size: 15px;
+}
+.chervaklistitem__img-text > h4{
+    font-size: 22px;
+}
+.chervak__izmenit{
+    color: var(--ff, #FAFAFD);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+padding: 10px;
+background: var(--13, #131418);
+cursor: pointer;
+/* 15 Б */
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 135%; /* 20.25px */
+}
+.chervak__delete{
+    color: var(--ff-928-b, #F23F34);
+text-align: right;
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%; /* 20.25px */
+text-decoration-line: underline;
+}
+}
+@media only screen and (max-width:505px){
+    .chervaklistitem__img-text > p{
+        -webkit-line-clamp: 2 !important;
+    }
+}
