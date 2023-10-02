@@ -55,10 +55,12 @@ html {
   }
   .logo {
     display: block;
-    width: 91px;
-    height: 44px;
+    width: 87px;
+    height: 40.612px;
+    
   
     background-image: url(../img/logo.svg);
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
   }
@@ -600,7 +602,7 @@ html {
   .catalogue-content__header {
     margin-bottom: 70px;
     width: 100%;  
-    background-image: url(../img/catalogue-header.jpg);
+   
     background-position: center center;
     background-position: center center;
     background-size: 100% auto;
@@ -609,8 +611,10 @@ html {
   }
   .catalogue-content__header > .container {
     padding: 96px 32px 21px 32px;
-  
     background-color: rgba(0, 0, 0, 0.7);
+    background-image: url("../../assets/img/main-header.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   .catalogue-content__title {
     font-weight: 400;
@@ -2064,10 +2068,15 @@ html {
   }
   .reviews-list {
     height: fit-content;
-  
+    width: 50%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+  @media only screen and (max-width:1021px){
+    .reviews-list{
+      width: auto;
+    }
   }
   .reviews-list + .reviews-list {
     margin-left: 20px;
@@ -5646,4 +5655,20 @@ html {
 .main__map-wrp{
  display: flex;
  justify-content: center;
+}
+.footer-nav__item{
+  display: block;
+}
+.footer-nav2{
+  display: flex;
+  justify-content: space-between;
+  margin: 150px 0;
+}
+
+@media only screen and (max-width:1021px){
+  .footer-nav2{
+    margin: 50px 0;
+    justify-content: flex-start;
+    gap: 50px;
+  }
 }

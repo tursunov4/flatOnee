@@ -261,6 +261,7 @@ line-height: 135%;
 .addobjectbtns1{
     border: none;
     outline: none;
+    cursor: pointer;
     color: var(--13, #131418);
 font-family: Inter;
 font-size: 15px;
@@ -527,23 +528,37 @@ line-height: 135%; /* 20.25px */
     color: #fff;
 }
 
-/*  
-   ('kids','Детсад'),
-    ('cafe','Кафе'),
-    ('school','Школа'),
-    ('restaran','Ресторан'),
-    ('park','Парк'),
-    ('magazin','Магазины'),
-    ('hospital','Больница'),
-    ('metro','Метро 230м'),
-    ('plyaj','Пляж 240м'),
-    ('tz','ТЦ'),
- */
- /* 
- ('restaran', 'Ресторан'),
-    ('park','Парк'),
-    ('kids','Детская площадка'),
-    ('bassen','Бассейн'),
-    ('sport','Спорт площадка'),
-    ('fitnes','Фитнес центр')
-  */
+.dadddd{
+     width: 80vw;
+    height: 400px;
+
+}
+.mySwiper{
+    width: 100%;
+    height: 400px;
+}
+.article-section__newimg  img{
+    width: 100%;
+    height: 445px;
+    object-fit: cover;
+    margin-top: 20px;
+}
+.article-section__newimg  p{
+    color: #000;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+    
+    /* 15 Л */
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 135%; /* 20.25px */
+    margin-bottom: 12px;
+
+}
+@media only screen and (max-width:500px){
+    .article-section__newimg  img{
+        height: 355px;
+    }
+}

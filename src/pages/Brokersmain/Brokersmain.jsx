@@ -132,7 +132,7 @@ const Brokersmain = () => {
 
 
 
-            <li class="add__section add__sectionmobb">
+            <li onClick={()=>navigate("/chervak")} class="add__section add__sectionmobb">
               <div class="add__section-icon">
                 <div class="add__btn-addhat">
                   <span>2</span>
@@ -191,7 +191,7 @@ const Brokersmain = () => {
             <img src={pluss} alt="pluss" />
             <span>Добавить объект</span>
           </button>
-          <button class="add__btn-add">
+          <button  onClick={()=>navigate("/chervak")} class="add__btn-add">
             <div class="add__btn-addhat">
               <span>2</span>
              <img src={hat} alt="hat"/>

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import http from '../../axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
+const token = localStorage.getItem("token")
 const Footer = () => {
   const [phone, setPhone] = useState("")
   const [text , setText] = useState("")
@@ -41,11 +43,19 @@ const Footer = () => {
     <div className="container">
       <div className="footer__left">
         <div className="footer__title">Flat one</div>
-        <nav className="footer-nav">
-          <a className="footer-nav__item" href="">Раздел</a>
-          <a className="footer-nav__item" href="">Раздел</a>
-          <a className="footer-nav__item" href="">Раздел</a>
-          <a className="footer-nav__item" href="">Раздел</a>
+        <nav className="footer-nav2">
+         <div className="">
+         <Link to={"/catalog"} className="footer-nav__item" href="">ОАЭ</Link>
+         <Link to={"/catalog"} className="footer-nav__item" href="">Турция</Link>
+         <Link to={"/catalog"} className="footer-nav__item" href="">Тайланд</Link>
+         <Link to={"/catalog"} className="footer-nav__item" href="">Бали</Link>
+         </div>
+         <div>
+         <Link to={"/savedlist"} className="footer-nav__item" href="">Избранное</Link>
+         <Link to={"/articlemain"} className="footer-nav__item" href="">Статьи</Link>
+         <Link to={token ?  "/brokermain" :"/login"} className="footer-nav__item" href="">Профиль</Link>
+         <Link to={'/academiya'} className="footer-nav__item" href="">Академия</Link>
+         </div>
         </nav>
         <div className="footer__copyright">
           Copyright © 2023 Dossles design | All Rights Reserved

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./catalog.css";
 import izamphone1 from "../../assets/img/izamphone1.svg";
 import izamphone2 from "../../assets/img/izamphone2.svg";
@@ -8,13 +8,24 @@ import strelkatepa from "../../assets/img/strelkatepa.svg";
 import arrowleft from "../../assets/img/arrow-left.svg";
 import uy from "../../assets/img/uyimg.png";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
-
+import http from "../../axios";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+const token = localStorage.getItem("token")
+const id = localStorage.getItem("id")
 const Cataloge = () => {
   const [typeabout, setAbout] = useState(false);
   const [select1, setSelect1] = useState(1);
   const [select2, setSelect2] = useState(1);
   const [select3, setSelect3] = useState(1);
   const [countBad, setCaountBad] = useState(1);
+  const [next , setNext ] = useState('')
+  const [prev , setPrev] = useState("")
+  const [data , setData] = useState([])
+  const [topData , setTopData] = useState([])
+  const [refresh , setRefresh] = useState(false)
+  const navigate = useNavigate()
+
   const category1 = [
     { id: 1, name: "Все башни" },
     { id: 2, name: "Нева" },
@@ -47,8 +58,52 @@ const Cataloge = () => {
     { count: 5 },
     { count: 6 },
   ];
+
+  useEffect(()=>{
+      getCatalogOfice()
+  },[refresh])
+  useEffect(()=>{
+   getTop(  )
+  },[refresh])
+  const getCatalogOfice =()=>{
+    http.get("/catalog/offices/").then((res)=>{
+      setData(res.data.results)
+      setPrev(res.data.previous)
+      setNext(res.data.next)
+      console.log(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+    
+  }
+  const getTop =()=>{
+    http.get("/catalog/offices/top_office/").then((res)=>{
+      console.log(res.data)
+      setTopData(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
   
   const [typefilter , setTypefilter] = useState(false)
+
+  const handleLike =(ids)=>{
+
+  if(token){
+    http.post("/catalog/wishlist/" , {
+      user: id,
+    office: ids,
+    }).then((res)=>{
+    if(res.status === 201){
+       setRefresh(!refresh)
+    }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }else{
+      navigate("/login")
+  }
+  }
   return (
  
     <main>
@@ -311,10 +366,12 @@ const Cataloge = () => {
             <section className="offer-section2">
               <h2 className="offer-section2__title">Топ 7 объектов Дубай</h2>
               <div className="offer-section__wrapper">
-                <ul className="apartament-list">
-                  <li className="apartament-list__item">
+                <ul className="apartament-list"> 
+                {
+                  topData?.map((item , index)=>(
+                    <li className="apartament-list__item">
                     <div className="apartament-list__preview">
-                      <img className="current" src={apartmentpriew} alt="" />
+                      <img  onClick={()=>navigate(`/product-item/${item.id}`)} className="current" src={`http://164.92.172.190:8080${item.image[0].image}/`} alt="" />
                       <img src="img/apartament-preview.jpg" alt="" />
                       <img src="img/apartament-preview.jpg" alt="" />
                       <img src="img/apartament-preview.jpg" alt="" />
@@ -329,185 +386,22 @@ const Cataloge = () => {
                     </div>
                     <div className="apartament-list__header">
                       <div>
-                        <p className="apartament-list__address">
-                          1-й Красногвардейский пр-д, 22 стр. 2
+                        <p  onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__address">
+                          {item.name}
                         </p>
                       </div>
-                      <button className="apartament-list__favorite-btn"></button>
+                      <button onClick={()=>handleLike(item.id)} className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
                     </div>
-                    <p className="apartament-list__price">360 000–590 000 $</p>
+                    <p className="apartament-list__price">{item.price}</p>
                     <ul className="apartament-list__tags">
-                      <li className="apartament-list__tag">70 этажей</li>
-                      <li className="apartament-list__tag">от120 м2</li>
-                      <li className="apartament-list__tag">Сдача 2026</li>
+                      <li className="apartament-list__tag">{item.etaj1} этажей</li>
+                      <li className="apartament-list__tag">от {item.square} м2</li>
+                      <li className="apartament-list__tag">Сдача {item.deadline}</li>
                     </ul>
                   </li>
-                  <li className="apartament-list__item">
-                    <div className="apartament-list__preview">
-                      <img className="current" src={apartmentpriew} alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                    </div>
-                    <div className="preview-paggination">
-                      <div className="preview-paggination__item selected"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                    </div>
-                    <div className="apartament-list__header">
-                      <div>
-                        <p className="apartament-list__address">
-                          1-й Красногвардейский пр-д, 22 стр. 2
-                        </p>
-                      </div>
-                      <button className="apartament-list__favorite-btn"></button>
-                    </div>
-                    <p className="apartament-list__price">360 000–590 000 $</p>
-                    <ul className="apartament-list__tags">
-                      <li className="apartament-list__tag">70 этажей</li>
-                      <li className="apartament-list__tag">от120 м2</li>
-                      <li className="apartament-list__tag">Сдача 2026</li>
-                    </ul>
-                  </li>
-                  <li className="apartament-list__item">
-                    <div className="apartament-list__preview">
-                      <img
-                        className="current"
-                        src="img/apartament-preview.jpg"
-                        alt=""
-                      />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                    </div>
-                    <div className="preview-paggination">
-                      <div className="preview-paggination__item selected"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                    </div>
-                    <div className="apartament-list__header">
-                      <div>
-                        <p className="apartament-list__address">
-                          1-й Красногвардейский пр-д, 22 стр. 2
-                        </p>
-                      </div>
-                      <button className="apartament-list__favorite-btn"></button>
-                    </div>
-                    <p className="apartament-list__price">360 000–590 000 $</p>
-                    <ul className="apartament-list__tags">
-                      <li className="apartament-list__tag">70 этажей</li>
-                      <li className="apartament-list__tag">от120 м2</li>
-                      <li className="apartament-list__tag">Сдача 2026</li>
-                    </ul>
-                  </li>
-                  <li className="apartament-list__item">
-                    <div className="apartament-list__preview">
-                      <img
-                        className="current"
-                        src="img/apartament-preview.jpg"
-                        alt=""
-                      />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                    </div>
-                    <div className="preview-paggination">
-                      <div className="preview-paggination__item selected"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                    </div>
-                    <div className="apartament-list__header">
-                      <div>
-                        <p className="apartament-list__address">
-                          1-й Красногвардейский пр-д, 22 стр. 2
-                        </p>
-                      </div>
-                      <button className="apartament-list__favorite-btn"></button>
-                    </div>
-                    <p className="apartament-list__price">360 000–590 000 $</p>
-                    <ul className="apartament-list__tags">
-                      <li className="apartament-list__tag">70 этажей</li>
-                      <li className="apartament-list__tag">от120 м2</li>
-                      <li className="apartament-list__tag">Сдача 2026</li>
-                    </ul>
-                  </li>
-                  <li className="apartament-list__item">
-                    <div className="apartament-list__preview">
-                      <img
-                        className="current"
-                        src="img/apartament-preview.jpg"
-                        alt=""
-                      />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                    </div>
-                    <div className="preview-paggination">
-                      <div className="preview-paggination__item selected"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                    </div>
-                    <div className="apartament-list__header">
-                      <div>
-                        <p className="apartament-list__address">
-                          1-й Красногвардейский пр-д, 22 стр. 2
-                        </p>
-                      </div>
-                      <button className="apartament-list__favorite-btn"></button>
-                    </div>
-                    <p className="apartament-list__price">360 000–590 000 $</p>
-                    <ul className="apartament-list__tags">
-                      <li className="apartament-list__tag">70 этажей</li>
-                      <li className="apartament-list__tag">от120 м2</li>
-                      <li className="apartament-list__tag">Сдача 2026</li>
-                    </ul>
-                  </li>
-                  <li className="apartament-list__item">
-                    <div className="apartament-list__preview">
-                      <img
-                        className="current"
-                        src="img/apartament-preview.jpg"
-                        alt=""
-                      />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                      <img src="img/apartament-preview.jpg" alt="" />
-                    </div>
-                    <div className="preview-paggination">
-                      <div className="preview-paggination__item selected"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                      <div className="preview-paggination__item"></div>
-                    </div>
-                    <div className="apartament-list__header">
-                      <div>
-                        <p className="apartament-list__address">
-                          1-й Красногвардейский пр-д, 22 стр. 2
-                        </p>
-                      </div>
-                      <button className="apartament-list__favorite-btn"></button>
-                    </div>
-                    <p className="apartament-list__price">360 000–590 000 $</p>
-                    <ul className="apartament-list__tags">
-                      <li className="apartament-list__tag">70 этажей</li>
-                      <li className="apartament-list__tag">от120 м2</li>
-                      <li className="apartament-list__tag">Сдача 2026</li>
-                    </ul>
-                  </li>
+                  ))
+                } 
+                
                 </ul>
               </div>
             </section>
@@ -515,9 +409,11 @@ const Cataloge = () => {
             <section className="categoriya__title-list">
               <h2>Комплексы Дубай</h2>
               <ul className="apartament-list">
-                <li className="apartament-list__item apartimentts">
+                {
+                  data?.map((item , index)=>(
+                   <li className="apartament-list__item apartimentts">
                   <div className="apartament-list__preview">
-                    <img className="current" src={apartmentpriew} alt="" />
+                    <img  onClick={()=>navigate(`/product-item/${item.id}`)} className="current" src={`http://164.92.172.190:8080${item.image[0].image}/`} alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
@@ -532,416 +428,28 @@ const Cataloge = () => {
                   </div>
                   <div className="apartament-list__header">
                     <div>
-                      <p className="apartament-list__address">
-                        1-й Красногвардейский пр-д, 22 стр. 2
+                      <p onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__address">
+                        {item.name}
                       </p>
                     </div>
-                    <button className="apartament-list__favorite-btn"></button>
+                    <button onClick={()=>handleLike(item.id)}  className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
                   </div>
-                  <p className="apartament-list__price">250 000₽/месяц</p>
+                  <p className="apartament-list__price">{item.price}₽/месяц</p>
                   <ul className="apartament-list__tags">
-                    <li className="apartament-list__tag">2 комнаты</li>
-                    <li className="apartament-list__tag">38 этаж</li>
-                    <li className="apartament-list__tag">120 м2</li>
+                    <li className="apartament-list__tag">{item.etaj1} этаж</li>
+                    <li className="apartament-list__tag">{item.square} м2</li>
+                    <li className="apartament-list__tag">Сдача {item.deadline}</li>
                   </ul>
-                  <div className="open-about__listmain">
-                    <div
-                      onClick={() => setAbout(!typeabout)}
-                      className="open-about__listmaintext"
-                    >
-                      <p>Планировки</p>
-                      <img
-                        id="open-strelka"
-                        className={typeabout ? "pentajstrelka" : ""}
-                        src={strelkasmall}
-                        alt=""
-                      />
-                    </div>
-                    <ul
-                      id="openaboutvibrate"
-                      className={
-                        typeabout
-                          ? "vibrate-section__list"
-                          : "vibrate-section__list planpetaj-hide"
-                      }
-                    >
-                      <li className="vibrate-section__list-item2">
-                        <h4>Студии</h4>
-                        <span className="vibrate-section__ulcham">
-                          от 40 м²
-                        </span>
-                        <span>360к–380к$</span>
-                        <h6>
-                          5 предложений <img src={strelkasmall} alt="" />
-                        </h6>
-                      </li>
-                      <li className="vibrate-section__list-item2">
-                        <h4>2 комнатные</h4>
-                        <span className="vibrate-section__ulcham">
-                          от 40 м²
-                        </span>
-                        <span>360к–380к$</span>
-                        <h6>
-                          20 предложений <img src={strelkasmall} alt="" />
-                        </h6>
-                      </li>
-                      <li className="vibrate-section__list-item2">
-                        <h4>3 комнатные</h4>
-                        <span className="vibrate-section__ulcham">
-                          от 40 м²
-                        </span>
-                        <span>360к–380к$</span>
-                        <h6>
-                          2 предложений <img src={strelkasmall} alt="" />
-                        </h6>
-                      </li>
-                      <li className="vibrate-section__list-item">
-                        <h6>
-                          Марина крик <img src={strelkatepa} alt="" />
-                        </h6>
-                        <span className="vibrate-section__ulcham2">Сдан</span>
-                        <span className="vibrate-section__ulcham2">380к$</span>
-                        <span className="vibrate-section__ulcham2">
-                          209,7 м²
-                        </span>
-                        <span className="vibrate-section__ulcham2">
-                          <img src={uy} alt="" />
-                        </span>
-                      </li>
-                      <li className="vibrate-section__list-item">
-                        <h6>
-                          Корпус 1 <img src={strelkatepa} alt="" />
-                        </h6>
-                        <span className="vibrate-section__ulcham2">Сдан</span>
-                        <span className="vibrate-section__ulcham2">390к$</span>
-                        <span className="vibrate-section__ulcham2">
-                          209,7 м²
-                        </span>
-                        <span className="vibrate-section__ulcham2">
-                          <img src={uy} alt="" />
-                        </span>
-                      </li>
-                      <li className="vibrate-section__list-item2">
-                        <h4>4 комнатные</h4>
-                        <span className="vibrate-section__ulcham">
-                          от 40 м²
-                        </span>
-                        <span>360к–380к$</span>
-                        <h6>
-                          15 предложений <img src={strelkasmall} alt="" />
-                        </h6>
-                      </li>
-                      <li className="vibrate-section__list-item2">
-                        <h4>5 комнатные</h4>
-                        <span className="vibrate-section__ulcham">
-                          от 40 м²
-                        </span>
-                        <span>360к–380к$</span>
-                        <h6>
-                          3 предложений <img src={strelkasmall} alt="" />
-                        </h6>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li className="apartament-list__item">
-                  <div className="apartament-list__preview">
-                    <img
-                      className="current"
-                      src="img/apartament-preview.jpg"
-                      alt=""
-                    />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                  </div>
-                  <div className="preview-paggination">
-                    <div className="preview-paggination__item selected"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                  </div>
-                  <div className="apartament-list__header">
-                    <div>
-                      <p className="apartament-list__address">
-                        1-й Красногвардейский пр-д, 22 стр. 2
-                      </p>
-                    </div>
-                    <button className="apartament-list__favorite-btn"></button>
-                  </div>
-                  <p className="apartament-list__price">250 000₽/месяц</p>
-                  <ul className="apartament-list__tags">
-                    <li className="apartament-list__tag">2 комнаты</li>
-                    <li className="apartament-list__tag">38 этаж</li>
-                    <li className="apartament-list__tag">120 м2</li>
-                  </ul>
-                  <div className="open-about__listmain">
-                    <div className="open-about__listmaintext">
-                      <p>Планировки</p>
-                      <img src="./img/strelkasmall.svg" alt="" />
-                    </div>
-                  </div>
-                </li>
-                <li className="apartament-list__item">
-                  <div className="apartament-list__preview">
-                    <img
-                      className="current"
-                      src="img/apartament-preview.jpg"
-                      alt=""
-                    />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                  </div>
-                  <div className="preview-paggination">
-                    <div className="preview-paggination__item selected"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                  </div>
-                  <div className="apartament-list__header">
-                    <div>
-                      <p className="apartament-list__address">
-                        1-й Красногвардейский пр-д, 22 стр. 2
-                      </p>
-                    </div>
-                    <button className="apartament-list__favorite-btn"></button>
-                  </div>
-                  <p className="apartament-list__price">250 000₽/месяц</p>
-                  <ul className="apartament-list__tags">
-                    <li className="apartament-list__tag">2 комнаты</li>
-                    <li className="apartament-list__tag">38 этаж</li>
-                    <li className="apartament-list__tag">120 м2</li>
-                  </ul>
-                  <div className="open-about__listmain">
-                    <div className="open-about__listmaintext">
-                      <p>Планировки</p>
-                      <img src="./img/strelkasmall.svg" alt="" />
-                    </div>
-                  </div>
-                </li>
-                <li className="apartament-list__item">
-                  <div className="apartament-list__preview">
-                    <img
-                      className="current"
-                      src="img/apartament-preview.jpg"
-                      alt=""
-                    />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                  </div>
-                  <div className="preview-paggination">
-                    <div className="preview-paggination__item selected"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                  </div>
-                  <div className="apartament-list__header">
-                    <div>
-                      <p className="apartament-list__address">
-                        1-й Красногвардейский пр-д, 22 стр. 2
-                      </p>
-                    </div>
-                    <button className="apartament-list__favorite-btn"></button>
-                  </div>
-                  <p className="apartament-list__price">250 000₽/месяц</p>
-                  <ul className="apartament-list__tags">
-                    <li className="apartament-list__tag">2 комнаты</li>
-                    <li className="apartament-list__tag">38 этаж</li>
-                    <li className="apartament-list__tag">120 м2</li>
-                  </ul>
-                  <div className="open-about__listmain">
-                    <div className="open-about__listmaintext">
-                      <p>Планировки</p>
-                      <img src="./img/strelkasmall.svg" alt="" />
-                    </div>
-                  </div>
-                </li>
-                <li className="apartament-list__item">
-                  <div className="apartament-list__preview">
-                    <img
-                      className="current"
-                      src="img/apartament-preview.jpg"
-                      alt=""
-                    />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                  </div>
-                  <div className="preview-paggination">
-                    <div className="preview-paggination__item selected"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                  </div>
-                  <div className="apartament-list__header">
-                    <div>
-                      <p className="apartament-list__address">
-                        1-й Красногвардейский пр-д, 22 стр. 2
-                      </p>
-                    </div>
-                    <button className="apartament-list__favorite-btn"></button>
-                  </div>
-                  <p className="apartament-list__price">250 000₽/месяц</p>
-                  <ul className="apartament-list__tags">
-                    <li className="apartament-list__tag">2 комнаты</li>
-                    <li className="apartament-list__tag">38 этаж</li>
-                    <li className="apartament-list__tag">120 м2</li>
-                  </ul>
-                  <div className="open-about__listmain">
-                    <div className="open-about__listmaintext">
-                      <p>Планировки</p>
-                      <img src="./img/strelkasmall.svg" alt="" />
-                    </div>
-                  </div>
-                </li>
-                <li className="apartament-list__item">
-                  <div className="apartament-list__preview">
-                    <img
-                      className="current"
-                      src="img/apartament-preview.jpg"
-                      alt=""
-                    />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                  </div>
-                  <div className="preview-paggination">
-                    <div className="preview-paggination__item selected"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                  </div>
-                  <div className="apartament-list__header">
-                    <div>
-                      <p className="apartament-list__address">
-                        1-й Красногвардейский пр-д, 22 стр. 2
-                      </p>
-                    </div>
-                    <button className="apartament-list__favorite-btn"></button>
-                  </div>
-                  <p className="apartament-list__price">250 000₽/месяц</p>
-                  <ul className="apartament-list__tags">
-                    <li className="apartament-list__tag">2 комнаты</li>
-                    <li className="apartament-list__tag">38 этаж</li>
-                    <li className="apartament-list__tag">120 м2</li>
-                  </ul>
-                  <div className="open-about__listmain">
-                    <div className="open-about__listmaintext">
-                      <p>Планировки</p>
-                      <img src="./img/strelkasmall.svg" alt="" />
-                    </div>
-                  </div>
-                </li>
+                
+                   </li>
+                  ))
+                }
+            
               </ul>
             </section>
-            <div className="catalogue-banner2 catalugbarner2-bag">
-              <a className="catolog-barner__route" href="">
-                <div className="catalogue-banner__description">
-                  <div className="catalogue-banner__title">
-                    Район Дубай марина
-                  </div>
-                  <p className="catalogue-banner__text">Перейти к статье</p>
-                </div>
-                <button className="learn-more">Подробнее</button>
-              </a>
-            </div>
-            <section className="categoriya__title-list">
-              <ul className="apartament-list">
-                <li className="apartament-list__item apartimentts">
-                  <div className="apartament-list__preview">
-                    <img
-                      className="current"
-                      src="img/apartament-preview.jpg"
-                      alt=""
-                    />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                  </div>
-                  <div className="preview-paggination">
-                    <div className="preview-paggination__item selected"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                  </div>
-                  <div className="apartament-list__header">
-                    <div>
-                      <p className="apartament-list__address">
-                        1-й Красногвардейский пр-д, 22 стр. 2
-                      </p>
-                    </div>
-                    <button className="apartament-list__favorite-btn"></button>
-                  </div>
-                  <p className="apartament-list__price">250 000₽/месяц</p>
-                  <ul className="apartament-list__tags">
-                    <li className="apartament-list__tag">2 комнаты</li>
-                    <li className="apartament-list__tag">38 этаж</li>
-                    <li className="apartament-list__tag">120 м2</li>
-                  </ul>
-                  <div className="open-about__listmain">
-                    <div className="open-about__listmaintext">
-                      <p>Планировки</p>
-                      <img src="./img/strelkasmall.svg" alt="" />
-                    </div>
-                  </div>
-                </li>
-                <li className="apartament-list__item">
-                  <div className="apartament-list__preview">
-                    <img
-                      className="current"
-                      src="img/apartament-preview.jpg"
-                      alt=""
-                    />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                  </div>
-                  <div className="preview-paggination">
-                    <div className="preview-paggination__item selected"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                  </div>
-                  <div className="apartament-list__header">
-                    <div>
-                      <p className="apartament-list__address">
-                        1-й Красногвардейский пр-д, 22 стр. 2
-                      </p>
-                    </div>
-                    <button className="apartament-list__favorite-btn"></button>
-                  </div>
-                  <p className="apartament-list__price">250 000₽/месяц</p>
-                  <ul className="apartament-list__tags">
-                    <li className="apartament-list__tag">2 комнаты</li>
-                    <li className="apartament-list__tag">38 этаж</li>
-                    <li className="apartament-list__tag">120 м2</li>
-                  </ul>
-                  <div className="open-about__listmain">
-                    <div className="open-about__listmaintext">
-                      <p>Планировки</p>
-                      <img src="./img/strelkasmall.svg" alt="" />
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </section>
-            <div
+       
+   
+            {/* <div
               className="catalogue-banner2 catalugbarner2-bag"
               // style="background-image: url(img/categback.png)"
             >
@@ -949,6 +457,17 @@ const Cataloge = () => {
                 <div className="catalogue-banner__description">
                   <div className="catalogue-banner__title">Лидмагнит</div>
                   <p className="catalogue-banner__text">Скачайте</p>
+                </div>
+                <button className="learn-more">Подробнее</button>
+              </a>
+            </div> */}
+                 <div className="catalogue-banner2 catalugbarner2-bag">
+              <a className="catolog-barner__route" href="">
+                <div className="catalogue-banner__description">
+                  <div className="catalogue-banner__title">
+                    Район Дубай марина
+                  </div>
+                  <p className="catalogue-banner__text">Перейти к статье</p>
                 </div>
                 <button className="learn-more">Подробнее</button>
               </a>

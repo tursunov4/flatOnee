@@ -19,16 +19,20 @@ import Addobject from '../pages/Addobject/Addobject'
 import Addkompleks from '../pages/Addkompleks/Addkompleks'
 import Brokersitem from '../pages/Brokersitem/Brokersitem'
 import Brokersmain from '../pages/Brokersmain/Brokersmain'
+import Academiya from '../pages/Academiya/Academiya'
+import Noudfound from '../pages/Notfound/Noudfound'
+
 const authenfication = () => {
   return (
     <Routes>
     <Route element={<MainPage/>} >
       <Route element={<HomePage/>} index/>
       <Route element={<Cataloge/>} path={`/catalog`} />
-      <Route element={<Productitem/>} path={`/product-item`}/>
-      <Route element={<Article/>} path={`/article`} />
+      <Route element={<Productitem/>} path={`/product-item/:id`}/>
+      <Route element={<Article/>} path={`/article/:id`} />
       <Route element={<Articlemain/>} path={`/articlemain`} /> 
       <Route element={<Savedlist/>} path={`/savedlist`} />
+      <Route element={<Academiya/>} path='/academiya' />
       {/* <Route element={<Ourstaff/>} path={`/ourstaff`} /> */}
       <Route element={<Settings/>} path={`/settings`}/>
       <Route element={<Izminitparol/>} path={`/izminitparol`} />
@@ -43,7 +47,7 @@ const authenfication = () => {
       <Route element={<Brokersitem/>} path={`/brokersitem`} /> 
       <Route element={<Brokersmain/>} path={`/brokermain`} /> 
     </Route>
-
+    <Route element={<Noudfound/>} path='/eror404' /> 
     </Routes>
   )
 }

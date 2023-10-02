@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./articlemain.css";
-import articlepreiw from  "../../assets/img/apartament-preview.jpg"
+
 import http from "../../axios";
 import { Link } from "react-router-dom";
 const Articlemain = () => {
@@ -11,7 +11,7 @@ const Articlemain = () => {
   const getData = ()=>{
       http.get("/articles/list/").then((res) =>{
         console.log(res.data)
-        setData(res.data)
+        setData(res.data.results)
       }).catch((err) =>[
         console.log(err)
       ])

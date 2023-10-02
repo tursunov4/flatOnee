@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import profile from "../../assets/img/profile.svg";
 import { Link } from "react-router-dom";
+const token = localStorage.getItem("token")
 const Header = () => {
 
   const [menu ,setMenu] = useState(false)
@@ -33,7 +34,7 @@ const Header = () => {
           <Link to={'/articlemain'} className="header-nav__item1" href="">
             Статьи
           </Link>
-          <Link to={"/brokermain"} className="header-nav__item-profile" href="">
+          <Link to={ token ?  "/brokermain" : "/login"} className="header-nav__item-profile" href="">
             <span>Профиль</span>
             <img src={profile} alt="" />
           </Link>

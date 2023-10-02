@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import productimg from "../../assets/img/product-image.jpg";
 import apartmentprev from "../../assets/img/apartament-preview.jpg"
 import strelkasmall from "../../assets/img/strelkasmall.svg"
@@ -28,9 +28,25 @@ import location from '../../assets/img/location.svg'
 import telefonproduct from "../../assets/img/telefonproduct.svg"
 import chat from "../../assets/img/chat.svg"
 import linkarrow from "../../assets/img/link-arrow.svg"
+import { useParams } from 'react-router-dom';
+import http from '../../axios';
 const Productitem = () => {
   const [typevibor , setTypevibor] = useState(false)
   const [typeplan , setTypeplan] = useState(false)
+  const [data, setData] = useState({})
+  const { id} = useParams()
+  useEffect(()=>{
+   getData()
+  },[])
+  const getData = ()=>{
+    http.get(`/catalog/offices/${id}/`).then((res)=>{
+       data(res.data)
+      console.log(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
   return (
     <main>
     <div class="product-page">

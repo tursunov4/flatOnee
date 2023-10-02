@@ -1,8 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './savedlist.css'
 import arrowleft from "../../assets/img/arrow-left.svg"
+import axios from 'axios'
+import http from '../../axios'
+import { useNavigate } from 'react-router-dom'
+const token  = localStorage.getItem("token")
 const Savedlist = () => {
     const [typefilter , setTypefilter] = useState(false)
+    const [data ,setData] = useState([])
+    const [refresh , setRefresh] = useState(false)
+    const navigate = useNavigate()
+    useEffect(()=>{
+    getData()
+    },[refresh])
+    const getData =()=>{
+        http.get("/catalog/wishlist/").then((res)=>{
+            setData(res.data)
+            console.log(res.data)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+    const handleDelet =(id) =>{
+        http.delete(`/catalog/wishlist/${id}/`).then((res)=>{
+            console.log(res.data)
+            if(res.status ===204){
+                setRefresh(!refresh) 
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
   return (
     <main>
         <section className="catalogue">
@@ -143,10 +171,12 @@ const Savedlist = () => {
 
                     <button onClick={()=>setTypefilter(true)} class="button" id="m-filters">Фильтры</button>
                 </div>
-                <ul className="apartament-list">                  
-                    <li className="apartament-list__item">
+                <ul className="apartament-list"> 
+                {
+                    data?.map((item , index)=>(
+                        <li className="apartament-list__item">
                         <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
+                            <img  onClick={()=>navigate(`/product-item/${item.id}`)} className="current" src={`http://164.92.172.190:8080${item.office_info.image[0].image}/`}  alt=""/>
                             <img src="img/apartament-preview.jpg" alt=""/>
                             <img src="img/apartament-preview.jpg" alt=""/>
                             <img src="img/apartament-preview.jpg" alt=""/>
@@ -161,251 +191,27 @@ const Savedlist = () => {
                         </div>
                         <div className="apartament-list__header">
                             <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
+                                <p  onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__address"> {item.office_info.name}</p>
+                             
                             </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
+                            <button onClick={()=>handleDelet(item.office)} className="apartament-list__favorite-btn filled"></button>
                         </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
+                        <p className="apartament-list__price">{item.office_info.price}₽/месяц</p>
                         <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
+                            <li className="apartament-list__tag">{item.office_info.etaj1} этаж</li>
+                            <li className="apartament-list__tag">{item.office_info.square} м2</li>
+                            <li className="apartament-list__tag">Сдача {item.office_info.deadline}</li>
                         </ul>
                         <p className="apartament-list__location">NEVA TOWERS</p>
                     </li>
+                    ))
+                }                 
+                   
                   
-                    <li className="apartament-list__item">
-                        <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
-                  
-                    <li className="apartament-list__item">
-                        <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
-                    <li className="apartament-list__item">
-                        <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
-                  
-                    <li className="apartament-list__item">
-                        <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
-                    <li className="apartament-list__item">
-                        <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
+                
                 </ul>
+
+               
 
                 <div className="catalogue-banner"
                 //  style="background-image: url(img/catalogue-header.jpg);"
@@ -419,269 +225,6 @@ const Savedlist = () => {
                     </a>
                 </div>
                 
-
-              
-                <ul class="apartament-list">
-                    <li class="apartament-list__item">
-                        <div class="apartament-list__preview">
-                            <img class="current" src="img/apartament-preview.jpg" alt=""/>
-
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
-                    <li className="apartament-list__item">
-                        <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
-                    <li className="apartament-list__item">
-                        <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
-                    <li className="apartament-list__item">
-                        <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
-                    <li className="apartament-list__item">
-                        <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
-                    <li className="apartament-list__item">
-                        <div className="apartament-list__preview">
-                            <img className="current" src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                            <img src="img/apartament-preview.jpg" alt=""/>
-                        </div>
-                        <div className="preview-paggination">
-                            <div className="preview-paggination__item selected"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                            <div className="preview-paggination__item"></div>
-                        </div>
-                        <div className="apartament-list__header">
-                            <div>
-                                <p className="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                                <ul className="metro-list">
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                    <li className="metro-list__item">
-                                        <img src="img/metro.svg" alt=""/>
-                                        <span className="metro-list__details">Metro name</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button className="apartament-list__favorite-btn filled"></button>
-                        </div>
-                        <p className="apartament-list__price">250 000₽/месяц</p>
-                        <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">2 комнаты</li>
-                            <li className="apartament-list__tag">38 этаж</li>
-                            <li className="apartament-list__tag">120 м2</li>
-                        </ul>
-                        <p className="apartament-list__location">NEVA TOWERS</p>
-                    </li>
-                </ul>
                 <div className="catalogue-paggination">
                     <span className="catalogue-paggination__prev" href="">
                         <img src={arrowleft} alt=""/>

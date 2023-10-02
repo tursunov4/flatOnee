@@ -7,6 +7,10 @@ import close2 from "../../assets/img/close2.svg";
 import pdf from "../../assets/img/pdf.svg"
 import planpentaj from "../../assets/img/planpentaj.svg"
 import axios from "axios";
+import http from "../../axios";
+import { useToast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+let id = localStorage.getItem("id")
 const Addobject = () => {
   const [name , setName] = useState('')
   const [sana ,setSana] = useState("")
@@ -14,10 +18,24 @@ const Addobject = () => {
   const [ot ,setOt] = useState("")
   const [iz , setIz] = useState("")
   const [description ,setDescription] = useState('')
+  const [planirovka , setPalnirovka]= useState("")
+  const [planpentaj1 ,setPlanpentaj1] = useState("")
+  const [money , setMoney] = useState("")
+  const [postojniymoney , setPostojneymony] = useState("")
+  const [dologomoney , setDologomoney] = useState("")
+  const [planpentaj2 , setPlanpentaj2]  = useState("")
+  const [nvm , setNvm] = useState("")
+  const [irr , setIrr] = useState('')
+  const [roc ,setRoc] = useState("")
+  const [pi , setPi] = useState("")
+  const [roi , setRoi] = useState("")
+  const [otdelka , setOdelka] = useState("beton")
+  const [comnat , setComnat] = useState(0)
+  const [snazul , setSnazul] = useState(1)
+  const navigate = useNavigate()
  
-
   // ------ hashtag uchun ----- 
-  const [hastagsData , setHashtagsData] = useState([])
+ const [hastagsData , setHashtagsData] = useState([])
 const [searchList , setSearchList] = useState(false)
 const [hashtagarraypost ,setHashtagarrayPost] = useState([])
 const inputRef = useRef()
@@ -27,12 +45,10 @@ const handleChange =(evt)=>{
   }
   else{
     setSearchList(true)
-    axios.get(`https://oqdevpy.jprq.live/catalog/tags/?name=${evt.target.value}`)
-    .then((res) =>{
-     setHashtagsData(res.data)
-    })
-    .catch((err)=>{
-     console.log(err);
+    http.get(`/catalog/tags/?name=${evt.target.value}`).then((res)=>{
+      setHashtagsData(res.data)
+    }).catch((err)=>{
+      console.log(err)
     })
    }
   }
@@ -52,16 +68,16 @@ const handleChange =(evt)=>{
   }
   const handleHashtagsubmit =(e)=>{
     e.preventDefault()
-    axios.post(`https://oqdevpy.jprq.live/catalog/tags/` , {
+    http.post("/catalog/tags/", {
       name:inputRef.current.value
     }).then((res)=>{
-       console.log(res.data)
-       if(res.status === 201){
+      if(res.status === 201){
         inputRef.current.value = ""
         setHashtagarrayPost([...hashtagarraypost , {id:res.data.id , name:res.data.name}])
        }
-    })
-    
+    }).catch((err)=>{
+      console.log(err)
+    })      
   }
   //  ---- Image va Docmnet uchun ---
   const [kompleksimage , setKompleksimage] = useState([])
@@ -137,6 +153,58 @@ const handleChange =(evt)=>{
    }
   } 
 
+  const postAllData =(type) =>{
+   const form  = new FormData()
+ 
+  videov.map((item , index)=>(  
+   form.append("vid",item.file)
+  ))
+  dakument?.map((item , index) =>(
+   form.append("documents",item.file)
+  ))
+ kompleksimage?.map((item, index)=>(
+   form.append("kuxni", item.file)
+  ))
+  infirastruktura?.map((item,index)=>(
+   form.append("komnat", item.file)
+  ))
+  lobbi?.map((item, index)=>(
+     form.append("spalni", item.file)
+    ))
+    photoplanirovka?.map((item , index)=>(
+      form.append("planirovki" , item.file)
+    ))
+  hashtagarraypost?.map((item, index)=>(
+     form.append( "tags",item.id)
+    ))
+    form.append("name" ,name)
+    form.append("owner" ,id)
+    form.append("otdelka" ,otdelka)
+    form.append("planirovki_count" ,planirovka)
+    form.append("comnat" ,comnat)
+    form.append('sanzul' , snazul)
+    form.append('square' , ploshad)
+    form.append('etaj1' , ot)
+    form.append('etaj2' , iz)
+    form.append('description' , description)
+    form.append("price" , money)
+    form.append("is_active" , type)
+    form.append("nvp" ,nvm)
+    form.append("irr" , irr)
+    form.append("roc" , roc)
+    form.append("pi" , pi)
+    form.append("roi" , roi)      
+    http.post("/catalog/complex/" , form).then((res)=>{
+      console.log(res.data)
+      if(res.status ===201){
+        navigate("/brokermain")
+        window.location.reload()
+      }
+      
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }  
 
   return (
     <main>
@@ -189,7 +257,7 @@ const handleChange =(evt)=>{
               <div className="addobeject__ploshad">
                 <h2>Общая площадь</h2>
                 <label className="addobejectploshad__label" htmlFor="">
-                  <input onChange={(e)=>setHashtagarrayPost(e.target.value)} placeholder="120 м2" type="text" />
+                  <input onChange={(e)=>setPloshad(e.target.value)} placeholder="120 м2" type="text" />
                 </label>
               </div>
               <div className="addobject__etaj2">
@@ -209,40 +277,38 @@ const handleChange =(evt)=>{
               <div className="addobeject__tipobj">
                 <h2>Отделка</h2>
                 <div className="tipobj__btnswrap">
-                  <button className="addtip__btn1 addtip__btn1-active">
+                  <button onClick={()=>setOdelka("beton")} className={otdelka==="beton" ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>
                     Бетон
                   </button>
-                  <button className="addtip__btn1">Без отделки</button>
-                  <button className="addtip__btn1">Вайтбокс</button>
-                  <button className="addtip__btn1">Чистовая</button>
-                  <button className="addtip__btn1">Чистовая с мебелью</button>
+                  <button onClick={()=>setOdelka("bez_otdelki")} className={otdelka==="bez_otdelki" ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'} >Без отделки</button>
+                  <button onClick={()=>setOdelka("baytboks")} className={otdelka==="baytboks" ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>Вайтбокс</button>
+                  <button onClick={()=>setOdelka("chistovaya")} className={otdelka==="chistovaya" ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>Чистовая</button>
+                  <button onClick={()=>setOdelka("chistovaya_mebel")} className={otdelka==="chistovaya_mebel" ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>Чистовая с мебелью</button>
                 </div>
               </div>
               <div className="addobeject__addmap">
                 <div id="list2" className="addobeject__kaches">
                   <h2>Количество комнат</h2>
                   <div className="kached__btnwrap">
-                    <button className="addtip__btn1 addtip__btn1-active ">
+                    <button  onClick={()=>setComnat(0)} className={comnat===0 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>
                       Студия
                     </button>
-                    <button className="addtip__btn1">1</button>
-                    <button className="addtip__btn1">2</button>
-                    <button className="addtip__btn1">3</button>
-                    <button className="addtip__btn1">4</button>
-                    <button className="addtip__btn1">5</button>
-                    <button className="addtip__btn1">6</button>
+                    <button onClick={()=>setComnat(1)} className={comnat===1 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>1</button>
+                    <button onClick={()=>setComnat(2)} className={comnat===2 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>2</button>
+                    <button onClick={()=>setComnat(3)} className={comnat===3 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>3</button>
+                    <button onClick={()=>setComnat(4)} className={comnat===4 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>4</button>
+                    <button onClick={()=>setComnat(5)} className={comnat===5 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>5</button>
+                    <button onClick={()=>setComnat(6)} className={comnat===6 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>6</button>
                   </div>
                 </div>
                 <div className="addobeject__etaj">
                   <h2>Количество санузлов</h2>
                   <div className="kached__btnwrap">
-                    <button className="addtip__btn1">1</button>
-                    <button className="addtip__btn1">2</button>
-                    <button className="addtip__btn1 addtip__btn1-active">
-                      3
-                    </button>
-                    <button className="addtip__btn1">4</button>
-                    <button className="addtip__btn1">5</button>
+                  <button onClick={()=>setSnazul(1)} className={snazul===1 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>1</button>
+                    <button onClick={()=>setSnazul(2)} className={snazul===2 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>2</button>
+                    <button onClick={()=>setSnazul(3)} className={ snazul===3 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>3</button>
+                    <button onClick={()=>setSnazul(4)} className={ snazul===4 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>4</button>
+                    <button onClick={()=>setSnazul(5)} className={snazul===5 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>5</button>
                   </div>
                 </div>
                 <div className="addobject__ubostva">
@@ -364,7 +430,7 @@ const handleChange =(evt)=>{
                 <div className="addobeject__ploshad">
                 <h2>Количество объектов в данной планировке</h2>
                 <label className="addobejectploshad__label" >
-                  <input placeholder="12" type="text" />
+                  <input onChange={(e)=>setPalnirovka(e.target.value)} placeholder="12" type="text" />
                 </label>
                 </div>
               <div className="addobject-addhash">
@@ -393,29 +459,26 @@ const handleChange =(evt)=>{
                   <div className="addobject-plan__list">
                     <p>Первый взнос</p>
                     <label className="addobejectploshad__label" >
-                     <input placeholder="+ 8%" type="text" />
+                     <input onChange={(e)=>setPlanpentaj1(e.target.value)} placeholder="+ 8%" type="text" />
                    </label>
                   </div>
                 </div>
                 <div className="addobject__sena">
                   <h2>Минимальная цена</h2>
-                  <div className="addobjec__senawrap">
-                    <span>от</span>
-                    <p>45 000 000 </p>
-                    <p>USD</p>
-                    <img width="16" src="./img/strelka2.png" alt="" />
-                  </div>
+                  
+                  <input onChange={(e)=>setMoney(e.target.value)} type="text" placeholder="45 000 000 USD" />
+
                 </div>
                 <div className="addobeject__ploshad">
                 <h2>Прибыль с посуточной сдачи</h2>
                 <label className="addobejectploshad__label2" >
-                  <input placeholder="3 000 $/мес" type="text" />
+                  <input onChange={(e)=>setPostojneymony(e.target.value)} placeholder="3 000 $/мес" type="text" />
                 </label>
                 </div>  
                 <div className="addobeject__ploshad">
                 <h2>Прибыль с долгосрочной сдачи</h2>
                 <label className="addobejectploshad__label2" >
-                  <input placeholder="3 000 $/мес" type="text" />
+                  <input onChange={(e)=>setDologomoney(e.target.value)} placeholder="3 000 $/мес" type="text" />
                 </label>
                 </div>  
                 <div className="addobject-planpentaj">
@@ -425,7 +488,7 @@ const handleChange =(evt)=>{
                   <div className="addobject-plan__list">
                     <p>2024</p>
                     <label className="addobejectploshad__label" >
-                     <input placeholder="+ 8%" type="text" />
+                     <input onChange={(e)=>setPlanpentaj2(e.target.value)} placeholder="+ 8%" type="text" />
                    </label>
                   </div>
                 </div>
@@ -434,19 +497,19 @@ const handleChange =(evt)=>{
                     <div>
                     <h3>NVP</h3>
                     <label className="addobejectploshad__label" >
-                     <input placeholder="120" type="text" />
+                     <input onChange={(e)=>setNvm(e.target.value)} placeholder="120" type="text" />
                    </label>
                     </div>
                     <div>
                     <h3>IRR</h3>
                     <label className="addobejectploshad__label" >
-                     <input placeholder="120" type="text" />
+                     <input onChange={(e)=>setIrr(e.target.value)} placeholder="120" type="text" />
                    </label>
                     </div>
                     <div>
                     <h3>ROC</h3>
                     <label className="addobejectploshad__label" >
-                     <input placeholder="120" type="text" />
+                     <input onChange={(e)=>setRoc(e.target.value)} placeholder="120" type="text" />
                    </label>
                     </div>
                   </li>
@@ -454,25 +517,25 @@ const handleChange =(evt)=>{
                     <div>
                     <h3>PI</h3>
                     <label className="addobejectploshad__label" >
-                     <input placeholder="120" type="text" />
+                     <input onChange={(e)=>setPi(e.target.value)} placeholder="120" type="text" />
                    </label>
                     </div>
                     <div>
                     <h3>ROI</h3>
                     <label className="addobejectploshad__label" >
-                     <input placeholder="120" type="text" />
+                     <input onChange={(e)=>setRoi(e.target.value)} placeholder="120" type="text" />
                    </label>
                     </div>
                  
                   </li>
                  </ul>            
                 <div className="addobjectbtns">
-                  <button className="addobjectbtns1">В черновик</button>
-                  <button className="addobjectbtns1 addtip__btn1-active">
+                  <button onClick={()=>postAllData(false)} className="addobjectbtns1">В черновик</button>
+                  <button onClick={()=>postAllData(true)} className="addobjectbtns1 addtip__btn1-active">
                     Добавить
                   </button>
                 </div>
-                <h4 className="addobject__udalit">Удалить черновик</h4>
+                <h4 onClick={()=>window.location.reload()}  className="addobject__udalit">Удалить черновик</h4>
               </div>
             
             </div>

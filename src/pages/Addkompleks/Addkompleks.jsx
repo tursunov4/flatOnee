@@ -8,8 +8,10 @@ import planpentaj from "../../assets/img/planpentaj.svg";
 import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
 import axios from "axios";
 import http from "../../axios";
+import { useNavigate } from "react-router-dom";
 
 const Addkompleks = () => {
+  const navigate = useNavigate()
  const [uslovi ,setUslovi] = useState('sale')
  const [name , setName] = useState("")
  const [sana ,setSana] = useState("")
@@ -31,7 +33,7 @@ const Addkompleks = () => {
  const [park , setPark] = useState(false)
  const [magazin , setMagazin] = useState(false)
  const [hospital , setHospital] = useState(false)
- const [metro , setMetro] = useState(false)
+ const [metro , setMetro] = useState(false)     
  const [plyaj, setPlayj] = useState(false)
  const [tz, setTz] = useState(false)
 // --- infra proekta 
@@ -58,15 +60,14 @@ const handleChange =(evt)=>{
   }
   else{
     setSearchList(true)
-    axios.get(`https://oqdevpy.jprq.live/catalog/tags/?name=${evt.target.value}`)
-    .then((res) =>{
-     setHashtagsData(res.data)
-    })
-    .catch((err)=>{
-     console.log(err);
+    http.get(`/catalog/tags/?name=${evt.target.value}`).then((res)=>{
+      setHashtagsData(res.data)
+    }).catch((err)=>{
+      console.log(err)
     })
    }
   }
+
   const handleList =(evt)=>{
     inputRef.current.value = ""
     setHashtagarrayPost([...hashtagarraypost , {id:evt.target.id , name:evt.target.textContent}])
@@ -83,16 +84,16 @@ const handleChange =(evt)=>{
   }
   const handleHashtagsubmit =(e)=>{
     e.preventDefault()
-    axios.post(`https://oqdevpy.jprq.live/catalog/tags/` , {
+    http.post("/catalog/tags/", {
       name:inputRef.current.value
     }).then((res)=>{
-       console.log(res.data)
-       if(res.status === 201){
+      if(res.status === 201){
         inputRef.current.value = ""
         setHashtagarrayPost([...hashtagarraypost , {id:res.data.id , name:res.data.name}])
        }
-    })
-    
+    }).catch((err)=>{
+      console.log(err)
+    })  
   }
 
  useEffect(()=>{
@@ -100,12 +101,13 @@ const handleChange =(evt)=>{
  },[])
 
  const getCatalogtypes = ()=>{
-  axios.get("https://oqdevpy.jprq.live/catalog/types/").then((res) =>{
-    console.log(res.data)
-     setCatalogtypes(res.data)
-  }).catch((err) =>{
+
+  http.get("/catalog/types/").then((res)=>{
+    setCatalogtypes(res.data)
+  }).catch((err)=>{
     console.log(err)
   })
+  
  }
  const handleKompleks =(e) =>{
   const form = new FormData()
@@ -173,24 +175,38 @@ const handleChange =(evt)=>{
   }
  } 
 
- let tags =[]
-
- hashtagarraypost?.map((item, index)=>(
-  tags.push(item.id)
- ))
-
- const pushallData = () => {
+ let districtinfrastructure = [
+  kids && "kids" ,
+  cafe && "cafe" ,
+  school && 'school' ,
+  park && "park" ,
+  magazin &&"magazin" ,
+  hospital &&"hospital" ,
+  metro &&"metro" ,
+  plyaj &&"plyaj" ,
+  tz &&"tz" ,
+  restaran &&"restaran" 
+]
+let projectinfrastructure =[
+ restaran2 && "restaran",
+ park2 && "park",
+ bassen2 && "bassen",
+ sport2 && "sport",
+ fitnes2 && "fitnes",
+ spacenter && "spa",
+ kids2 && "kids"
+]
+ const pushallData = (type) => {
   const lobb = new FormData()
-  const kom = new FormData()
-  const  infr = new FormData()
-  const vid = new FormData()
-  const docs = new FormData()
-  
-
+  districtinfrastructure?.map((item , index)=>(
+     item && lobb.append("districtinfrastructure" , item)    
+  ))
+  projectinfrastructure?.map((item , index)=>(
+    item &&  lobb.append("projectinfrastructure" , item)
+  ))
    videov.map((item , index)=>(  
     lobb.append("vid",item.file)
    ))
-
    dakument?.map((item , index) =>(
     lobb.append("documents",item.file)
    ))
@@ -206,7 +222,6 @@ const handleChange =(evt)=>{
      hashtagarraypost?.map((item, index)=>(
       lobb.append( "tags",item.id)
      ))
-
   lobb.append('owner' , 1)
   lobb.append('contry' , "uzb")
   lobb.append('name' , name)
@@ -222,17 +237,17 @@ const handleChange =(evt)=>{
   lobb.append('transaction_type' , uslovi)
   lobb.append('description' , description)
   lobb.append("price" , money)
-  lobb.append("districtinfrastructure" ,"kids" )
-  lobb.append("projectinfrastructure" ,"restaran")
-
-  axios
-    .post("https://oqdevpy.jprq.live/catalog/offices/", lobb )
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  lobb.append("is_active", type)
+  http.post('/catalog/offices/' ,lobb).then((res)=>{
+    if(res.status ===201){
+      navigate("/brokermain")
+      window.location.reload()
+    }
+    console.log(res.data)
+  }).catch((err)=>{
+    console.log(err)
+  })
+ 
 };
 
 //  ------------- for Map --- 
@@ -594,8 +609,8 @@ const handleChange =(evt)=>{
                 </div>
               </div>
               <div className="addobjectbtns">
-                <button className="addobjectbtns1">В черновик</button>
-                <button onClick={pushallData} className="addobjectbtns1 addtip__btn1-active">
+                <button onClick={()=>pushallData(false)} className="addobjectbtns1">В черновик</button>
+                <button onClick={()=>pushallData(true)} className="addobjectbtns1 addtip__btn1-active">
                   Добавить
                 </button>
               </div>

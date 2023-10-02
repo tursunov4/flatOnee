@@ -5,13 +5,16 @@ import articleform from "../../assets/img/article-form.jpg";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 import http from "../../axios";
 const Article = () => {
   const { id} = useParams()
   const [data , setData] = useState([])
   const [phone, setPhone] = useState("")
   const [text , setText] = useState("")
-
 
   useEffect(()=>{
     getData()
@@ -124,7 +127,9 @@ const Article = () => {
           </section>
           <section className="article-section">
             <h4 className="article-h4">О проекте</h4>
-            <p className="article-p">
+            
+            <div dangerouslySetInnerHTML={{ __html: data.about_project }} className="article-section__newimg"></div>
+            {/* <p className="article-p">
               Добро пожаловать на сайт компании, которая специализируется на
               предоставлении недвижимости в районе Москва-Сити. Наша команда
               состоит из профессионалов, которые имеют многолетний опыт работы в
@@ -144,120 +149,210 @@ const Article = () => {
               предлагаем широкий выбор объектов недвижимости в районе
               Москва-Сити, среди которых квартиры, офисные помещения,
               коммерческие здания, а также продажу и аренду земельных участков.
-            </p>
+            </p> */}
 
           </section>
            <section className="article-ug">
             <h2>Удобства</h2>
               <ul className="acticle-ug__list">
                 <li className="acticle-ul__list-item">
+                  {
+                    data.balkon &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Балкон</p>
                  </div>
+                  }
+                  {
+                    data.basseyn &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Бассейн</p>
                  </div>
+                  }
+                  {
+                    data.begovie_dorojki && 
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Беговые дорожки</p>
                  </div>
+                  }
+                  {
+                    data.butiki_magazini &&
                  <div className="acticle-ul__wrap">
                       <img src={aricon} alt="" />
                       <p>Бутики и магазины</p>
                   </div>
+                  }
+                  {
+                    data.valet_parking &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Валет паркинг</p>
                  </div>
+                  }
+                  {
+                    data.vid_kanal &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Вид на канал</p>
                  </div>
+                  }
+                  {
+                    data.detskiy_basseyn &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Детская игровая площадка</p>
                  </div>
+                  }
+                  {
+                     data.detskiy_basseyn &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Детский бассейн</p>
                  </div>
+                  }
                  
                 </li>
                 <li className="acticle-ul__list-item">
+                  {
+                    data.domashniy_jivotnie &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Домашние животные</p>
                  </div>
+                  }
+                  {
+                    data.zelenaya_zona &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Зеленые насаждения</p>
                  </div>
+                  }
+                  {
+                    data.zona_barbekyu &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Зона барбекю</p>
                  </div>
+                  }
+                  {
+                    data.kofe_restorani &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Кафе и рестораны</p>
                  </div>
+                  }
+                  {
+                    data.konditsioner &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Кондиционер</p>
                  </div>
+                  }
+                  {
+                    data.lift &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Лифт</p>
                  </div>
+                  }
+                  {
+                    data.oxrana &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Охрана и видеонаблюдение</p>
                  </div>
+                  }
+                  {
+                    data.parkovniy_mesta &&
                   <div className="acticle-ul__wrap">
                       <img src={aricon} alt="" />
                       <p>Парковочные места</p>
                   </div>
+                  }
                 </li>
                 <li className="acticle-ul__list-item">
+                  {
+                    data.park &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Парк</p>
                  </div>
+                  }
+                  {
+                    data.pole_golfa &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Поле для гольфа</p>
                  </div>
+                  }
+                  {
+                    data.spa_zona &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>СПА зона</p>
                  </div>
+                  }
+                  {
+                    data.sportivnie_ploshadeki &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Спортивные площадки</p>
                  </div>
+                  }
+                  {
+                    data.tenisniy_kort &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Теннисный корт</p>
                  </div>
+                  }
+                  {
+                    data.fitnes_sentr &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Фитнес-центр и тренажерный зал</p>
                  </div>
+                  }
+                  {
+                    data.chastniy_plazh  &&
                  <div className="acticle-ul__wrap">
                     <img src={aricon} alt="" />
                     <p>Частный пляж</p>
                  </div>
+                  }
                 </li>
               </ul>
            </section>
-
+        {/* <div className="dadddd">
+        <Swiper       
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Pagination]}
+        className="mySwiper"
+      >
+        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>Slide 5</SwiperSlide>
+        <SwiperSlide>Slide 6</SwiperSlide>
+        <SwiperSlide>Slide 7</SwiperSlide>
+        <SwiperSlide>Slide 8</SwiperSlide>
+        <SwiperSlide>Slide 9</SwiperSlide>
+      </Swiper>
+        </div> */}
+     
           <section className="article-section">
+      
             <div className="article-gallery">
               {
                 data?.images?.map((item, index)=>(
                   <div key={index} className="article-gallery__item">
                   <h4>{item.title}</h4>
+                  
                    <img src={item.images} alt="" />
               </div>
                 ))

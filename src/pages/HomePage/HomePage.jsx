@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import apartiment from "../../assets/img/apartament-preview.jpg";
 import telefoon from "../../assets/img/telefon.svg";
 import phone from "../../assets/img/iphone.png";
@@ -9,9 +9,83 @@ import iphone from "../../assets/img/iphone.png";
 import iphone2 from "../../assets/img/iphone2.png";
 import "./home.css";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
+import http from "../../axios";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const token = localStorage.getItem("token")
+const id = localStorage.getItem("id")
 const HomePage = () => {
   const [typetitle, setTypetitle] = useState("Москва");
-  return (
+  const [flatabout , setFlatAbout] = useState([])
+  const [rekoment1 ,setRekomend1] = useState([])
+  const [rekoment2 ,setRekomend2] = useState([])
+  const [dataOffices , setDataoffices] = useState([])
+  const [refresh , setRefresh] = useState(false)
+   useEffect(()=>{
+    flatAbout()
+    getFlatRecomend()
+    getFlatRecomend2()
+   },[])
+   const navigate = useNavigate()
+  const flatAbout =()=>{
+    http.get("/flatone/about/").then((res)=>{
+      console.log(res.data)
+      setFlatAbout(res.data)
+      if(res.status ===404){
+        navigate("/eror404")
+    }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  const getFlatRecomend =()=>{
+    http.get("/flatone/reconmendation/left/").then((res)=>{
+      setRekomend1(res.data.results)
+      if(res.status ===404){
+        navigate("/eror404")
+    }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  const getFlatRecomend2 =()=>{
+    http.get("/flatone/reconmendation/right/").then((res)=>{
+      setRekomend2(res.data.results)
+    })
+  }
+
+  useEffect(()=>{
+    getDataOffice()
+  },[refresh])
+  const getDataOffice =()=>{
+    http.get("/catalog/offices/").then((res)=>{
+      console.log(res.data)
+      setDataoffices(res.data.results)
+      if(res.status ===404){
+        navigate("/eror404")
+    }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  const handleLike =(ids)=>{
+
+    if(token){
+      http.post("/catalog/wishlist/" , {
+        user: id,
+      office: ids,
+      }).then((res)=>{
+      if(res.status === 201){
+         setRefresh(!refresh)
+      }
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }else{
+        navigate("/login")
+    }
+    }
+    return (
     <main>
       <section className="main-section__update">
         <div className="container__main">
@@ -19,8 +93,7 @@ const HomePage = () => {
             <div className="main-section__language">En | Рус | 中國人</div>
             <div className="main-seciton__wrapper-inner">
               <h2>
-                Меняем мир недвижимости с помощью
-                <span>искусственного интеллекта</span>
+                Меняем мир недвижимости с помощью            <span>искусственного интеллекта</span>
               </h2>
               <h4>
                 Упрощаем все процессы: от аренды, покупки и сдачи, до оплаты
@@ -117,22 +190,16 @@ const HomePage = () => {
             <div className="our-mission__content-wrapper">
               <div>
                 <ul className="mission-stats">
-                  <li className="mission-stats__item">
-                    <p className="mission-stats__value">1600+</p>
-                    <p className="mission-stats__label">
-                      Объектов на долгосрочную аренду
-                    </p>
-                  </li>
-                  <li className="mission-stats__item">
-                    <p className="mission-stats__value">1406+</p>
-                    <p className="mission-stats__label">Объектов на покупку</p>
-                  </li>
-                  <li className="mission-stats__item">
-                    <p className="mission-stats__value">1220+</p>
-                    <p className="mission-stats__label">
-                      Офисов и парковочных мест
-                    </p>
-                  </li>
+                  {
+                    flatabout?.map((item , index)=>(
+                      <li className="mission-stats__item">
+                      <p className="mission-stats__value">{item.count}+</p>
+                      <p className="mission-stats__label">
+                         {item.title}
+                      </p>
+                    </li>
+                    ))
+                  }
                 </ul>
                 <form className="search">
                   <input
@@ -295,9 +362,11 @@ const HomePage = () => {
       <section className="offer-section">
         <div className="offer-section__wrapper">
           <ul className="apartament-list">
-            <li className="apartament-list__item">
+            {
+            dataOffices?.map((item , index) =>(
+              <li className="apartament-list__item">
               <div className="apartament-list__preview">
-                <img className="current" src={apartiment} alt="" />
+                <img  onClick={()=>navigate(`/product-item/${item.id}`)} className="current" src={`http://164.92.172.190:8080${item.image[0].image}`} alt="" />
                 <img src="img/apartament-preview.jpg" alt="" />
                 <img src="img/apartament-preview.jpg" alt="" />
                 <img src="img/apartament-preview.jpg" alt="" />
@@ -312,279 +381,22 @@ const HomePage = () => {
               </div>
               <div className="apartament-list__header">
                 <div>
-                  <p className="apartament-list__address">
-                    1-й Красногвардейский пр-д, 22 стр. 2
+                  <p  onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__address">
+                     {item.name}
                   </p>
-                  <ul className="metro-list">
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                  </ul>
+           
                 </div>
-                <button className="apartament-list__favorite-btn"></button>
+                <button onClick={()=>handleLike(item.id)} className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
               </div>
-              <p className="apartament-list__price">250 000₽/месяц</p>
+              <p className="apartament-list__price">{item.price}₽/месяц</p>
               <ul className="apartament-list__tags">
-                <li className="apartament-list__tag">2 комнаты</li>
-                <li className="apartament-list__tag">38 этаж</li>
-                <li className="apartament-list__tag">120 м2</li>
+                <li className="apartament-list__tag">{item.etaj1} этаж</li>
+                <li className="apartament-list__tag">{item.square} м2</li>
+                <li className="apartament-list__tag">Сдача {item.deadline}</li>
               </ul>
-              <p className="apartament-list__location">NEVA TOWERS</p>
-            </li>
-            <li className="apartament-list__item">
-              <div className="apartament-list__preview">
-                <img
-                  className="current"
-                  src="img/apartament-preview.jpg"
-                  alt=""
-                />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-              </div>
-              <div className="preview-paggination">
-                <div className="preview-paggination__item selected"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-              </div>
-              <div className="apartament-list__header">
-                <div>
-                  <p className="apartament-list__address">
-                    1-й Красногвардейский пр-д, 22 стр. 2
-                  </p>
-                  <ul className="metro-list">
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="apartament-list__favorite-btn"></button>
-              </div>
-              <p className="apartament-list__price">250 000₽/месяц</p>
-              <ul className="apartament-list__tags">
-                <li className="apartament-list__tag">2 комнаты</li>
-                <li className="apartament-list__tag">38 этаж</li>
-                <li className="apartament-list__tag">120 м2</li>
-              </ul>
-              <p className="apartament-list__location">NEVA TOWERS</p>
-            </li>
-            <li className="apartament-list__item">
-              <div className="apartament-list__preview">
-                <img
-                  className="current"
-                  src="img/apartament-preview.jpg"
-                  alt=""
-                />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-              </div>
-              <div className="preview-paggination">
-                <div className="preview-paggination__item selected"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-              </div>
-              <div className="apartament-list__header">
-                <div>
-                  <p className="apartament-list__address">
-                    1-й Красногвардейский пр-д, 22 стр. 2
-                  </p>
-                  <ul className="metro-list">
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="apartament-list__favorite-btn"></button>
-              </div>
-              <p className="apartament-list__price">250 000₽/месяц</p>
-              <ul className="apartament-list__tags">
-                <li className="apartament-list__tag">2 комнаты</li>
-                <li className="apartament-list__tag">38 этаж</li>
-                <li className="apartament-list__tag">120 м2</li>
-              </ul>
-              <p className="apartament-list__location">NEVA TOWERS</p>
-            </li>
-            <li className="apartament-list__item">
-              <div className="apartament-list__preview">
-                <img
-                  className="current"
-                  src="img/apartament-preview.jpg"
-                  alt=""
-                />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-              </div>
-              <div className="preview-paggination">
-                <div className="preview-paggination__item selected"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-              </div>
-              <div className="apartament-list__header">
-                <div>
-                  <p className="apartament-list__address">
-                    1-й Красногвардейский пр-д, 22 стр. 2
-                  </p>
-                  <ul className="metro-list">
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="apartament-list__favorite-btn"></button>
-              </div>
-              <p className="apartament-list__price">250 000₽/месяц</p>
-              <ul className="apartament-list__tags">
-                <li className="apartament-list__tag">2 комнаты</li>
-                <li className="apartament-list__tag">38 этаж</li>
-                <li className="apartament-list__tag">120 м2</li>
-              </ul>
-              <p className="apartament-list__location">NEVA TOWERS</p>
-            </li>
-            <li className="apartament-list__item">
-              <div className="apartament-list__preview">
-                <img
-                  className="current"
-                  src="img/apartament-preview.jpg"
-                  alt=""
-                />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-              </div>
-              <div className="preview-paggination">
-                <div className="preview-paggination__item selected"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-              </div>
-              <div className="apartament-list__header">
-                <div>
-                  <p className="apartament-list__address">
-                    1-й Красногвардейский пр-д, 22 стр. 2
-                  </p>
-                  <ul className="metro-list">
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="apartament-list__favorite-btn"></button>
-              </div>
-              <p className="apartament-list__price">250 000₽/месяц</p>
-              <ul className="apartament-list__tags">
-                <li className="apartament-list__tag">2 комнаты</li>
-                <li className="apartament-list__tag">38 этаж</li>
-                <li className="apartament-list__tag">120 м2</li>
-              </ul>
-              <p className="apartament-list__location">NEVA TOWERS</p>
-            </li>
-            <li className="apartament-list__item">
-              <div className="apartament-list__preview">
-                <img
-                  className="current"
-                  src="img/apartament-preview.jpg"
-                  alt=""
-                />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-              </div>
-              <div className="preview-paggination">
-                <div className="preview-paggination__item selected"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-              </div>
-              <div className="apartament-list__header">
-                <div>
-                  <p className="apartament-list__address">
-                    1-й Красногвардейский пр-д, 22 стр. 2
-                  </p>
-                  <ul className="metro-list">
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                    <li className="metro-list__item">
-                      <img src="img/metro.svg" alt="" />
-                      <span className="metro-list__details">Metro name</span>
-                    </li>
-                  </ul>
-                </div>
-                <button className="apartament-list__favorite-btn"></button>
-              </div>
-              <p className="apartament-list__price">250 000₽/месяц</p>
-              <ul className="apartament-list__tags">
-                <li className="apartament-list__tag">2 комнаты</li>
-                <li className="apartament-list__tag">38 этаж</li>
-                <li className="apartament-list__tag">120 м2</li>
-              </ul>
-              <p className="apartament-list__location">NEVA TOWERS</p>
-            </li>
+            </li> 
+            ))
+            }
           </ul>
         </div>
       </section>
@@ -667,6 +479,7 @@ const HomePage = () => {
             </p>
           </div>
           <ul className="bistro-section__list">
+            
             <li>
               <span className="bistro-foiz">
                 <img src="./img/40.svg" alt="" />
@@ -701,64 +514,39 @@ const HomePage = () => {
           <h2 className="section-h2">Нас рекомендуют</h2>
           <div className="reviews-wrapper">
             <ul className="reviews-list">
+               {
+                rekoment1.map((item, index)=>(
               <li className="reviews-list__item">
-                <img className="reviews-list__preview" src="" alt="" />
+                <img className="reviews-list__preview" src={item.image} alt="" />
                 <div>
-                  <div className="reviews-list__name">Иван Ивановнич</div>
-                  <div className="reviews-list__additional">CEO ройстат</div>
+                  <div className="reviews-list__name">{item.name}</div>
+                  <div className="reviews-list__additional">{item.position}</div>
                   <p className="reviews-list__description">
-                    В целом, структуру лендинга можно разделить на две части:
-                    информационную и функциональную. В первой части должна быть
-                    представлена информация о компании, ее
+                   {item.text}
                   </p>
                 </div>
               </li>
-              <li className="reviews-list__item">
-                <img className="reviews-list__preview" src="" alt="" />
-                <div>
-                  <div className="reviews-list__name">Иван Ивановнич</div>
-                  <div className="reviews-list__additional">CEO ройстат</div>
-                  <p className="reviews-list__description">
-                    В целом, структуру лендинга можно разделить на две части:
-                    информационную и функциональную. В первой части должна быть
-                    представлена информация о компании, ее услугах,
-                    недвижимости, а также отзывы и контакты, во второй – форма
-                    обратной связи для получения консультации по покупке
-                    недвижимости в Москва-Сити.
-                  </p>
-                </div>
-              </li>
+                ))
+               }
+        
             </ul>
             <ul className="reviews-list">
+              {
+                rekoment2.map((item, index)=>(
+
               <li className="reviews-list__item">
-                <img className="reviews-list__preview" src="" alt="" />
+                <img className="reviews-list__preview" src={item.image} alt="" />
                 <div>
-                  <div className="reviews-list__name">Иван Ивановнич</div>
-                  <div className="reviews-list__additional">CEO ройстат</div>
+                  <div className="reviews-list__name">{item.name}</div>
+                  <div className="reviews-list__additional">{item.position}</div>
                   <p className="reviews-list__description">
-                    В целом, структуру лендинга можно разделить на две части:
-                    информационную и функциональную. В первой части должна быть
-                    представлена информация о компании, ее услугах,
-                    недвижимости, а также отзывы и контакты, во второй – форма
-                    обратной связи для получения консультации по покупке
-                    недвижимости в Москва-Сити.
+                    {item.text}
                   </p>
                 </div>
               </li>
-              <li className="reviews-list__item">
-                <img className="reviews-list__preview" src="" alt="" />
-                <div>
-                  <div className="reviews-list__name">Иван Ивановнич</div>
-                  <div className="reviews-list__additional">CEO ройстат</div>
-                  <p className="reviews-list__description">
-                    В целом, структуру лендинга можно разделить на две части:
-                    информационную и функциональную. В первой части должна быть
-                    представлена информация о компании, ее услугах,
-                    недвижимости, а также отзывы и контакты, во второй – форма
-                    обратной связи для получения
-                  </p>
-                </div>
-              </li>
+                ))
+              }
+
             </ul>
           </div>
         </div>
