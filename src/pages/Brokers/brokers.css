@@ -2,7 +2,7 @@
 .add__container {
   max-width: 1260px;
   padding: 10px;
-  margin: 0 auto;
+  margin: 50px auto;
 }
 .add__row {
   margin: 50px 0;
@@ -17,9 +17,8 @@
   display: none !important  ;
 }
 .add__left {
-  position: absolute;
-  max-width: 88dvw;
-  margin: 0 auto;
+
+
 }
 .add__user-info {
   max-width: 285px;
@@ -115,7 +114,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-left: 320px;
+
 }
 .add__right-top {
   margin-bottom: 20px;
@@ -178,7 +177,7 @@
   border-radius: 2px;
   background: var(--f-1, #f2f2f2);
   margin: 16px 0;
-  max-width: 500px;
+  max-width: 94vw;
 }
 .add__apartament-list {
   display: flex;
@@ -276,6 +275,11 @@
   .add__right {
     display: none;
   }
+  
+
+.add__container{
+  margin: 20px auto;
+}
   .add__sectionmobb{
     display:flex !important;
   }
@@ -286,10 +290,10 @@
     position: relative;
   }
   .add__user-info {
-    max-width: 500px;
+    max-width: 100%;
   }
   .add__section {
-    max-width: 500px;
+    max-width: 100%;
   }
 }
 
@@ -405,7 +409,7 @@
 }
 .add__right--obj {
   align-items: start;
-  margin-left: 340px;
+  
 }
 .add__right-top--obj {
   color: var(--13, #131418);
@@ -996,3 +1000,4 @@ background: var(--Profile, linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.2
 .navigate-settings{
   cursor: pointer;
 }
+

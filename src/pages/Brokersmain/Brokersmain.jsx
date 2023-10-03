@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import profileimg from '../../assets/img/profile.png'
 import Check from "../../assets/img/check.svg"
 import setting from "../../assets/img/setings.svg"
@@ -12,117 +12,182 @@ import history from "../../assets/img/history.svg"
 import star from "../../assets/img/star.svg"
 import hat from "../../assets/img/hat.svg"
 import { useNavigate } from 'react-router-dom'
+import http from '../../axios'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 const userimage = localStorage.getItem("image")
 const firstname = localStorage.getItem("firstname")
 const username = localStorage.getItem("email")
-
+const token = localStorage.getItem("token")
+const id = localStorage.getItem("id")
 
 const Brokersmain = () => {
   const navigate = useNavigate()
+  const [data , setData] = useState([])
+  const [refresh , setRefresh] = useState(false)
+  const [chervak , setChervak] = useState("")
+  useEffect(()=>{
+    getDatao()
+  },[refresh])
+  useEffect(()=>{
+    getChervak()
+  },[])
+
+  const getDatao =()=>{
+    http.get("/catalog/offices/").then((res)=>{
+      setData(res.data.results)
+      console.log(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  const getChervak =()=>{
+    http.get("/catalog/offices/me_offices/").then((res)=>{
+      setChervak(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  const handleLike =(ids)=>{
+
+    if(token){
+      http.post("/catalog/wishlist/" , {
+        user: id,
+      office: ids,
+      }).then((res)=>{
+      if(res.status === 201){
+         setRefresh(!refresh)
+      }
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }else{
+        navigate("/login")
+    }
+    }
+
+  const handleDislike =(ids)=>{
+    if(token){
+      http.delete(`/catalog/wishlist/${ids}/`).then((res)=>{
+        if(res.status === 204){
+          setRefresh(!refresh)
+        }
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }else{
+      navigate("/login")
+    }
+  }
+
+
+
   return (
-    <div class="add__container">
+    <div className="add__container">
    
-    <div class="add__row">
-      <div class="add__left">
-        <div class="add__user-info">
-          <div class="add__profile">
+    <div className="add__row">
+      <div className="add__left">
+        <div className="add__user-info">
+          <div className="add__profile">
             <img src={profileimg} alt="profile" />
           </div>
-          <div class="add__user-text">
-            <div class="add__user-name">
+          <div className="add__user-text">
+            <div className="add__user-name">
               <span>{firstname}</span>
               <br />
               <span>{username}</span>
           </div>
-            <div class="add__user-status">
+            <div className="add__user-status">
               <span>Собственник</span>
               <span><img src={Check} alt="check" /></span>
             </div>
           </div>
-          <div class="add__user-setings">
-            <img onClick={()=>navigate("/settings")} className='navigate-settings' src={setting} alt="setings" />
+          <div className="add__user-setings">
+            <img onClick={()=>navigate("/settings")} classNameName='navigate-settings' src={setting} alt="setings" />
           </div>
         </div>
-        <div class="add__left-bottom">
-          <ul class="add__sections">
-            <li class="add__section">
-              <div class="add__section-icon">
+        <div className="add__left-bottom">
+          <ul className="add__sections">
+            <li className="add__section">
+              <div className="add__section-icon">
                 <img src={chat} alt="icon" />
               </div>
-              <div class="add__section-name">Сообщения</div>
-              <div class="add__section-right">
+              <div className="add__section-name">Сообщения</div>
+              <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
             </li>
-            <li class="add__section">
-              <div class="add__section-icon">
+            <li className="add__section">
+              <div className="add__section-icon">
                 <img src={heart} alt="icon" />
               </div>
-              <div class="add__section-name">Избранное</div>
-              <div class="add__section-right">
+              <div className="add__section-name">Избранное</div>
+              <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
             </li>
 
-            <li class="add__section">
-              <div class="add__section-icon">
+            <li className="add__section">
+              <div className="add__section-icon">
                 <img src={star} alt="icon" />
               </div>
-              <div class="add__section-name">Сравнить</div>
-              <div class="add__section-right">
+              <div className="add__section-name">Сравнить</div>
+              <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
             </li>
 
 
-            <div class="add__mobile-section">
-              <div class="add__section-name">Мои объекты</div>
-              <div class="add__mobile-add">
-                <button onClick={()=>navigate("/addobject")} class="add__btn-add">
+            <div className="add__mobile-section">
+              <div className="add__section-name">Мои объекты</div>
+              <div className="add__mobile-add">
+                <button onClick={()=>navigate("/addobject")} className="add__btn-add">
                   <img src={pluss} alt="pluss" />
                   <span>Добавить объект</span>
                 </button>
                
                 
               </div>
-              <div class="add__apartament-list">
-                <div class="add__apartament-item">
-                  <div class="add__apartament-icon">
+              <div className="add__apartament-list">
+                <div className="add__apartament-item">
+                  <div className="add__apartament-icon">
                   </div>
 
-                  <div class="add__apartament-count-rooms">
+                  <div className="add__apartament-count-rooms">
                     2 комнаты, 120м2
                   </div>
-                  <div class="add__apartament-price">
+                  <div className="add__apartament-price">
                     21 000₽/мес
                   </div>
-                  <div class="add__apartament-address">
+                  <div className="add__apartament-address">
                     1-й Красногвардейский пр-д, 22 стр. 2
                   </div>
                 </div>
-                <div class="add__apartament-item">
-                  <div class="add__apartament-icon">
+                <div className="add__apartament-item">
+                  <div className="add__apartament-icon">
                   </div>
-                  <div class="add__apartament-count-rooms">
+                  <div className="add__apartament-count-rooms">
                     2 комнаты, 120м2
                   </div>
-                  <div class="add__apartament-price">
+                  <div className="add__apartament-price">
                     21 000₽/мес
                   </div>
-                  <div class="add__apartament-address">
+                  <div className="add__apartament-address">
                     1-й Красногвардейский пр-д, 22 стр. 2
                   </div>
                 </div>
-                <div class="add__apartament-item">
-                  <div class="add__apartament-icon">
+                <div className="add__apartament-item">
+                  <div className="add__apartament-icon filled">
                   </div>
-                  <div class="add__apartament-count-rooms">
+                  <div className="add__apartament-count-rooms">
                     2 комнаты, 120м2
                   </div>
-                  <div class="add__apartament-price">
+                  <div className="add__apartament-price">
                     21 000₽/мес
                   </div>
-                  <div class="add__apartament-address">
+                  <div className="add__apartament-address">
                     1-й Красногвардейский пр-д, 22 стр. 2
                   </div>
                 </div>
@@ -132,258 +197,124 @@ const Brokersmain = () => {
 
 
 
-            <li onClick={()=>navigate("/chervak")} class="add__section add__sectionmobb">
-              <div class="add__section-icon">
-                <div class="add__btn-addhat">
-                  <span>2</span>
+            <li onClick={()=>navigate("/chervak")} className="add__section add__sectionmobb">
+              <div className="add__section-icon">
+                <div className="add__btn-addhat">
+                  {
+                    chervak.length !== 0 &&
+                  <span>{chervak.length}</span>
+                  }
                  <img src={hat} alt="hat"/>
                 </div>
               </div>
-              <div class="add__section-name">Черновики</div>
-              <div class="add__section-right">
+              <div className="add__section-name">Черновики</div>
+              <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
             </li>
-            <li onClick={()=>navigate("/addkompleks")} class="add__section add__sectionmobb">
-              <div class="add__section-icon">
+            <li onClick={()=>navigate("/addkompleks")} className="add__section add__sectionmobb">
+              <div className="add__section-icon">
                 <img src={pluss} alt="icon" />
               </div>
-              <div class="add__section-name">Добавить комплекс</div>
-              <div class="add__section-right">
+              <div className="add__section-name">Добавить комплекс</div>
+              <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
             </li>
-            <li class="add__section">
-              <div class="add__section-icon">
+            <li className="add__section">
+              <div className="add__section-icon">
                 <img src={alert} alt="icon" />
               </div>
-              <div class="add__section-name">Настройки уведомлений</div>
-              <div class="add__section-right">
+              <div className="add__section-name">Настройки уведомлений</div>
+              <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
             </li>
 
-            <li class="add__section">
-              <div class="add__section-icon">
+            <li className="add__section">
+              <div className="add__section-icon">
                 <img src={question} alt="icon" />
               </div>
-              <div class="add__section-name">Вопрос — ответ</div>
-              <div class="add__section-right">
+              <div className="add__section-name">Вопрос — ответ</div>
+              <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
             </li>
 
-            <li class="add__section">
-              <div class="add__section-icon">
+            <li className="add__section">
+              <div className="add__section-icon">
                 <img src={history} alt="icon" />
               </div>
-              <div class="add__section-name">История просмотров</div>
-              <div class="add__section-right">
+              <div className="add__section-name">История просмотров</div>
+              <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
             </li>
           </ul>
         </div>
       </div>
-      <div class="add__right">
-        <div class="add__right-top">
-          <button onClick={()=>navigate("/addobject")} class="add__btn-add">
+      <div className="add__right">
+        <div className="add__right-top">
+          <button onClick={()=>navigate("/addobject")} className="add__btn-add">
             <img src={pluss} alt="pluss" />
             <span>Добавить объект</span>
           </button>
-          <button  onClick={()=>navigate("/chervak")} class="add__btn-add">
-            <div class="add__btn-addhat">
-              <span>2</span>
+          <button  onClick={()=>navigate("/chervak")} className="add__btn-add">
+            <div className="add__btn-addhat">
+            {
+                    chervak.length !== 0 &&
+                  <span>{chervak.length}</span>
+                  }
              <img src={hat} alt="hat"/>
             </div>
             <span>Черновики</span>
           </button>
-          <button onClick={()=>navigate("/addkompleks")} class="add__btn-add">
+          <button onClick={()=>navigate("/addkompleks")} className="add__btn-add">
             <img src={pluss} alt="pluss" />
             <span>Добавить комплекс</span>
           </button>
         </div>
-        <div class="add__right-bottom">
-          <div class="add__cards">
-            <ul class="apartament-listt">
-              <li class="apartament-list__item">
-                <div class="apartament-list__preview">
-                  <img class="current" src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
+        <div className="add__right-bottom">
+          <div className="add__cards">
+            <ul className="apartament-listt">
+            {
+              data?.map((item , index)=>(                
+              <li className="apartament-list__item">
+                <div className="apartament-list__preview">
+                <Swiper
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper3"
+                >
+                {
+                  item.image?.map((item , index)=>(
+                    <>
+                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item.image}`} alt="" /></SwiperSlide>
+                    </>
+                ))
+              }
+              </Swiper>
                 </div>
-                <div class="preview-paggination">
-                  <div class="preview-paggination__item selected"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
+                <div className="preview-paggination">
+              
                 </div>
-                <div class="apartament-list__header">
+                <div className="apartament-list__header">
                   <div>
-                    <p class="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-
+                    <p   onClick={()=>navigate(`/product-item/${item.id}`)}  className="apartament-list__address"> {item.name}</p>
                   </div>
-                  <button class="apartament-list__favorite-btn"></button>
+                  <button onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
                 </div>
-                <p class="apartament-list__price">250 000₽/месяц</p>
-                <ul class="apartament-list__tags">
-                  <li class="apartament-list__tag">2 комнаты</li>
-                  <li class="apartament-list__tag">38 этаж</li>
-                  <li class="apartament-list__tag">120 м2</li>
+                <p className="apartament-list__price">250 000₽/месяц</p>
+                <ul className="apartament-list__tags">
+                <li className="apartament-list__tag">{item.etaj1} этаж</li>
+                    <li className="apartament-list__tag">{item.square} м2</li>
+                    <li className="apartament-list__tag">Сдача {item.deadline}</li>
                 </ul>
-                <p class="apartament-list__location">NEVA TOWERS</p>
               </li>
-              <li class="apartament-list__item">
-                <div class="apartament-list__preview">
-                  <img class="current" src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                </div>
-                <div class="preview-paggination">
-                  <div class="preview-paggination__item selected"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                </div>
-                <div class="apartament-list__header">
-                  <div>
-                    <p class="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-
-                  </div>
-                  <button class="apartament-list__favorite-btn"></button>
-                </div>
-                <p class="apartament-list__price">250 000₽/месяц</p>
-                <ul class="apartament-list__tags">
-                  <li class="apartament-list__tag">2 комнаты</li>
-                  <li class="apartament-list__tag">38 этаж</li>
-                  <li class="apartament-list__tag">120 м2</li>
-                </ul>
-                <p class="apartament-list__location">NEVA TOWERS</p>
-              </li>
-              <li class="apartament-list__item">
-                <div class="apartament-list__preview">
-                  <img class="current" src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                </div>
-                <div class="preview-paggination">
-                  <div class="preview-paggination__item selected"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                </div>
-                <div class="apartament-list__header">
-                  <div>
-                    <p class="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                  </div>
-                  <button class="apartament-list__favorite-btn"></button>
-                </div>
-                <p class="apartament-list__price">250 000₽/месяц</p>
-                <ul class="apartament-list__tags">
-                  <li class="apartament-list__tag">2 комнаты</li>
-                  <li class="apartament-list__tag">38 этаж</li>
-                  <li class="apartament-list__tag">120 м2</li>
-                </ul>
-                <p class="apartament-list__location">NEVA TOWERS</p>
-              </li>
-              <li class="apartament-list__item">
-                <div class="apartament-list__preview">
-                  <img class="current" src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                </div>
-                <div class="preview-paggination">
-                  <div class="preview-paggination__item selected"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                </div>
-                <div class="apartament-list__header">
-                  <div>
-                    <p class="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-
-                  </div>
-                  <button class="apartament-list__favorite-btn"></button>
-                </div>
-                <p class="apartament-list__price">250 000₽/месяц</p>
-                <ul class="apartament-list__tags">
-                  <li class="apartament-list__tag">2 комнаты</li>
-                  <li class="apartament-list__tag">38 этаж</li>
-                  <li class="apartament-list__tag">120 м2</li>
-                </ul>
-                <p class="apartament-list__location">NEVA TOWERS</p>
-              </li>
-              <li class="apartament-list__item">
-                <div class="apartament-list__preview">
-                  <img class="current" src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                </div>
-                <div class="preview-paggination">
-                  <div class="preview-paggination__item selected"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                </div>
-                <div class="apartament-list__header">
-                  <div>
-                    <p class="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-
-                  </div>
-                  <button class="apartament-list__favorite-btn"></button>
-                </div>
-                <p class="apartament-list__price">250 000₽/месяц</p>
-                <ul class="apartament-list__tags">
-                  <li class="apartament-list__tag">2 комнаты</li>
-                  <li class="apartament-list__tag">38 этаж</li>
-                  <li class="apartament-list__tag">120 м2</li>
-                </ul>
-                <p class="apartament-list__location">NEVA TOWERS</p>
-              </li>
-              <li class="apartament-list__item">
-                <div class="apartament-list__preview">
-                  <img class="current" src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                  <img src="img/apartament-preview.jpg" alt=""/>
-                </div>
-                <div class="preview-paggination">
-                  <div class="preview-paggination__item selected"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                  <div class="preview-paggination__item"></div>
-                </div>
-                <div class="apartament-list__header">
-                  <div>
-                    <p class="apartament-list__address">1-й Красногвардейский пр-д, 22 стр. 2</p>
-                  </div>
-                  <button class="apartament-list__favorite-btn"></button>
-                </div>
-                <p class="apartament-list__price">250 000₽/месяц</p>
-                <ul class="apartament-list__tags">
-                  <li class="apartament-list__tag">2 комнаты</li>
-                  <li class="apartament-list__tag">38 этаж</li>
-                  <li class="apartament-list__tag">120 м2</li>
-                </ul>
-                <p class="apartament-list__location">NEVA TOWERS</p>
-              </li>
+              ))
+            }
              </ul>
           </div>
         </div>

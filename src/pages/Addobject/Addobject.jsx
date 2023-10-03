@@ -193,7 +193,11 @@ const handleChange =(evt)=>{
     form.append("irr" , irr)
     form.append("roc" , roc)
     form.append("pi" , pi)
-    form.append("roi" , roi)      
+    form.append("roi" , roi)     
+    form.append("perviy_vznos" , planpentaj1) 
+    form.append("posutochno",postojniymoney )
+    form.append("dolgo",dologomoney )
+    form.append("sena" ,planpentaj2 )
     http.post("/catalog/complex/" , form).then((res)=>{
       console.log(res.data)
       if(res.status ===201){

@@ -535,7 +535,7 @@ line-height: 135%; /* 20.25px */
 }
 .mySwiper{
     width: 100%;
-    height: 400px;
+    height: 340px;
 }
 .article-section__newimg  img{
     width: 100%;
@@ -560,5 +560,63 @@ line-height: 135%; /* 20.25px */
 @media only screen and (max-width:500px){
     .article-section__newimg  img{
         height: 355px;
+    }
+}
+
+@media only screen and (max-width:450px){
+    .mySwiper{
+        width: 100%;
+        height: 260px;
+    }
+}
+.apartament-list__previe{
+    max-width: 500px;
+}
+.mySwiper2{
+     height: 95%;
+     width: 30vw;
+}
+.mySwiper2 img{
+    width: 100%;
+    height: 100%
+}
+@media only screen and (max-width:1201px){
+    .mySwiper2{
+        height: 95%;
+        width: 58vw;
+   }
+}
+@media only screen and (max-width:1021px){
+    .mySwiper2{
+        height: 95%;
+        width: 47vw;
+   }
+}
+@media only screen and (max-width:801px){
+    .mySwiper2{
+        height: 95%;
+        width: 96vw;
+   }
+}
+@media only screen and (max-width:525px){
+    .mySwiper2{
+        height: 95%;
+        width: 94vw;
+   }
+}
+@media only screen and (max-width:402px){
+    .mySwiper2{
+        height: 95%;
+        width: 92vw;
+   } 
+}
+.mySwiper3{
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width:420px){
+    .catalogue > .container{
+        padding: 0 6px !important;
     }
 }

@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./chervak.css"
 import chervak from "../../assets/img/main-header.jpg"
+import http from '../../axios'
+
 const Chervak = () => {
+    const [data ,setData] = useState([])
+    useEffect(()=>{
+      getData()
+    },[])
+   const getData =()=>{
+    http.get("/catalog/offices/me_offices/").then((res)=>{
+        setData(res.data)
+        console.log(res.data)
+    }).catch((err)=>{
+        console.log(err)
+    })
+   }
   return (
     <div>
           <main>
@@ -12,15 +26,15 @@ const Chervak = () => {
                     <h2>Черновики</h2>
                 </div>
                 <ul className="chervak__list">
+                    {
+                        data?.map((item , index)=>(
                     <li className="chervak__listitem">
                         <div className="chervaklistitem__img">
-                            <img src={chervak} alt=""/>
+                            <img src={`http://164.92.172.190:8080${item.image[0].image}/`} alt="rasm"/>
                             <div className="chervaklistitem__img-text">
-                                <h4>64 Этаж 80м2 ОКО</h4>
+                                <h4>{item.etaj1} Этаж {item.square}м2 {item.name}</h4>
                                 <p>
-                                    Эти апартаменты одни из лучших, что может предложить рынок
-                                    Жить на такой высоте— быть в шаге от свободного полёта. Лучший выбор для тех любит жить в неброских, но роскошных апартаментах. Эти апартаменты одни из лучших, что может предложить рынок
-                                    Жить на такой высоте— быть в шаге от свободного полёта. Лучший выбор для тех любит жить в неброских, но роскошных апартаментах. 
+                                   {item.description}
                                 </p>
                             </div>
                         </div>
@@ -29,40 +43,9 @@ const Chervak = () => {
                             <p className="chervak__delete">Изменить</p>
                         </div>
                     </li>
-                    <li className="chervak__listitem">
-                        <div className="chervaklistitem__img">
-                        <img src={chervak} alt=""/>
-                            <div className="chervaklistitem__img-text">
-                                <h4>64 Этаж 80м2 ОКО</h4>
-                                <p>
-                                    Эти апартаменты одни из лучших, что может предложить рынок
-                                    Жить на такой высоте— быть в шаге от свободного полёта. Лучший выбор для тех любит жить в неброских, но роскошных апартаментах. Эти апартаменты одни из лучших, что может предложить рынок
-                                    Жить на такой высоте— быть в шаге от свободного полёта. Лучший выбор для тех любит жить в неброских, но роскошных апартаментах. 
-                                </p>
-                            </div>
-                        </div>
-                        <div className="chervak__btns">
-                            <button className="chervak__izmenit">Изменить</button>
-                            <p className="chervak__delete">Изменить</p>
-                        </div>
-                    </li>
-                    <li className="chervak__listitem">
-                        <div className="chervaklistitem__img">
-                        <img src={chervak} alt=""/>
-                            <div className="chervaklistitem__img-text">
-                                <h4>64 Этаж 80м2 ОКО</h4>
-                                <p>
-                                    Эти апартаменты одни из лучших, что может предложить рынок
-                                    Жить на такой высоте— быть в шаге от свободного полёта. Лучший выбор для тех любит жить в неброских, но роскошных апартаментах. Эти апартаменты одни из лучших, что может предложить рынок
-                                    Жить на такой высоте— быть в шаге от свободного полёта. Лучший выбор для тех любит жить в неброских, но роскошных апартаментах. 
-                                </p>
-                            </div>
-                        </div>
-                        <div className="chervak__btns">
-                            <button className="chervak__izmenit">Изменить</button>
-                            <p className="chervak__delete">Изменить</p>
-                        </div>
-                    </li>
+                        ))
+                    }
+              
                 </ul>
             </div>
           </div>

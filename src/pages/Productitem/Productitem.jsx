@@ -30,17 +30,19 @@ import chat from "../../assets/img/chat.svg"
 import linkarrow from "../../assets/img/link-arrow.svg"
 import { useParams } from 'react-router-dom';
 import http from '../../axios';
-const Productitem = () => {
+  const Productitem = () => {
   const [typevibor , setTypevibor] = useState(false)
   const [typeplan , setTypeplan] = useState(false)
   const [data, setData] = useState({})
+  const [image , setImage] = useState([])
   const { id} = useParams()
   useEffect(()=>{
    getData()
   },[])
   const getData = ()=>{
     http.get(`/catalog/offices/${id}/`).then((res)=>{
-       data(res.data)
+       setData(res.data)
+       setImage(res.data.image)
       console.log(res.data)
     }).catch((err)=>{
       console.log(err)
@@ -49,109 +51,124 @@ const Productitem = () => {
 
   return (
     <main>
-    <div class="product-page">
-      <div class="container">
-        <ul class="breadcrumbs">
-          <li class="breadcrumbs__item">
+    
+    <div className="product-page">
+      <div className="container">
+        <ul className="breadcrumbs">
+          <li className="breadcrumbs__item">
             <a href="">оаэ</a>
           </li>
-          <li class="breadcrumbs__item">
+          <li className="breadcrumbs__item">
             <a href="">дубай</a>
           </li>
-          <li class="breadcrumbs__item">
+          <li className="breadcrumbs__item">
             <span>дубай марина крик</span>
           </li>
         </ul>
-        <div class="product-page__header">
-          <h1 class="product-page__title">Дубай Марина крик</h1>
-          <div class="product-interactions">
-            <button class="wishlist-btn"></button>
-            <button class="share-btn"></button>
+        <div className="product-page__header">
+          <h1 className="product-page__title">Дубай Марина крик</h1>
+          <div className="product-interactions">
+            <button className={data.like_status ?"wishlist-btn filled" :"wishlist-btn " }></button>
+            <button className="share-btn"></button>
           </div>
         </div>
-        <div class="product-gallery">
-          <img src={productimg} alt="" />
-          <div class="product-gallery__images">
-            <img src={apartmentprev} alt="" />
-            <img src={apartmentprev} alt="" />
-            <img src={apartmentprev} alt="" />
-            <img src={apartmentprev } alt="" />
+        <div className="product-gallery">
+          {
+            image[0] &&       <img  src={`http://164.92.172.190:8080${image[0].image}`}alt="" />
+          }
+   
+          <div className="product-gallery__images">
+          {
+            image[1] &&       <img  src={`http://164.92.172.190:8080${image[1].image}`}alt="" />
+          }
+             {
+            image[2] &&       <img  src={`http://164.92.172.190:8080${image[2].image}`}alt="" />
+          }
+            {
+            image[3] &&       <img  src={`http://164.92.172.190:8080${image[3].image}`}alt="" />
+          }
+            {
+            image[4] &&       <img  src={`http://164.92.172.190:8080${image[4].image}`}alt="" />
+          }
+           
           </div>
-          <button class="product-gallery__see-all">Все фото</button>
+          <button className="product-gallery__see-all">Все фото</button>
         </div>
-        <div class="product-content">
+        <div className="product-content">
           <div>
-            <section class="product-section">
-              <p class="product-section__p">
-                Emaar Business Park 1, Al Thanyah Third area, 602, Дубай ОАЭ.
+            <section className="product-section">
+              <p className="product-section__p">
+                {data.name}
               </p>
-              <div class="product-tags">
-                <div class="product-tags__item">#Предстарт продаж</div>
-                <div class="product-tags__item">#Комплекс сдан</div>
-                <div class="product-tags__item">#Доступна рассрочка</div>
+              <div className="product-tags">
+                {
+                  data?.tags?.map((item, index)=>(
+                    <p className="product-tags__item" >#{item.name}</p>
+                  ))
+                }              
               </div>
             </section>
-            <section class="product__about-setion">
-              <div onClick={()=>setTypevibor(!typevibor)} id="vibratie-title" class="vibratie-title">
+            <section className="product__about-setion">
+              <div onClick={()=>setTypevibor(!typevibor)} id="vibratie-title" className="vibratie-title">
                 <h2>Варианты планировок</h2>
                 <img className={typevibor ? "pentajstrelka" :''} id="vibratestrelka" src={strelkabig} alt="" />
               </div>
               <ul id="vibrate-section__list" className={typevibor ? "planpetaj-hide" : "vibrate-section__list"}>
-                <li class="vibrate-section__list-item">
+                <li className="vibrate-section__list-item">
                   <h4>Студии</h4>
-                  <span class="vibrate-section__ulcham">от 40 м²</span>
+                  <span className="vibrate-section__ulcham">от 40 м²</span>
                   <span>360 000–380 000$</span>
                   <h6>
                     5 предложений <img src={strelkasmall} alt="" />
                   </h6>
                 </li>
-                <li class="vibrate-section__list-item">
+                <li className="vibrate-section__list-item">
                   <h4>2 комнатные</h4>
-                  <span class="vibrate-section__ulcham">от70 м²</span>
+                  <span className="vibrate-section__ulcham">от70 м²</span>
                   <span>360 000–380 000$</span>
                   <h6>
                     20 предложений <img src={strelkasmall} alt="" />
                   </h6>
                 </li>
-                <li class="vibrate-section__list-item">
+                <li className="vibrate-section__list-item">
                   <h4>3 комнатные</h4>
-                  <span class="vibrate-section__ulcham">от120 м²</span>
+                  <span className="vibrate-section__ulcham">от120 м²</span>
                   <span>360 000–380 000$</span>
                   <h6>
                     2 предложений <img src={strelkasmall} alt="" />
                   </h6>
                 </li>
-                <li class="vibrate-section__list-item">
+                <li className="vibrate-section__list-item">
                   <h6>
                     Марина крик <img src={strelkatepa} alt="" />
                   </h6>
-                  <span class="vibrate-section__ulcham2">Сдан</span>
-                  <span class="vibrate-section__ulcham2">380 000$</span>
-                  <span class="vibrate-section__ulcham2">209,7 м²</span>
-                  <span class="vibrate-section__ulcham2"
+                  <span className="vibrate-section__ulcham2">Сдан</span>
+                  <span className="vibrate-section__ulcham2">380 000$</span>
+                  <span className="vibrate-section__ulcham2">209,7 м²</span>
+                  <span className="vibrate-section__ulcham2"
                     ><img src={uy} alt=""
                   /></span>
                 </li>
-                <li class="vibrate-section__list-item">
+                <li className="vibrate-section__list-item">
                   <h6>Корпус 1 <img src={strelkatepa} alt="" /></h6>
-                  <span class="vibrate-section__ulcham2">Сдан</span>
-                  <span class="vibrate-section__ulcham2">380 000$</span>
-                  <span class="vibrate-section__ulcham2">209,7 м²</span>
-                  <span class="vibrate-section__ulcham2"
+                  <span className="vibrate-section__ulcham2">Сдан</span>
+                  <span className="vibrate-section__ulcham2">380 000$</span>
+                  <span className="vibrate-section__ulcham2">209,7 м²</span>
+                  <span className="vibrate-section__ulcham2"
                     ><img src={uy} alt=""
                   /></span>
                 </li>
-                <li class="vibrate-section__list-item">
+                <li className="vibrate-section__list-item">
                   <h4>3 комнатные</h4>
-                  <span class="vibrate-section__ulcham">от70 м²</span>
+                  <span className="vibrate-section__ulcham">от70 м²</span>
                   <span>360 000–380 000$</span>
                   <h6>
                     15 предложений <img src={strelkasmall} alt="" />
                   </h6>
                 </li>
-                <li class="vibrate-section__list-item">
+                <li className="vibrate-section__list-item">
                   <h4>3 комнатные</h4>
-                  <span class="vibrate-section__ulcham">от70 м²</span>
+                  <span className="vibrate-section__ulcham">от70 м²</span>
                   <span>360 000–380 000$</span>
                   <h6>
                     3 предложений <img src={strelkasmall} alt="" />
@@ -159,345 +176,403 @@ const Productitem = () => {
                 </li>
               </ul>
             </section>
-            <section class="kochestva__knok">
+            <section className="kochestva__knok">
               <h2>Подобрать объект</h2>
               <p>Количество комнат</p>
-              <ul class="kochestva__knok-list">
+              <ul className="kochestva__knok-list">
                 <li>
-                  <span class="kochestve__btn1">студия</span>
+                  <span className="kochestve__btn1">студия</span>
                 </li>
-                <li class="active__kochesbtn">2</li>
+                <li className="active__kochesbtn">2</li>
                 <li>3</li>
                 <li>4</li>
                 <li>5+</li>
               </ul>
-              <div class="uyimg__kochestva">
-                <div class="uyimg__kochestva-img">
+              <div className="uyimg__kochestva">
+                <div className="uyimg__kochestva-img">
                   <img src={uybig} alt="" />
                 </div>
-                <div class="uyimg__kochestva-text">
+                <div className="uyimg__kochestva-text">
                   <h3>от 360 000 $</h3>
                   <h2>от 70 м²</h2>
                   <span>от 36 000 $/м2</span>
-                  <span class="uyimg__konkurs">Корпус 1</span>
+                  <span className="uyimg__konkurs">Корпус 1</span>
                   <p>2 комнатные</p>
                   <button>Показать предложения</button>
                 </div>
               </div>
             </section>
-            <section class="kompleks__izab">
+            <section className="kompleks__izab">
               <h2>О комплексе</h2>
-              <div class="kompleks__izab-text">
+              <div className="kompleks__izab-text">
                 <ul>
-                  <li class="kompleks__izab-textlistitem1">Тип жилья</li>
-                  <li class="kompleks__izab-textlistitem1">Первчика</li>
+                  <li className="kompleks__izab-textlistitem1">Тип жилья</li>
+                  <li className="kompleks__izab-textlistitem1">Первчика</li>
                 </ul>
                 <ul>
-                  <li class="kompleks__izab-textlistitem1">Условия сделки</li>
-                  <li class="kompleks__izab-textlistitem1">
+                  <li className="kompleks__izab-textlistitem1">Условия сделки</li>
+                  <li className="kompleks__izab-textlistitem1">
                     Покупка в пуле инвесторов
                   </li>
                 </ul>
                 <ul>
-                  <li class="kompleks__izab-textlistitem1">В продаже</li>
-                  <li class="kompleks__izab-textlistitem1">55 квартир</li>
+                  <li className="kompleks__izab-textlistitem1">В продаже</li>
+                  <li className="kompleks__izab-textlistitem1">55 квартир</li>
                 </ul>
                 <ul>
-                  <li class="kompleks__izab-textlistitem1">Срок сдачи</li>
-                  <li class="kompleks__izab-textlistitem1">
+                  <li className="kompleks__izab-textlistitem1">Срок сдачи</li>
+                  <li className="kompleks__izab-textlistitem1">
                     IV кв 2025 года
                   </li>
                 </ul>
                 <ul>
-                  <li class="kompleks__izab-textlistitem1">Этажность</li>
-                  <li class="kompleks__izab-textlistitem1">15 этажей</li>
+                  <li className="kompleks__izab-textlistitem1">Этажность</li>
+                  <li className="kompleks__izab-textlistitem1">15 этажей</li>
                 </ul>
               </div>
             </section>
-            <sectoin class="opesniy">
+            <sectoin className="opesniy">
                <h2>Описание</h2>
-               <p>Этот апарт комплекс один из лучших, что может предложить рынок </p>
-               {/* <p>✦ Просторная кухня, переходящая в зал <br>
-                  ✦ Спальня с видом на Москву <br>
-                  ✦ Ванная с прозрачной душевой кабинкой
-              </p> */}
-              <p>
-                  Жить на такой высоте— быть в шаге от свободного полёта. Лучший выбор для тех любит жить в неброских, но роскошных апартаментах. Эти апартаменты одни из лучших, что может предложить рынок
-                  Жить на такой высоте— быть в шаге от свободного полёта. Лучший выбор для тех любит жить в неброских, но роскошных апартаментах. </p>
+               
+              <p>{data.description}</p>
             </sectoin>
-            <section class="infraktura__proekt">
+            <section className="infraktura__proekt">
               <h2>Инфраструктура проекта</h2>
-              <ul class="infraktura__proekt-list">
-                  <li class="infraktura__proekt-listitem">
-                      <p><img src={oshxona} alt=""/> <span>Ресторан</span></p>
-                      <p><img src={spa} alt=""/> <span>Спа центр</span></p>
-                      <p><img src={basen} alt=""/> <span>Бассен</span></p>
-                      <p><img src={fitne} alt=""/> <span>Фитнес центр</span></p>
-                      <p><img src={park} alt=""/> <span>Парк</span></p>
+              <ul className="infraktura__proekt-list">
+                  <li className="infraktura__proekt-listitem">
+                    {
+                      data.projectinfrastructure?.map((item , index)=>(
+                        <>
+                        {
+                        item === "restaran" &&    <p><img src={oshxona} alt=""/> <span>Ресторан</span></p> 
+                        }
+                        {
+                          item === "spa"  &&   <p><img src={spa} alt=""/> <span>Спа центр</span></p>
+                        }
+                        {
+                          item === 'bassen' && <p><img src={basen} alt=""/> <span>Бассен</span></p>
+                        }
+                        {
+                          item === 'fitnes' &&  <p><img src={fitne} alt=""/> <span>Фитнес центр</span></p>
+                        }
+                        {
+                          item === 'park' &&  <p><img src={park} alt=""/> <span>Парк</span></p>
+                        }
+                        </>
+                      ))
+                    }
                   </li>
-                  <li class="infraktura__proekt-listitem">
-                      <p><img src={detskiy} alt=""/> <span>Детская площадка</span></p>
-                      <p><img src={ploshad} alt=""/> <span>Спорт площадка</span></p>
+                  <li className="infraktura__proekt-listitem">
+                  {
+                      data.projectinfrastructure
+                      ?.map((item , index)=>(
+                        <>
+                        {
+                        item === "kids" && <p><img src={detskiy} alt=""/> <span>Детская площадка</span></p> 
+                        }
+                        {
+                          item === "sport" && <p><img src={ploshad} alt=""/> <span>Спорт площадка</span></p>
+                        }                       
+                        </>
+                      ))
+                    }
+                     
                   </li>
                 
               </ul>
             </section>
-            <section class="infraktura__proekt">
+            <section className="infraktura__proekt">
               <h2>Инфраструктура проекта</h2>
-              <ul class="infraktura__proekt-list">
-                  <li class="infraktura__proekt-listitem">
-                      <p><img src={dedsad} alt=""/> <span>Детсад</span></p>
-                      <p><img src={shkola} alt=""/> <span>Школа</span></p>
-                      <p><img src={metro2} alt=""/> <span>Метро 230м</span></p>
-                      <p><img src={hospital} alt=""/> <span>Больница</span></p>
-                      <p><img src={tts} alt=""/> <span>ТЦ</span></p>
+              <ul className="infraktura__proekt-list">
+                  <li className="infraktura__proekt-listitem">
+                  {
+                      data.projectinfrastructure
+                      ?.map((item , index)=>(
+                        <>
+                        {
+                        item === "kids" && <p><img src={dedsad} alt=""/> <span>Детсад</span></p>
+                        }
+                        {
+                          item === "school" && <p><img src={shkola} alt=""/> <span>Школа</span></p>
+                        }                       
+                        {
+                          item === "metro" &&  <p><img src={metro2} alt=""/> <span>Метро 230м</span></p>
+                        }
+                        {
+                          item === "hospital" &&                        <p><img src={hospital} alt=""/> <span>Больница</span></p>
+                        }
+                        {
+                          item === "tz" && <p><img src={tts} alt=""/> <span>ТЦ</span></p>
+                        }
+                        </>
+                      ))
+                    }
+                  
                   </li>
-                  <li class="infraktura__proekt-listitem">
-                      <p><img src={detskiy} alt=""/> <span>Детская площадка</span></p>
-                      <p><img src={oshxona} alt=""/> <span>Ресторан</span></p>
-                      <p><img src={magazin} alt=""/> <span>Магазины</span></p>
-                      <p><img src={park} alt=""/> <span>Парк</span></p>
-                      <p><img src={playj} alt=""/> <span>Пляж 240м</span></p>
+                  <li className="infraktura__proekt-listitem">
+                  {
+                      data.projectinfrastructure
+                      ?.map((item , index)=>(
+                        <>
+                        {
+                        item === "kids" &&  <p><img src={detskiy} alt=""/> <span>Детская площадка</span></p>
+                        }
+                        {
+                          item === "restaran" && <p><img src={oshxona} alt=""/> <span>Ресторан</span></p>
+                        }                       
+                        {
+                          item === "magazin" &&  <p><img src={magazin} alt=""/> <span>Магазины</span></p>
+                        }
+                        {
+                          item === "park" && <p><img src={park} alt=""/> <span>Парк</span></p>
+                        }
+                        {
+                          item === "plyaj" && <p><img src={playj} alt=""/> <span>Пляж 240м</span></p>
+                        }
+                        </>
+                      ))
+                    }
+                     
                   </li>
                 
               </ul>
             </section>
-            <section class="product-section">
-              <div class="product-banner">
-                  <a class="container" href="">
-                      <h4 class="product-banner__title">Район Дубай марина    </h4>
-                      <p class="product-banner__text">Перейти к статье</p>
+            <section className="product-section">
+              <div className="product-banner">
+                  <a className="container" href="">
+                      <h4 className="product-banner__title">Район Дубай марина    </h4>
+                      <p className="product-banner__text">Перейти к статье</p>
                   </a>
               </div>
             </section>
-             <section class="profuct-file">
-              <label class="profuct-file__label" for="product">
-                <input class="profuct-file__input" id="product"  type="file"/>
+             <section className="profuct-file">
+              <label className="profuct-file__label" for="product">
+                <input className="profuct-file__input" id="product"  type="file"/>
                 <img src={file} alt=""/>
                 <h4>21 планировка в этом ЖК</h4>
                 <p>Выбрать</p>
               </label>
              </section>
-             <section class="profuct__doc">
+             <section className="profuct__doc">
               <h2>Документация от застройщика</h2>
-              <ul class="profuct-doc__list">
+              <ul className="profuct-doc__list">
                 <li><img src={pdf} alt=""/><span>Документация</span> </li>
                 <li><img src={pdf} alt=""/><span>Документация</span> </li>
                 <li><img src={pdf} alt=""/><span>Документация</span> </li>
               </ul>
              </section>
-             <section class="zastraoy">
+             <section className="zastraoy">
               <h2>О застройщике</h2>
-              <ul class="zastraoy-wrapper">
+              <ul className="zastraoy-wrapper">
                 <li>
-                  <p class="zastraoy-wrapperp1">Сдано</p>
-                  <p class="zastraoy-wrapperp2">4 объекта <img src={strelkatepa} alt=""/></p>
+                  <p className="zastraoy-wrapperp1">Сдано</p>
+                  <p className="zastraoy-wrapperp2">4 объекта <img src={strelkatepa} alt=""/></p>
                 </li>
                 <li>
-                  <p class="zastraoy-wrapperp1">Строится </p>
-                  <p class="zastraoy-wrapperp2">3 объекта <img src={strelkatepa         } alt=""/></p>
+                  <p className="zastraoy-wrapperp1">Строится </p>
+                  <p className="zastraoy-wrapperp2">3 объекта <img src={strelkatepa         } alt=""/></p>
                 </li>
                
               </ul>
              </section>
         
-             <section class="product-section">
-              <div class="product-banner">
-                  <a class="container" href="">
-                      <h4 class="product-banner__title">Дубай Марина крик</h4>
-                      <p class="product-banner__text">Перейти к статье</p>
+             <section className="product-section">
+              <div className="product-banner">
+                  <a className="container" href="">
+                      <h4 className="product-banner__title">Дубай Марина крик</h4>
+                      <p className="product-banner__text">Перейти к статье</p>
                   </a>
               </div>
             </section>  
-            <section class="planpetaj">
+            <section className="planpetaj">
               <h2>План платежей</h2>
-             <div class="planpetaj-wrapper">
-              <ul class="planpetaj-list">
-                <li class="planpetaj-listitem">
-                   <span class="planpetaj-number">1</span>
+             <div className="planpetaj-wrapper">
+              <ul className="planpetaj-list">
+                <li className="planpetaj-listitem">
+                   <span className="planpetaj-number">1</span>
                     <div>
-                      <p class="planpetaj-text">10% Первый взнос</p>
-                       <p class="planpetaj-text-item"></p>
+                      <p className="planpetaj-text">10% Первый взнос</p>
+                       <p className="planpetaj-text-item"></p>
                     </div>
                 </li>
-                <li class="planpetaj-line"></li>
-                <li class="planpetaj-listitem">
-                   <span class="planpetaj-number">2</span>
+                <li className="planpetaj-line"></li>
+                <li className="planpetaj-listitem">
+                   <span className="planpetaj-number">2</span>
                     <div>
-                      <p class="planpetaj-text">20% Первый взнос</p>
-                       <p class="planpetaj-text-item"></p>
+                      <p className="planpetaj-text">20% Первый взнос</p>
+                       <p className="planpetaj-text-item"></p>
                     </div>
                 </li>
-                <li class="planpetaj-line"></li>
-                <li class="planpetaj-listitem">
-                   <span class="planpetaj-number">3</span>
+                <li className="planpetaj-line"></li>
+                <li className="planpetaj-listitem">
+                   <span className="planpetaj-number">3</span>
                     <div>
-                      <p class="planpetaj-text">30% Первый взнос</p>
-                       <p class="planpetaj-text-item"></p>
+                      <p className="planpetaj-text">30% Первый взнос</p>
+                       <p className="planpetaj-text-item"></p>
                     </div>
                 </li>
-                <li class="planpetaj-line"></li>
-                <li class="planpetaj-listitem">
-                   <span class="planpetaj-number  planpetaj-listactive ">4</span>
+                <li className="planpetaj-line"></li>
+                <li className="planpetaj-listitem">
+                   <span className="planpetaj-number  planpetaj-listactive ">4</span>
                     <div>
-                      <p class="planpetaj-text">40% Первый взнос</p>
-                       <p class="planpetaj-text-item">Возможно продать</p>
+                      <p className="planpetaj-text">40% Первый взнос</p>
+                       <p className="planpetaj-text-item">Возможно продать</p>
                     </div>
                 </li>
-                <li class="planpetaj-line"></li>
-                <li class="planpetaj-listitem">
-                   <span class="planpetaj-number">5</span>
+                <li className="planpetaj-line"></li>
+                <li className="planpetaj-listitem">
+                   <span className="planpetaj-number">5</span>
                     <div>
-                      <p class="planpetaj-text">50% Первый взнос</p>
-                       <p class="planpetaj-text-item"></p>
+                      <p className="planpetaj-text">50% Первый взнос</p>
+                       <p className="planpetaj-text-item"></p>
                     </div>
                 </li>
-                <li class="planpetaj-line"></li>
-                <div id="planpentajhide" class={typeplan ? "" :'planpetaj-hide'}>
-                  <li class="planpetaj-listitem">
-                    <span class="planpetaj-number">6</span>
+                <li className="planpetaj-line"></li>
+                <div id="planpentajhide" className={typeplan ? "" :'planpetaj-hide'}>
+                  <li className="planpetaj-listitem">
+                    <span className="planpetaj-number">6</span>
                      <div>
-                       <p class="planpetaj-text">60% Первый взнос</p>
-                        <p class="planpetaj-text-item"></p>
+                       <p className="planpetaj-text">60% Первый взнос</p>
+                        <p className="planpetaj-text-item"></p>
                      </div>
                  </li>
-                 <li class="planpetaj-line"></li>
-                 <li class="planpetaj-listitem">
-                  <span class="planpetaj-number">7</span>
+                 <li className="planpetaj-line"></li>
+                 <li className="planpetaj-listitem">
+                  <span className="planpetaj-number">7</span>
                    <div>
-                     <p class="planpetaj-text">70% Первый взнос</p>
-                      <p class="planpetaj-text-item"></p>
+                     <p className="planpetaj-text">70% Первый взнос</p>
+                      <p className="planpetaj-text-item"></p>
                    </div>
                </li>
-               <li class="planpetaj-line"></li>
-               <li class="planpetaj-listitem">
-                <span class="planpetaj-number">8</span>
+               <li className="planpetaj-line"></li>
+               <li className="planpetaj-listitem">
+                <span className="planpetaj-number">8</span>
                  <div>
-                   <p class="planpetaj-text">80% Первый взнос</p>
-                    <p class="planpetaj-text-item"></p>
+                   <p className="planpetaj-text">80% Первый взнос</p>
+                    <p className="planpetaj-text-item"></p>
                  </div>
              </li>
-             <li class="planpetaj-line"></li>
-             <li class="planpetaj-listitem">
-              <span class="planpetaj-number">9</span>
+             <li className="planpetaj-line"></li>
+             <li className="planpetaj-listitem">
+              <span className="planpetaj-number">9</span>
                <div>
-                 <p class="planpetaj-text">90% Первый взнос</p>
-                  <p class="planpetaj-text-item"></p>
+                 <p className="planpetaj-text">90% Первый взнос</p>
+                  <p className="planpetaj-text-item"></p>
                </div>
            </li>
-           <li class="planpetaj-line"></li>
-           <li class="planpetaj-listitem">
-            <span class="planpetaj-number">10</span>
+           <li className="planpetaj-line"></li>
+           <li className="planpetaj-listitem">
+            <span className="planpetaj-number">10</span>
              <div > 
-               <p class="planpetaj-text">100% Первый взнос</p>
-                <p class="planpetaj-text-item"></p>
+               <p className="planpetaj-text">100% Первый взнос</p>
+                <p className="planpetaj-text-item"></p>
              </div>
          </li>
                 </div>
                
                </ul>
-               <div onClick={()=>setTypeplan(!typeplan)} id="open__planpetaj" class="open__planpetaj">
+               <div onClick={()=>setTypeplan(!typeplan)} id="open__planpetaj" className="open__planpetaj">
                 <p>Показать всё</p>
                 <img id="pentajstrelka" className={typeplan ? 'pentajstrelka' : ""} src={strelka2} alt=""/>
                </div>
              </div>
             </section>
-            <section class="plojkompleks">
+            {/* <section className="plojkompleks">
               <h2>Похожие комплексы</h2>
-              <ul class="apartament-list2">
-                <li class="apartament-list__item">
-                  <div class="apartament-list__preview">
-                    <img class="current" src={apartmentprev} alt="" />
+              <ul className="apartament-list2">
+                <li className="apartament-list__item">
+                  <div className="apartament-list__preview">
+                    <img className="current" src={apartmentprev} alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
                   </div>
-                  <div class="preview-paggination">
-                    <div class="preview-paggination__item selected"></div>
-                    <div class="preview-paggination__item"></div>
-                    <div class="preview-paggination__item"></div>
-                    <div class="preview-paggination__item"></div>
-                    <div class="preview-paggination__item"></div>
+                  <div className="preview-paggination">
+                    <div className="preview-paggination__item selected"></div>
+                    <div className="preview-paggination__item"></div>
+                    <div className="preview-paggination__item"></div>
+                    <div className="preview-paggination__item"></div>
+                    <div className="preview-paggination__item"></div>
                   </div>
-                  <div class="apartament-list__header">
+                  <div className="apartament-list__header">
                     <div>
-                      <p class="apartament-list__address">
+                      <p className="apartament-list__address">
                         Emaar Business Park 1, Al Thanyah...
                       </p>
                    
                     </div>
-                    <button class="apartament-list__favorite-btn"></button>
+                    <button className="apartament-list__favorite-btn"></button>
                   </div>
-                  <p class="apartament-list__price">Creek Heights</p>
-                  <ul class="apartament-list__tags">
-                    <li class="apartament-list__tag">360 000–590 000 $</li>
-                    <li class="apartament-list__tag">от 40 м²</li>
+                  <p className="apartament-list__price">Creek Heights</p>
+                  <ul className="apartament-list__tags">
+                    <li className="apartament-list__tag">360 000–590 000 $</li>
+                    <li className="apartament-list__tag">от 40 м²</li>
                   </ul>
                 </li>
-                <li class="apartament-list__item">
-                  <div class="apartament-list__preview">
-                    <img class="current" src={apartmentprev} alt="" />
+                <li className="apartament-list__item">
+                  <div className="apartament-list__preview">
+                    <img className="current" src={apartmentprev} alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
                     <img src="img/apartament-preview.jpg" alt="" />
                   </div>
-                  <div class="preview-paggination">
-                    <div class="preview-paggination__item selected"></div>
-                    <div class="preview-paggination__item"></div>
-                    <div class="preview-paggination__item"></div>
-                    <div class="preview-paggination__item"></div>
-                    <div class="preview-paggination__item"></div>
+                  <div className="preview-paggination">
+                    <div className="preview-paggination__item selected"></div>
+                    <div className="preview-paggination__item"></div>
+                    <div className="preview-paggination__item"></div>
+                    <div className="preview-paggination__item"></div>
+                    <div className="preview-paggination__item"></div>
                   </div>
-                  <div class="apartament-list__header">
+                  <div className="apartament-list__header">
                     <div>
-                      <p class="apartament-list__address">
+                      <p className="apartament-list__address">
                         Emaar Business Park 1, Al Thanyah...
                       </p>
                    
                     </div>
-                    <button class="apartament-list__favorite-btn"></button>
+                    <button className="apartament-list__favorite-btn"></button>
                   </div>
-                  <p class="apartament-list__price">Creek Heights</p>
-                  <ul class="apartament-list__tags">
-                    <li class="apartament-list__tag">360 000–590 000 $</li>
-                    <li class="apartament-list__tag">от 40 м²</li>
+                  <p className="apartament-list__price">Creek Heights</p>
+                  <ul className="apartament-list__tags">
+                    <li className="apartament-list__tag">360 000–590 000 $</li>
+                    <li className="apartament-list__tag">от 40 м²</li>
                   </ul>
                 </li>               
               </ul>
-            </section>
+            </section> */}
           </div>
-          <aside class="product-sidebar">
-            <div class="product-sidebar__top">
-              <div class="product-sidebar__price">
-               <div class="product-sidebar__price-wrap">
+          <aside className="product-sidebar">
+            <div className="product-sidebar__top">
+              <div className="product-sidebar__price">
+               <div className="product-sidebar__price-wrap">
                 <h3>от 360 000 до 590 000 $</h3>
                 <p>от 36 000 $/м2 до 59 000 $/м2</p>
                </div>
-               <a class="product-sidebar__location" href="">
+               <a className="product-sidebar__location" href="">
                 <img src={location} alt=""/>
                </a>
               </div>
             
             </div>
-            <div class="product-sidebar__buttons">
-              <button class="product-btn" id="book-btn">
+            <div className="product-sidebar__buttons">
+              <button className="product-btn" id="book-btn">
                 <img src={telefonproduct} alt=""/>
                 <span>Забронировать</span>
               </button>
              
-              <button class="product-btn2">
+              <button className="product-btn2">
                 <img src={chat} alt="" />
               </button>
             </div>
-            <div class="separator"></div>
-            <p class="product-sidebar__text">К другому объекту</p>
-            <div class="product-sidebar__links">
-              <a class="product-sidebar__prev" href="">
+            <div className="separator"></div>
+            <p className="product-sidebar__text">К другому объекту</p>
+            <div className="product-sidebar__links">
+              <a className="product-sidebar__prev" href="">
                 <img src={linkarrow} alt="" />
               </a>
-              <a class="product-sidebar__next" href="">
+              <a className="product-sidebar__next" href="">
                 <img src={linkarrow} alt="" />
               </a>
             </div>
@@ -505,82 +580,82 @@ const Productitem = () => {
         </div>
       </div>
     </div>      
-    <div class="overlay">
-      <div class="container">
-        <div class="form-overlay">
-          <div class="container">
-            <button class="form-overlay__close"></button>
+    <div className="overlay">
+      <div className="container">
+        <div className="form-overlay">
+          <div className="container">
+            <button className="form-overlay__close"></button>
             <form action="">
-              <p class="form-overlay__text">
+              <p className="form-overlay__text">
                 Оставьте контакты и наш специалист свяжется с вами в ближайшее
                 время.
               </p>
               <input
-                class="form-overlay__input"
+                className="form-overlay__input"
                 placeholder="Введите имя"
                 type="text"
               />
               <input
-                class="form-overlay__input"
+                className="form-overlay__input"
                 placeholder="+7 000 000 00 00"
                 type="tel"
               />
-              <div class="form-overlay__wrapper">
-                <button class="form-overlay__back-btn">Назад</button>
-                <button class="form-overlay__confirm-btn">Отправить</button>
+              <div className="form-overlay__wrapper">
+                <button className="form-overlay__back-btn">Назад</button>
+                <button className="form-overlay__confirm-btn">Отправить</button>
               </div>
             </form>
           </div>
         </div>
-        <div class="gallery-overlay">
-          <div class="container">
-            <button class="gallery-overlay__close"></button>
-            <div class="gallery-overlay__center">
-              <button class="gallery-overlay__prev">
+        <div className="gallery-overlay">
+          <div className="container">
+            <button className="gallery-overlay__close"></button>
+            <div className="gallery-overlay__center">
+              <button className="gallery-overlay__prev">
                 <img src="img/gallery-arrow.svg" alt="" />
               </button>
               <img
-                class="gallery-overlay__current"
+                className="gallery-overlay__current"
                 src="img/gallery-overlay.jpg"
                 alt=""
               />
-              <button class="gallery-overlay__next">
+              <button className="gallery-overlay__next">
                 <img src="img/gallery-arrow.svg" alt="" />
               </button>
             </div>
-            <div class="gallery-overlay__wrapper">
-              <ul class="gallery-overlay__list">
-                <li class="gallery-overlay__item selected">
+            <div className="gallery-overlay__wrapper">
+              <ul className="gallery-overlay__list">
+                <li className="gallery-overlay__item selected">
                   <img src="img/gallery-overlay.jpg" alt="" />
                 </li>
-                <li class="gallery-overlay__item">
+                <li className="gallery-overlay__item">
                   <img src="img/apartament-preview.jpg" alt="" />
                 </li>
-                <li class="gallery-overlay__item">
+                <li className="gallery-overlay__item">
                   <img src="img/gallery-overlay.jpg" alt="" />
                 </li>
-                <li class="gallery-overlay__item">
+                <li className="gallery-overlay__item">
                   <img src="img/gallery-overlay.jpg" alt="" />
                 </li>
-                <li class="gallery-overlay__item">
+                <li className="gallery-overlay__item">
                   <img src="img/gallery-overlay.jpg" alt="" />
                 </li>
-                <li class="gallery-overlay__item">
+                <li className="gallery-overlay__item">
                   <img src="img/gallery-overlay.jpg" alt="" />
                 </li>
-                <li class="gallery-overlay__item">
+                <li className="gallery-overlay__item">
                   <img src="img/gallery-overlay.jpg" alt="" />
                 </li>
-                <li class="gallery-overlay__item">
+                <li className="gallery-overlay__item">
                   <img src="img/gallery-overlay.jpg" alt="" />
                 </li>
-                <li class="gallery-overlay__item">
+                <li className="gallery-overlay__item">
                   <img src="img/gallery-overlay.jpg" alt="" />
                 </li>
-                <li class="gallery-overlay__item">
+                <li className="gallery-overlay__item">
                   <img src="img/gallery-overlay.jpg" alt="" />
                 </li>
-                <li class="gallery-overlay__item">
+                <li className="gallery-overlay__item">
                   <img src="img/gallery-overlay.jpg" alt="" />
                 </li>
               </ul>

@@ -5,7 +5,7 @@ import wife from "../../assets/img/wifeubos.svg";
 import close2 from "../../assets/img/close2.svg";
 import pdf from "../../assets/img/pdf.svg";
 import planpentaj from "../../assets/img/planpentaj.svg";
-import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
+import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import axios from "axios";
 import http from "../../axios";
 import { useNavigate } from "react-router-dom";
@@ -48,12 +48,16 @@ const [catalogtypes ,setCatalogtypes] = useState([])
 const [typenejvisot ,setTypenejvisot] = useState("")
 const [typezastroy ,setTypeZastroy ] = useState("")
 const [typeEtap , setTypeEtap] = useState("")
+const [placmarkcord , setPlacmarkcord]= useState([])
+const [addresname , setAddresname] = useState("")
+const [yandexcenter ,setYandexcenter] = useState([55.684758, 37.738521])
 
 // ------- hashtag 
 const [hastagsData , setHashtagsData] = useState([])
 const [searchList , setSearchList] = useState(false)
 const [hashtagarraypost ,setHashtagarrayPost] = useState([])
 const inputRef = useRef()
+const inputRef2 = useRef()
 const handleChange =(evt)=>{
   if(evt.target.value===""){
     setSearchList(false)
@@ -230,8 +234,8 @@ let projectinfrastructure =[
   lobb.append('construction_phase' , typezastroy)
   lobb.append('deadline' , sana)
   lobb.append('square' , ploshad)
-  lobb.append('lat' , 43.3)
-  lobb.append('long' , 43.3)
+  lobb.append('lat' , placmarkcord[0])
+  lobb.append('long' , placmarkcord[1]) 
   lobb.append('etaj1' , ot)
   lobb.append('etaj2' , iz)
   lobb.append('transaction_type' , uslovi)
@@ -250,24 +254,26 @@ let projectinfrastructure =[
  
 };
 
-//  ------------- for Map --- 
-// const apikey = 'a1790995-bbe5-41eb-8c22-35713a9dbbb8'
-// const [placemarkGeometry, setPlacemarkGeometry] = useState([]);
-// const [addres , setAdres] = useState('') 
-// const mapState = {
-//   center: [55.751574, 37.573856],
-//   zoom: 5,
-// };
-// const handleMapClick = (event) => {
-//   const clickedCoordinates = event.get("coords");
-//   setPlacemarkGeometry(clickedCoordinates); // Устанавливаем координаты для новой метки
-//   console.log(clickedCoordinates);
-//   axios.get( `https://geocode-maps.yandex.ru/1.x/?apikey=${apikey}&format=json&geocode=${clickedCoordinates[1]},${clickedCoordinates[0]}`).then((res)=>{
-//     setAdres(res.data.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.formatted)
-// }).catch((err)=>{
-//   console.log(err)
-// })
-// };
+const handleMapClick = (event) => {
+  const clickedCoordinates = event.get("coords");
+  setPlacmarkcord([...clickedCoordinates])
+  axios.get( `https://geocode-maps.yandex.ru/1.x/?apikey=ca60917c-ba3d-485a-8711-39fad57f4fe2&format=json&geocode=${clickedCoordinates[1]},${clickedCoordinates[0]}`).then((res)=>{
+    setAddresname(res.data.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.formatted)
+    inputRef2.current.value =res.data.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.formatted
+}).catch((err)=>{
+  console.log(err)
+})
+};
+const handleYandex = (e)=>{
+  e.preventDefault()
+  axios.get( `https://geocode-maps.yandex.ru/1.x/?apikey=a1790995-bbe5-41eb-8c22-35713a9dbbb8&format=json&geocode=${inputRef2.current.value}`).then((res)=>{
+    setPlacmarkcord([res.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ')[1]-0 , res.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ')[0]-0])    
+    setYandexcenter([res.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ')[1]-0 , res.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ')[0]-0])
+  }).catch((err)=>{
+    console.log(err)
+  })
+}
+
   return (
     <main>
       <section className="addobject">
@@ -285,7 +291,7 @@ let projectinfrastructure =[
                 <h2>Добавить хештеги</h2>
                 <form onSubmit={(e)=>handleHashtagsubmit(e)} action="">
                   {
-                      searchList && hastagsData.length>=1 ?
+                   searchList && hastagsData.length>=1 ?
                   <ul className="addhashtag__tagslist">
                      {
                     
@@ -390,30 +396,35 @@ let projectinfrastructure =[
                 <h2>Объект на карте</h2>
                 <div className="addmap__mapwrap">
                   <div className="mapouter">
-                  {/* <YMaps
+                  <YMaps
+                  
                     query={{ apikey: "ca60917c-ba3d-485a-8711-39fad57f4fe2" }}
                   >
                     <Map
-                      width="98%"
-                      height="100%"
+                    width={`100%`}
+                    height={"321px"}
                       defaultState={{
-                        center: [55.684758, 37.738521],
-                        zoom: 12,
+                        center: placmarkcord.length === 0 ? [55.684758, 37.738521]: placmarkcord ,
+                        zoom: 5,
                       }}
+                      onClick={handleMapClick}
                     >
-                
-                      <Placemark geometry={[55.684758, 37.738521]} />
+                        <Placemark geometry={placmarkcord} />
                     </Map>
-                  </YMaps> */}
+                  </YMaps>
                   </div>
                 </div>
+                <form onSubmit={(e)=>handleYandex(e)} action="">
+
                 <label className="addmap__label" for="">
                   <img src={lupa} alt="lupa" />
-                  <input
+                  <input 
+                  ref={inputRef2}
                     type="text"
                     placeholder="1-й Красногвардейский пр-д ..."
                   />
                 </label>
+                </form>
               </div>
               <div id="list4" className="addobject__foto">
                 <h2>Фото</h2>

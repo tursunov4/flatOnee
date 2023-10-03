@@ -11,6 +11,10 @@ import "./home.css";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import http from "../../axios";
 import axios from "axios";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 import { useNavigate } from "react-router-dom";
 const token = localStorage.getItem("token")
 const id = localStorage.getItem("id")
@@ -51,6 +55,8 @@ const HomePage = () => {
   const getFlatRecomend2 =()=>{
     http.get("/flatone/reconmendation/right/").then((res)=>{
       setRekomend2(res.data.results)
+    }).catch((err)=>{
+      console.log(err)
     })
   }
 
@@ -59,7 +65,7 @@ const HomePage = () => {
   },[refresh])
   const getDataOffice =()=>{
     http.get("/catalog/offices/").then((res)=>{
-      console.log(res.data)
+      console.log(res.data.results)
       setDataoffices(res.data.results)
       if(res.status ===404){
         navigate("/eror404")
@@ -84,6 +90,19 @@ const HomePage = () => {
     }else{
         navigate("/login")
     }
+    }
+    const handleDislike =(id)=>{
+      if(token){
+        http.delete(`/catalog/wishlist/${id}/`).then((res)=>{
+          if(res.status === 204){
+            setRefresh(!refresh)
+          }
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }else{
+        navigate("/login")
+      }
     }
     return (
     <main>
@@ -364,21 +383,27 @@ const HomePage = () => {
           <ul className="apartament-list">
             {
             dataOffices?.map((item , index) =>(
-              <li className="apartament-list__item">
+              <li className="apartament-list__item apartimentts">
+                
               <div className="apartament-list__preview">
-                <img  onClick={()=>navigate(`/product-item/${item.id}`)} className="current" src={`http://164.92.172.190:8080${item.image[0].image}`} alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
-                <img src="img/apartament-preview.jpg" alt="" />
+                <Swiper
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper"
+                >
+                {
+                  item.image?.map((item , index)=>(
+                    <>
+                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item.image}`} alt="" /></SwiperSlide>
+                    </>
+
+                ))
+              }
+              </Swiper>
               </div>
-              <div className="preview-paggination">
-                <div className="preview-paggination__item selected"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-                <div className="preview-paggination__item"></div>
-              </div>
+            
               <div className="apartament-list__header">
                 <div>
                   <p  onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__address">
@@ -386,7 +411,7 @@ const HomePage = () => {
                   </p>
            
                 </div>
-                <button onClick={()=>handleLike(item.id)} className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
+                <button onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
               </div>
               <p className="apartament-list__price">{item.price}₽/месяц</p>
               <ul className="apartament-list__tags">
