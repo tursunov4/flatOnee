@@ -8,7 +8,9 @@ import Slider from 'rc-slider';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'rc-slider/assets/index.css';
+// import 'rc-slider/assets/index.css';
+// import "rsuite/dist/rsuite.css";
+
 import { Pagination } from 'swiper/modules';
 const token  = localStorage.getItem("token")
 const Savedlist = () => {
@@ -56,7 +58,7 @@ const Savedlist = () => {
     
     const getData =()=>{
         http.get(`/catalog/wishlist/?name=${name}&square_min=${squeremin}&square_max=${squeremax}&price_min=${pricemin}&price_max=${newMaxsum}&deadline=${sana}&property_type=${protery}&development_type=${development}&construction_phase=${constraction}&transaction_type=${uslovi}&coutry=`).then((res)=>{
-            setData(res.data)
+            setData(res.data.results)
             setOfficeImage(res.data.office_info.image)
             console.log(res.data)
         }).catch((err)=>{
