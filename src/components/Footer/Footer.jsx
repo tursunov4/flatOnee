@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import http from '../../axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import { Context } from '../../Context/Context';
 const token = localStorage.getItem("token")
 const Footer = () => {
   const [phone, setPhone] = useState("")
   const [text , setText] = useState("")
   const notify = (text) => toast(`${text}`);
+  const {lan , setLan} = useContext(Context)
+
   const handleClick =(e) =>{
     e.preventDefault()
     if(phone !== "" && text !== ""){
@@ -45,16 +48,73 @@ const Footer = () => {
         <div className="footer__title">Flat one</div>
         <nav className="footer-nav2">
          <div className="">
-         <Link to={"/catalog"} className="footer-nav__item" href="">ОАЭ</Link>
-         <Link to={"/catalog"} className="footer-nav__item" href="">Турция</Link>
-         <Link to={"/catalog"} className="footer-nav__item" href="">Тайланд</Link>
-         <Link to={"/catalog"} className="footer-nav__item" href="">Бали</Link>
+         <Link to={"/catalog"} className="footer-nav__item" href="">
+            {
+              lan === "ru" && "ОАЭ"
+            }
+            {
+              lan === "en" && "UAE"
+            }
+          </Link>
+         <Link to={"/catalog"} className="footer-nav__item" href="">
+           {
+              lan === "ru" && "Турция"
+            }
+            {
+              lan === "en" && "Turkiye"
+            } 
+         </Link>
+         <Link to={"/catalog"} className="footer-nav__item" href="">
+           {
+              lan === "ru" && "Тайланд"
+            }
+            {
+              lan === "en" && "Thailand"
+            }      
+           
+         </Link>
+         <Link to={"/catalog"} className="footer-nav__item" href="">
+         {
+              lan === "ru" && "Бали"
+            }
+            {
+              lan === "en" && "Bali"
+            }   
+         </Link>
          </div>
          <div>
-         <Link to={"/savedlist"} className="footer-nav__item" href="">Избранное</Link>
-         <Link to={"/articlemain"} className="footer-nav__item" href="">Статьи</Link>
-         <Link to={token ?  "/brokermain" :"/login"} className="footer-nav__item" href="">Профиль</Link>
-         <Link to={'/academiya'} className="footer-nav__item" href="">Академия</Link>
+         <Link to={"/savedlist"} className="footer-nav__item" href="">
+           {
+              lan === "ru" && "Избранное"
+            }
+            {
+              lan === "en" && "Favorites "
+            }   
+         </Link>
+         <Link to={"/articlemain"} className="footer-nav__item" href="">
+         {
+              lan === "ru" && "Статьи"
+            }
+            {
+              lan === "en" && "Tenor"
+            }   
+         </Link>
+         <Link to={token ?  "/brokermain" :"/login"} className="footer-nav__item" href="">
+         {
+              lan === "ru" && "Профиль"
+            }
+            {
+              lan === "en" && "Profile"
+            }   
+         </Link>
+         <Link to={'/academiya'} className="footer-nav__item" href="">
+         {
+              lan === "ru" && "Академия"
+            }
+            {
+              lan === "en" && "Academy"
+            }
+         </Link>
          </div>
         </nav>
         <div className="footer__copyright">
@@ -64,8 +124,13 @@ const Footer = () => {
       <div className="footer__right">
         <form className="footer-form" action="">
           <p className="footer-form__text">
-            Оставте заявку и наш специалист ответит на интересующие вас
-            вопросы
+            {
+              lan === "ru" && "  Оставте заявку и наш специалист ответит на интересующие вас           вопросы"
+            }
+            {
+              lan === "en" && "Leave a request and our specialist will answer your questions            questions"
+            }   
+          
           </p>
           <input
             onChange={(e)=>setText(e.target.value)}
@@ -73,6 +138,7 @@ const Footer = () => {
             placeholder="Как к вам обращаться"
             type="text"
           />
+     
           <input
             onChange={(e)=>setPhone(e.target.value)}
             className="footer-form__input"
@@ -86,8 +152,22 @@ const Footer = () => {
           /> */}
           <button onClick={(e) =>handleClick(e)} className="footer-form__button">Отправить</button>
           <p className="footer-form__disclaimer">
-            Отправляя заявку вы принимаете пользовательское соглашение.
-            <a href="">Узнать больше</a>
+           {
+              lan === "ru" && " Отправляя заявку вы принимаете пользовательское соглашение."
+            }
+            {
+              lan === "en" && " By submitting an application you accept the user agreement."
+            } 
+           
+            <a href="">
+            {
+              lan === "ru" && "Узнать больше"
+            }
+            {
+              lan === "en" && "To learn more"
+            }
+            </a>
+            
           </p>
         </form>
       </div>

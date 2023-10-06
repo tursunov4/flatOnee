@@ -13,6 +13,7 @@ import star from "../../assets/img/star.svg"
 import hat from "../../assets/img/hat.svg"
 import { useNavigate } from 'react-router-dom'
 import http from '../../axios'
+import  apartimen from "../../assets/img/apartament-preview.jpg"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -27,7 +28,9 @@ const Brokersmain = () => {
   const navigate = useNavigate()
   const [data , setData] = useState([])
   const [refresh , setRefresh] = useState(false)
+  const [image , setImage] = useState([])
   const [chervak , setChervak] = useState("")
+  const vznos = []
   useEffect(()=>{
     getDatao()
   },[refresh])
@@ -38,6 +41,7 @@ const Brokersmain = () => {
   const getDatao =()=>{
     http.get("/catalog/offices/").then((res)=>{
       setData(res.data.results)
+     
       console.log(res.data)
     }).catch((err)=>{
       console.log(err)
@@ -151,46 +155,28 @@ const Brokersmain = () => {
                 
               </div>
               <div className="add__apartament-list">
-                <div className="add__apartament-item">
-                  <div className="add__apartament-icon">
-                  </div>
+                 {
+                  data?.map((item , index) =>(
+                    <div className="add__apartament-item">
+                    <img className='broker-apartmenprev' src={`http://164.92.172.190:8080${item.image[0].image}`} alt="" />
+                      <div onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "add__apartament-icon2 add__apartament-icon " : "add__apartament-icon" }>
+                      </div>
+    
+                      <div className="add__apartament-count-rooms">
+                      {item.etaj1} этаж, {item.square}м2
 
-                  <div className="add__apartament-count-rooms">
-                    2 комнаты, 120м2
-                  </div>
-                  <div className="add__apartament-price">
-                    21 000₽/мес
-                  </div>
-                  <div className="add__apartament-address">
-                    1-й Красногвардейский пр-д, 22 стр. 2
-                  </div>
-                </div>
-                <div className="add__apartament-item">
-                  <div className="add__apartament-icon">
-                  </div>
-                  <div className="add__apartament-count-rooms">
-                    2 комнаты, 120м2
-                  </div>
-                  <div className="add__apartament-price">
-                    21 000₽/мес
-                  </div>
-                  <div className="add__apartament-address">
-                    1-й Красногвардейский пр-д, 22 стр. 2
-                  </div>
-                </div>
-                <div className="add__apartament-item">
-                  <div className="add__apartament-icon filled">
-                  </div>
-                  <div className="add__apartament-count-rooms">
-                    2 комнаты, 120м2
-                  </div>
-                  <div className="add__apartament-price">
-                    21 000₽/мес
-                  </div>
-                  <div className="add__apartament-address">
-                    1-й Красногвардейский пр-д, 22 стр. 2
-                  </div>
-                </div>
+                      </div>
+                      <div className="add__apartament-price">
+                         {item.price}₽/мес
+                      </div>
+                      <div className="add__apartament-address">
+                        {item.name}
+                      </div>
+                    </div>
+                  ))
+                 }
+               
+             
               </div>
             </div>
 

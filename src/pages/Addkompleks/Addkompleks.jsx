@@ -51,7 +51,8 @@ const [typeEtap , setTypeEtap] = useState("")
 const [placmarkcord , setPlacmarkcord]= useState([])
 const [addresname , setAddresname] = useState("")
 const [yandexcenter ,setYandexcenter] = useState([55.684758, 37.738521])
-
+const [country , setCountry] = useState("")
+const [gorod , setGorod] = useState("")
 // ------- hashtag 
 const [hastagsData , setHashtagsData] = useState([])
 const [searchList , setSearchList] = useState(false)
@@ -226,8 +227,10 @@ let projectinfrastructure =[
      hashtagarraypost?.map((item, index)=>(
       lobb.append( "tags",item.id)
      ))
+
   lobb.append('owner' , 1)
-  lobb.append('contry' , "uzb")
+  lobb.append('country' ,country-0  )
+  lobb.append("city" , gorod)
   lobb.append('name' , name)
   lobb.append('property_type' , typeEtap)
   lobb.append('development_type' , typenejvisot)
@@ -242,6 +245,10 @@ let projectinfrastructure =[
   lobb.append('description' , description)
   lobb.append("price" , money)
   lobb.append("is_active", type)
+
+  // axios.post(`https://oqdevpy.jprq.site/catalog/offices/` , lobb).then((res)=>{
+  //   console.log(res.data)
+  // })
   http.post('/catalog/offices/' ,lobb).then((res)=>{
     if(res.status ===201){
       navigate("/brokermain")
@@ -287,6 +294,58 @@ const handleYandex = (e)=>{
                 <h2>Название объекта</h2>
                 <input onChange={(e)=>setName(e.target.value)} type="text" placeholder="Введите название" />
               </div>
+              <div className="addobject__nazvaniya">
+                <h2>Введите страну</h2>
+                  <select onChange={(e)=>setCountry(e.target.value)} name="" id="" >
+                    {
+                    
+                       <option  selected hidden  value="Введите страну">Введите страну</option>
+                    }
+                    <option value="1">ОАЭ</option>
+                    <option value="2">Индонезия</option>
+                    <option value="3">Тайланд</option>
+                    <option value="4">Турция</option>  
+                  </select>
+              </div>
+              <div className="addobject__nazvaniya">
+                <h2>Введите город</h2>
+                  <select onChange={(e)=>setGorod(e.target.value)} name="" id="" >
+                    {
+                       <option  selected hidden  value="Введите страну">Введите  город</option>
+                    }
+                    {
+                      country === "1" &&
+                      <>
+                      <option value={1}>Дубай</option>
+                      <option value={2}>Абу-Даби</option>
+                      </>
+                    }
+                    {
+                      country === "2" &&
+                      <>
+                      <option value={1}>Бали</option>
+                      </>
+                    }
+                    {
+                      country === "3" &&
+                      <>
+                      <option value={1}>Паттайя</option>
+                      <option value={2}>Пхукет</option>
+                      <option value={3}>Самуи</option>
+                      </>
+                    }
+                    {
+                      country === "3" &&
+                      <>
+                      <option value={1}>Аланья</option>
+                      <option value={2}>Бодрум</option>
+                      <option value={3}>Стамбул</option>
+                      <option value={4}>Фетхие</option>
+                      </>
+                    }
+                  </select>
+              </div>
+        
               <div className="addobject-addhash">
                 <h2>Добавить хештеги</h2>
                 <form onSubmit={(e)=>handleHashtagsubmit(e)} action="">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./article.css";
 import aricon from "../../assets/img/articleug.svg"
 import articleform from "../../assets/img/article-form.jpg";
@@ -10,11 +10,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import http from "../../axios";
+import { Context } from "../../Context/Context";
 const Article = () => {
   const { id} = useParams()
   const [data , setData] = useState([])
   const [phone, setPhone] = useState("")
   const [text , setText] = useState("")
+  const {lan , setLan} = useContext(Context)
 
   useEffect(()=>{
     getData()
@@ -47,7 +49,7 @@ const Article = () => {
   
   }
   const getData =() =>{
-    http.get(`/articles/detail/${id}/`).then((res)=>{
+    http.get(`/${lan}/articles/detail/${id}/`).then((res)=>{
       console.log(res.data)
        setData(res.data)
     }).catch((err)=>{
@@ -72,37 +74,7 @@ const Article = () => {
               <span>Жизнь в сити</span>
             </li>
           </ul>
-          <aside className="article-sidebar">
-            <nav className="article-nav">
-              <a className="article-nav__item heading" href="">
-                Инфраструктура
-              </a>
-              <a className="article-nav__item" href="">
-                Башни
-              </a>
-              <a className="article-nav__item" href="">
-                Развлечения
-              </a>
-              <a className="article-nav__item heading" href="">
-                Жизнь в сити
-              </a>
-              <a className="article-nav__item" href="">
-                Инфраструктура
-              </a>
-              <a className="article-nav__item" href="">
-                Заведения
-              </a>
-              <a className="article-nav__item heading" href="">
-                Выгодные предложения
-              </a>
-              <a className="article-nav__item" href="">
-                Тест драйв
-              </a>
-              <a className="article-nav__item" href="">
-                а
-              </a>
-            </nav>
-          </aside>
+        
           <h1 className="article-h1">{data.title}</h1>
           <h2 className="article-h2">
             {data?.description}
@@ -129,27 +101,7 @@ const Article = () => {
             <h4 className="article-h4">О проекте</h4>
             
             <div dangerouslySetInnerHTML={{ __html: data.about_project }} className="article-section__newimg"></div>
-            {/* <p className="article-p">
-              Добро пожаловать на сайт компании, которая специализируется на
-              предоставлении недвижимости в районе Москва-Сити. Наша команда
-              состоит из профессионалов, которые имеют многолетний опыт работы в
-              сфере недвижимости. Мы предлагаем широкий выбор объектов
-              недвижимости в районе Москва-Сити, среди которых квартиры, офисные
-              помещения, коммерческие здания, а также продажу и аренду земельных
-              участков. Добро пожаловать на сайт компании, которая
-              специализируется на предоставлении недвижимости в районе
-              Москва-Сити. Наша команда состоит из профессионалов, которые имеют
-              многолетний опыт работы в сфере недвижимости. Мы предлагаем
-              широкий выбор объектов недвижимости в районе Москва-Сити, среди
-              которых квартиры, офисные помещения, коммерческие здания, а также
-              продажу и аренду земельных участков. Добро пожаловать на сайт
-              компании, которая специализируется на предоставлении недвижимости
-              в районе Москва-Сити. Наша команда состоит из профессионалов,
-              которые имеют многолетний опыт работы в сфере недвижимости. Мы
-              предлагаем широкий выбор объектов недвижимости в районе
-              Москва-Сити, среди которых квартиры, офисные помещения,
-              коммерческие здания, а также продажу и аренду земельных участков.
-            </p> */}
+          
 
           </section>
            <section className="article-ug">

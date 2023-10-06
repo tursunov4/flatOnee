@@ -1,17 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./chervak.css"
 import chervak from "../../assets/img/main-header.jpg"
 import http from '../../axios'
+import { Context } from '../../Context/Context'
 
 const Chervak = () => {
     const [data ,setData] = useState([])
+    const [refresh , setRefresh] = useState(false)
+    const {lan} = useContext(Context)
     useEffect(()=>{
       getData()
     },[])
    const getData =()=>{
-    http.get("/catalog/offices/me_offices/").then((res)=>{
+    http.get(`/catalog/offices/me_offices/`).then((res)=>{
         setData(res.data)
         console.log(res.data)
+    }).catch((err)=>{
+        console.log(err)
+    })
+   }
+   const handleDelete =(id) =>{
+    http.delete(`/catalog/offices/me_offices/${id}/`).then((res)=>{
+         if(res.status === 204){
+            console.log(res.data)
+            setRefresh(!refresh)
+         } 
     }).catch((err)=>{
         console.log(err)
     })
@@ -40,7 +53,7 @@ const Chervak = () => {
                         </div>
                         <div className="chervak__btns">
                             <button className="chervak__izmenit">Изменить</button>
-                            <p className="chervak__delete">Изменить</p>
+                            <p onClick={()=>handleDelete(item.id)} className="chervak__delete">Удалить</p>
                         </div>
                     </li>
                         ))

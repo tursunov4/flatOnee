@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./login.css"
 import { Link, useNavigate } from 'react-router-dom'
 import http from '../../axios'
 import profile from "../../assets/img/profile.svg";
+import { Context } from '../../Context/Context';
 
 const token = localStorage.getItem("token")
 const Login = () => {
     const [username , setUsername ] = useState("")
     const [password , setPassword] = useState("")
     const [menu ,setMenu] = useState(false)
+    const {lan} = useContext(Context)
     const navigate = useNavigate()
     const handleSubmit =(e)=>{
         e.preventDefault()
-        http.post("/user/login/" , {
+        http.post(`/user/login/` , {
             email_or_username: username,
             password: password
         }).then((res)=>{
@@ -131,7 +133,7 @@ const Login = () => {
             <div className="form__title">Логин</div>
             <div className="form__input">   
                 <label>
-                    <input type="tel" onChange={(e)=>setUsername(e.target.value)} name="username" placeholder="Email or username"/>
+                    <input onChange={(e)=>setUsername(e.target.value)} name="username" placeholder="Email or username"/>
                 </label>
             </div>
             <div className="form__input">

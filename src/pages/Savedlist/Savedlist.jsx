@@ -8,6 +8,7 @@ import Slider from 'rc-slider';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import mainHeader from "../../assets/img/main-header.jpg"
 // import 'rc-slider/assets/index.css';
 // import "rsuite/dist/rsuite.css";
 
@@ -34,7 +35,7 @@ const Savedlist = () => {
     const [officeimg , setOfficeImage] = useState([])
     const [prev ,setPrev] = useState("")
     const [next , setNext] = useState("")
-    const [count ,setCount] = useState(1)
+     const [count ,setCount ] = useState(1)
     const navigate = useNavigate()
     useEffect(()=>{
     getData()
@@ -59,6 +60,8 @@ const Savedlist = () => {
     const getData =()=>{
         http.get(`/catalog/wishlist/?name=${name}&square_min=${squeremin}&square_max=${squeremax}&price_min=${pricemin}&price_max=${newMaxsum}&deadline=${sana}&property_type=${protery}&development_type=${development}&construction_phase=${constraction}&transaction_type=${uslovi}&coutry=`).then((res)=>{
             setData(res.data.results)
+            setNext(res.data.next)
+            setPrev(res.data.previous)
             setOfficeImage(res.data.office_info.image)
             console.log(res.data)
         }).catch((err)=>{
@@ -66,6 +69,7 @@ const Savedlist = () => {
         })
     }
     const handleDelet =(id) =>{
+      if(token){
         http.delete(`/catalog/wishlist/${id}/`).then((res)=>{
             console.log(res.data)
             if(res.status ===204){
@@ -74,6 +78,9 @@ const Savedlist = () => {
         }).catch((err)=>{
             console.log(err)
         })
+      }else{
+        navigate("/login")
+      }
     }
 
 
@@ -115,6 +122,35 @@ const Savedlist = () => {
       const handleSearch =(e)=>{
         setName(e.target.value)
         setRefresh(!refresh)
+      }
+      const handlePrev =()=>{
+        if(prev){
+          axios.get(prev).then((res)=>{
+            setCount(prev => prev-1)
+            setData(res.data.results)
+            setPrev(res.data.previous)
+            setNext(res.data.next)
+            setOfficeImage(res.data.office_info.image)
+          
+          }).catch((err)=>{
+            console.log(err)
+          })
+        }
+      }
+      const handleNext =()=>{
+        if(next){
+          axios.get(next).then((res)=>{
+            setCount(prev=>prev+1)
+            setData(res.data.results)
+            setPrev(res.data.previous)
+            setNext(res.data.next)
+            
+            setOfficeImage(res.data.office_info.image)
+   
+          }).catch((err)=>{
+            console.log(err)
+          })
+        }
       }
   return (
     <main>
@@ -254,6 +290,7 @@ const Savedlist = () => {
               </div>
               <div className="filter-section__content">
               <Slider
+          
         min={0} // Minimum qiymat
         max={1000} // Maksimum qiymat
         step={10} // Qadam miqdori (masalan, 10 dan 10 gacha o'zgartirish)
@@ -289,6 +326,8 @@ const Savedlist = () => {
             <div className="catalogue-content">
                 <div className="catalogue-content__header">
                     <div className="container">
+                <img className='mainheader__bavimgg' src={mainHeader} alt="" />
+
                         <h1 className="catalogue-content__title">Апартаменты Москва Сити долгосрочно </h1>
                         <p className="catalogue-content__text">1 504 из 2 345 вариантов</p>
                     </div>
@@ -346,8 +385,20 @@ const Savedlist = () => {
                   
                 
                 </ul>
-
-               
+                 {
+                  data.length !== 0  &&
+                <div className="catalogue-paggination">
+                    <span onClick={()=>handlePrev()} className="catalogue-paggination__prev" href="">
+                        <img src={arrowleft} alt=""/>
+                    </span>
+                    <ul className="paggination-list">
+                        <li className="paggination-list__item">{count}</li>
+                    </ul>
+                    <span onClick={()=>handleNext()} className="catalogue-paggination__next" href="">
+                        <img src={arrowleft} alt=""/>
+                    </span>
+                </div>
+                 }
 
                 <div className="catalogue-banner"
                 //  style="background-image: url(img/catalogue-header.jpg);"
@@ -361,22 +412,7 @@ const Savedlist = () => {
                     </a>
                 </div>
                 
-                <div className="catalogue-paggination">
-                    <span className="catalogue-paggination__prev" href="">
-                        <img src={arrowleft} alt=""/>
-                    </span>
-                    <ul className="paggination-list">
-                        <li className="paggination-list__item">1</li>
-                        <li className="paggination-list__item selected">2</li>
-                        <li className="paggination-list__item">3</li>
-                        <li className="paggination-list__item">4</li>
-                        <li className="paggination-list__item">...</li>
-                        <li className="paggination-list__item">15</li>
-                    </ul>
-                    <span className="catalogue-paggination__next" href="">
-                        <img src={arrowleft} alt=""/>
-                    </span>
-                </div>
+         
             </div>
         </div>
     </section>

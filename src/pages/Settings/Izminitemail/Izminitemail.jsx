@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import http from '../../../axios'
 import { useNavigate } from 'react-router-dom'
 const id = localStorage.getItem("id")
 
 const Izminitemail = () => {
     const [newemail ,setEmail] = useState('')
+    const [oldemail , setOldEmail] = useState("")
     const navigate = useNavigate()
+
     const handleSubmit =(e)=>{
         e.preventDefault()
-        http.put(`/user/update/email/${id}/` ,{
+        http.put(`/user/update/email/${oldemail}/` ,{
             email: newemail
         }).then((res)=>{
             console.log(res.data) 
@@ -25,22 +27,21 @@ const Izminitemail = () => {
     <main>
         <form method="post">
          
-            <div class="noti-container container-options">
-                <div class="notifications">
-                    <div class="title">Изменить почту</div>
-                    {/* <div class="edit-input">
+            <div className="noti-container container-options">
+                <div className="notifications">
+                    <div className="title">Изменить почту</div>
+                    <div className="edit-input">
                         <label>
-                                     
-                       <input type="email" name="email" class="input" placeholder="Введите старый почту"/>
+                          <input onChange={(e) =>setOldEmail(e.target.value)} required type="email" name="email" className="input" placeholder="Введите старый почту"/>
                         </label>
-                    </div> */}
-                    <div  class="edit-input">
+                    </div>
+                    <div  className="edit-input">
                         <label>
-                            <input onChange={(e)=>setEmail(e.target.value)} type="email" name="email" class="input" placeholder="Введите новую почту"/>
+                            <input onChange={(e)=>setEmail(e.target.value)} type="email" name="email" className="input" placeholder="Введите новую почту"/>
                         </label>
 
-                        <div class="button-edit">
-                            <button onClick={(e)=>handleSubmit(e)} type="submit" class="button">Отправить</button>
+                        <div className="button-edit">
+                            <button onClick={(e)=>handleSubmit(e)} type="submit" className="button">Отправить</button>
                         </div>
                     </div>
                 </div>

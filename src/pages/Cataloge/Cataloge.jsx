@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./catalog.css";
 import izamphone1 from "../../assets/img/izamphone1.svg";
 import izamphone2 from "../../assets/img/izamphone2.svg";
@@ -13,12 +13,13 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { Context } from "../../Context/Context";
 const token = localStorage.getItem("token")
 const id = localStorage.getItem("id")
 
 const Cataloge = () => {
   const [typeabout, setAbout] = useState(false);
-
+  const {lan} = useContext(Context)
   const [next , setNext ] = useState('')
   const [prev , setPrev] = useState("")
   const [data , setData] = useState([])
@@ -293,11 +294,14 @@ const Cataloge = () => {
         min={pricemin-0} 
         max={pricemax-0} 
         step={10} 
-        
-        
+       
         
         onChange={handleSliderChange} 
       />
+      <div className="rangeslider__summa">
+      <p>{pricemin}</p>
+      <p>{pricemax}</p>
+      </div>
               </div>
             </div>
             <div className="filter-section opened">
@@ -346,9 +350,7 @@ const Cataloge = () => {
                       </li>
                       <li className={uslovi=== "sale_rent" ? "filter-list__item selected": "filter-list__item"} onClick={()=>handleUslovi("sale_rent")} >
                       В пуле инвесторов
-                      </li>
-                    
-                                 
+                      </li>                                 
                 </ul>
               </div>
             </div>
@@ -545,7 +547,8 @@ const Cataloge = () => {
             
                </ul>
             </section>
-       
+          {
+            data.length !== 0 &&
             <div className="catalogue-paggination">
               <span onClick={()=>handlePrev()} className="catalogue-paggination__prev" href="">
                 <img src={arrowleft} alt="" />
@@ -557,6 +560,7 @@ const Cataloge = () => {
                 <img src={arrowleft} alt="" />
               </span>
             </div>
+          }
             {/* <div
               className="catalogue-banner2 catalugbarner2-bag"
               // style="background-image: url(img/categback.png)"

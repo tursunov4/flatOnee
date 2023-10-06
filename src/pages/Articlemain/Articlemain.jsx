@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./articlemain.css";
 
 import http from "../../axios";
 import { Link } from "react-router-dom";
+import { Context } from "../../Context/Context";
 const Articlemain = () => {
   const [data , setData] = useState([])
+  const [name , setName] = useState("")
+  const [refresh , setRefresh] = useState(false)
+  const {lan} = useContext(Context)
   useEffect(()=>{
     getData()
-  }, [])
+  }, [refresh])
   const getData = ()=>{
-      http.get("/articles/list/").then((res) =>{
+      http.get(`/${lan}/articles/list/?search=${name}`).then((res) =>{
         console.log(res.data)
         setData(res.data.results)
       }).catch((err) =>[
@@ -17,11 +21,8 @@ const Articlemain = () => {
       ])
   }
   const handleSearch =(e) =>{
-    http.get(`/articles/list/?search=${e.target.value}`).then((res)=>{
-      console.log(res.data)
-    }).catch((err)=>{
-      console.log(err)
-    })
+      setName(e.target.value)
+      setRefresh(!refresh)
   }
   return (
     <main>

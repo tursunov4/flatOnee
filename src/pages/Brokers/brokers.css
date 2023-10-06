@@ -204,8 +204,7 @@
       180deg,
       rgba(0, 0, 0, 0) 47.5%,
       rgba(0, 0, 0, 0.8) 100%
-    ),
-    url("../../assets/img/card.png") center / cover no-repeat;
+    );
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -248,7 +247,7 @@
     "ss06" on, "ss05" on;
 
   font-family: Inter;
-  font-size: 22px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 500;
   line-height: 125%;
@@ -1001,3 +1000,9 @@ background: var(--Profile, linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.2
   cursor: pointer;
 }
 
+
+.add__apartament-icon2{
+  background:url("../../assets/img/heart-filled.svg") ;
+  background-size: 100%;
+  background-repeat: no-repeat;
+} 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import apartiment from "../../assets/img/apartament-preview.jpg";
 import telefoon from "../../assets/img/telefon.svg";
 import phone from "../../assets/img/iphone.png";
@@ -16,8 +16,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { useNavigate } from "react-router-dom";
+import { Context } from "../../Context/Context";
 const token = localStorage.getItem("token")
 const id = localStorage.getItem("id")
+
 const HomePage = () => {
   const [typetitle, setTypetitle] = useState("Москва");
   const [flatabout , setFlatAbout] = useState([])
@@ -25,14 +27,15 @@ const HomePage = () => {
   const [rekoment2 ,setRekomend2] = useState([])
   const [dataOffices , setDataoffices] = useState([])
   const [refresh , setRefresh] = useState(false)
+  const {lan, setLan} = useContext(Context)
    useEffect(()=>{
     flatAbout()
     getFlatRecomend()
     getFlatRecomend2()
-   },[])
+   },[refresh])
    const navigate = useNavigate()
   const flatAbout =()=>{
-    http.get("/flatone/about/").then((res)=>{
+    http.get(`/${lan}/flatone/about/`).then((res)=>{
       console.log(res.data)
       setFlatAbout(res.data)
       if(res.status ===404){
@@ -43,7 +46,7 @@ const HomePage = () => {
     })
   }
   const getFlatRecomend =()=>{
-    http.get("/flatone/reconmendation/left/").then((res)=>{
+    http.get(`/${lan}/flatone/reconmendation/left/`).then((res)=>{
       setRekomend1(res.data.results)
       if(res.status ===404){
         navigate("/eror404")
@@ -53,7 +56,7 @@ const HomePage = () => {
     })
   }
   const getFlatRecomend2 =()=>{
-    http.get("/flatone/reconmendation/right/").then((res)=>{
+    http.get(`/${lan}/flatone/reconmendation/right/`).then((res)=>{
       setRekomend2(res.data.results)
     }).catch((err)=>{
       console.log(err)
@@ -104,22 +107,44 @@ const HomePage = () => {
         navigate("/login")
       }
     }
+    const handleLanguage =(lang) =>{
+      setLan(lang)
+      localStorage.setItem("lang" , lang)
+      setRefresh(!refresh)
+    }
     return (
     <main>
       <section className="main-section__update">
         <div className="container__main">
           <div className="main-section__wrapperu">
-            <div className="main-section__language">En | Рус | 中國人</div>
+            <div className="main-section__language"> <span className="cursorimgg" onClick={()=>handleLanguage("en")}>En </span>| <span className="cursorimgg" onClick={()=>handleLanguage("ru")}>Рус </span> | <span>中國人</span></div>
             <div className="main-seciton__wrapper-inner">
               <h2>
-                Меняем мир недвижимости с помощью            <span>искусственного интеллекта</span>
+              {
+              lan === "ru" && "Меняем мир недвижимости с помощью"
+            }
+            {
+              lan === "en" && "Changing the world of real estate with"
+            }
+           <span> 
+            {
+              lan === "ru" && " искусственного интеллекта "
+            }
+            {
+              lan === "en" && " artificial intelligence"
+            }
+            </span>
               </h2>
               <h4>
-                Упрощаем все процессы: от аренды, покупки и сдачи, до оплаты
-                коммунальных услуг, за счёт связки из нескольких нейросетей в
-                единую систему
+              {
+              lan === "ru" && "  Упрощаем все процессы: от аренды, покупки и сдачи, до оплаты              коммунальных услуг, за счёт связки из нескольких нейросетей в              единую систему "
+            }
+            {
+              lan === "en" && " We simplify all processes: from rent, purchase and delivery, to payment              utilities, due to a combination of several neural networks in              unified system"
+            }
+               
               </h4>
-              <button>Найти объект</button>
+              <button onClick={()=>navigate("/catalog")} >Найти объект</button>
             </div>
           </div>
         </div>

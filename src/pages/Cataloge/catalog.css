@@ -5,3 +5,10 @@
 .catalogue-paggination__next , .catalogue-paggination__prev{
     cursor: pointer;
 }
+.rangeslider__summa{
+    display: flex;
+    justify-content: space-between;
+}
+.imgcursorim{
+    cursor: pointer;
+}

@@ -32,13 +32,23 @@ const Addobject = () => {
   const [otdelka , setOdelka] = useState("beton")
   const [comnat , setComnat] = useState(0)
   const [snazul , setSnazul] = useState(1)
+  const [vznos , setVznos] = useState([])
+  const [kompleks , setKompleks] = useState([])
+  const [kompleksid , setKompleksid] = useState('')
+  const [nwife , setNwife] = useState(false)
+  const [sovmesh , setSovmesh] = useState(false)
+  const [liftt , setLiftt] = useState(false)
+  const [gruzavoy , setGruzavoy] = useState(false)
+  const [teritorita , setTeritoriya] = useState(false)
   const navigate = useNavigate()
  
   // ------ hashtag uchun ----- 
  const [hastagsData , setHashtagsData] = useState([])
 const [searchList , setSearchList] = useState(false)
+const [searchList2 , setSearchList2] = useState(false)
 const [hashtagarraypost ,setHashtagarrayPost] = useState([])
 const inputRef = useRef()
+const inputRef2 = useRef()
 const handleChange =(evt)=>{
   if(evt.target.value===""){
     setSearchList(false)
@@ -52,11 +62,28 @@ const handleChange =(evt)=>{
     })
    }
   }
+   const handleChange2 =(evt) =>{
+    if(evt.target.value===""){
+      setSearchList2(false)
+    }
+    else{
+      setSearchList2(true)
+      http.get(`/catalog/offices/me/?name=${evt.target.value}`).then((res)=>{
+        setKompleks(res.data)
+      }).catch((err)=>{
+        console.log(err)
+      })
+     }
+   }
   const handleList =(evt)=>{
     inputRef.current.value = ""
     setHashtagarrayPost([...hashtagarraypost , {id:evt.target.id , name:evt.target.textContent}])
     setSearchList(false)
     console.log(evt.target.id)
+  }
+  const handleList2 =(evt)=>{
+    inputRef2.current.value = evt.target.textContent
+    setKompleksid(evt.target.id)
   }
   const handleHashtagDelete =(id)=>{
     const indexToDelete = hashtagarraypost.findIndex(item => item.id === id);
@@ -86,6 +113,7 @@ const handleChange =(evt)=>{
   const [videov ,setVideos] = useState([])
   const [photoplanirovka ,setPhotoplanirovka] = useState([])
   const [dakument , setDakument] = useState([])
+  const [yilvznos , setYilvznos] = useState([])
   const handlePlanirovka =(e)=>{
     setPhotoplanirovka([...photoplanirovka , {file:e.target.files[0] , id:photoplanirovka.length , img: URL.createObjectURL(e.target.files[0])}])
   }
@@ -153,8 +181,39 @@ const handleChange =(evt)=>{
    }
   } 
 
+  const addVznos =()=>{
+    setVznos([...vznos, {id:vznos.length+1, name:''}])
+  }
+  const addYlivznos =()=>{
+    setYilvznos([...yilvznos , {id:2024+yilvznos.length , name:''}])
+  }
+  const handleYilivznosadd =(e , id)=>{
+    setYilvznos((prevItems) =>
+    prevItems.map((item) =>
+      item.id === id ? { ...item, name: e.target.value } : item
+    )
+  )
+  }
+  const handleVznosAdd =(e , id)=>{
+    setVznos((prevItems) =>
+    prevItems.map((item) =>
+      item.id === id ? { ...item, name: e.target.value } : item
+    )
+  )
+  }
+
   const postAllData =(type) =>{
    const form  = new FormData()
+  
+   vznos?.map((item , index)=>(
+    form.append("vznos" , item.name)
+   ))
+   yilvznos?.map((item , index)=>(
+    form.append("sena_year" , item.id)
+   ))
+   yilvznos?.map((item , index)=>(
+    form.append("sena" , item.name)
+   ))
  
   videov.map((item , index)=>(  
    form.append("vid",item.file)
@@ -177,7 +236,8 @@ const handleChange =(evt)=>{
   hashtagarraypost?.map((item, index)=>(
      form.append( "tags",item.id)
     ))
-    form.append("name" ,name)
+   
+    // form.append("name" ,name)
     form.append("owner" ,id)
     form.append("otdelka" ,otdelka)
     form.append("planirovki_count" ,planirovka)
@@ -194,21 +254,45 @@ const handleChange =(evt)=>{
     form.append("roc" , roc)
     form.append("pi" , pi)
     form.append("roi" , roi)     
-    form.append("perviy_vznos" , planpentaj1) 
     form.append("posutochno",postojniymoney )
     form.append("dolgo",dologomoney )
-    form.append("sena" ,planpentaj2 )
+    form.append("wife" , nwife)
+    form.append("lift" , liftt)
+    form.append("canuzl" , sovmesh)
+    form.append("gruzovoy_lift" , gruzavoy)
+    form.append("territoriya" , teritorita  )
+    form.append("office" , kompleksid)
+
+    
     http.post("/catalog/complex/" , form).then((res)=>{
       console.log(res.data)
+      console.log(res.status)
       if(res.status ===201){
         navigate("/brokermain")
         window.location.reload()
       }
-      
     }).catch((err)=>{
       console.log(err)
     })
   }  
+  const handleDelet  =(id) =>{
+    const indexToDelete = vznos.findIndex(item => item.id === id);
+    if (indexToDelete !== -1) {
+      const newItems = [...vznos];
+      newItems.splice(indexToDelete, 1);
+      setVznos(newItems); 
+    }
+  }
+  const handleDelet2 =(id)=>{
+    const indexToDelete = yilvznos.findIndex(item => item.id === id);
+    if (indexToDelete !== -1) {
+      const newItems = [...yilvznos];
+      newItems.splice(indexToDelete, 1);
+      setYilvznos(newItems); 
+    }
+  }
+
+
 
   return (
     <main>
@@ -222,8 +306,19 @@ const handleChange =(evt)=>{
               <div className="addobject-kopleks">
                 <h2>Добавить в комплекс</h2>
                 <form action="">
+                {
+                      searchList2 && kompleks.length !==0 ?
+                    <ul className="addhashtag__tagslist2">
+                     {
+                    
+                      kompleks?.map((item , index) =>(
+                        <li onClick={handleList2} key={item.id} id={item.id} >{item.name}</li>
+                      ))
+                     }
+                  </ul> :""
+                  }
                   <label className="addmap__label" >
-                    <input onChange={(e)=>setName(e.target.value)} type="text" placeholder="Dubai Marina" />
+                    <input onBlur={() =>{setTimeout(()=>{setSearchList2(false)},[150])}} ref={inputRef2}  onChange={handleChange2} type="text"  placeholder="Dubai Marina" />
                   </label>
                 </form>
               </div>
@@ -231,7 +326,7 @@ const handleChange =(evt)=>{
                 <h2>Добавить хештеги</h2>
                 <form onSubmit={(e)=>handleHashtagsubmit(e)} action="">
                   {
-                      searchList && hastagsData.length>=1 ?
+                      searchList && hastagsData.length !== 0 ?
                   <ul className="addhashtag__tagslist">
                      {
                     
@@ -319,22 +414,27 @@ const handleChange =(evt)=>{
                   <h2>Удобства</h2>
                   <ul className="object__ubostva-list">
                     <li className="object__ubostva-listitem">
+                    <input defaultChecked={nwife} onClick={()=>setNwife(!nwife)} type="checkbox" />
                       <img src={wife} alt="" />
                       <p>Wi Fi: Есть</p>
                     </li>
                     <li className="object__ubostva-listitem">
+                    <input defaultChecked={sovmesh} onClick={()=>setSovmesh(!sovmesh)}  type="checkbox" />
                       <img src={wife} alt="" />
                       <p>Санузел: Совмещенный</p>
                     </li>
                     <li className="object__ubostva-listitem">
+                       <input defaultChecked={liftt} onClick={()=>setLiftt(!liftt)}  type="checkbox" />
                       <img src={wife} alt="" />
                       <p>Лифт: 4</p>
                     </li>
                     <li className="object__ubostva-listitem">
+                     <input defaultChecked={gruzavoy} onClick={()=>setGruzavoy(!gruzavoy)}  type="checkbox" />
                       <img src={wife} alt="" />
                       <p>Грузовой лифт: 4</p>
                     </li>
                     <li className="object__ubostva-listitem">
+                       <input  defaultChecked={teritorita} onClick={()=>setTeritoriya(!teritorita)}  type="checkbox" />
                       <img src={wife} alt="" />
                       <p>Территория: Закрытая</p>
                     </li>
@@ -459,13 +559,19 @@ const handleChange =(evt)=>{
               </div>
                 <div className="addobject-planpentaj">
                   <h2>План платежей</h2>
-                  <img   src={planpentaj} alt="" />
-                  <div className="addobject-plan__list">
-                    <p>Первый взнос</p>
-                    <label className="addobejectploshad__label" >
-                     <input onChange={(e)=>setPlanpentaj1(e.target.value)} placeholder="+ 8%" type="text" />
-                   </label>
-                  </div>
+                  <img className="imgcursorim"  onClick={()=>addVznos()}   src={planpentaj} alt="" />
+                  {
+                    vznos?.map((item , index)=>(
+                      <div className="addobject-plan__list">
+                      <p>{index+1} взнос</p>
+                      <label className="addobejectploshad__label" >
+                       <input onChange={(e)=>handleVznosAdd(e, item.id)} placeholder="+ 8%" type="text" />
+                        <span className="imgcursorim" onClick={()=>handleDelet(item.id)}><img width={16} src={close2} alt="" /></span>
+                     </label>
+                    </div>
+                    ))
+                  }
+                 
                 </div>
                 <div className="addobject__sena">
                   <h2>Минимальная цена</h2>
@@ -488,13 +594,18 @@ const handleChange =(evt)=>{
                 <div className="addobject-planpentaj">
                   <h2>План платежей</h2>
                   <p className="planpentaj__p">Введите значения предположительного роста или снижения цены</p>
-                  <img   src={planpentaj} alt="" />
-                  <div className="addobject-plan__list">
+                  <img onClick={()=>addYlivznos()} className="imgcursorim"   src={planpentaj} alt="" />
+                  {
+                    yilvznos?.map((item ,index) =>(
+                     <div className="addobject-plan__list">
                     <p>2024</p>
                     <label className="addobejectploshad__label" >
-                     <input onChange={(e)=>setPlanpentaj2(e.target.value)} placeholder="+ 8%" type="text" />
+                     <input onChange={(e)=>handleYilivznosadd(e , item.id)} placeholder="+ 8%" type="text" />
+                     <span className="imgcursorim" onClick={()=>handleDelet2  (item.id)}><img width={16} src={close2} alt="" /></span>
                    </label>
-                  </div>
+                    </div>
+                    ))
+                  }
                 </div>
                 <ul className="addobject__nvm">
                   <li>
