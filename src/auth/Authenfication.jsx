@@ -25,7 +25,7 @@ import Noudfound from '../pages/Notfound/Noudfound'
 const authenfication = () => {
   return (
     <Routes>
-    <Route element={<MainPage/>} >
+        <Route element={<MainPage/>} >
       <Route element={<HomePage/>} index/>
       <Route element={<Cataloge/>} path={`/catalog`} />
       <Route element={<Productitem/>} path={`/product-item/:id`}/>
@@ -47,7 +47,8 @@ const authenfication = () => {
       <Route element={<Brokersitem/>} path={`/brokersitem`} /> 
       <Route element={<Brokersmain/>} path={`/brokermain`} /> 
     </Route>
-    <Route element={<Noudfound/>} path='/eror404' /> 
+    <Route path='*' element={<Noudfound/>}  /> 
+   
     </Routes>
   )
 }

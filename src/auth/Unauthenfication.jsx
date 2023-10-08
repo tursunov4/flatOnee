@@ -26,6 +26,7 @@ const Unauthenfication = () => {
       <Route element={<Savedlist/>} path={`/savedlist`} />
       </Route>
       <Route element={<Noudfound/>} path='/eror404' /> 
+      <Route path='*' element={<Noudfound/>}  /> 
      </Routes>
   )
 }
