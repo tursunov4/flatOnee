@@ -52,11 +52,11 @@ line-height: 135%; /* 20.25px */
     justify-content: center;    
 }
 .academiya-list__item1{
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.70) 100%), url("../../assets/img/akademikbag2.png");
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.70) 100%), url("../../assets/img/akademikbag2.webp");
     background-size: 100%;
     }
 .academiya-list__item2{
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.70) 100%), url("../../assets/img/akademikbag1.png");
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.70) 100%), url("../../assets/img/akademikbag1.webp");
     background-size: 100%;
     background-position: center;
 }

@@ -61,7 +61,7 @@ const Login = () => {
   return (
     <>
     <ToastContainer/>
-    <header className= "header ">
+    <header className={"header "}>
 
 <div className="container">
   <Link to={'/'} className="logo" href=""></Link>
@@ -76,6 +76,9 @@ const Login = () => {
       {
         lan === "china" && "學院"
       }
+         {
+            lan === "ar" && "الأكاديمية"
+          }   
     
     </Link>
     <Link to={`/catalog`} className="header-nav__item1" href="">
@@ -88,6 +91,9 @@ const Login = () => {
       {
         lan === "china" && "阿聯酋"
       }
+        {
+            lan === "ar" && `الإمارات العربية المتحدة`
+          } 
   
     </Link>
     <Link to={`/catalog`} className="header-nav__item1" href="">
@@ -100,6 +106,9 @@ const Login = () => {
       {
         lan === "china" && '泰國'
       }
+       {
+            lan === "ar" && `تايلاند`
+          } 
     </Link>
     <Link to={`/catalog`} className="header-nav__item1" href="">
     {
@@ -111,7 +120,9 @@ const Login = () => {
       {
         lan === "china" && "峇里島"
       }   
-      
+         {
+            lan === "ar" && `بالي`
+          } 
     </Link>
     <Link to={`/catalog`} className="header-nav__item1" href="">
      {
@@ -123,6 +134,9 @@ const Login = () => {
         {
         lan === "china" && "土耳其"
       }   
+         {
+            lan === "ar" && `تركيا`
+          } 
       
     </Link>
     <Link to={`/savedlist`} className="header-nav__item1" href="">
@@ -135,6 +149,9 @@ const Login = () => {
          {
         lan === "china" && "收藏夾"
       }   
+       {
+            lan === "ar" && `المفضلة`
+          } 
     </Link>
     <Link to={'/articlemain'} className="header-nav__item1" href="">
      {
@@ -146,6 +163,9 @@ const Login = () => {
          {
         lan === "china" && "文章"
       }  
+        {
+            lan === "ar" && `مقالات`
+          } 
      
     </Link>
     <Link to={ token ?  "/brokermain" : "/login"} className="header-nav__item-profile" href="">
@@ -159,6 +179,10 @@ const Login = () => {
           {
         lan === "china" && "輪廓"
       }   
+       {
+            lan === "ar" && `حساب تعريفي`
+          } 
+     
         </span>
       <img src={profile} alt="" />
     </Link>
@@ -187,6 +211,9 @@ const Login = () => {
            {
         lan === "china" && "輪廓"
       }   
+       {
+            lan === "ar" && `حساب تعريفي`
+          } 
         </span>
         <img src={profile} alt="" />
       </Link>
@@ -201,6 +228,9 @@ const Login = () => {
        {
         lan === "china" && "學院"
       }
+       {
+            lan === "ar" && "الأكاديمية"
+          }  
       </Link>
       <Link onClick={()=>setMenu(false)}     to={`/catalog`} className="header-nav__item1" href="">
       {
@@ -212,6 +242,10 @@ const Login = () => {
        {
         lan === "china" && "學院"
       }
+      {
+            lan === "ar" && `الإمارات العربية المتحدة`
+          } 
+  
       </Link>
       <Link onClick={()=>setMenu(false)}  to={`/catalog`} className="header-nav__item1" href="">
       {
@@ -223,6 +257,9 @@ const Login = () => {
         {
         lan === "china" && '泰國'
       }
+       {
+            lan === "ar" && `تايلاند`
+          } 
       </Link>
       <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
       {
@@ -234,6 +271,9 @@ const Login = () => {
          {
         lan === "china" && "峇里島"
       }   
+       {
+            lan === "ar" && `بالي`
+          } 
       </Link>
       <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
       {
@@ -245,6 +285,10 @@ const Login = () => {
        {
         lan === "china" && "土耳其"
       } 
+       {
+            lan === "ar" && `تركيا`
+          } 
+      
       </Link>
       <Link onClick={()=>setMenu(false)}   to={`/savedlist`} className="header-nav__item1" href="">
       {
@@ -257,6 +301,9 @@ const Login = () => {
       {
         lan === "china" && "收藏夾"
       }   
+         {
+            lan === "ar" && `المفضلة`
+          } 
       </Link>
       <Link onClick={()=>setMenu(false)}  to={'/articlemain'} className="header-nav__item1" href="">
       {
@@ -268,6 +315,9 @@ const Login = () => {
          {
         lan === "china" && "文章"
       }  
+       {
+            lan === "ar" && `مقالات`
+          } 
       </Link>
     </nav>
     <form className="search">
@@ -286,14 +336,27 @@ const Login = () => {
     </a>
   </div>
 </div>
-</header>
+</header> 
     <div className="wrapper">
           
 
     <form  className="form">
    
         <div className="form__content">
-            <div className="form__title">Логин</div>
+            <div className="form__title">
+            {
+        lan === "ru" && " Логин"
+      }
+      {
+        lan === "en" && "Login"
+      }   
+         {
+        lan === "china" && "登录"
+      }  
+       {
+            lan === "ar" && `تسجيل الدخول`
+          } 
+             </div>
             <div className="form__input">   
                 <label>
                     <input required onChange={(e)=>setUsername(e.target.value)} name="username" placeholder="Email or username"/>
@@ -308,8 +371,62 @@ const Login = () => {
                 <button className="btn" type='submit' onClick={(e)=>handleSubmit(e)} >Войти</button>
                 <br />
 
-                <p>У меня нет аккаунт <Link to={'/register'}>Регистрация</Link></p>
-                <p> Забыeли пароль <a>Здесь</a> </p>
+                <p>
+                {
+        lan === "ru" && " У меня нет аккаунт"
+      }
+      {
+        lan === "en" && "I don't have an account"
+      }   
+         {
+        lan === "china" && " 我没有账户"
+      }  
+       {
+            lan === "ar" && `ليس لدي حساب`
+          } 
+                  <Link to={'/register'}>
+                  {
+                  lan === "ru" && " Регистрация"
+                   }
+                   {
+                   lan === "en" && " Registration"
+                    }   
+                    {
+                     lan === "china" && "  登记"
+                      }  
+                       {
+                        lan === "ar" && `  تسجيل`
+                       }                    
+                    
+                    </Link></p>
+                <p>
+                {
+                  lan === "ru" && "Забыeли пароль"
+                   }
+                   {
+                   lan === "en" && "Forgot your password"
+                    }   
+                    {
+                     lan === "china" && "忘记密码了吗"
+                      }  
+                       {
+                        lan === "ar" && `نسيت كلمة السر`
+                       }  
+                  
+                    <a>
+                    {
+                  lan === "ru" && " Здесь"
+                   }
+                   {
+                   lan === "en" && " Here"
+                    }   
+                    {
+                     lan === "china" && "这里"
+                      }  
+                       {
+                        lan === "ar" && `هنا`
+                       }  
+                     </a> </p>
             </div>
         </div>
     </form>

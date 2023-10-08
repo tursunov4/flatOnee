@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import apartiment from "../../assets/img/apartament-preview.jpg";
+import apartiment from "../../assets/img/apartament-preview.webp";
 import telefoon from "../../assets/img/telefon.svg";
-import phone from "../../assets/img/iphone.png";
-import ourmisson from "../../assets/img/our-mission.jpg";
+import phone from "../../assets/img/iphone.webp";
+import ourmisson from "../../assets/img/our-mission.webp";
 import flatforg from "../../assets/img/faltfrog.svg";
 import flatforg2 from "../../assets/img/faltfrog2.svg";
-import iphone from "../../assets/img/iphone.png";
-import iphone2 from "../../assets/img/iphone2.png";
+import iphone from "../../assets/img/iphone.webp";
+import iphone2 from "../../assets/img/iphone2.webp";
 import img90 from "../../assets/img/90.svg"
 import img40 from "../../assets/img/40.svg"
 import close from '../../assets/img/close-white.svg'
