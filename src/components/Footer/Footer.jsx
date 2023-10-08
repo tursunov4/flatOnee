@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import http from '../../axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,9 +10,11 @@ const Footer = () => {
   const [text , setText] = useState("")
   const notify = (text) => toast(`${text}`);
   const {lan , setLan} = useContext(Context)
-
+  const inputRef = useRef()
+  const inputRef2 = useRef()
   const handleClick =(e) =>{
     e.preventDefault()
+   
     if(phone !== "" && text !== ""){
       http.post("/contact/post/" ,{
         name: text,
@@ -29,10 +31,11 @@ const Footer = () => {
             progress: undefined,
             theme: "light",
             });
-         setTimeout(()=>{
-          window.location.reload()
-         }, 2000)
+          inputRef.current.value =""
+          inputRef2.current.value =''
         }
+      }).catch((err)=>{
+        
       })
     }
   
@@ -55,6 +58,9 @@ const Footer = () => {
             {
               lan === "en" && "UAE"
             }
+             {
+              lan === "china" && "阿聯酋"
+            }
           </Link>
          <Link to={"/catalog"} className="footer-nav__item" href="">
            {
@@ -63,6 +69,9 @@ const Footer = () => {
             {
               lan === "en" && "Turkiye"
             } 
+               {
+              lan === "china" && "土耳其"
+            }  
          </Link>
          <Link to={"/catalog"} className="footer-nav__item" href="">
            {
@@ -71,6 +80,9 @@ const Footer = () => {
             {
               lan === "en" && "Thailand"
             }      
+             {
+              lan === "china" && '泰國'
+            }
            
          </Link>
          <Link to={"/catalog"} className="footer-nav__item" href="">
@@ -80,6 +92,9 @@ const Footer = () => {
             {
               lan === "en" && "Bali"
             }   
+             {
+              lan === "china" && "峇里島"
+            }  
          </Link>
          </div>
          <div>
@@ -90,6 +105,9 @@ const Footer = () => {
             {
               lan === "en" && "Favorites "
             }   
+              {
+              lan === "china" && "收藏夾"
+            }   
          </Link>
          <Link to={"/articlemain"} className="footer-nav__item" href="">
          {
@@ -98,6 +116,9 @@ const Footer = () => {
             {
               lan === "en" && "Tenor"
             }   
+              {
+              lan === "china" && "文章"
+            }  
          </Link>
          <Link to={token ?  "/brokermain" :"/login"} className="footer-nav__item" href="">
          {
@@ -114,6 +135,9 @@ const Footer = () => {
             {
               lan === "en" && "Academy"
             }
+              {
+              lan === "china" && "輪廓"
+            }   
          </Link>
          </div>
         </nav>
@@ -130,9 +154,13 @@ const Footer = () => {
             {
               lan === "en" && "Leave a request and our specialist will answer your questions            questions"
             }   
-          
+           {
+            lan === "china" && `
+            留下请求，我们的专家将回答您的问题`
+           }
           </p>
           <input
+           ref={inputRef}
             onChange={(e)=>setText(e.target.value)}
             className="footer-form__input"
             placeholder="Как к вам обращаться"
@@ -140,6 +168,7 @@ const Footer = () => {
           />
      
           <input
+          ref={inputRef2}
             onChange={(e)=>setPhone(e.target.value)}
             className="footer-form__input"
             placeholder="+7 000 000 00 00"
@@ -158,6 +187,10 @@ const Footer = () => {
             {
               lan === "en" && " By submitting an application you accept the user agreement."
             } 
+               {
+            lan === "china" && `
+            提交申请即表示您接受用户协议。`
+           }
            
             <a href="">
             {
@@ -166,6 +199,9 @@ const Footer = () => {
             {
               lan === "en" && "To learn more"
             }
+                 {
+            lan === "china" && `    了解更多`
+           }
             </a>
             
           </p>

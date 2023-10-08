@@ -12,14 +12,14 @@ const IzminitPhone = () => {
             
                           <input name="phone_number" type="text" class="input" placeholder="Введите старый номер телефона"/>
                     </label>
-                      <div class="error-input active">Неверный номер телефона</div>
+                      {/* <div class="error-input active">Неверный номер телефона</div> */}
                 </div>
                 <div class="edit-input">
                     <label>
                         <input name="phone_number" type="text" class="input" placeholder="Введите новый номер телефона"/>
                     </label>
 
-                             <div class="forgot-password active">Забыли пароль</div>
+                             {/* <div class="forgot-password active">Забыли пароль</div> */}
                 </div>
 
                 <div class="button-edit">

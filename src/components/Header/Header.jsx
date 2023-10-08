@@ -35,6 +35,12 @@ const Header = () => {
             {
               lan === "en" && "Academy"
             }
+            {
+              lan === "china" && "學院"
+            }
+               {
+                  lan === "ar" && "الأكاديمية"
+                }   
           
           </Link>
           <Link to={`/catalog`} className="header-nav__item1" href="">
@@ -44,6 +50,12 @@ const Header = () => {
             {
               lan === "en" && "UAE"
             }
+            {
+              lan === "china" && "阿聯酋"
+            }
+              {
+                  lan === "ar" && `الإمارات العربية المتحدة`
+                } 
         
           </Link>
           <Link to={`/catalog`} className="header-nav__item1" href="">
@@ -53,7 +65,12 @@ const Header = () => {
             {
               lan === "en" && "Thailand"
             }      
-           
+            {
+              lan === "china" && '泰國'
+            }
+             {
+                  lan === "ar" && `تايلاند`
+                } 
           </Link>
           <Link to={`/catalog`} className="header-nav__item1" href="">
           {
@@ -61,8 +78,13 @@ const Header = () => {
             }
             {
               lan === "en" && "Bali"
+            }  
+            {
+              lan === "china" && "峇里島"
             }   
-            
+               {
+                  lan === "ar" && `بالي`
+                } 
           </Link>
           <Link to={`/catalog`} className="header-nav__item1" href="">
            {
@@ -71,6 +93,13 @@ const Header = () => {
             {
               lan === "en" && "Turkiye"
             } 
+              {
+              lan === "china" && "土耳其"
+            }   
+               {
+                  lan === "ar" && `تركيا`
+                } 
+            
           </Link>
           <Link to={`/savedlist`} className="header-nav__item1" href="">
           {
@@ -79,6 +108,12 @@ const Header = () => {
             {
               lan === "en" && "Favorites "
             }   
+               {
+              lan === "china" && "收藏夾"
+            }   
+             {
+                  lan === "ar" && `المفضلة`
+                } 
           </Link>
           <Link to={'/articlemain'} className="header-nav__item1" href="">
            {
@@ -87,6 +122,12 @@ const Header = () => {
             {
               lan === "en" && "Tenor"
             }   
+               {
+              lan === "china" && "文章"
+            }  
+              {
+                  lan === "ar" && `مقالات`
+                } 
            
           </Link>
           <Link to={ token ?  "/brokermain" : "/login"} className="header-nav__item-profile" href="">
@@ -96,7 +137,14 @@ const Header = () => {
             }
             {
               lan === "en" && "Profile"
+            }  
+                {
+              lan === "china" && "輪廓"
             }   
+             {
+                  lan === "ar" && `حساب تعريفي`
+                } 
+           
               </span>
             <img src={profile} alt="" />
           </Link>
@@ -122,6 +170,12 @@ const Header = () => {
             {
               lan === "en" && "Profile"
             } 
+                 {
+              lan === "china" && "輪廓"
+            }   
+             {
+                  lan === "ar" && `حساب تعريفي`
+                } 
               </span>
               <img src={profile} alt="" />
             </Link>
@@ -131,7 +185,14 @@ const Header = () => {
             }
             {
               lan === "en" && "Academy"
+
             }
+             {
+              lan === "china" && "學院"
+            }
+             {
+                  lan === "ar" && "الأكاديمية"
+                }  
             </Link>
             <Link onClick={()=>setMenu(false)}     to={`/catalog`} className="header-nav__item1" href="">
             {
@@ -140,6 +201,13 @@ const Header = () => {
             {
               lan === "en" && "UAE"
             }
+             {
+              lan === "china" && "學院"
+            }
+            {
+                  lan === "ar" && `الإمارات العربية المتحدة`
+                } 
+        
             </Link>
             <Link onClick={()=>setMenu(false)}  to={`/catalog`} className="header-nav__item1" href="">
             {
@@ -148,6 +216,12 @@ const Header = () => {
             {
               lan === "en" && "Thailand"
             }  
+              {
+              lan === "china" && '泰國'
+            }
+             {
+                  lan === "ar" && `تايلاند`
+                } 
             </Link>
             <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
             {
@@ -156,6 +230,12 @@ const Header = () => {
             {
               lan === "en" && "Bali"
             }   
+               {
+              lan === "china" && "峇里島"
+            }   
+             {
+                  lan === "ar" && `بالي`
+                } 
             </Link>
             <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
             {
@@ -164,6 +244,13 @@ const Header = () => {
             {
               lan === "en" && "Turkiye"
             } 
+             {
+              lan === "china" && "土耳其"
+            } 
+             {
+                  lan === "ar" && `تركيا`
+                } 
+            
             </Link>
             <Link onClick={()=>setMenu(false)}   to={`/savedlist`} className="header-nav__item1" href="">
             {
@@ -173,6 +260,12 @@ const Header = () => {
               lan === "en" && "Favorites "
             }   
             
+            {
+              lan === "china" && "收藏夾"
+            }   
+               {
+                  lan === "ar" && `المفضلة`
+                } 
             </Link>
             <Link onClick={()=>setMenu(false)}  to={'/articlemain'} className="header-nav__item1" href="">
             {
@@ -181,6 +274,12 @@ const Header = () => {
             {
               lan === "en" && "Tenor"
             }   
+               {
+              lan === "china" && "文章"
+            }  
+             {
+                  lan === "ar" && `مقالات`
+                } 
             </Link>
           </nav>
           <form className="search">

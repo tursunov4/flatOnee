@@ -9,6 +9,7 @@ import iphone from "../../assets/img/iphone.png";
 import iphone2 from "../../assets/img/iphone2.png";
 import img90 from "../../assets/img/90.svg"
 import img40 from "../../assets/img/40.svg"
+import close from '../../assets/img/close-white.svg'
 import "./home.css";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import http from "../../axios";
@@ -19,6 +20,7 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../Context/Context";
+import ReactInstaStories from "react-insta-stories";
 const token = localStorage.getItem("token")
 const id = localStorage.getItem("id")
 
@@ -87,7 +89,7 @@ const HomePage = () => {
         complex: ids,
       }).then((res)=>{
       if(res.status === 201){
-         setRefresh(!refresh)
+         setRefresh(!refresh)     
       }
       }).catch((err)=>{
         console.log(err)
@@ -114,12 +116,53 @@ const HomePage = () => {
       localStorage.setItem("lang" , lang)
       setRefresh(!refresh)
     }
+    const [story , setStory] = useState([])
+     useEffect(()=>{
+      getHistory()
+     },[])
+    const getHistory =()=>{
+      http.get("catalog/history/").then((res)=>{
+        setStory(res.data.results)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+    const [ty , setTy] = useState(false)
+  window.onclick = function(event) {
+      if (event.target.id == "myModal") {
+         setTy(false)
+      }
+    }
     return (
     <main>
+            {
+            ty &&
+        <div id="myModal" className='insta-stoooriya'>
+          <div onClick={()=>setTy(false)} className="recistorys__img" >
+            <img width={30} src={close} alt="" />
+          </div>
+      <div className='insta-stoooriya__wap'>
+      {
+        story.length!==0  &&
+         <ReactInstaStories
+      stories={story.map((item , index)=>({
+        url: item.video_or_image ,
+        type: item.image_type, // Ma'lumot turi, bu yerda rasm
+      }))}
+      defaultInterval={1500}
+      width={"100%"}
+      height={"100vh"}
+        
+    />
+      }
+      </div>
+    </div>
+          }
+      
       <section className="main-section__update">
         <div className="container__main">
           <div className="main-section__wrapperu">
-            <div className="main-section__language"> <span className="cursorimgg" onClick={()=>handleLanguage("en")}>En </span>| <span className="cursorimgg" onClick={()=>handleLanguage("ru")}>Рус </span> | <span>中國人</span></div>
+            <div className="main-section__language"> <span className="cursorimgg"  onClick={()=>handleLanguage("ru")}>Рус </span> | <span className="cursorimgg" onClick={()=>handleLanguage("en")}>En </span>| <span className="cursorimgg" onClick={()=>handleLanguage("china")} >中國人</span></div>
             <div className="main-seciton__wrapper-inner">
               <h2>
               {
@@ -127,6 +170,9 @@ const HomePage = () => {
             }
             {
               lan === "en" && "Changing the world of real estate with"
+            }
+            {
+              lan === "china" && "用人工智慧改變房地產世界"
             }
            <span> 
             {
@@ -144,6 +190,9 @@ const HomePage = () => {
             {
               lan === "en" && " We simplify all processes: from rent, purchase and delivery, to payment              utilities, due to a combination of several neural networks in              unified system"
             }
+             {
+              lan === "china" && "我們透過將多個神經網路組合到一個系統中來簡化所有流程：從租賃、購買和出租到支付公用事業費用"
+            }
                
               </h4>
               <button onClick={()=>navigate("/catalog")} >Найти объект</button>
@@ -157,40 +206,7 @@ const HomePage = () => {
       <section className="stories-section">
         <div className="container">
           <ul className="stories-list">
-            <li className="stories-list__item" data-story="1">
-              <div className="stories-list__wrapper">
-                <div className="stories-list__border"></div>
-                <img
-                  className="stories-list__preview"
-                  src={apartiment}
-                  alt=""
-                />
-              </div>
-              <p className="stories-list__title">История</p>
-            </li>
-            <li className="stories-list__item" data-story="2">
-              <div className="stories-list__wrapper">
-                <div className="stories-list__border"></div>
-                <img
-                  className="stories-list__preview"
-                  src={apartiment}
-                  alt=""
-                />
-              </div>
-              <p className="stories-list__title">История</p>
-            </li>
-            <li className="stories-list__item" data-story="3">
-              <div className="stories-list__wrapper">
-                <div className="stories-list__border"></div>
-                <img
-                  className="stories-list__preview"
-                  src={apartiment}
-                  alt=""
-                />
-              </div>
-              <p className="stories-list__title">История</p>
-            </li>
-            <li className="stories-list__item" data-story="4">
+            <li onClick={()=>setTy(true)} className="stories-list__item" data-story="1">
               <div className="stories-list__wrapper">
                 <div className="stories-list__border"></div>
                 <img
@@ -214,6 +230,9 @@ const HomePage = () => {
             {
               lan === "en" && `We are a real estate agency that uses`
             }
+              {
+              lan === "china" && "我們是一家使用神經網路的房地產機構"
+            }
               <span> 
               {
               lan === "ru" && ` нейросети`
@@ -236,7 +255,10 @@ const HomePage = () => {
             }
             {
               lan === "en" && `We suggest up to 90% of liquid objects in advance`
-            }              
+            }    
+             {
+              lan === "china" && "我們是一家使用神經網路的房地產機構"
+            }          
              </p>
             <div className="our-mission__newwrap">
               <h2>
@@ -245,7 +267,10 @@ const HomePage = () => {
             }
             {
               lan === "en" && '«Neurobroker»'
-            }    
+            }  
+              {
+              lan === "china" && "《第一單元》"
+            }   
                  <br />
                  {
               lan === "ru" && "от Flat one"
@@ -253,6 +278,10 @@ const HomePage = () => {
             {
               lan === "en" && 'from Flat one'
             }    
+            
+            {
+              lan === "china" && "中的“神經經紀人"
+            }  
                 
               </h2>
               <h5>
@@ -262,6 +291,9 @@ const HomePage = () => {
             {
               lan === "en" && ` We are creating a tool for instant and accurate analysis of the real estate market, which allows you to be aware of the most liquid and profitable lots.`
             }   
+              {
+              lan === "china" && "我們正在創建一個即時、準確分析房地產市場的工具，讓您了解最具流動性和利潤最高的土地。"
+            }
               </h5>
             </div>
           </div>
@@ -305,6 +337,9 @@ const HomePage = () => {
             {
               lan === "en" && `What is Neurobroker?`
             }   
+              {
+              lan === "china" && "什麼是神經經紀人？"
+            }  
                 
               </h2>
               <p>
@@ -316,6 +351,9 @@ const HomePage = () => {
             {
               lan === "en" && `  «Neurobroker»  Flat one simplifies all actions in real estate: from purchase, rental, to payment of utilities due to a combination of several neural networks in a single system.`
             }   
+              {
+              lan === "china" && "「Neurobroker」Flat one 簡化了房地產中的所有操作：由於單一系統中結合了多個神經網絡，從購買、租賃到水電費支付。"
+            }  
 
                
               </p>
@@ -327,7 +365,10 @@ const HomePage = () => {
             }
             {
               lan === "en" && `Personal assistant`
-            }              
+            }    
+             {
+              lan === "china" && "私人助理"
+            }            
              </h2>
               <p>
               {
@@ -341,7 +382,10 @@ const HomePage = () => {
               purchasing an object helps clients make an informed decision about
               purchasing real estate, reducing time for risk analysis and
               investments.`
-            }      
+            }   
+              {
+              lan === "china" && "購買房產時自動分析財務風險和機會可以幫助客戶做出購買房地產的明智決策，減少分析風險和投資的時間。"
+            }       
                 
              
               </p>
@@ -353,7 +397,11 @@ const HomePage = () => {
             }
             {
               lan === "en" && `Your pocket broker`
-            }           
+            }   
+            {
+              lan === "china" && "您的袖珍经纪人"
+            }       
+                        
                 </h2>
               <p>
               {
@@ -366,7 +414,9 @@ const HomePage = () => {
               you demand and informs you about any changes in the market. Helps
               make the best decision.`
             }     
-           
+               {
+              lan === "china" && "房地產銷售中的人工智慧可以預測您的需求並告知您市場的任何變化。 幫助您做出更好的決定。"
+            } 
               </p>
             </li>
           </ul>
@@ -382,6 +432,9 @@ const HomePage = () => {
             {
               lan === "en" && `For whom`
             }    
+              {
+              lan === "china" && "為了誰"
+            } 
            
             </h6>
           <div className="main-cont__wrap">
@@ -393,7 +446,9 @@ const HomePage = () => {
             {
               lan === "en" && `Who will benefit from «Neurobroker»`
             }    
-                
+                {
+              lan === "china" && "誰將從 Neurobroker 中受益？"
+            } 
                 </h2>
               <div className="main-cont__wrap-inner">
                 <img className="telefonchiziq" src={telefoon} alt="" />
@@ -407,6 +462,9 @@ const HomePage = () => {
                 {
                  lan === "en" && `Real estate investor`
                 }    
+                 {
+              lan === "china" && "房地產投資者"
+            } 
            
                       </h5>
                   </li>
@@ -418,7 +476,11 @@ const HomePage = () => {
                  }
                 {
                  lan === "en" && `Owners renting long term`
-                }    
+                }   
+                         {
+              lan === "china" && "房地產投資者"
+            }  
+                
                       </h5>
                   </li>
                   <li>
@@ -430,6 +492,10 @@ const HomePage = () => {
                 {
                  lan === "en" && ` Buyers`
                 }    
+                   {
+                 lan === "china" && "買家"
+                 }  
+                
                      </h5>
                   </li>
                   <li>
@@ -440,7 +506,10 @@ const HomePage = () => {
                  }
                 {
                  lan === "en" && `  Tenants`
-                }    
+                }   
+                   {
+                 lan === "china" && "買家"
+                 }   
                      </h5>
                   </li>
                 </ul>
@@ -461,7 +530,9 @@ const HomePage = () => {
                 {
                  lan === "en" && `Our objects`
                 }    
-             
+                   {
+                 lan === "china" && "我們的對象"
+                 }  
               </h2>
             <p>
                  {
@@ -472,6 +543,9 @@ const HomePage = () => {
                  lan === "en" && `We select the most profitable properties using our predictive tools
                  neural networks.`
                 }    
+                  {
+                 lan === "china" && "我們利用神經網路分析以及與頂級開發商的合作來選擇最有利可圖的房產"
+                 }  
          
             </p>
           </div>
@@ -556,6 +630,12 @@ const HomePage = () => {
                  what you have been looking for for a long time without wasting your time on
                  current or fake market lots.`
                 } 
+                {
+                  lan === 'china' && `就像您一样，我们节省了时间，这对我们来说不仅重要
+                  用不同的句子猜测一切，并准确找到什么
+                  你一直在寻找的东西，而不是浪费你的时间
+                  当前或假的市场批次`
+                }
              
               </p>
             </div>
@@ -619,6 +699,9 @@ const HomePage = () => {
                 {
                  lan === "en" && `We operate in 4 countries`
                 } 
+                {
+                  lan === 'china' && "我們在 4 個國家開展業務"
+                }
             
             </h2>
           <div className="main__map-wrp">
@@ -645,6 +728,9 @@ const HomePage = () => {
                  lan === "en" && `
                  Flat one is a set of solutions`
                 } 
+                  {
+                  lan === 'china' && "Flat one 是一組解決方案"
+                }
            
             </h2>
           <div className="flarorg__wrap">
@@ -658,6 +744,9 @@ const HomePage = () => {
                 {
                  lan === "en" && ` We are changing the market now`
                 } 
+                  {
+                  lan === 'china' && '  我们现在正在改变市场'
+                }
             </h3>
         </div>
       </section>
@@ -673,6 +762,9 @@ const HomePage = () => {
                 {
                  lan === "en" && `  Soon you will be able to use`
                 } 
+                  {
+                  lan === 'china' && ' 很快您將能夠使用成熟的應用程序，：'
+                }
               
                 <span>
                 {
@@ -689,6 +781,9 @@ const HomePage = () => {
                 {
                  lan === "en" && `where will:`
                 } 
+                {
+                  lan === 'china' && "其中包括"
+                }
                  
               </h2>
               <ul className="telefon2__list">
@@ -701,6 +796,9 @@ const HomePage = () => {
                 {
                  lan === "en" && `More accurate predictions of price movements`
                 } 
+                {
+                  lan === "china" && "更準確預測價格走勢"
+                }
                     </h5>
                 </li>
                 <li>
@@ -712,6 +810,9 @@ const HomePage = () => {
                 {
                  lan === "en" && `More indicators`
                 } 
+                  {
+                  lan === "china" &&  `更多指標`
+                }
                 </h5>
                 </li>
                 <li>
@@ -723,6 +824,9 @@ const HomePage = () => {
                 {
                  lan === "en" && `Simplification of all operational processes`
                 } 
+                  {
+                  lan === "china" &&  `簡化所有操作流程`
+                }
                     </h5>
                 </li>
                 <li>
@@ -734,6 +838,10 @@ const HomePage = () => {
                 {
                  lan === "en" && `Neural network for interior design`
                 }
+                   {
+                  lan === "china" &&  `室內設計的神經網絡`
+                }
+                    
                    </h5>
                 </li>
               </ul>
@@ -752,6 +860,9 @@ const HomePage = () => {
                  lan === "en" && `
                  Follow the development of our product on Telegram`
                 }
+                    {
+                  lan === "china" &&  `在 Telegram 上關注我們產品的開發`
+                }
               </p>
             <button>Подписаться</button>
           </div>
@@ -761,10 +872,32 @@ const HomePage = () => {
       <section className="bistro-section">
         <div className="container__main">
           <div className="bistro-text">
-            <h2>Точно и быстро</h2>
+            <h2>
+            {
+                    lan === "ru" && "Точно и быстро"
+                 }
+                {
+                 lan === "en" && `Accurate and fast`
+                } 
+                  {
+                  lan === "china" &&  `
+                  准确快速`
+                }
+              </h2>
             <p>
-              Точность нейросетей превосходит человеческую. Обработка больших
-              объёмов информации происходит за секунды.
+              {
+                    lan === "ru" && `  Точность нейросетей превосходит человеческую. Обработка больших
+                    объёмов информации происходит за секунды.`
+                 }
+                {
+                 lan === "en" && `The accuracy of neural networks exceeds that of humans. Processing large
+                 volumes of information happen in seconds.`
+                }
+                  {
+                  lan === "china" &&  `神经网络的准确性超过了人类。加工量大
+                  大量信息在几秒钟内发生`
+                }
+            
             </p>
           </div>
           <ul className="bistro-section__list">
@@ -772,27 +905,71 @@ const HomePage = () => {
             <li>
               <span className="bistro-foiz">
                 <img src={img40} alt="" />
-                <p>Секунд</p>
+                <p>
+                {
+                    lan === "ru" && " Секунд"
+                 }
+                {
+                 lan === "en" && `Seconds`
+                } 
+                 {
+                  lan === "china" &&  `秒数`
+                }
+                 </p>
               </span>
             </li>
             <li>
               <p className="bistro-text__p">
-                Необходимы нейросети чтобы создать подборку выгодных для
-                инвестиции объектов, когда человеку на это потребуется около
-                часа.
+              {
+                    lan === "ru" && `   Необходимы нейросети чтобы создать подборку выгодных для
+                    инвестиции объектов, когда человеку на это потребуется около
+                    часа.`
+                 }
+                {
+                 lan === "en" && `Neural networks are needed to create a selection of profitable
+                 investment of objects when a person will need about
+                 hours.`
+                } 
+               {
+                  lan === "china" &&  `需要神经网络来创建一系列有利可图的
+                  当一个人需要时进行物品投资
+                  小时。`
+                }
               </p>
             </li>
             <li className="bistro__line"></li>
             <li>
               <span className="bistro-foiz">
                 <img src={img90} alt="" />
-                <p>Точность</p>
+                <p>
+                {
+                    lan === "ru" && "Точност"
+                 }
+                {
+                 lan === "en" && `Accuracy`
+                } 
+                 {
+                  lan === "china" &&`      准确性`
+                }
+                  </p>
               </span>
             </li>
             <li>
               <p className="bistro-text__p">
-                Точность предсказаний превышает 90% и сопоставима с точностью
-                профессионального инвестиционного брокера
+              {
+                    lan === "ru" && `  Точность предсказаний превышает 90% и сопоставима с точностью
+                    профессионального инвестиционного брокера`
+                 }
+                {
+                 lan === "en" && `The accuracy of predictions exceeds 90% and is comparable to the accuracy
+                 professional investment broker`
+                } 
+                  {
+                  lan === "china" &&`
+                  预测准确率超过90%，媲美准确度
+                                      专业投资经纪人`
+                }
+              
               </p>
             </li>
           </ul>
@@ -800,7 +977,18 @@ const HomePage = () => {
       </section>
       <section className="reviews-section">
         <div className="container">
-          <h2 className="section-h2">Нас рекомендуют</h2>
+          <h2 className="section-h2">
+          {
+                    lan === "ru" && "Нас рекомендуют"
+                 }
+                {
+                 lan === "en" && `
+                 We are recommended`
+                } 
+                 {
+                  lan === "china" &&`我们被推荐`
+                }
+            </h2>
           <div className="reviews-wrapper">
             <ul className="reviews-list">
                {

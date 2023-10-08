@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import profileimg from '../../assets/img/profile.png'
 import Check from "../../assets/img/check.svg"
 import setting from "../../assets/img/setings.svg"
@@ -18,6 +18,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
+import { Context } from '../../Context/Context'
 const userimage = localStorage.getItem("image")
 const firstname = localStorage.getItem("firstname")
 const username = localStorage.getItem("email")
@@ -30,6 +31,7 @@ const Brokersmain = () => {
   const [refresh , setRefresh] = useState(false)
   const [image , setImage] = useState([])
   const [chervak , setChervak] = useState("")
+  const {lan} = useContext(Context)
   const vznos = []
   useEffect(()=>{
     getDatao()
@@ -39,7 +41,7 @@ const Brokersmain = () => {
   },[])
 
   const getDatao =()=>{
-    http.get("/catalog/offices/").then((res)=>{
+    http.get("/catalog/complex/").then((res)=>{
       setData(res.data.results)
      
       console.log(res.data)
@@ -57,9 +59,9 @@ const Brokersmain = () => {
   const handleLike =(ids)=>{
 
     if(token){
-      http.post("/catalog/wishlist/" , {
+      http.post("/catalog/wishlist-complex/" , {
         user: id,
-      office: ids,
+      complex: ids,
       }).then((res)=>{
       if(res.status === 201){
          setRefresh(!refresh)
@@ -74,7 +76,7 @@ const Brokersmain = () => {
 
   const handleDislike =(ids)=>{
     if(token){
-      http.delete(`/catalog/wishlist/${ids}/`).then((res)=>{
+      http.delete(`/catalog/wishlist-complex/${ids}/`).then((res)=>{
         if(res.status === 204){
           setRefresh(!refresh)
         }
@@ -104,7 +106,18 @@ const Brokersmain = () => {
               <span>{username}</span>
           </div>
             <div className="add__user-status">
-              <span>Собственник</span>
+              <span>
+              {
+              lan === "ru" && " Собственник"
+            }
+              {
+              lan === "en" && " Owner"
+            }
+              {
+              lan === "china" && "所有者"
+            }
+               
+              </span>
               <span><img src={Check} alt="check" /></span>
             </div>
           </div>
@@ -118,7 +131,18 @@ const Brokersmain = () => {
               <div className="add__section-icon">
                 <img src={chat} alt="icon" />
               </div>
-              <div className="add__section-name">Сообщения</div>
+              <div className="add__section-name">
+              {
+              lan === "ru" && "Сообщения"
+            }
+              {
+              lan === "en" && "Messages"
+            }
+              {
+              lan === "china" && "留言"
+            }
+                
+                </div>
               <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
@@ -127,7 +151,17 @@ const Brokersmain = () => {
               <div className="add__section-icon">
                 <img src={heart} alt="icon" />
               </div>
-              <div className="add__section-name">Избранное</div>
+              <div className="add__section-name">
+              {
+              lan === "ru" && "Избранное"
+            }
+              {
+              lan === "en" && "Favorites"
+            }
+              {
+              lan === "china" && `收藏夹`
+            }
+                </div>
               <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
@@ -137,7 +171,17 @@ const Brokersmain = () => {
               <div className="add__section-icon">
                 <img src={star} alt="icon" />
               </div>
-              <div className="add__section-name">Сравнить</div>
+              <div className="add__section-name">
+              {
+              lan === "ru" && "Сравнить"
+            }
+              {
+              lan === "en" && "Compare"
+            }
+              {
+              lan === "china" && `比较`
+            }
+                </div>
               <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
@@ -145,11 +189,31 @@ const Brokersmain = () => {
 
 
             <div className="add__mobile-section">
-              <div className="add__section-name">Мои объекты</div>
+              <div className="add__section-name">
+              {
+              lan === "ru" && "Мои объекты"
+            }
+              {
+              lan === "en" && "My objects"
+            }
+              {
+              lan === "china" && `我的对象`
+            }
+                </div>
               <div className="add__mobile-add">
                 <button onClick={()=>navigate("/addobject")} className="add__btn-add">
                   <img src={pluss} alt="pluss" />
-                  <span>Добавить объект</span>
+                  <span>
+                  {
+              lan === "ru" && " Добавить объект"
+            }
+              {
+              lan === "en" && "Add object"
+            }
+              {
+              lan === "china" && `我的对象`
+            }
+                    </span>
                 </button>
                
                 
@@ -158,7 +222,7 @@ const Brokersmain = () => {
                  {
                   data?.map((item , index) =>(
                     <div className="add__apartament-item">
-                    <img className='broker-apartmenprev' src={`http://164.92.172.190:8080${item.image[0].image}`} alt="" />
+                    <img className='broker-apartmenprev' src={`http://164.92.172.190:8080${item.image[0]}`} alt="" />
                       <div onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "add__apartament-icon2 add__apartament-icon " : "add__apartament-icon" }>
                       </div>
     
@@ -193,7 +257,17 @@ const Brokersmain = () => {
                  <img src={hat} alt="hat"/>
                 </div>
               </div>
-              <div className="add__section-name">Черновики</div>
+              <div className="add__section-name">
+              {
+              lan === "ru" && "Черновики"
+            }
+              {
+              lan === "en" && "Drafts"
+            }
+              {
+              lan === "china" && `草稿`
+            }
+                </div>
               <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
@@ -202,7 +276,18 @@ const Brokersmain = () => {
               <div className="add__section-icon">
                 <img src={pluss} alt="icon" />
               </div>
-              <div className="add__section-name">Добавить комплекс</div>
+              <div className="add__section-name">
+              {
+              lan === "ru" && "Добавить комплекс"
+            }
+              {
+              lan === "en" && "Add complex"
+            }
+              {
+              lan === "china" && `添加复合体`
+            }
+                
+                </div>
               <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
@@ -211,7 +296,17 @@ const Brokersmain = () => {
               <div className="add__section-icon">
                 <img src={alert} alt="icon" />
               </div>
-              <div className="add__section-name">Настройки уведомлений</div>
+              <div className="add__section-name">
+              {
+              lan === "ru" && "Настройки уведомлений"
+            }
+              {
+              lan === "en" && "Notification settings"
+            }
+              {
+              lan === "china" && `通知设置`
+            }
+            </div>
               <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
@@ -221,7 +316,18 @@ const Brokersmain = () => {
               <div className="add__section-icon">
                 <img src={question} alt="icon" />
               </div>
-              <div className="add__section-name">Вопрос — ответ</div>
+              <div className="add__section-name">
+              {
+              lan === "ru" && "Вопрос — ответ"
+            }
+              {
+              lan === "en" && "Question answer"
+            }
+              {
+              lan === "china" && `问题解答`
+            }
+                
+                </div>
               <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
@@ -231,7 +337,17 @@ const Brokersmain = () => {
               <div className="add__section-icon">
                 <img src={history} alt="icon" />
               </div>
-              <div className="add__section-name">История просмотров</div>
+              <div className="add__section-name">
+              {
+              lan === "ru" && "  История просмотров"
+            }
+              {
+              lan === "en" && "Browsing history"
+            }
+              {
+              lan === "china" && `浏览记录`
+            }
+              </div>
               <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
@@ -243,21 +359,53 @@ const Brokersmain = () => {
         <div className="add__right-top">
           <button onClick={()=>navigate("/addobject")} className="add__btn-add">
             <img src={pluss} alt="pluss" />
-            <span>Добавить объект</span>
+            <span>
+            {
+              lan === "ru" && " Добавить объект"
+            }
+              {
+              lan === "en" && "Add object"
+            }
+              {
+              lan === "china" && `我的对象`
+            }
+              </span>
           </button>
           <button  onClick={()=>navigate("/chervak")} className="add__btn-add">
             <div className="add__btn-addhat">
-            {
+              {
                     chervak.length !== 0 &&
                   <span>{chervak.length}</span>
                   }
              <img src={hat} alt="hat"/>
             </div>
-            <span>Черновики</span>
+            <span>  
+            {
+              lan === "ru" && "Черновики"
+            }
+              {
+              lan === "en" && "Drafts"
+            }
+              {
+              lan === "china" && `草稿`
+            }
+              
+              
+              </span>
           </button>
           <button onClick={()=>navigate("/addkompleks")} className="add__btn-add">
             <img src={pluss} alt="pluss" />
-            <span>Добавить комплекс</span>
+            <span>
+            {
+              lan === "ru" && "Добавить комплекс"
+            }
+              {
+              lan === "en" && "Add complex"
+            }
+              {
+              lan === "china" && `添加复合体`
+            }
+            </span>
           </button>
         </div>
         <div className="add__right-bottom">
@@ -277,7 +425,7 @@ const Brokersmain = () => {
                 {
                   item.image?.map((item , index)=>(
                     <>
-                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item.image}`} alt="" /></SwiperSlide>
+                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item?.image[0]?.image}`} alt="" /></SwiperSlide>
                     </>
                 ))
               }

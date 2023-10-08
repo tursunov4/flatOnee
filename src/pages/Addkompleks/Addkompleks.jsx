@@ -9,6 +9,8 @@ import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import axios from "axios";
 import http from "../../axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Addkompleks = () => {
   const navigate = useNavigate()
@@ -257,6 +259,16 @@ let projectinfrastructure =[
       console.log(res.data)
     }).catch((err)=>{
       console.log(err)
+      toast.error( 'В введенных данных ошибка!!!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     })
  
 };
@@ -278,11 +290,13 @@ const handleYandex = (e)=>{
     setYandexcenter([res.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ')[1]-0 , res.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ')[0]-0])
   }).catch((err)=>{
     console.log(err)
+    
   })
 }
 
   return (
     <main>
+      <ToastContainer/>
       <section className="addobject">
         <div className="container">
           <div className="addobject__wrapper">

@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
 import http from '../../../axios'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const id = localStorage.getItem("id")
 
 const Izminitemail = () => {
@@ -20,7 +22,31 @@ const Izminitemail = () => {
               window.location.reload()
             }
         }).catch((err)=>{
-            console.log(err)
+            if(err.response.status === 404){
+                toast.error( 'В введенных данных ошибка!!!', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+                } else{
+                  
+                        toast.error( err.response.data.email && `${err.response.data.email}`, {
+                            position: "top-right",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                            });
+                
+                }
         })
     }
   return (

@@ -10,6 +10,10 @@ import axios from "axios";
 import http from "../../axios";
 import { useToast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ReactInstaStories from "react-insta-stories";
+
 let id = localStorage.getItem("id")
 const Addobject = () => {
   const [name , setName] = useState('')
@@ -267,12 +271,22 @@ const handleChange =(evt)=>{
     http.post("/catalog/complex/" , form).then((res)=>{
       console.log(res.data)
       console.log(res.status)
-      if(res.status ===201){
-        navigate("/brokermain")
-        window.location.reload()
-      }
+      // if(res.status ===201){
+      //   navigate("/brokermain")
+      //   window.location.reload()
+      // }
     }).catch((err)=>{
       console.log(err)
+      toast.error( 'В введенных данных ошибка!!!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     })
   }  
   const handleDelet  =(id) =>{
@@ -291,12 +305,13 @@ const handleChange =(evt)=>{
       setYilvznos(newItems); 
     }
   }
-
-
+ 
 
   return (
     <main>
+      <ToastContainer/>
       <section className="addobject">
+
         <div className="container">
           <div className="addobject__wrapper">
             <div className="addobject__list1">
@@ -304,7 +319,7 @@ const handleChange =(evt)=>{
             </div>
             <div className="addobject__list2">
               <div className="addobject-kopleks">
-                <h2>Добавить в комплекс</h2>
+                <h2 className="addobject-kopleks__h">Добавить в комплекс</h2>
                 <form action="">
                 {
                       searchList2 && kompleks.length !==0 ?
@@ -354,7 +369,7 @@ const handleChange =(evt)=>{
                 </ul>
               </div>
               <div className="addobeject__ploshad">
-                <h2>Общая площадь</h2>
+                <h2 >Общая площадь</h2>
                 <label className="addobejectploshad__label" htmlFor="">
                   <input onChange={(e)=>setPloshad(e.target.value)} placeholder="120 м2" type="text" />
                 </label>
@@ -414,27 +429,22 @@ const handleChange =(evt)=>{
                   <ul className="object__ubostva-list">
                     <li className="object__ubostva-listitem">
                     <input defaultChecked={nwife} onClick={()=>setNwife(!nwife)} type="checkbox" />
-                      <img src={wife} alt="" />
                       <p>Wi Fi: Есть</p>
                     </li>
                     <li className="object__ubostva-listitem">
                     <input defaultChecked={sovmesh} onClick={()=>setSovmesh(!sovmesh)}  type="checkbox" />
-                      <img src={wife} alt="" />
                       <p>Санузел: Совмещенный</p>
                     </li>
                     <li className="object__ubostva-listitem">
                        <input defaultChecked={liftt} onClick={()=>setLiftt(!liftt)}  type="checkbox" />
-                      <img src={wife} alt="" />
                       <p>Лифт: 4</p>
                     </li>
                     <li className="object__ubostva-listitem">
                      <input defaultChecked={gruzavoy} onClick={()=>setGruzavoy(!gruzavoy)}  type="checkbox" />
-                      <img src={wife} alt="" />
                       <p>Грузовой лифт: 4</p>
                     </li>
                     <li className="object__ubostva-listitem">
                        <input  defaultChecked={teritorita} onClick={()=>setTeritoriya(!teritorita)}  type="checkbox" />
-                      <img src={wife} alt="" />
                       <p>Территория: Закрытая</p>
                     </li>
                   </ul>
@@ -597,7 +607,7 @@ const handleChange =(evt)=>{
                   {
                     yilvznos?.map((item ,index) =>(
                      <div className="addobject-plan__list">
-                    <p>2024</p>
+                    <p>{index+2024}</p>
                     <label className="addobejectploshad__label" >
                      <input onChange={(e)=>handleYilivznosadd(e , item.id)} placeholder="+ 8%" type="text" />
                      <span className="imgcursorim" onClick={()=>handleDelet2  (item.id)}><img width={16} src={close2} alt="" /></span>

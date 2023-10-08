@@ -43,6 +43,7 @@ const Cataloge = () => {
   const [otdelka , setOdelka] = useState("")
   const [comnat , setComnat] = useState("")
   const [count , setCount] = useState(1)  
+  const [likePaginate , setLikePaginate] = useState("")
   const navigate = useNavigate()
 
   useEffect(()=>{
@@ -59,13 +60,14 @@ const Cataloge = () => {
   const getRange =()=>{
     http.get("/catalog/complex-range/ ").then((res)=>{
       setRangeNums(res.data)
+
      setPricemin(res.data.min_price-0)
      setPricemax(res.data.max_price-0)
-     setQueremax(res.data.max_square-0)
+     setQueremax(res.data.max_square)
      setQueremin(res.data.min_square-0)
      setEtajmax(res.data.max_etaj-0)
      setEtajmin(res.data.min_etaj-0)
-     console.log(res.data.min_price)
+     console.log(res.data , "dsaf")
 
     }).catch((err)=>{
       console.log(err)
@@ -101,9 +103,11 @@ const Cataloge = () => {
       user: id,
     complex: ids,
     }).then((res)=>{
-    if(res.status === 201){
-       setRefresh(!refresh)
-    }
+      if(count===1){
+        setRefresh(!refresh)
+      }else{
+          getlikePaginate()
+      }
     }).catch((err)=>{
       console.log(err)
     })
@@ -111,12 +115,16 @@ const Cataloge = () => {
       navigate("/login")
   }
   }
-
+ 
   const handleDislike =(ids)=>{
     if(token){
       http.delete(`/catalog/wishlist-complex/${ids}/`).then((res)=>{
         if(res.status === 204){
-          setRefresh(!refresh)
+          if(count===1){
+            setRefresh(!refresh)
+          }else{
+              getlikePaginate()
+          }
         }
       }).catch((err)=>{
         console.log(err)
@@ -167,6 +175,7 @@ const Cataloge = () => {
   }
   const handlePrev =()=>{
     if(prev){
+      setLikePaginate(prev)
       axios.get(prev).then((res)=>{
         setData(res.data.results)
         setPrev(res.data.previous)
@@ -177,8 +186,18 @@ const Cataloge = () => {
       })
     }
   }
+  const getlikePaginate =()=>{
+    axios.get(likePaginate).then(res=>{
+      setData(res.data.results)
+      setPrev(res.data.previous)
+      setNext(res.data.next)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
   const handleNext =()=>{
     if(next){
+      setLikePaginate(next)
       axios.get(next).then((res)=>{
         setData(res.data.results)
         setPrev(res.data.previous)
@@ -223,7 +242,7 @@ const Cataloge = () => {
     <main>
       <section className="catalogue">
         <div className="container">
-          <aside className={typefilter ? "opened catalogue-sidebar" :'catalogue-sidebar'}>
+        <aside className={typefilter ? "opened catalogue-sidebar" :'catalogue-sidebar'}>
             <button onClick={()=>setTypefilter(false)} className="catalogue-sidebar__m-close"></button>
             <form className="search">
               <input onChange={(e)=>handleSearch(e)} className="search__input" placeholder="Поиск" type="text" />
@@ -344,6 +363,7 @@ const Cataloge = () => {
               <div className="filter-section__content">
           
               <Slider
+              step={100}
            className="slider"
             value={[pricemin ,pricemax] }
         onChange={handleChange}

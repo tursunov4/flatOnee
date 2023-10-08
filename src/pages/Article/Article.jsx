@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./article.css";
 import aricon from "../../assets/img/articleug.svg"
 import articleform from "../../assets/img/article-form.jpg";
@@ -17,7 +17,8 @@ const Article = () => {
   const [phone, setPhone] = useState("")
   const [text , setText] = useState("")
   const {lan , setLan} = useContext(Context)
-
+  const inputRef = useRef()
+  const inputRef2 = useRef()
   useEffect(()=>{
     getData()
   },[])
@@ -38,12 +39,13 @@ const Article = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: "light", 
             });
-         setTimeout(()=>{
-          window.location.reload()
-         }, 2000)
+          inputRef.current.value =""
+          inputRef2.current.value =""
         }
+      }).catch((err)=>{
+        console.log(err)
       })
     }
   
@@ -327,12 +329,14 @@ const Article = () => {
                 покупке или аренде.
               </p>
               <input
+                ref={inputRef}
                 onChange={(e)=>setText(e.target.value)}
                 className="input"
                 placeholder="Как к вам обращаться"
                 type="text"
               />
               <input
+                ref={inputRef2}
                 onChange={(e)=>setPhone(e.target.value)}
                 className="input"
                 placeholder="+7 000 000 00 00"

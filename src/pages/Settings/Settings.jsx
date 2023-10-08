@@ -36,7 +36,12 @@ const Settings = () => {
             {
               lan === "en" && "Settings"
             }
-          
+                {
+               lan === "china" && "設定"
+                }  
+                {
+                  lan === "ar" && "إعدادات"
+                }
           </div>
         <div className="list">
           <Link  to={'/izminitparol'} className="item item-options">
@@ -50,6 +55,9 @@ const Settings = () => {
             {
               lan === "ar" && 'تغيير البريد'
             }
+              {
+               lan === "china" && '更改密碼'
+                }  
             </div>
           </Link>
           <Link to={'/izminitemail'} className="item item-options">
@@ -63,6 +71,9 @@ const Settings = () => {
             {
               lan === "ar" && 'تغيير البريد'
             }
+                          {
+               lan === "china" && '更改郵件'
+                }  
             </div>
           </Link>
 
@@ -78,6 +89,9 @@ const Settings = () => {
              {
               lan === "ar" && 'غير رقم الهاتف'
             }
+                  {
+               lan === "china" && '更改電話號碼'
+                }  
             </div>
           </Link>
 
@@ -92,6 +106,11 @@ const Settings = () => {
             {
               lan === "ar" && "إعدادات الإشعار"
             }
+                {
+               lan === "china" && '通知設定'
+                }
+                  
+                
              
               </div>
           </Link>
@@ -103,6 +122,12 @@ const Settings = () => {
             {
               lan === "en" && "Log out"
             }
+              {
+               lan === "china" && '退出您的帐户'
+                } 
+                   {
+                  lan === "ar" && "تسجيل الخروج من حسابك"
+                } 
            
             </div>
           </Link>
@@ -117,8 +142,13 @@ const Settings = () => {
             }
             {
               lan === "en" && "Select language"
-            }     
-           
+            }
+             {
+               lan === "china" && '選擇語言'
+             }   
+               {
+                  lan === "ar" && "اختار اللغة"
+                }   
           </p>
           <img id="strelka" className={typelan ? "strelkarotate" : ""} src={strelka} alt="strelka"/>
          </div>
@@ -150,10 +180,10 @@ const Settings = () => {
             </li>
              <li className='list__choose' >
               <div>
-                <img width="26" src={china} alt="flag"/>
+                <img  width="26" src={china} alt="flag"/>
                  <p >China</p>
               </div>
-              <input id='nam' name='lan'  className="choose__language-input"  type="checkbox"/>
+              <input checked={lan ==="china" ? true : false} onClick={()=>handleLangClick("china")}  id='nam' name='lan'  className="choose__language-input"  type="checkbox"/>
             </li>
          </ul>
             </form>
