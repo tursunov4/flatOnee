@@ -11,9 +11,9 @@ import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import http from "../../axios";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import Slider from 'react-slider';
 import { Context } from "../../Context/Context";
+import { queries } from "@testing-library/react";
 const token = localStorage.getItem("token")
 const id = localStorage.getItem("id")
 
@@ -39,8 +39,10 @@ const Cataloge = () => {
   const [etajmin ,setEtajmin] = useState("")
   const [etajmax , setEtajmax] = useState("")
   const [newMaxsum , setNewMaxsum] = useState("")
-  const [count , setCount] = useState(1)
-  
+  const [rangenums , setRangeNums] = useState("")
+  const [otdelka , setOdelka] = useState("")
+  const [comnat , setComnat] = useState("")
+  const [count , setCount] = useState(1)  
   const navigate = useNavigate()
 
   useEffect(()=>{
@@ -55,19 +57,22 @@ const Cataloge = () => {
     getRange()
   },[])
   const getRange =()=>{
-    http.get("/catalog/range/").then((res)=>{
+    http.get("/catalog/complex-range/ ").then((res)=>{
+      setRangeNums(res.data)
      setPricemin(res.data.min_price-0)
      setPricemax(res.data.max_price-0)
      setQueremax(res.data.max_square-0)
      setQueremin(res.data.min_square-0)
      setEtajmax(res.data.max_etaj-0)
      setEtajmin(res.data.min_etaj-0)
+     console.log(res.data.min_price)
+
     }).catch((err)=>{
       console.log(err)
     })
   }
   const getCatalogOfice =()=>{
-    http.get(`/catalog/offices/?name=${name}&square_min=${squeremin}&square_max=${squeremax}&price_min=${pricemin}&price_max=${newMaxsum}&deadline=${sana}&property_type=${protery}&development_type=${development}&construction_phase=${constraction}&transaction_type=${uslovi}&coutry=`).then((res)=>{
+    http.get(`/catalog/complex/?name=${name}&square_min=${squeremin}&square_max=${squeremax}&price_min=${pricemin}&price_max=${pricemax}&deadline=${sana}&property_type=${protery}&development_type=${development}&construction_phase=${constraction}&transaction_type=${uslovi}&min_etaj=${etajmin}&max_etaj=${etajmax}&otdelka=${otdelka}&comnat=${comnat}&coutry=`).then((res)=>{
       setData(res.data.results)
       setPrev(res.data.previous)
       setNext(res.data.next)
@@ -79,7 +84,7 @@ const Cataloge = () => {
     
   }
   const getTop =()=>{
-    http.get("/catalog/offices/top_office/").then((res)=>{
+    http.get("/catalog/complex/top_complex/").then((res)=>{
       console.log(res.data)
       setTopData(res.data)
     }).catch((err)=>{
@@ -92,9 +97,9 @@ const Cataloge = () => {
   const handleLike =(ids)=>{
 
   if(token){
-    http.post("/catalog/wishlist/" , {
+    http.post("/catalog/wishlist-complex/" , {
       user: id,
-    office: ids,
+    complex: ids,
     }).then((res)=>{
     if(res.status === 201){
        setRefresh(!refresh)
@@ -109,7 +114,7 @@ const Cataloge = () => {
 
   const handleDislike =(ids)=>{
     if(token){
-      http.delete(`/catalog/wishlist/${ids}/`).then((res)=>{
+      http.delete(`/catalog/wishlist-complex/${ids}/`).then((res)=>{
         if(res.status === 204){
           setRefresh(!refresh)
         }
@@ -179,11 +184,40 @@ const Cataloge = () => {
         setPrev(res.data.previous)
         setNext(res.data.next)
         setCount(prev => prev+1)
+     
       }).catch((err)=>{
         console.log(err)
       })
     }
   }
+
+
+
+  
+   const handleChange = (newValues) =>{
+    setPricemin(newValues[0])
+    setPricemax(newValues[1])
+    setRefresh(!refresh)
+   } ;
+   const handleChange2 = (newValues) =>{
+    setQueremin(newValues[0])
+    setQueremax(newValues[1])
+    setRefresh(!refresh)
+
+   } ;
+   const handleChange3 = (newValues) =>{
+    setEtajmin(newValues[0])
+    setEtajmax(newValues[1])
+    setRefresh(!refresh)
+   } ;
+  const handleOdelka =(text)=>{
+    setOdelka(text)
+    setRefresh(!refresh)
+  }
+   const handleComnat =(text) =>{
+    setComnat(text)
+    setRefresh(!refresh)
+   }
   return (
  
     <main>
@@ -252,6 +286,25 @@ const Cataloge = () => {
             </div>
             <div className="filter-section opened">
               <div className="filter-section__header">
+                <div className="filter-section__title">Отделка</div>
+                <div className="filter-section__icon"></div>
+              </div>
+              <div className="filter-section__content">
+                <ul className="filter-list selected">
+                <li onClick={()=>handleOdelka("beton")} className={otdelka==="beton" ? "filter-list__item  selected":'filter-list__item'}>
+                    Бетон
+                  </li>
+                  <li onClick={()=>handleOdelka("bez_otdelki")} className={otdelka==="bez_otdelki" ? "filter-list__item selected":'filter-list__item'} >Без отделки</li>
+                  <li onClick={()=>handleOdelka("baytboks")} className={otdelka==="baytboks" ? "filter-list__item selected":'filter-list__item'}>Вайтбокс</li>
+                  <li onClick={()=>handleOdelka("chistovaya")} className={otdelka==="chistovaya" ? "filter-list__item selected":'filter-list__item'}>Чистовая</li>
+                  <li onClick={()=>handleOdelka("chistovaya_mebel")} className={otdelka==="chistovaya_mebel" ? "filter-list__item selected":'filter-list__item'}>Чистовая с мебелью</li>
+                      
+                
+                </ul>
+              </div>
+            </div>
+            <div className="filter-section opened">
+              <div className="filter-section__header">
                 <div className="filter-section__title">Этап строительства</div>
                 <div className="filter-section__icon"></div>
               </div>
@@ -289,19 +342,18 @@ const Cataloge = () => {
                 <div className="filter-section__icon"></div>
               </div>
               <div className="filter-section__content">
+          
               <Slider
-
-        min={pricemin-0} 
-        max={pricemax-0} 
-        step={10} 
-       
-        
-        onChange={handleSliderChange} 
+           className="slider"
+            value={[pricemin ,pricemax] }
+        onChange={handleChange}
+        min={rangenums.min_price}
+        max={rangenums.max_price}
       />
-      <div className="rangeslider__summa">
-      <p>{pricemin}</p>
-      <p>{pricemax}</p>
-      </div>
+        <div className="price__change-wrap">
+       <p>{pricemin}</p>
+        <p>{pricemax}</p>
+        </div>
               </div>
             </div>
             <div className="filter-section opened">
@@ -311,12 +363,16 @@ const Cataloge = () => {
               </div>
               <div className="filter-section__content">
               <Slider
-        min={0} 
-        max={1000} 
-        step={10} 
-        value={money} 
-        onChange={handleSliderChange} 
+           className="slider"
+            value={[squeremin ,squeremax] }
+        onChange={handleChange2}
+        min={rangenums.min_square}
+        max={rangenums.max_square}
       />
+        <div className="price__change-wrap">
+       <p>{squeremin}</p>
+        <p>{squeremax}</p>
+        </div>
               </div>
             </div>
             <div className="filter-section opened">
@@ -326,14 +382,18 @@ const Cataloge = () => {
               </div>
               <div className="filter-section__content">
               <Slider
-        min={0} // Minimum qiymat
-        max={1000} // Maksimum qiymat
-        step={10} // Qadam miqdori (masalan, 10 dan 10 gacha o'zgartirish)
-        value={money} // Slider qiymati
-        onChange={handleSliderChange} // Slider o'zgarganda chaqiriladigan funksiya
+           className="slider"
+            value={[etajmin ,etajmax] }
+        onChange={handleChange3}
+        min={rangenums.min_etaj}
+        max={rangenums.max_etaj}
       />
+        <div className="price__change-wrap">
+       <p>{etajmin}</p>
+        <p>{etajmax}</p>
+        </div>
               </div>
-            </div>
+            </div>           
             <div className="filter-section opened">
               <div className="filter-section__header">
                 <div className="filter-section__title">Этап строительства</div>
@@ -354,7 +414,24 @@ const Cataloge = () => {
                 </ul>
               </div>
             </div>
-           
+            <div className="filter-section opened">
+              <div className="filter-section__header">
+                <div className="filter-section__title">Количество комнат</div>
+                <div className="filter-section__icon"></div>
+              </div>
+              <div className="filter-section__content">
+                <ul className="filter-list selected">
+                <li  onClick={()=>handleComnat(0)} className={comnat===0 ?  "filter-list__item selected": "filter-list__item"}>
+                      Студия
+                    </li>
+                    <li onClick={()=>handleComnat(1)} className={comnat===1 ?  "filter-list__item selected": "filter-list__item"}>1</li>
+                    <li onClick={()=>handleComnat(2)} className={comnat===2 ?  "filter-list__item selected": "filter-list__item"}>2</li>
+                    <li onClick={()=>handleComnat(3)} className={comnat===3 ?  "filter-list__item selected": "filter-list__item"}>3</li>
+                    <li onClick={()=>handleComnat(4)} className={comnat===4 ?  "filter-list__item selected": "filter-list__item"}>4</li>
+                    <li onClick={()=>handleComnat(5)} className={comnat===5 ?  "filter-list__item selected": "filter-list__item"}>5</li>
+                </ul>
+              </div>
+            </div>             
           </aside>
           <div className="catalogue-content">
             <div className="catalogue-content__header">
@@ -416,10 +493,8 @@ const Cataloge = () => {
                   <li
                   className="baclist5"
                   >
-
                     <a className="catalog__hovera1" href="">
                       <div className="catalog__hover-text">Турция</div>
-
                     </a>
                   </li>
                   <li
@@ -427,7 +502,6 @@ const Cataloge = () => {
                   >
                     <a className="catalog__hovera1" href="">
                       <div className="catalog__hover-text">Дубай</div>
-
                     </a>
                   </li>
                   <li
@@ -437,7 +511,6 @@ const Cataloge = () => {
 
                     <a className="catalog__hovera1" href="">
                       <div className="catalog__hover-text">Абу-Даби</div>
-
                     </a>
                   </li>
                 </ul>
@@ -559,7 +632,7 @@ const Cataloge = () => {
               <span onClick={()=>handleNext()} className="catalogue-paggination__next" href="">
                 <img src={arrowleft} alt="" />
               </span>
-            </div>
+            </div>  
           }
             {/* <div
               className="catalogue-banner2 catalugbarner2-bag"

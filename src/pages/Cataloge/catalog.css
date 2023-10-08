@@ -12,3 +12,78 @@
 .imgcursorim{
     cursor: pointer;
 }
+.filter-section__content{
+    position: relative;
+    padding: 10px 0;
+}
+
+/* Styles for the slider component */
+.slider {
+    height: 10px;
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+  
+}
+
+
+/* Styles for the slider thumb */
+.slider .thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    top: -5px;
+    background: linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.27%);
+    cursor: grab;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for the slider active state */
+.slider .thumb.active {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4   );
+}
+
+.horizontal-slider {
+    width: 100%;
+    max-width: 500px;
+    height: 50px;
+    margin: 100px;
+}
+
+.horizontal-slider .example-track {
+    top: 20px;
+    height: 10px;
+}
+
+.track-0 {
+    
+    background-color: green !important;
+}
+ .track-1 {
+     height: 100%;
+     border-radius: 25px;
+    background: linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.27%);
+  
+}
+
+.track-2{
+    background-color: aqua !important;
+}
+.example-track.example-track-2 {
+  
+}
+
+.horizontal-slider .example-thumb {
+    top: 1px;
+    width: 50px;
+    height: 48px;
+    line-height: 38px;
+    border-radius: 50%;
+    font-size: 0.9em;
+    text-align: center;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border: 5px solid gray;
+    box-sizing: border-box;
+}

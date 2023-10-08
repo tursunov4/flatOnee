@@ -246,18 +246,18 @@ let projectinfrastructure =[
   lobb.append("price" , money)
   lobb.append("is_active", type)
 
-  // axios.post(`https://oqdevpy.jprq.site/catalog/offices/` , lobb).then((res)=>{
-  //   console.log(res.data)
+  // axios.post(`http://164.92.172.190:8000/catalog/offices/` , lobb).then((res)=>{
+  //    console.log(res.data)
   // })
-  http.post('/catalog/offices/' ,lobb).then((res)=>{
-    if(res.status ===201){
-      navigate("/brokermain")
-      window.location.reload()
-    }
-    console.log(res.data)
-  }).catch((err)=>{
-    console.log(err)
-  })
+    http.post('/catalog/offices/' ,lobb).then((res)=>{
+      if(res.status ===201){
+        navigate("/brokermain")
+        window.location.reload()
+      }
+      console.log(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
  
 };
 
@@ -335,7 +335,7 @@ const handleYandex = (e)=>{
                       </>
                     }
                     {
-                      country === "3" &&
+                      country === "4" &&
                       <>
                       <option value={1}>Аланья</option>
                       <option value={2}>Бодрум</option>

@@ -28,25 +28,54 @@ import location from '../../assets/img/location.svg'
 import telefonproduct from "../../assets/img/telefonproduct.svg"
 import chat from "../../assets/img/chat.svg"
 import linkarrow from "../../assets/img/link-arrow.svg"
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import http from '../../axios';
   const Productitem = () => {
   const [typevibor , setTypevibor] = useState(false)
   const [typeplan , setTypeplan] = useState(false)
   const [data, setData] = useState({})
+  const [prevnext , setPrevNext] = useState({})
   const [image , setImage] = useState([])
+  const [vznos , setVznos] = useState([])
   const { id} = useParams()
   useEffect(()=>{
-   getData()
+      getData()
+         prevNext()
   },[])
+  // useEffect(()=>{
+  //  getData()
+  //  prevNext()
+  // },[])
+  const  navigate = useNavigate()
   const getData = ()=>{
-    http.get(`/catalog/offices/${id}/`).then((res)=>{
+    http.get(`/catalog/complex/${id}/`).then((res)=>{
        setData(res.data)
        setImage(res.data.image)
+       setVznos(res.data.vznos)
       console.log(res.data)
     }).catch((err)=>{
       console.log(err)
     })
+  }
+  const prevNext =()=>{
+    http.get(`/catalog/next-prev/${id}/?obj=complex`).then((res)=>{
+      console.log(res.data)
+      setPrevNext(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  const handleNavigate =()=>{
+    if(prevnext.prev){
+      navigate(`/product-item/${prevnext.prev}`)
+      window.location.reload()
+    }
+  }
+  const handleNavigate2 =()=>{
+    if(prevnext.next){
+      navigate(`/product-item/${prevnext.next}`)
+      window.location.reload()
+    }
   }
 
   return (
@@ -106,7 +135,7 @@ import http from '../../axios';
                     <p className="product-tags__item" >#{item.name}</p>
                   ))
                 }              
-              </div>
+              </div>  
             </section>
             <section className="product__about-setion">
               <div onClick={()=>setTypevibor(!typevibor)} id="vibratie-title" className="vibratie-title">
@@ -282,7 +311,7 @@ import http from '../../axios';
               </ul>
             </section>
             <section className="infraktura__proekt">
-              <h2>Инфраструктура проекта</h2>
+              <h2>Инфраструктура района</h2>
               <ul className="infraktura__proekt-list">
                   <li className="infraktura__proekt-listitem">
                   {
@@ -388,89 +417,24 @@ import http from '../../axios';
               <h2>План платежей</h2>
              <div className="planpetaj-wrapper">
               <ul className="planpetaj-list">
-                <li className="planpetaj-listitem">
-                   <span className="planpetaj-number">1</span>
-                    <div>
-                      <p className="planpetaj-text">10% Первый взнос</p>
-                       <p className="planpetaj-text-item"></p>
-                    </div>
-                </li>
-                <li className="planpetaj-line"></li>
-                <li className="planpetaj-listitem">
-                   <span className="planpetaj-number">2</span>
-                    <div>
-                      <p className="planpetaj-text">20% Первый взнос</p>
-                       <p className="planpetaj-text-item"></p>
-                    </div>
-                </li>
-                <li className="planpetaj-line"></li>
-                <li className="planpetaj-listitem">
-                   <span className="planpetaj-number">3</span>
-                    <div>
-                      <p className="planpetaj-text">30% Первый взнос</p>
-                       <p className="planpetaj-text-item"></p>
-                    </div>
-                </li>
-                <li className="planpetaj-line"></li>
-                <li className="planpetaj-listitem">
-                   <span className="planpetaj-number  planpetaj-listactive ">4</span>
-                    <div>
-                      <p className="planpetaj-text">40% Первый взнос</p>
-                       <p className="planpetaj-text-item">Возможно продать</p>
-                    </div>
-                </li>
-                <li className="planpetaj-line"></li>
-                <li className="planpetaj-listitem">
-                   <span className="planpetaj-number">5</span>
-                    <div>
-                      <p className="planpetaj-text">50% Первый взнос</p>
-                       <p className="planpetaj-text-item"></p>
-                    </div>
-                </li>
-                <li className="planpetaj-line"></li>
-                <div id="planpentajhide" className={typeplan ? "" :'planpetaj-hide'}>
-                  <li className="planpetaj-listitem">
-                    <span className="planpetaj-number">6</span>
+                {
+                  vznos.map((item , index)=>(
+                     <>
+                        <li className="planpetaj-listitem">
+                    <span className="planpetaj-number">{index+1}</span>
                      <div>
-                       <p className="planpetaj-text">60% Первый взнос</p>
+                       <p className="planpetaj-text">{item} Первый взнос</p>
                         <p className="planpetaj-text-item"></p>
                      </div>
-                 </li>
-                 <li className="planpetaj-line"></li>
-                 <li className="planpetaj-listitem">
-                  <span className="planpetaj-number">7</span>
-                   <div>
-                     <p className="planpetaj-text">70% Первый взнос</p>
-                      <p className="planpetaj-text-item"></p>
-                   </div>
-               </li>
-               <li className="planpetaj-line"></li>
-               <li className="planpetaj-listitem">
-                <span className="planpetaj-number">8</span>
-                 <div>
-                   <p className="planpetaj-text">80% Первый взнос</p>
-                    <p className="planpetaj-text-item"></p>
-                 </div>
-             </li>
-             <li className="planpetaj-line"></li>
-             <li className="planpetaj-listitem">
-              <span className="planpetaj-number">9</span>
-               <div>
-                 <p className="planpetaj-text">90% Первый взнос</p>
-                  <p className="planpetaj-text-item"></p>
-               </div>
-           </li>
-           <li className="planpetaj-line"></li>
-           <li className="planpetaj-listitem">
-            <span className="planpetaj-number">10</span>
-             <div > 
-               <p className="planpetaj-text">100% Первый взнос</p>
-                <p className="planpetaj-text-item"></p>
-             </div>
-         </li>
-                </div>
+                    </li>
+                <li className="planpetaj-line"></li>
+                     </>
+                  ))
+                }
+              
                
-               </ul>
+               
+              </ul>
                <div onClick={()=>setTypeplan(!typeplan)} id="open__planpetaj" className="open__planpetaj">
                 <p>Показать всё</p>
                 <img id="pentajstrelka" className={typeplan ? 'pentajstrelka' : ""} src={strelka2} alt=""/>
@@ -569,12 +533,12 @@ import http from '../../axios';
             <div className="separator"></div>
             <p className="product-sidebar__text">К другому объекту</p>
             <div className="product-sidebar__links">
-              <a className="product-sidebar__prev" href="">
+              <button onClick={()=>handleNavigate()} className="product-sidebar__prev" href="">
                 <img src={linkarrow} alt="" />
-              </a>
-              <a className="product-sidebar__next" href="">
+              </button>
+              <button onClick={()=>handleNavigate2()} className="product-sidebar__next" href="">
                 <img src={linkarrow} alt="" />
-              </a>
+              </button>
             </div>
           </aside>
         </div>

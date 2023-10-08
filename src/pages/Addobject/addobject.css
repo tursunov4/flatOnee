@@ -43,9 +43,18 @@ line-height: 125%; /* 27.5px */
 }
 
 .addobject__list2{
-    max-width: 590px;
+  width: 65%;
 }
-
+@media only screen and (max-width:705px){
+    .addobject__list2{
+        width: 80%;
+      }
+}
+@media only screen and (max-width:500px){
+    .addobject__list2{
+        width: 95%;
+      }
+}
 .addobject__list3{
     width: 150px;
 }
@@ -678,4 +687,18 @@ line-height: 135%; /* 20.25px */
 }
 .add__apartament-address{
     z-index: 1; 
+}
+.addobject__cheklist{
+    width: 45%;
+}
+
+@media only screen and (max-width:560px){    
+  
+.addobject__chek{
+    flex-direction: column;
+    gap: 0;
+}
+.addobject__cheklist{
+    width: 80%;
+}
 }

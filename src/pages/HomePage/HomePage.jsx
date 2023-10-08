@@ -7,6 +7,8 @@ import flatforg from "../../assets/img/faltfrog.svg";
 import flatforg2 from "../../assets/img/faltfrog2.svg";
 import iphone from "../../assets/img/iphone.png";
 import iphone2 from "../../assets/img/iphone2.png";
+import img90 from "../../assets/img/90.svg"
+import img40 from "../../assets/img/40.svg"
 import "./home.css";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import http from "../../axios";
@@ -67,9 +69,9 @@ const HomePage = () => {
     getDataOffice()
   },[refresh])
   const getDataOffice =()=>{
-    http.get("/catalog/offices/").then((res)=>{
-      console.log(res.data.results)
-      setDataoffices(res.data.results)
+    http.get("/catalog/complex/luchshiy/").then((res)=>{
+      console.log(res.data)
+      setDataoffices(res.data)
       if(res.status ===404){
         navigate("/eror404")
     }
@@ -80,9 +82,9 @@ const HomePage = () => {
   const handleLike =(ids)=>{
 
     if(token){
-      http.post("/catalog/wishlist/" , {
+      http.post("/catalog/wishlist-complex/" , {
         user: id,
-      office: ids,
+        complex: ids,
       }).then((res)=>{
       if(res.status === 201){
          setRefresh(!refresh)
@@ -96,7 +98,7 @@ const HomePage = () => {
     }
     const handleDislike =(id)=>{
       if(token){
-        http.delete(`/catalog/wishlist/${id}/`).then((res)=>{
+        http.delete(`/catalog/wishlist-complex/${id}/`).then((res)=>{
           if(res.status === 204){
             setRefresh(!refresh)
           }
@@ -206,8 +208,20 @@ const HomePage = () => {
         <div className="container__main">
           <div className="mi__wrapper">
             <h2>
-              Мы — агентсво недвижимости, которое использует
-              <span> нейросети</span>
+            {
+              lan === "ru" && `Мы — агентсво недвижимости, которое использует`
+            }
+            {
+              lan === "en" && `We are a real estate agency that uses`
+            }
+              <span> 
+              {
+              lan === "ru" && ` нейросети`
+            }
+            {
+              lan === "en" && ` neural networks`
+            }
+              </span>
             </h2>
           </div>
         </div>
@@ -216,16 +230,38 @@ const HomePage = () => {
       <section className="our-mission">
         <div className="container">
           <div className="our-mission__newtext">
-            <p>Заранее подсказываем до 90% ликвидных объектов</p>
+            <p>
+            {
+              lan === "ru" && ` Заранее подсказываем до 90% ликвидных объектов  `
+            }
+            {
+              lan === "en" && `We suggest up to 90% of liquid objects in advance`
+            }              
+             </p>
             <div className="our-mission__newwrap">
               <h2>
-                «Нейроброкер» <br />
-                от Flat one
+              {
+              lan === "ru" && "«Нейроброкер»"
+            }
+            {
+              lan === "en" && '«Neurobroker»'
+            }    
+                 <br />
+                 {
+              lan === "ru" && "от Flat one"
+            }
+            {
+              lan === "en" && 'from Flat one'
+            }    
+                
               </h2>
               <h5>
-                Создаём инструмент для моментального и точного анализа рынка
-                недвижимости, который позволяет быть в курсе самых ликвидных и
-                выгодных лотов.
+              {
+              lan === "ru" && `  Создаём инструмент для моментального и точного анализа рынка    недвижимости, который позволяет быть в курсе самых ликвидных и     выгодных лотов.`
+            }
+            {
+              lan === "en" && ` We are creating a tool for instant and accurate analysis of the real estate market, which allows you to be aware of the most liquid and profitable lots.`
+            }   
               </h5>
             </div>
           </div>
@@ -262,28 +298,75 @@ const HomePage = () => {
         <div className="container__main">
           <ul className="ourmis__about-list">
             <li className="ourmis__about-listitem">
-              <h2>Что такое «Нейроброкер»</h2>
+              <h2>
+              {
+              lan === "ru" && `Что такое «Нейроброкер»`
+            }
+            {
+              lan === "en" && `What is Neurobroker?`
+            }   
+                
+              </h2>
               <p>
-                «Нейроброкер» Flat one упрощает все действия в недвижимости: от
-                покупки, сдачи, до оплаты коммунальных услуг за счёт связки из
-                нескольких нейросетей в единой системе.
+              {
+              lan === "ru" && ` «Нейроброкер» Flat one упрощает все действия в недвижимости: от
+              покупки, сдачи, до оплаты коммунальных услуг за счёт связки из
+              нескольких нейросетей в единой системе.`
+            }
+            {
+              lan === "en" && `  «Neurobroker»  Flat one simplifies all actions in real estate: from purchase, rental, to payment of utilities due to a combination of several neural networks in a single system.`
+            }   
+
+               
               </p>
             </li>
             <li className="ourmis__about-listitem">
-              <h2>Личный помошник</h2>
+              <h2>
+              {
+              lan === "ru" && "Личный помошник"
+            }
+            {
+              lan === "en" && `Personal assistant`
+            }              
+             </h2>
               <p>
-                Автоматический анализ финансовых рисков и возможностей при
-                покупке объекта помогает клиентам принять обоснованное решение о
-                покупке недвижимости, сократив время на анализ рисков и
-                инвестиций.
+              {
+              lan === "ru" && `   Автоматический анализ финансовых рисков и возможностей при
+              покупке объекта помогает клиентам принять обоснованное решение о
+              покупке недвижимости, сократив время на анализ рисков и
+              инвестиций.`
+            }
+            {
+              lan === "en" && `Automatic analysis of financial risks and opportunities when
+              purchasing an object helps clients make an informed decision about
+              purchasing real estate, reducing time for risk analysis and
+              investments.`
+            }      
+                
+             
               </p>
             </li>
             <li className="ourmis__about-listitem">
-              <h2>Ваш карманный брокер</h2>
+              <h2>
+              {
+              lan === "ru" && "Ваш карманный брокер"
+            }
+            {
+              lan === "en" && `Your pocket broker`
+            }           
+                </h2>
               <p>
-                Искуственный интеллект в продаже недвижимости прогнозирует для
-                вас спрос и собщает о любых изменениях на рынке. Помогает
-                принять лучшее решение.
+              {
+              lan === "ru" && ` Искуственный интеллект в продаже недвижимости прогнозирует для
+              вас спрос и собщает о любых изменениях на рынке. Помогает
+              принять лучшее решение.`
+            }
+            {
+              lan === "en" && `Artificial intelligence in real estate sales predicts for
+              you demand and informs you about any changes in the market. Helps
+              make the best decision.`
+            }     
+           
               </p>
             </li>
           </ul>
@@ -292,28 +375,73 @@ const HomePage = () => {
 
       <section className="main-cont__tel">
         <div className="container__main">
-          <h6>Для кого</h6>
+          <h6>
+           {
+               lan === "ru" && " Для кого"
+            }
+            {
+              lan === "en" && `For whom`
+            }    
+           
+            </h6>
           <div className="main-cont__wrap">
             <div className="main-cont__text">
-              <h2>Кому будет полезен «Нейроброкер»</h2>
+              <h2> 
+             {
+              lan === "ru" && "Кому будет полезен «Нейроброкер»"
+            }
+            {
+              lan === "en" && `Who will benefit from «Neurobroker»`
+            }    
+                
+                </h2>
               <div className="main-cont__wrap-inner">
                 <img className="telefonchiziq" src={telefoon} alt="" />
                 <ul className="main-cont__wrap-inner-text">
                   <li>
                     <span>01</span>
-                    <h5>Инвестора в недвижимость</h5>
+                    <h5>
+                    {
+                    lan === "ru" && "Инвестора в недвижимость"
+                 }
+                {
+                 lan === "en" && `Real estate investor`
+                }    
+           
+                      </h5>
                   </li>
                   <li>
                     <span>02</span>
-                    <h5>Собственники сдающие долгосрочно</h5>
+                    <h5>
+                    {
+                    lan === "ru" && "Собственники сдающие долгосрочно"
+                 }
+                {
+                 lan === "en" && `Owners renting long term`
+                }    
+                      </h5>
                   </li>
                   <li>
                     <span>03</span>
-                    <h5>Покупатели</h5>
+                    <h5>
+                    {
+                    lan === "ru" && " Покупатели"
+                 }
+                {
+                 lan === "en" && ` Buyers`
+                }    
+                     </h5>
                   </li>
                   <li>
                     <span>04 </span>
-                    <h5>Арендаторы</h5>
+                    <h5>
+                    {
+                    lan === "ru" && " Покупатели"
+                 }
+                {
+                 lan === "en" && `  Tenants`
+                }    
+                     </h5>
                   </li>
                 </ul>
               </div>
@@ -326,10 +454,25 @@ const HomePage = () => {
       <section className="sections">
         <div className="container__main">
           <div className="nashobj__wrap">
-            <h2>Наши объекты</h2>
+            <h2>
+                  {
+                    lan === "ru" && " Наши объекты"
+                 }
+                {
+                 lan === "en" && `Our objects`
+                }    
+             
+              </h2>
             <p>
-              Отбираем самые выгодные объекты с помощью наших предсказательных
-              нейросетей.
+                 {
+                    lan === "ru" &&  ` Отбираем самые выгодные объекты с помощью наших предсказательных
+                    нейросетей.`
+                 }
+                {
+                 lan === "en" && `We select the most profitable properties using our predictive tools
+                 neural networks.`
+                }    
+         
             </p>
           </div>
         </div>
@@ -392,12 +535,28 @@ const HomePage = () => {
               </li>
             </ul>
             <div className="offer-section__bar2">
-              <h3>Лучшие предложения</h3>
+              <h3>
+              {
+                    lan === "ru" && "Лучшие предложения"
+                 }
+                {
+                 lan === "en" && `Best deals`
+                } 
+                </h3>
               <p>
-                Мы также как и вы экономим своё время и для нас важно не просто
-                угадывать все различными предложениями, а находить именно то,
-                что вы давно искали при этом не тратя ваше время на не
-                актуальные или фейковые лоты рынка.
+              {
+                    lan === "ru" &&  `   Мы также как и вы экономим своё время и для нас важно не просто
+                    угадывать все различными предложениями, а находить именно то,
+                    что вы давно искали при этом не тратя ваше время на не
+                    актуальные или фейковые лоты рынка.`
+                 }
+                {
+                 lan === "en" && `Just like you, we save our time and for us it’s not just important
+                 guess everything with different sentences, and find exactly what
+                 what you have been looking for for a long time without wasting your time on
+                 current or fake market lots.`
+                } 
+             
               </p>
             </div>
           </div>
@@ -453,7 +612,15 @@ const HomePage = () => {
 
       <section className="main__map">
         <div className="container__main">
-          <h2>Мы работаем в 4 странах</h2>
+          <h2>
+                {
+                    lan === "ru" && "Мы работаем в 4 странах"
+                 }
+                {
+                 lan === "en" && `We operate in 4 countries`
+                } 
+            
+            </h2>
           <div className="main__map-wrp">
             <YMaps query={{ apikey: "ca60917c-ba3d-485a-8711-39fad57f4fe2" }}>
               <Map
@@ -471,12 +638,27 @@ const HomePage = () => {
 
       <section className="flarorg">
         <div className="container__main">
-          <h2>Flat one это комплекс решений</h2>
+          <h2>  {
+                    lan === "ru" && " Flat one это комплекс решений"
+                 }
+                {
+                 lan === "en" && `
+                 Flat one is a set of solutions`
+                } 
+           
+            </h2>
           <div className="flarorg__wrap">
             <img className="falatorgimg" src={flatforg} alt="" />
             <img className="falatorgimg2" src={flatforg2} alt="" />
           </div>
-          <h3>Меняем рынок уже сейчас</h3>
+          <h3>
+               {
+                    lan === "ru" && "Меняем рынок уже сейчас"
+                 }
+                {
+                 lan === "en" && ` We are changing the market now`
+                } 
+            </h3>
         </div>
       </section>
 
@@ -485,25 +667,74 @@ const HomePage = () => {
           <div className="telefon2__wrap">
             <div className="telefon2__text">
               <h2>
-                Скоро вы сможете пользоваться
-                <span> полноценным приложением</span> , где будет:
+              {
+                    lan === "ru" && "  Скоро вы сможете пользоваться"
+                 }
+                {
+                 lan === "en" && `  Soon you will be able to use`
+                } 
+              
+                <span>
+                {
+                    lan === "ru" && "  полноценным приложением"
+                 }
+                {
+                 lan === "en" && `
+                 full-fledged application`
+                } 
+                 </span> ,
+                 {
+                    lan === "ru" && " где будет:"
+                 }
+                {
+                 lan === "en" && `where will:`
+                } 
+                 
               </h2>
               <ul className="telefon2__list">
                 <li>
                   <span>01</span>
-                  <h5>Более точные предсказания динамики цен</h5>
+                  <h5>
+                  {
+                    lan === "ru" && "Более точные предсказания динамики цен"
+                 }
+                {
+                 lan === "en" && `More accurate predictions of price movements`
+                } 
+                    </h5>
                 </li>
                 <li>
                   <span>02</span>
-                  <h5>Больше показателей</h5>
+                  <h5>
+                  {
+                    lan === "ru" && "    Больше показателей"
+                 }
+                {
+                 lan === "en" && `More indicators`
+                } 
+                </h5>
                 </li>
                 <li>
                   <span>03</span>
-                  <h5>Упрощение всех операционных процессов</h5>
+                  <h5>
+                  {
+                    lan === "ru" && "Упрощение всех операционных процессов"
+                 }
+                {
+                 lan === "en" && `Simplification of all operational processes`
+                } 
+                    </h5>
                 </li>
                 <li>
                   <span>04</span>
-                  <h5>Нейросеть для дизайна интерьеров</h5>
+                  <h5>
+                  {
+                    lan === "ru" && " Нейросеть для дизайна интерьеров"
+                 }
+                {
+                 lan === "en" && `Neural network for interior design`
+                }
+                   </h5>
                 </li>
               </ul>
             </div>
@@ -513,7 +744,15 @@ const HomePage = () => {
             </div>
           </div>
           <div className="telefon2__btns">
-            <p>Следите за развитием нашего продукта в Telegram</p>
+            <p>
+               {
+                    lan === "ru" && `Следите за развитием нашего продукта в Telegram`
+                 }
+                {
+                 lan === "en" && `
+                 Follow the development of our product on Telegram`
+                }
+              </p>
             <button>Подписаться</button>
           </div>
         </div>
@@ -532,7 +771,7 @@ const HomePage = () => {
             
             <li>
               <span className="bistro-foiz">
-                <img src="./img/40.svg" alt="" />
+                <img src={img40} alt="" />
                 <p>Секунд</p>
               </span>
             </li>
@@ -546,7 +785,7 @@ const HomePage = () => {
             <li className="bistro__line"></li>
             <li>
               <span className="bistro-foiz">
-                <img src="./img/90.svg" alt="" />
+                <img src={img90} alt="" />
                 <p>Точность</p>
               </span>
             </li>

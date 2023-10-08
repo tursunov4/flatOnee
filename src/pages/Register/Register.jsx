@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./register.css"
 import { Link, useNavigate } from 'react-router-dom'
 import http from '../../axios'
 import profile from "../../assets/img/profile.svg";
+import { Context } from '../../Context/Context';
 
 const token = localStorage.getItem("token")
 const Register = () => {
@@ -12,6 +13,7 @@ const Register = () => {
     const [firstname , setFirsname] = useState("")
     const [password, setPassword] = useState("")
     const [password2 ,setPassword2] = useState('')
+    const {lan , setLan} = useContext(Context)
     const [menu ,setMenu] = useState(false)
     const navigate =  useNavigate()
     const handleClick =(e) =>{
@@ -32,37 +34,84 @@ const Register = () => {
     }
   return (
     <>
-         <header className="header ">
+        <header className="header ">
 
 <div className="container">
   <Link to={'/'} className="logo" href=""></Link>
   <nav className="header-nav2">
-    <Link  to={"/academiya"} className="header-nav__item1" href="">
-    Академия
-    </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
-      ОАЭ
-    </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
-      Тайланд
-    </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
-      Бали
-    </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
-      Турция
-    </Link>
-    <Link to={`/savedlist`} className="header-nav__item1" href="">
-      Избранное
-    </Link>
-    <Link to={'/articlemain'} className="header-nav__item1" href="">
-      Статьи
-    </Link>
-    <Link to={ token ?  "/brokermain" : "/login"} className="header-nav__item-profile" href="">
-      <span>Профиль</span>
-      <img src={profile} alt="" />
-    </Link>
-  </nav>
+          <Link  to={"/academiya"} className="header-nav__item1" href="">
+            {
+              lan === "ru" && "Академия"
+            }
+            {
+              lan === "en" && "Academy"
+            }
+          
+          </Link>
+          <Link to={`/catalog`} className="header-nav__item1" href="">
+           {
+              lan === "ru" && "ОАЭ"
+            }
+            {
+              lan === "en" && "UAE"
+            }
+        
+          </Link>
+          <Link to={`/catalog`} className="header-nav__item1" href="">
+           {
+              lan === "ru" && "Тайланд"
+            }
+            {
+              lan === "en" && "Thailand"
+            }      
+           
+          </Link>
+          <Link to={`/catalog`} className="header-nav__item1" href="">
+          {
+              lan === "ru" && "Бали"
+            }
+            {
+              lan === "en" && "Bali"
+            }   
+            
+          </Link>
+          <Link to={`/catalog`} className="header-nav__item1" href="">
+           {
+               lan === "ru" && "Турция"
+            }
+            {
+              lan === "en" && "Turkiye"
+            } 
+          </Link>
+          <Link to={`/savedlist`} className="header-nav__item1" href="">
+          {
+              lan === "ru" && "Избранное"
+            }
+            {
+              lan === "en" && "Favorites "
+            }   
+          </Link>
+          <Link to={'/articlemain'} className="header-nav__item1" href="">
+           {
+              lan === "ru" && "Статьи"
+            }
+            {
+              lan === "en" && "Tenor"
+            }   
+           
+          </Link>
+          <Link to={ token ?  "/brokermain" : "/login"} className="header-nav__item-profile" href="">
+            <span>
+            {
+              lan === "ru" && "Профиль"
+            }
+            {
+              lan === "en" && "Profile"
+            }   
+              </span>
+            <img src={profile} alt="" />
+          </Link>
+        </nav>
   <button onClick={() => setMenu(true)} className="mm-btn">
     <span></span>
     <span></span>
@@ -70,55 +119,98 @@ const Register = () => {
   </button>
 </div>
 <div className={menu ? "m-menu opened" : `m-menu`}>
-  <div className="container">
-    <button
-      onClick={() => setMenu(false)}
-      className="m-menu__close"
-    ></button>
-    <nav className="header-nav">
-      <Link onClick={()=>setMenu(false)} to={"/brokermain"} className="header-nav__item-profile" href="">
-        <span>Профиль</span>
-        <img src={profile} alt="" />
-      </Link>
-      <Link  onClick={()=>setMenu(false)} to={"/academiya"} className="header-nav__item1" href="">
-      Академия
-      </Link>
-      <Link onClick={()=>setMenu(false)}     to={`/catalog`} className="header-nav__item1" href="">
-        ОАЭ
-      </Link>
-      <Link onClick={()=>setMenu(false)}  to={`/catalog`} className="header-nav__item1" href="">
-        Тайланд
-      </Link>
-      <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
-        Бали
-      </Link>
-      <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
-        Турция
-      </Link>
-      <Link onClick={()=>setMenu(false)}   to={`/savedlist`} className="header-nav__item1" href="">
-        Избранное
-      </Link>
-      <Link onClick={()=>setMenu(false)}  to={'/articlemain'} className="header-nav__item1" href="">
-        Статьи
-      </Link>
-    </nav>
-    <form className="search">
-      <input
-        className="search__input"
-        placeholder="Введите запрос"
-        type="text"
-      />
-      <button className="search__btn"></button>
-    </form>
-    <a className="faq__yoz" href="">
-      FAQ
-    </a>
-    <a className="faq__yoz" href="">
-      Техподдержка
-    </a>
-  </div>
-</div>
-        </header>
+        <div className="container">
+          <button
+            onClick={() => setMenu(false)}
+            className="m-menu__close"
+          ></button>
+          <nav className="header-nav">
+            <Link onClick={()=>setMenu(false)} to={"/brokermain"} className="header-nav__item-profile" href="">
+              <span>
+              {
+              lan === "ru" && "Профиль"
+            }
+            {
+              lan === "en" && "Profile"
+            } 
+              </span>
+              <img src={profile} alt="" />
+            </Link>
+            <Link  onClick={()=>setMenu(false)} to={"/academiya"} className="header-nav__item1" href="">
+            {
+              lan === "ru" && "Академия"
+            }
+            {
+              lan === "en" && "Academy"
+            }
+            </Link>
+            <Link onClick={()=>setMenu(false)}     to={`/catalog`} className="header-nav__item1" href="">
+            {
+              lan === "ru" && "ОАЭ"
+            }
+            {
+              lan === "en" && "UAE"
+            }
+            </Link>
+            <Link onClick={()=>setMenu(false)}  to={`/catalog`} className="header-nav__item1" href="">
+            {
+              lan === "ru" && "Тайланд"
+            }
+            {
+              lan === "en" && "Thailand"
+            }  
+            </Link>
+            <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
+            {
+              lan === "ru" && "Бали"
+            }
+            {
+              lan === "en" && "Bali"
+            }   
+            </Link>
+            <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
+            {
+              lan === "ru" && "Турция"
+            }
+            {
+              lan === "en" && "Turkiye"
+            } 
+            </Link>
+            <Link onClick={()=>setMenu(false)}   to={`/savedlist`} className="header-nav__item1" href="">
+            {
+              lan === "ru" && "Избранное"
+            }
+            {
+              lan === "en" && "Favorites "
+            }   
+            
+            </Link>
+            <Link onClick={()=>setMenu(false)}  to={'/articlemain'} className="header-nav__item1" href="">
+            {
+              lan === "ru" && "Статьи"
+            }
+            {
+              lan === "en" && "Tenor"
+            }   
+            </Link>
+          </nav>
+          <form className="search">
+            <input
+              className="search__input"
+              placeholder="Введите запрос"
+              type="text"
+            />
+            <button className="search__btn"></button>
+          </form>
+          <a className="faq__yoz" href="">
+            FAQ
+          </a>
+          <a className="faq__yoz" href="">
+            Техподдержка
+          </a>
+        </div>
+      </div>
+        </header>  
     <div className="wrapper">
     <form className="form">
        

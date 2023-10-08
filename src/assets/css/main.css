@@ -716,9 +716,7 @@ html {
     background-image: url(../img/heart.svg);
     background-position: center center;
     background-repeat: no-repeat;
-  
-    cursor: pointer;
-    transition: background-image linear 0.2s;
+    cursor: pointer; 
   }
   .apartament-list__favorite-btn.filled {
     background-image: url(../img/heart-filled.svg);
@@ -5683,4 +5681,20 @@ html {
   top: 0;
  z-index: -3;
  height: 100%;
+}
+.swiper-wrapper  img{
+  width: 100%;
+  height: 94%;
+}
+.swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: var(--swiper-pagination-bottom, -3px) !important;
+  top: var(--swiper-pagination-top, auto);
+  left: 0;
+  width: 100%;
+}
+.price__change-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
 }

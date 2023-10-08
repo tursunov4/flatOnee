@@ -3,6 +3,7 @@
   max-width: 1260px;
   padding: 10px;
   margin: 50px auto;
+  margin-top: 10px;
 }
 .add__row {
   margin: 50px 0;
@@ -36,16 +37,27 @@
   margin-right: 1px;
 }
 .add__user-name {
-  color: var(--13, #131418);
-  font-variant-numeric: lining-nums proportional-nums;
-  font-feature-settings: "ss11" on, "ss10" on, "ss09" on, "ss08" on, "ss07" on,
-    "ss06" on, "ss05" on;
+  width: 140px; 
+ 
+}
+.add__user-name > span{
+  display: block;
+ width: 100%;
+  overflow: hidden;
+text-overflow: ellipsis !important;
+display: -webkit-box;
+-webkit-line-clamp: 1 !important;
+-webkit-box-orient: vertical;
+color: var(--13, #131418);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: "ss11" on, "ss10" on, "ss09" on, "ss08" on, "ss07" on,
+  "ss06" on, "ss05" on;
 
-  font-family: Inter;
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 125%;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 300;
+line-height: 100%;
 }
 .add__user-status {
   color: var(--80, #5b5b5b);
@@ -1000,7 +1012,9 @@ background: var(--Profile, linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.2
   cursor: pointer;
 }
 
-
+.add__right{
+  width: 80%;
+}
 .add__apartament-icon2{
   background:url("../../assets/img/heart-filled.svg") ;
   background-size: 100%;

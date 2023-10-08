@@ -397,7 +397,6 @@ const handleChange =(evt)=>{
                     <button onClick={()=>setComnat(3)} className={comnat===3 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>3</button>
                     <button onClick={()=>setComnat(4)} className={comnat===4 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>4</button>
                     <button onClick={()=>setComnat(5)} className={comnat===5 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>5</button>
-                    <button onClick={()=>setComnat(6)} className={comnat===6 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>6</button>
                   </div>
                 </div>
                 <div className="addobeject__etaj">

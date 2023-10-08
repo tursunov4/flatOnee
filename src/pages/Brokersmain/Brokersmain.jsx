@@ -108,8 +108,8 @@ const Brokersmain = () => {
               <span><img src={Check} alt="check" /></span>
             </div>
           </div>
-          <div className="add__user-setings">
-            <img onClick={()=>navigate("/settings")} classNameName='navigate-settings' src={setting} alt="setings" />
+          <div className="add__user-setings  navigate-settings">
+            <img onClick={()=>navigate("/settings")} classNameName='navigate-settings ' src={setting} alt="setings" />
           </div>
         </div>
         <div className="add__left-bottom">

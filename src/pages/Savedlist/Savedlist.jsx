@@ -4,7 +4,7 @@ import arrowleft from "../../assets/img/arrow-left.svg"
 import axios from 'axios'
 import http from '../../axios'
 import { useNavigate } from 'react-router-dom'
-import Slider from 'rc-slider';
+import Slider from 'react-slider';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -32,8 +32,12 @@ const Savedlist = () => {
     const [etajmin ,setEtajmin] = useState("")
     const [etajmax , setEtajmax] = useState("")
     const [newMaxsum , setNewMaxsum] = useState("")
+    const [rangenums , setRangeNums] = useState("")
     const [officeimg , setOfficeImage] = useState([])
+    const [otdelka , setOdelka] = useState("")
+    const [comnat , setComnat] = useState("")
     const [prev ,setPrev] = useState("")
+
     const [next , setNext] = useState("")
      const [count ,setCount ] = useState(1)
     const navigate = useNavigate()
@@ -46,6 +50,7 @@ const Savedlist = () => {
       },[])
     const getRange =()=>{
         http.get(`/catalog/range/`).then((res)=>{
+          setRangeNums(res.data)
          setPricemin(res.data.min_price-0)
          setPricemax(res.data.max_price-0)
          setQueremax(res.data.max_square-0)
@@ -58,19 +63,19 @@ const Savedlist = () => {
       }
     
     const getData =()=>{
-        http.get(`/catalog/wishlist/?name=${name}&square_min=${squeremin}&square_max=${squeremax}&price_min=${pricemin}&price_max=${newMaxsum}&deadline=${sana}&property_type=${protery}&development_type=${development}&construction_phase=${constraction}&transaction_type=${uslovi}&coutry=`).then((res)=>{
+        http.get(`/catalog/wishlist-complex/?name=${name}&square_min=${squeremin}&square_max=${squeremax}&price_min=${pricemin}&price_max=${pricemax}&deadline=${sana}&property_type=${protery}&development_type=${development}&construction_phase=${constraction}&transaction_type=${uslovi}&otdelka=${otdelka}&comnat=${comnat}&coutry=`).then((res)=>{
             setData(res.data.results)
             setNext(res.data.next)
             setPrev(res.data.previous)
-            setOfficeImage(res.data.office_info.image)
-            console.log(res.data)
+          
+            console.log(res.data.results)
         }).catch((err)=>{
             console.log(err)
         })
     }
     const handleDelet =(id) =>{
       if(token){
-        http.delete(`/catalog/wishlist/${id}/`).then((res)=>{
+        http.delete(`/catalog/wishlist-complex/${id}/`).then((res)=>{
             console.log(res.data)
             if(res.status ===204){
                 setRefresh(!refresh) 
@@ -92,13 +97,8 @@ const Savedlist = () => {
           console.log(err)
         })
       }
-      const [money, setMoney] = useState(pricemax); 
     
-      const handleSliderChange = (value) => {
-        setNewMaxsum(value)
-        console.log(value)
-        setRefresh(!refresh)
-      };
+   
       const handleCanstruction =(id) =>{
         setConstraction(id)
         setRefresh(!refresh)
@@ -145,14 +145,38 @@ const Savedlist = () => {
             setPrev(res.data.previous)
             setNext(res.data.next)
             
-            setOfficeImage(res.data.office_info.image)
+            // setOfficeImage(res.data.office_info.image)
    
           }).catch((err)=>{
             console.log(err)
           })
         }
       }
-  return (
+      const handleChange = (newValues) =>{
+        setPricemin(newValues[0])
+        setPricemax(newValues[1])
+        setRefresh(!refresh)
+       } ;
+       const handleChange2 = (newValues) =>{
+        setQueremin(newValues[0])
+        setQueremax(newValues[1])
+        setRefresh(!refresh)
+    
+       } ;
+       const handleChange3 = (newValues) =>{
+        setEtajmin(newValues[0])
+        setEtajmax(newValues[1])
+        setRefresh(!refresh)
+       } ;
+       const handleOdelka =(text)=>{
+        setOdelka(text)
+        setRefresh(!refresh)
+      }
+       const handleComnat =(text) =>{
+        setComnat(text)
+        setRefresh(!refresh)
+       }
+  return (  
     <main>
         <section className="catalogue">
         <div className="container">
@@ -219,6 +243,25 @@ const Savedlist = () => {
             </div>
             <div className="filter-section opened">
               <div className="filter-section__header">
+                <div className="filter-section__title">Отделка</div>
+                <div className="filter-section__icon"></div>
+              </div>
+              <div className="filter-section__content">
+                <ul className="filter-list selected">
+                <li onClick={()=>handleOdelka("beton")} className={otdelka==="beton" ? "filter-list__item  selected":'filter-list__item'}>
+                    Бетон
+                  </li>
+                  <li onClick={()=>handleOdelka("bez_otdelki")} className={otdelka==="bez_otdelki" ? "filter-list__item selected":'filter-list__item'} >Без отделки</li>
+                  <li onClick={()=>handleOdelka("baytboks")} className={otdelka==="baytboks" ? "filter-list__item selected":'filter-list__item'}>Вайтбокс</li>
+                  <li onClick={()=>handleOdelka("chistovaya")} className={otdelka==="chistovaya" ? "filter-list__item selected":'filter-list__item'}>Чистовая</li>
+                  <li onClick={()=>handleOdelka("chistovaya_mebel")} className={otdelka==="chistovaya_mebel" ? "filter-list__item selected":'filter-list__item'}>Чистовая с мебелью</li>
+                      
+                
+                </ul>
+              </div>
+            </div>
+            <div className="filter-section opened">
+              <div className="filter-section__header">
                 <div className="filter-section__title">Этап строительства</div>
                 <div className="filter-section__icon"></div>
               </div>
@@ -256,16 +299,18 @@ const Savedlist = () => {
                 <div className="filter-section__icon"></div>
               </div>
               <div className="filter-section__content">
+          
               <Slider
-
-        min={pricemin-0} // Minimum qiymat
-        max={pricemax-0} // Maksimum qiymat
-        step={10} // Qadam miqdori (masalan, 10 dan 10 gacha o'zgartirish)
-        // tipFormatter={(value) => `${value}H`}
-        
-        
-        onChange={handleSliderChange} // Slider o'zgarganda chaqiriladigan funksiya
+           className="slider"
+            value={[pricemin ,pricemax] }
+        onChange={handleChange}
+        min={rangenums.min_price}
+        max={rangenums.max_price}
       />
+        <div className="price__change-wrap">
+       <p>{pricemin}</p>
+        <p>{pricemax}</p>
+        </div>
               </div>
             </div>
             <div className="filter-section opened">
@@ -275,12 +320,16 @@ const Savedlist = () => {
               </div>
               <div className="filter-section__content">
               <Slider
-        min={0} // Minimum qiymat
-        max={1000} // Maksimum qiymat
-        step={10} // Qadam miqdori (masalan, 10 dan 10 gacha o'zgartirish)
-        value={money} // Slider qiymati
-        onChange={handleSliderChange} // Slider o'zgarganda chaqiriladigan funksiya
+           className="slider"
+            value={[squeremin ,squeremax] }
+        onChange={handleChange2}
+        min={rangenums.min_square}
+        max={rangenums.max_square}
       />
+        <div className="price__change-wrap">
+       <p>{squeremin}</p>
+        <p>{squeremax}</p>
+        </div>
               </div>
             </div>
             <div className="filter-section opened">
@@ -290,15 +339,18 @@ const Savedlist = () => {
               </div>
               <div className="filter-section__content">
               <Slider
-          
-        min={0} // Minimum qiymat
-        max={1000} // Maksimum qiymat
-        step={10} // Qadam miqdori (masalan, 10 dan 10 gacha o'zgartirish)
-        value={money} // Slider qiymati
-        onChange={handleSliderChange} // Slider o'zgarganda chaqiriladigan funksiya
+           className="slider"
+            value={[etajmin ,etajmax] }
+        onChange={handleChange3}
+        min={rangenums.min_etaj}
+        max={rangenums.max_etaj}
       />
+        <div className="price__change-wrap">
+       <p>{etajmin}</p>
+        <p>{etajmax}</p>
+        </div>
               </div>
-            </div>
+            </div>           
             <div className="filter-section opened">
               <div className="filter-section__header">
                 <div className="filter-section__title">Этап строительства</div>
@@ -315,13 +367,28 @@ const Savedlist = () => {
                       </li>
                       <li className={uslovi=== "sale_rent" ? "filter-list__item selected": "filter-list__item"} onClick={()=>handleUslovi("sale_rent")} >
                       В пуле инвесторов
-                      </li>
-                    
-                                 
+                      </li>                                 
                 </ul>
               </div>
             </div>
-           
+            <div className="filter-section opened">
+              <div className="filter-section__header">
+                <div className="filter-section__title">Количество комнат</div>
+                <div className="filter-section__icon"></div>
+              </div>
+              <div className="filter-section__content">
+                <ul className="filter-list selected">
+                <li  onClick={()=>handleComnat(0)} className={comnat===0 ?  "filter-list__item selected": "filter-list__item"}>
+                      Студия
+                    </li>
+                    <li onClick={()=>handleComnat(1)} className={comnat===1 ?  "filter-list__item selected": "filter-list__item"}>1</li>
+                    <li onClick={()=>handleComnat(2)} className={comnat===2 ?  "filter-list__item selected": "filter-list__item"}>2</li>
+                    <li onClick={()=>handleComnat(3)} className={comnat===3 ?  "filter-list__item selected": "filter-list__item"}>3</li>
+                    <li onClick={()=>handleComnat(4)} className={comnat===4 ?  "filter-list__item selected": "filter-list__item"}>4</li>
+                    <li onClick={()=>handleComnat(5)} className={comnat===5 ?  "filter-list__item selected": "filter-list__item"}>5</li>
+                </ul>
+              </div>
+            </div>             
           </aside>
             <div className="catalogue-content">
                 <div className="catalogue-content__header">
@@ -350,12 +417,13 @@ const Savedlist = () => {
                     clickable: true,
                   }}
                   modules={[Pagination]}
-                  className="mySwiper2"
+                  className="mySwiper2" 
                 >
+
                 {
-                  item.office_info.image?.map((item , index)=>(
+                  item.complex_info.image?.map((item , index)=>(
                     <>
-                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item.image}`} alt="" /></SwiperSlide>
+                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item?.image}`} alt="" /></SwiperSlide>
                     </>
 
                 ))
@@ -366,16 +434,16 @@ const Savedlist = () => {
                         </div>
                         <div className="apartament-list__header">
                             <div>
-                                <p  onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__address"> {item.office_info.name}</p>
+                                <p  onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__address"> {item.office_info?.name}</p>
                              
                             </div>
-                            <button onClick={()=>handleDelet(item.office)} className="apartament-list__favorite-btn filled"></button>
+                            <button onClick={()=>handleDelet(item.complex)} className="apartament-list__favorite-btn filled"></button>
                         </div>
-                        <p className="apartament-list__price">{item.office_info.price}₽/месяц</p>
+                        <p className="apartament-list__price">{item.complex_info?.price}₽/месяц</p>
                         <ul className="apartament-list__tags">
-                            <li className="apartament-list__tag">{item.office_info.etaj1} этаж</li>
-                            <li className="apartament-list__tag">{item.office_info.square} м2</li>
-                            <li className="apartament-list__tag">Сдача {item.office_info.deadline}</li>
+                            <li className="apartament-list__tag">{item.complex_info?.etaj1} этаж</li>
+                            <li className="apartament-list__tag">{item.complex_info?.square} м2</li>
+                            <li className="apartament-list__tag">Сдача {item.complex_info?.deadline}</li>
                         </ul>
                         <p className="apartament-list__location">NEVA TOWERS</p>
                     </li>
