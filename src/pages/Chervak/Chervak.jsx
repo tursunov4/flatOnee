@@ -3,7 +3,8 @@ import "./chervak.css"
 import chervak from "../../assets/img/main-header.jpg"
 import http from '../../axios'
 import { Context } from '../../Context/Context'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Chervak = () => {
     const [data ,setData] = useState([])
     const [refresh , setRefresh] = useState(false)
@@ -31,6 +32,16 @@ const Chervak = () => {
    const handleDelete =(id) =>{
     http.delete(`/catalog/offices/${id}/`).then((res)=>{
          if(res.status === 204){
+            toast.warn(  `Удалить Черновики !!!`, {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
             console.log(res.data)
             setRefresh(!refresh)
          } 
@@ -41,6 +52,16 @@ const Chervak = () => {
    const handeleDelete2 =(id)=>{    
     http.delete(`/catalog/complex/${id}/`).then((res)=>{
         if(res.status === 204){
+            toast.warn(  `Удалить Черновики !!!`, {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
            console.log(res.data)
            setRefresh(!refresh)
         } 
@@ -51,6 +72,7 @@ const Chervak = () => {
    }
   return (
     <div>
+        <ToastContainer/>
           <main>
         <section className="chervak__section">
           <div className="container">

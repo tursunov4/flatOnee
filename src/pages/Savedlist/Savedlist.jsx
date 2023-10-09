@@ -176,6 +176,7 @@ const Savedlist = () => {
         setComnat(text)
         setRefresh(!refresh)
        }
+      
   return (  
     <main>
         <section className="catalogue">
@@ -308,8 +309,8 @@ const Savedlist = () => {
         max={rangenums.max_price}
       />
         <div className="price__change-wrap">
-       <p>{pricemin}</p>
-        <p>{pricemax}</p>
+       <p>{pricemin}₽</p>
+        <p>{pricemax}₽</p>
         </div>
               </div>
             </div>
@@ -401,7 +402,7 @@ const Savedlist = () => {
                 </div>
                 <div className="m-catalogue">
                     <form className="search">
-                        <input className="search__input" placeholder="Поиск" type="text"/>
+                        <input onChange={(e)=>handleSearch(e)} q className="search__input" placeholder="Поиск" type="text"/>
                         <button className="search__btn"></button>
                     </form>
 

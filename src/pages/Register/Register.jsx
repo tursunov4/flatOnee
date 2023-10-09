@@ -27,6 +27,16 @@ const Register = () => {
             password2: password2
         }).then((res) =>{
             if(res.status ===201){
+              toast.success(  `Удачливый !!!`, {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
                     navigate("/login")
             }
         }).catch((err)=>{
@@ -91,10 +101,15 @@ const Register = () => {
         
         })
     }
+    const handleReload =(id)=>{
+      navigate(`/catalog/${id}`)
+      setMenu(false)
+      window.location.reload()
+    }
   return (
     <>
           <ToastContainer/>
-          <header className={"header "}>
+          <header className={ "header "}>
 
 <div className="container">
   <Link to={'/'} className="logo" href=""></Link>
@@ -114,7 +129,7 @@ const Register = () => {
           }   
     
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link onClick={()=>handleReload(1)} to={`/catalog/1`} className="header-nav__item1" href="">
      {
         lan === "ru" && "ОАЭ"
       }
@@ -129,7 +144,7 @@ const Register = () => {
           } 
   
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link  onClick={()=>handleReload(2)} to={`/catalog/2`} className="header-nav__item1" href="">
      {
         lan === "ru" && "Тайланд"
       }
@@ -143,7 +158,7 @@ const Register = () => {
             lan === "ar" && `تايلاند`
           } 
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link onClick={()=>handleReload(3)}  to={`/catalog/3`} className="header-nav__item1" href="">
     {
         lan === "ru" && "Бали"
       }
@@ -157,7 +172,7 @@ const Register = () => {
             lan === "ar" && `بالي`
           } 
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link onClick={()=>handleReload(4)}  to={`/catalog/4`} className="header-nav__item1" href="">
      {
          lan === "ru" && "Турция"
       }
@@ -265,7 +280,7 @@ const Register = () => {
             lan === "ar" && "الأكاديمية"
           }  
       </Link>
-      <Link onClick={()=>setMenu(false)}     to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(1)}      to={`/catalog/1`} className="header-nav__item1" href="">
       {
         lan === "ru" && "ОАЭ"
       }
@@ -280,7 +295,7 @@ const Register = () => {
           } 
   
       </Link>
-      <Link onClick={()=>setMenu(false)}  to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(2)}   to={`/catalog/2`} className="header-nav__item1" href="">
       {
         lan === "ru" && "Тайланд"
       }
@@ -294,7 +309,7 @@ const Register = () => {
             lan === "ar" && `تايلاند`
           } 
       </Link>
-      <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(3)}    to={`/catalog/3`} className="header-nav__item1" href="">
       {
         lan === "ru" && "Бали"
       }
@@ -308,7 +323,7 @@ const Register = () => {
             lan === "ar" && `بالي`
           } 
       </Link>
-      <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(4)} to={`/catalog/4`} className="header-nav__item1" href="">
       {
         lan === "ru" && "Турция"
       }
@@ -369,7 +384,7 @@ const Register = () => {
     </a>
   </div>
 </div>
-</header> 
+</header>
     <div className="wrapper">
     <form className="form">
        
@@ -415,7 +430,21 @@ const Register = () => {
                 </label>
             </div>
             <div className="form__btn">
-                <button onClick={(e)=>handleClick(e)} className="btn" type="submit">Зарегистрироваться</button>
+                <button onClick={(e)=>handleClick(e)} className="btn" type="submit">
+                
+                  {
+        lan === "ru" && " Зарегистрироваться"
+      }
+      {
+        lan === "en" && "Register"
+      }   
+         {
+        lan === "china" && "登记"
+      }  
+       {
+            lan === "ar" && `يسجل`
+          } 
+                  </button>
                 <br/>
                 <p>
                 {

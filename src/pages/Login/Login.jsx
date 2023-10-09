@@ -20,15 +20,25 @@ const Login = () => {
             password: password
         }).then((res)=>{
             if(res.status ===200){
+              toast.success(  `Удачливый !!!`, {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
                 localStorage.setItem("token" , res.data.tokens.access )
                 localStorage.setItem("id" , res.data.id )
                 localStorage.setItem("firstname" , res.data.first_name)
                 localStorage.setItem("image" , res.data.image_url)
                 localStorage.setItem("email" , res.data.email_or_username)
-
+                    
                 navigate("/brokermain")
                   window.location.reload()
-             
+                 
             }
             if(res.status ===404){
                 navigate("/eror404")
@@ -60,10 +70,15 @@ const Login = () => {
             
         })
     }
+    const handleReload =(id)=>{
+      navigate(`/catalog/${id}`)
+      setMenu(false)
+      window.location.reload()
+    }
   return (
     <>
     <ToastContainer/>
-    <header className={"header "}>
+    <header className={ "header "}>
 
 <div className="container">
   <Link to={'/'} className="logo" href=""></Link>
@@ -83,7 +98,7 @@ const Login = () => {
           }   
     
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link onClick={()=>handleReload(1)} to={`/catalog/1`} className="header-nav__item1" href="">
      {
         lan === "ru" && "ОАЭ"
       }
@@ -98,7 +113,7 @@ const Login = () => {
           } 
   
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link  onClick={()=>handleReload(2)} to={`/catalog/2`} className="header-nav__item1" href="">
      {
         lan === "ru" && "Тайланд"
       }
@@ -112,7 +127,7 @@ const Login = () => {
             lan === "ar" && `تايلاند`
           } 
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link onClick={()=>handleReload(3)}  to={`/catalog/3`} className="header-nav__item1" href="">
     {
         lan === "ru" && "Бали"
       }
@@ -126,7 +141,7 @@ const Login = () => {
             lan === "ar" && `بالي`
           } 
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link onClick={()=>handleReload(4)}  to={`/catalog/4`} className="header-nav__item1" href="">
      {
          lan === "ru" && "Турция"
       }
@@ -234,7 +249,7 @@ const Login = () => {
             lan === "ar" && "الأكاديمية"
           }  
       </Link>
-      <Link onClick={()=>setMenu(false)}     to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(1)}      to={`/catalog/1`} className="header-nav__item1" href="">
       {
         lan === "ru" && "ОАЭ"
       }
@@ -249,7 +264,7 @@ const Login = () => {
           } 
   
       </Link>
-      <Link onClick={()=>setMenu(false)}  to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(2)}   to={`/catalog/2`} className="header-nav__item1" href="">
       {
         lan === "ru" && "Тайланд"
       }
@@ -263,7 +278,7 @@ const Login = () => {
             lan === "ar" && `تايلاند`
           } 
       </Link>
-      <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(3)}    to={`/catalog/3`} className="header-nav__item1" href="">
       {
         lan === "ru" && "Бали"
       }
@@ -277,7 +292,7 @@ const Login = () => {
             lan === "ar" && `بالي`
           } 
       </Link>
-      <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(4)} to={`/catalog/4`} className="header-nav__item1" href="">
       {
         lan === "ru" && "Турция"
       }
@@ -338,7 +353,7 @@ const Login = () => {
     </a>
   </div>
 </div>
-</header> 
+</header>
     <div className="wrapper">
           
 
@@ -370,7 +385,22 @@ const Login = () => {
                 </label>
             </div>
             <div className="form__btn">
-                <button className="btn" type='submit' onClick={(e)=>handleSubmit(e)} >Войти</button>
+                <button className="btn" type='submit' onClick={(e)=>handleSubmit(e)} >
+                
+                  
+                  {
+        lan === "ru" && "   Войти"
+      }
+      {
+        lan === "en" && "Login"
+      }   
+         {
+        lan === "china" && "进来"
+      }  
+       {
+            lan === "ar" && `ليأتي`
+          } 
+                  </button>
                 <br />
 
                 <p>

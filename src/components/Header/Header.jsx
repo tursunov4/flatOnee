@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import profile from "../../assets/img/profile.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../Context/Context";
 const token = localStorage.getItem("token")
 const Header = () => {
   const [menu ,setMenu] = useState(false)
   const [scrolling, setScrolling] = useState(false);
   const {lan , setLan} =useContext(Context)
+  const navigate = useNavigate()
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -20,6 +21,11 @@ const Header = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  const handleReload =(id)=>{
+    navigate(`/catalog/${id}`)
+    setMenu(false)
+    window.location.reload()
+  }
 
   return (
   
@@ -43,7 +49,7 @@ const Header = () => {
                 }   
           
           </Link>
-          <Link to={`/catalog`} className="header-nav__item1" href="">
+          <Link onClick={()=>handleReload(1)} to={`/catalog/1`} className="header-nav__item1" href="">
            {
               lan === "ru" && "ОАЭ"
             }
@@ -58,7 +64,7 @@ const Header = () => {
                 } 
         
           </Link>
-          <Link to={`/catalog`} className="header-nav__item1" href="">
+          <Link  onClick={()=>handleReload(2)} to={`/catalog/2`} className="header-nav__item1" href="">
            {
               lan === "ru" && "Тайланд"
             }
@@ -72,7 +78,7 @@ const Header = () => {
                   lan === "ar" && `تايلاند`
                 } 
           </Link>
-          <Link to={`/catalog`} className="header-nav__item1" href="">
+          <Link onClick={()=>handleReload(3)}  to={`/catalog/3`} className="header-nav__item1" href="">
           {
               lan === "ru" && "Бали"
             }
@@ -86,7 +92,7 @@ const Header = () => {
                   lan === "ar" && `بالي`
                 } 
           </Link>
-          <Link to={`/catalog`} className="header-nav__item1" href="">
+          <Link onClick={()=>handleReload(4)}  to={`/catalog/4`} className="header-nav__item1" href="">
            {
                lan === "ru" && "Турция"
             }
@@ -194,7 +200,7 @@ const Header = () => {
                   lan === "ar" && "الأكاديمية"
                 }  
             </Link>
-            <Link onClick={()=>setMenu(false)}     to={`/catalog`} className="header-nav__item1" href="">
+            <Link onClick={()=>handleReload(1)}      to={`/catalog/1`} className="header-nav__item1" href="">
             {
               lan === "ru" && "ОАЭ"
             }
@@ -209,7 +215,7 @@ const Header = () => {
                 } 
         
             </Link>
-            <Link onClick={()=>setMenu(false)}  to={`/catalog`} className="header-nav__item1" href="">
+            <Link onClick={()=>handleReload(2)}   to={`/catalog/2`} className="header-nav__item1" href="">
             {
               lan === "ru" && "Тайланд"
             }
@@ -223,7 +229,7 @@ const Header = () => {
                   lan === "ar" && `تايلاند`
                 } 
             </Link>
-            <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
+            <Link onClick={()=>handleReload(3)}    to={`/catalog/3`} className="header-nav__item1" href="">
             {
               lan === "ru" && "Бали"
             }
@@ -237,7 +243,7 @@ const Header = () => {
                   lan === "ar" && `بالي`
                 } 
             </Link>
-            <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
+            <Link onClick={()=>handleReload(4)} to={`/catalog/4`} className="header-nav__item1" href="">
             {
               lan === "ru" && "Турция"
             }

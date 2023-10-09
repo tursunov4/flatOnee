@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./parol.css"
 import http from '../../../axios'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Context } from '../../../Context/Context';
 
 const Izminitparol = () => {
     const [oldp , setOldp] = useState("")
     const [password , setPassword] = useState("")
     const [password1 , setPassword1] = useState("")
     const navigate = useNavigate()
-
+    const {lan} = useContext(Context)
     const handleSubmit =(e) =>{
         e.preventDefault()
         http.put('/user/update-password/', {
@@ -20,6 +21,16 @@ const Izminitparol = () => {
         }).then((res)=>{
             console.log(res.data)
             if(res.status === 200){
+                toast.success(  `Изменить пароль!!!`, {
+                    position: "top-right",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
              navigate("/brokermain")
              window.location.reload()
             }
@@ -57,7 +68,20 @@ const Izminitparol = () => {
         <form method="post">
             <div class="noti-container container-options">
                 <div class="notifications">
-                    <div class="title">Изменить пароль</div>
+                    <div class="title">
+                    {
+              lan === "ru" && " Изменить пароль"
+            }
+            {
+              lan === "en" && "Change password"
+            }
+            {
+              lan === "ar" && 'تغيير البريد'
+            }
+              {
+               lan === "china" && '更改密碼'
+                }  
+                </div>
                     <div class="edit-input">
                         <label>
                             <input onChange={(e)=>setOldp(e.target.value)} name="old_password" type="text" class="input"     placeholder="Введите старый пароль"/>
@@ -80,7 +104,20 @@ const Izminitparol = () => {
                     </div>
 
                     <div class="button-edit">
-                        <button onClick={(e)=>handleSubmit(e)} type="submit" class="button">Отправить</button>
+                        <button onClick={(e)=>handleSubmit(e)} type="submit" class="button">
+                        {
+              lan === "ru" && "Отправить"
+            }
+            {
+              lan === "en" && "Send"
+            }
+            {
+              lan === "ar" && 'يرسل'
+            }
+                          {
+               lan === "china" && '发送'
+                }  
+                        </button>
                     </div>
                 </div>
             </div>

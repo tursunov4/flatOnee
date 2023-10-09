@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from 'react'
 import http from '../../axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../../Context/Context';
 const token = localStorage.getItem("token")
 const Footer = () => {
@@ -39,6 +39,11 @@ const Footer = () => {
       })
     }
   
+  } 
+  const navigate = useNavigate()
+  const handleReload =(id)=>{
+    navigate(`/catalog/${id}`)
+    window.location.reload()
   }
   return (
     <>
@@ -51,7 +56,7 @@ const Footer = () => {
         <div className="footer__title">Flat one</div>
         <nav className="footer-nav2">
          <div className="">
-         <Link to={"/catalog"} className="footer-nav__item" href="">
+         <Link onClick={()=>handleReload(1)} to={"/catalog/1"} className="footer-nav__item" href="">
             {
               lan === "ru" && "ОАЭ"
             }
@@ -62,7 +67,7 @@ const Footer = () => {
               lan === "china" && "阿聯酋"
             }
           </Link>
-         <Link to={"/catalog"} className="footer-nav__item" href="">
+         <Link onClick={()=>handleReload(2)} to={"/catalog/2"} className="footer-nav__item" href="">
            {
               lan === "ru" && "Турция"
             }
@@ -73,7 +78,7 @@ const Footer = () => {
               lan === "china" && "土耳其"
             }  
          </Link>
-         <Link to={"/catalog"} className="footer-nav__item" href="">
+         <Link onClick={()=>handleReload(3)} to={"/catalog/3"} className="footer-nav__item" href="">
            {
               lan === "ru" && "Тайланд"
             }
@@ -85,7 +90,7 @@ const Footer = () => {
             }
            
          </Link>
-         <Link to={"/catalog"} className="footer-nav__item" href="">
+         <Link onClick={()=>handleReload(4)} to={"/catalog/4"} className="footer-nav__item" href="">
          {
               lan === "ru" && "Бали"
             }

@@ -10,7 +10,7 @@ import arrowleft from "../../assets/img/arrow-left.svg";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import http from "../../axios";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Slider from 'react-slider';
 import { Context } from "../../Context/Context";
 import { queries } from "@testing-library/react";
@@ -45,6 +45,7 @@ const Cataloge = () => {
   const [count , setCount] = useState(1)  
   const [likePaginate , setLikePaginate] = useState("")
   const navigate = useNavigate()
+  const {text} = useParams()
 
   useEffect(()=>{
       getCatalogOfice()
@@ -74,7 +75,7 @@ const Cataloge = () => {
     })
   }
   const getCatalogOfice =()=>{
-    http.get(`/catalog/complex/?name=${name}&square_min=${squeremin}&square_max=${squeremax}&price_min=${pricemin}&price_max=${pricemax}&deadline=${sana}&property_type=${protery}&development_type=${development}&construction_phase=${constraction}&transaction_type=${uslovi}&min_etaj=${etajmin}&max_etaj=${etajmax}&otdelka=${otdelka}&comnat=${comnat}&coutry=`).then((res)=>{
+    http.get(`/catalog/complex/?name=${name}&square_min=${squeremin}&square_max=${squeremax}&price_min=${pricemin}&price_max=${pricemax}&deadline=${sana}&property_type=${protery}&development_type=${development}&construction_phase=${constraction}&transaction_type=${uslovi}&min_etaj=${etajmin}&max_etaj=${etajmax}&otdelka=${otdelka}&comnat=${comnat}&country=${text}`).then((res)=>{
       setData(res.data.results)
       setPrev(res.data.previous)
       setNext(res.data.next)
@@ -237,6 +238,7 @@ const Cataloge = () => {
     setComnat(text)
     setRefresh(!refresh)
    }
+ 
   return (
  
     <main>
@@ -371,8 +373,8 @@ const Cataloge = () => {
         max={rangenums.max_price}
       />
         <div className="price__change-wrap">
-       <p>{pricemin}</p>
-        <p>{pricemax}</p>
+       <p>{pricemin}₽</p>
+        <p>{pricemax}₽</p>
         </div>
               </div>
             </div>

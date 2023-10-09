@@ -11,9 +11,14 @@ const Noudfound = () => {
     const [menu ,setMenu] = useState(false)
     const {lan } =useContext(Context)
     const navigate = useNavigate()
+    const handleReload =(id)=>{
+      navigate(`/catalog/${id}`)
+      setMenu(false)
+      window.location.reload()
+    }
   return (
     <>
-     <header className={"header "}>
+            <header className={ "header "}>
 
 <div className="container">
   <Link to={'/'} className="logo" href=""></Link>
@@ -33,7 +38,7 @@ const Noudfound = () => {
           }   
     
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link onClick={()=>handleReload(1)} to={`/catalog/1`} className="header-nav__item1" href="">
      {
         lan === "ru" && "ОАЭ"
       }
@@ -48,7 +53,7 @@ const Noudfound = () => {
           } 
   
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link  onClick={()=>handleReload(2)} to={`/catalog/2`} className="header-nav__item1" href="">
      {
         lan === "ru" && "Тайланд"
       }
@@ -62,7 +67,7 @@ const Noudfound = () => {
             lan === "ar" && `تايلاند`
           } 
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link onClick={()=>handleReload(3)}  to={`/catalog/3`} className="header-nav__item1" href="">
     {
         lan === "ru" && "Бали"
       }
@@ -76,7 +81,7 @@ const Noudfound = () => {
             lan === "ar" && `بالي`
           } 
     </Link>
-    <Link to={`/catalog`} className="header-nav__item1" href="">
+    <Link onClick={()=>handleReload(4)}  to={`/catalog/4`} className="header-nav__item1" href="">
      {
          lan === "ru" && "Турция"
       }
@@ -184,7 +189,7 @@ const Noudfound = () => {
             lan === "ar" && "الأكاديمية"
           }  
       </Link>
-      <Link onClick={()=>setMenu(false)}     to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(1)}      to={`/catalog/1`} className="header-nav__item1" href="">
       {
         lan === "ru" && "ОАЭ"
       }
@@ -199,7 +204,7 @@ const Noudfound = () => {
           } 
   
       </Link>
-      <Link onClick={()=>setMenu(false)}  to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(2)}   to={`/catalog/2`} className="header-nav__item1" href="">
       {
         lan === "ru" && "Тайланд"
       }
@@ -213,7 +218,7 @@ const Noudfound = () => {
             lan === "ar" && `تايلاند`
           } 
       </Link>
-      <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(3)}    to={`/catalog/3`} className="header-nav__item1" href="">
       {
         lan === "ru" && "Бали"
       }
@@ -227,7 +232,7 @@ const Noudfound = () => {
             lan === "ar" && `بالي`
           } 
       </Link>
-      <Link onClick={()=>setMenu(false)}   to={`/catalog`} className="header-nav__item1" href="">
+      <Link onClick={()=>handleReload(4)} to={`/catalog/4`} className="header-nav__item1" href="">
       {
         lan === "ru" && "Турция"
       }
@@ -288,7 +293,7 @@ const Noudfound = () => {
     </a>
   </div>
 </div>
-</header> 
+</header>
     <div class="error__wrapper">
     <img class="cl-1" src={plusblue} alt="pluss"/>
     <img class="cl-2" src={plusblue} alt="pluss"/>

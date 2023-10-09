@@ -25,7 +25,7 @@ const token = localStorage.getItem("token")
 const id = localStorage.getItem("id")
 
 const HomePage = () => {
-  const [typetitle, setTypetitle] = useState("Москва");
+  const [typetitle, setTypetitle] = useState("");
   const [flatabout , setFlatAbout] = useState([])
   const [rekoment1 ,setRekomend1] = useState([])
   const [rekoment2 ,setRekomend2] = useState([])
@@ -584,28 +584,28 @@ const HomePage = () => {
           <div className="offer-section__mwrap">
             <ul className="offer-section__bar">
               <li
-                onClick={() => setTypetitle("Москва")}
-                className={typetitle === "Москва" && "offer-section__activeli"}
+                onClick={() => setTypetitle("ОАЭ")}
+                className={typetitle === "ОАЭ" && "offer-section__activeli"}
               >
-                Москва
+                ОАЭ
               </li>
               <li
-                onClick={() => setTypetitle("Дубаи")}
-                className={typetitle === "Дубаи" && "offer-section__activeli"}
+                onClick={() => setTypetitle("Индонезия")}
+                className={typetitle === "Индонезия" && "offer-section__activeli"}
               >
-                Дубаи
-              </li>
-              <li
-                onClick={() => setTypetitle("Бали")}
-                className={typetitle === "Бали" && "offer-section__activeli"}
-              >
-                Бали
+                Индонезия
               </li>
               <li
                 onClick={() => setTypetitle("Тайланд")}
                 className={typetitle === "Тайланд" && "offer-section__activeli"}
               >
                 Тайланд
+              </li>
+              <li
+                onClick={() => setTypetitle("Турция")}
+                className={typetitle === "Турция" && "offer-section__activeli"}
+              >
+                Турция
               </li>
             </ul>
             <div className="offer-section__bar2">

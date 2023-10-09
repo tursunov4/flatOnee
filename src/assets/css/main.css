@@ -5707,3 +5707,23 @@ html {
 .add__apartament-price{
   cursor: pointer;
 }
+.header-nav__item1:hover{
+  display: block;
+  color: #001894;
+  border-bottom: 1px solid !important;
+  opacity: 0.8;
+   transition: border 0.5s;
+}
+.header-nav__item-profile :hover{
+  color: #001894;
+  display: block;
+  border-bottom: 1px solid !important;
+  opacity: 0.8;
+   transition: border 0.5s;
+}
+.footer-nav__item:hover{
+  color: #8698ee;
+  display: block;
+  border-bottom: 1px solid !important;
+  opacity: 0.8;
+}

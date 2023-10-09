@@ -27,7 +27,7 @@ const authenfication = () => {
     <Routes>
         <Route element={<MainPage/>} >
       <Route element={<HomePage/>} index/>
-      <Route element={<Cataloge/>} path={`/catalog`} />
+      <Route element={<Cataloge/>} path={`/catalog/:text`} />
       <Route element={<Productitem/>} path={`/product-item/:id`}/>
       <Route element={<Article/>} path={`/article/:id`} />
       <Route element={<Articlemain/>} path={`/articlemain`} /> 
