@@ -21,7 +21,7 @@ import Brokersitem from '../pages/Brokersitem/Brokersitem'
 import Brokersmain from '../pages/Brokersmain/Brokersmain'
 import Academiya from '../pages/Academiya/Academiya'
 import Noudfound from '../pages/Notfound/Noudfound'
-const toke
+
 const authenfication = () => {
   return (
     <Routes>

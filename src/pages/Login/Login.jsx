@@ -25,8 +25,10 @@ const Login = () => {
                 localStorage.setItem("firstname" , res.data.first_name)
                 localStorage.setItem("image" , res.data.image_url)
                 localStorage.setItem("email" , res.data.email_or_username)
-                navigate("/brokermain")
-                window.location.reload()
+
+                  window.location.reload()
+                  navigate("/brokermain")
+             
             }
             if(res.status ===404){
                 navigate("/eror404")
