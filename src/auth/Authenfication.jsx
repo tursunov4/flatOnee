@@ -47,9 +47,7 @@ const authenfication = () => {
       <Route element={<Brokersitem/>} path={`/brokersitem`} /> 
       <Route element={<Brokersmain/>} path={`/brokermain`} /> 
     </Route>
-    {
-      
-    }
+  
     <Route path='*' element={<Noudfound/>}  /> 
    
     </Routes>
