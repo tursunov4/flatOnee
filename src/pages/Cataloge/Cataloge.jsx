@@ -69,7 +69,6 @@ const Cataloge = () => {
      setQueremin(res.data.min_square-0)
      setEtajmax(res.data.max_etaj-0)
      setEtajmin(res.data.min_etaj-0)
-     console.log(res.data , "dsaf")
 
     }).catch((err)=>{
       console.log(err)
@@ -80,7 +79,6 @@ const Cataloge = () => {
       setData(res.data.results)
       setPrev(res.data.previous)
       setNext(res.data.next)
-      console.log(res.data)
       setCount(1)
     }).catch((err)=>{
       console.log(err)
@@ -89,7 +87,6 @@ const Cataloge = () => {
   }
   const getTop =()=>{
     http.get("/catalog/complex/top_complex/").then((res)=>{
-      console.log(res.data)
       setTopData(res.data)
     }).catch((err)=>{
       console.log(err)
@@ -138,7 +135,6 @@ const Cataloge = () => {
   
   const getCatalogtypes =()=>{
     http.get('/catalog/types/').then((res)=>{
-      console.log(res.data)
       setCatalogtype(res.data)
     }).catch((err)=>{
       console.log(err)
@@ -148,7 +144,6 @@ const Cataloge = () => {
 
   const handleSliderChange = (value) => {
     setNewMaxsum(value)
-    console.log(value)
     setRefresh(!refresh)
   };
   const handleCanstruction =(id) =>{

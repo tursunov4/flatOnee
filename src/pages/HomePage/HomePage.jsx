@@ -40,7 +40,6 @@ const HomePage = () => {
    const navigate = useNavigate()
   const flatAbout =()=>{
     http.get(`/${lan}/flatone/about/`).then((res)=>{
-      console.log(res.data)
       setFlatAbout(res.data)
       if(res.status ===404){
         navigate("/eror404")
@@ -72,7 +71,6 @@ const HomePage = () => {
   },[refresh])
   const getDataOffice =()=>{
     http.get(`/catalog/complex/luchshiy/?country=${typetitle}`).then((res)=>{
-      console.log(res.data)
       setDataoffices(res.data)
     
     }).catch((err)=>{
@@ -159,8 +157,9 @@ const HomePage = () => {
           setTimeout(()=>{
            setSendType(false)
           },800)
-
          }
+      }).catch((err)=>{
+        console.log(err)
       })
     }
     const handlenavigate =(id) =>{

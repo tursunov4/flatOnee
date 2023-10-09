@@ -14,7 +14,6 @@ const Articlemain = () => {
   }, [refresh])
   const getData = ()=>{
       http.get(`/${lan}/articles/list/?search=${name}`).then((res) =>{
-        console.log(res.data)
         setData(res.data.results)
       }).catch((err) =>[
         console.log(err)

@@ -83,7 +83,6 @@ const handleChange =(evt)=>{
     inputRef.current.value = ""
     setHashtagarrayPost([...hashtagarraypost , {id:evt.target.id , name:evt.target.textContent}])
     setSearchList(false)
-    console.log(evt.target.id)
   }
   const handleList2 =(evt)=>{
     inputRef2.current.value = evt.target.textContent

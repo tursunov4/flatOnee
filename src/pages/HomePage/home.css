@@ -50,8 +50,8 @@
 }
 .insta-stoooriya{
     position: relative;
-    position: sticky; /* Stay in place */
-    z-index: 100; /* Sit on top */
+    position:fixed ; /* Satay in place */
+    z-index: 10000; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */

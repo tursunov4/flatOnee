@@ -52,14 +52,12 @@ import http from '../../axios';
        setData(res.data)
        setImage(res.data.image)
        setVznos(res.data.vznos)
-      console.log(res.data)
     }).catch((err)=>{
       console.log(err)
     })
   }
   const prevNext =()=>{
     http.get(`/catalog/next-prev/${id}/?obj=complex`).then((res)=>{
-      console.log(res.data)
       setPrevNext(res.data)
     }).catch((err)=>{
       console.log(err)

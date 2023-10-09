@@ -79,7 +79,6 @@ const handleChange =(evt)=>{
     inputRef.current.value = ""
     setHashtagarrayPost([...hashtagarraypost , {id:evt.target.id , name:evt.target.textContent}])
     setSearchList(false)
-    console.log(evt.target.id)
   }
   const handleHashtagDelete =(id)=>{
     const indexToDelete = hashtagarraypost.findIndex(item => item.id === id);

@@ -17,7 +17,6 @@ const Izminitemail = () => {
         http.put(`/user/update/email/${oldemail}/` ,{
             email: newemail
         }).then((res)=>{
-            console.log(res.data) 
             if(res.status ===200){
                 toast.success(  `Изменить почту!!!`, {
                     position: "top-right",

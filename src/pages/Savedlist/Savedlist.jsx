@@ -69,7 +69,6 @@ const Savedlist = () => {
             setNext(res.data.next)
             setPrev(res.data.previous)
              setCount(1)
-            console.log(res.data.results)
         }).catch((err)=>{
             console.log(err)
         })
@@ -77,7 +76,6 @@ const Savedlist = () => {
     const handleDelet =(id) =>{
       if(token){
         http.delete(`/catalog/wishlist-complex/${id}/`).then((res)=>{
-            console.log(res.data)
             if(res.status ===204){
                 setRefresh(!refresh) 
             }
@@ -92,7 +90,6 @@ const Savedlist = () => {
 
     const getCatalogtypes =()=>{
         http.get('/catalog/types/').then((res)=>{
-          console.log(res.data)
           setCatalogtype(res.data)
         }).catch((err)=>{
           console.log(err)

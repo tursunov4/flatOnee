@@ -44,7 +44,6 @@ const Brokersmain = () => {
     http.get("/catalog/complex/").then((res)=>{
       setData(res.data.results)
      
-      console.log(res.data)
     }).catch((err)=>{
       console.log(err)
     })

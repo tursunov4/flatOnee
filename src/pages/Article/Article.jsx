@@ -52,7 +52,6 @@ const Article = () => {
   }
   const getData =() =>{
     http.get(`/${lan}/articles/detail/${id}/`).then((res)=>{
-      console.log(res.data)
        setData(res.data)
     }).catch((err)=>{
       console.log(err)

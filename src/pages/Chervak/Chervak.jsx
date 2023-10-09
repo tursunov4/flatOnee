@@ -17,7 +17,6 @@ const Chervak = () => {
    const getData =()=>{
     http.get(`/catalog/offices/me_offices/`).then((res)=>{
         setData(res.data)
-        console.log(res.data)
     }).catch((err)=>{
         console.log(err)
     })
@@ -42,7 +41,6 @@ const Chervak = () => {
                 progress: undefined,
                 theme: "light",
                 });
-            console.log(res.data)
             setRefresh(!refresh)
          } 
     }).catch((err)=>{
@@ -62,7 +60,6 @@ const Chervak = () => {
                 progress: undefined,
                 theme: "light",
                 });
-           console.log(res.data)
            setRefresh(!refresh)
         } 
    }).catch((err)=>{
