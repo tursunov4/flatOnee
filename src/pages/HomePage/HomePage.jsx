@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import apartiment from "../../assets/img/apartament-preview.webp";
 import telefoon from "../../assets/img/telefon.svg";
 import phone from "../../assets/img/iphone.webp";
@@ -130,6 +130,7 @@ const HomePage = () => {
       })
     }
     const [ty , setTy] = useState(false)
+    const [storyid , setStoryid] = useState("")
   window.onclick = function(event) {
       if (event.target.id == "myModal") {
          setTy(false)
@@ -139,9 +140,32 @@ const HomePage = () => {
       setTypetitle(id)
       setRefresh(!refresh)
     }
-    const handleStory =(item)=>{
+    const handleStory =(item , id)=>{
       setStory(item)
+      setStoryid(id)
       setTy(true)
+    }
+    const stoyrref = useRef()
+    const [sendType  , setSendType] = useState(false)
+    const handleSubmit =(e)=>{
+      e.preventDefault()
+      http.post(`/catalog/comment/history/` , {
+        history: storyid,
+        text: stoyrref.current.value
+      }).then((res)=>{
+         if(res.status === 201){
+          stoyrref.current.value =""
+          setSendType(true)
+          setTimeout(()=>{
+           setSendType(false)
+          },800)
+
+         }
+      })
+    }
+    const handlenavigate =(id) =>{
+       navigate('/catalog/1')
+       window.location.reload()
     }
     return (
     <main>
@@ -161,10 +185,39 @@ const HomePage = () => {
       }))}
       defaultInterval={1500}
       width={"100%"}
-      height={"100vh"}
-        
+      height={"90vh"}   
     />
       }
+      {
+        sendType &&
+      <div className="story__sentp">
+        {
+              lan === "ru" &&  `Отправить`
+            }
+            {
+              lan === "en" && `Send`
+            }   
+           {
+            lan === "china" && `发送`
+           }!
+      </div>
+      }
+      <div className="story__footer" >
+        <form className="storr__forrm" onSubmit={(e)=>handleSubmit(e)} action="">
+        <input ref={stoyrref} placeholder="text..." type="text" />
+        <button onClick={(e)=>handleSubmit(e)} >
+        {
+              lan === "ru" &&  `Отправить`
+            }
+            {
+              lan === "en" && `Send`
+            }   
+           {
+            lan === "china" && `发送`
+           }
+        </button>
+        </form>
+      </div>
       </div>
     </div>
           }
@@ -205,7 +258,18 @@ const HomePage = () => {
             }
                
               </h4>
-              <button onClick={()=>navigate("/catalog")} >Найти объект</button>
+              <button onClick={()=>handlenavigate(1)} >
+              {
+              lan === "ru" && ` Найти объект`
+            }
+            {
+              lan === "en" &&  "Find object"
+              }
+             {
+              lan === "china" &&  `寻找对象`        
+                 }
+               
+                </button>
             </div>
           </div>
         </div>
@@ -219,7 +283,7 @@ const HomePage = () => {
             {
               storymain?.map((item , index)=>(
 
-            <li key={index} onClick={()=>handleStory(item.images_or_videos)} className="stories-list__item" data-story="1">
+            <li key={index} onClick={()=>handleStory(item.images_or_videos , item.id)} className="stories-list__item" data-story="1">
               <div className="stories-list__wrapper">
                 <div className="stories-list__border"></div>
                 <img
@@ -880,7 +944,17 @@ const HomePage = () => {
                   lan === "china" &&  `在 Telegram 上關注我們產品的開發`
                 }
               </p>
-            <button>Подписаться</button>
+            <button>
+            {
+              lan === "ru" && ` Подписаться`
+            }
+            {
+              lan === "en" &&  "Subscribe"
+                          }
+             {
+              lan === "china" && "订阅"
+            }
+             </button>
           </div>
         </div>
       </section>

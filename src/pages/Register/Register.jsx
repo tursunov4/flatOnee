@@ -415,7 +415,7 @@ const Register = () => {
             </div>
             <div className="form__input">
                 <label>
-                    <input onChange={(e)=>setFirsname(e.target.value)} name="first_name"  placeholder="Enter your firstname"/>
+                    <input onChange={(e)=>setFirsname(e.target.value)} name="first_name"  placeholder="Enter your fullname"/>
                 </label>
             </div>
            

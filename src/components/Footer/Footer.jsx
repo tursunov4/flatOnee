@@ -184,7 +184,18 @@ const Footer = () => {
             placeholder="Введите интересующий вас вопрос"
             type="text"
           /> */}
-          <button onClick={(e) =>handleClick(e)} className="footer-form__button">Отправить</button>
+          <button onClick={(e) =>handleClick(e)} className="footer-form__button">
+          {
+              lan === "ru" &&  `Отправить`
+            }
+            {
+              lan === "en" && `Send`
+            }   
+           {
+            lan === "china" && `发送`
+           }
+            
+            </button>
           <p className="footer-form__disclaimer">
            {
               lan === "ru" && " Отправляя заявку вы принимаете пользовательское соглашение."

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './savedlist.css'
 import arrowleft from "../../assets/img/arrow-left.svg"
 import axios from 'axios'
@@ -13,6 +13,7 @@ import mainHeader from "../../assets/img/main-header.jpg"
 // import "rsuite/dist/rsuite.css";
 
 import { Pagination } from 'swiper/modules';
+import { Context } from '../../Context/Context'
 const token  = localStorage.getItem("token")
 const Savedlist = () => {
     const [typefilter , setTypefilter] = useState(false)
@@ -176,7 +177,6 @@ const Savedlist = () => {
         setComnat(text)
         setRefresh(!refresh)
        }
-      
        const [fil1 , setFil1] = useState(false)
        const [fil2 , setFil2] = useState(false)
        const [fil3 , setFil3] = useState(false)
@@ -187,7 +187,7 @@ const Savedlist = () => {
        const [fil8, setFil8] = useState(false)
        const [fil9, setFil9] = useState(false)
        const [fil10, setFil10] = useState(false)
-       
+       const {lan} = useContext(Context)
   return (  
     <main>
         <section className="catalogue">
@@ -202,7 +202,21 @@ const Savedlist = () => {
          
             <div className="filter-section opened">
               <div onClick={()=>setFil1(!fil1)}  className="filter-section__header">
-                <div className="filter-section__title">Тип недвижимости</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && " Тип недвижимости"
+            }
+            {
+              lan === "en" && "Property type"
+            }
+            {
+              lan === "china" && "财产种类              "
+            }
+               {
+                  lan === "ar" && "نوع الملكية"
+                }   
+                 
+                  </div>
                 <div className={fil1 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }>
                 </div>
               </div>
@@ -224,7 +238,20 @@ const Savedlist = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil2(!fil2)} className="filter-section__header">
-                <div className="filter-section__title">Вид застройки</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && "Type of development"
+            }
+            {
+              lan === "en" && "Type of development"
+            }
+            {
+              lan === "china" && "开发类型 "
+            }
+               {
+                  lan === "ar" && "نوع التطوير"
+                }   
+                 </div>
                 <div className={fil2 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -245,7 +272,21 @@ const Savedlist = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil3(!fil3)} className="filter-section__header">
-                <div className="filter-section__title">Этап строительства</div>
+                <div className="filter-section__title">
+                 
+                  {
+              lan === "ru" && " Этап строительства"
+            }
+            {
+              lan === "en" && "Construction phase"
+            }
+            {
+              lan === "china" && "施工阶段 "
+            }
+               {
+                  lan === "ar" && "مرحلة البناء"
+                }   
+                  </div>
                 <div  className={fil3 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -265,7 +306,21 @@ const Savedlist = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil4(!fil4)} className="filter-section__header">
-                <div className="filter-section__title">Отделка</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && " Отделка"
+            }
+            {
+              lan === "en" && "Finishing"
+            }
+            {
+              lan === "china" && "精加工  "
+            }
+               {
+                  lan === "ar" && "التشطيب"
+                }   
+                 
+                  </div>
                 <div  className={fil4 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -287,7 +342,22 @@ const Savedlist = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil5(!fil5)} className="filter-section__header">
-                <div className="filter-section__title">Этап строительства</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && " Этап строительства"
+            }
+            {
+              lan === "en" && "Construction phase "
+            }
+            {
+              lan === "china" && "施工阶段  "
+            }
+               {
+                  lan === "ar" && "مرحلة البناء"
+                }   
+                 
+                  Этап строительства
+                  </div>
                 <div  className={fil5 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -323,7 +393,21 @@ const Savedlist = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil6(!fil6)} className="filter-section__header">
-                <div className="filter-section__title">Цена</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && " Цена"
+            }
+            {
+              lan === "en" && "Price "
+            }
+            {
+              lan === "china" && " 价格 "
+            }
+               {
+                  lan === "ar" && "سعر"
+                }   
+                  
+                  </div>
                 <div  className={fil6 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -347,7 +431,21 @@ const Savedlist = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil7(!fil7)} className="filter-section__header">
-                <div className="filter-section__title">Площадь</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && "Площадь"
+            }
+            {
+              lan === "en" && "Square"
+            }
+            {
+              lan === "china" && "正方形"
+            }
+               {
+                  lan === "ar" && "مربع"
+                }   
+                  
+                  </div>
                 <div className={fil7 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -369,7 +467,20 @@ const Savedlist = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil8(!fil8)} className="filter-section__header">
-                <div className="filter-section__title">Этажность</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && "Этажность"
+            }
+            {
+              lan === "en" && "Number of storeys"
+            }
+            {
+              lan === "china" && "层数"
+            }
+               {
+                  lan === "ar" && "عدد الطوابق"
+                }   
+                  </div>
                 <div className={fil8 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -391,7 +502,20 @@ const Savedlist = () => {
             </div>           
             <div className="filter-section opened">
               <div onClick={()=>setFil9(!fil9)} className="filter-section__header">
-                <div className="filter-section__title">Этап строительства</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && " Этап строительства"
+            }
+            {
+              lan === "en" && "Construction phase"
+            }
+            {
+              lan === "china" && " 施工阶段"
+            }
+               {
+                  lan === "ar" && "مرحلة البناء"
+                }   
+                 </div>
                 <div className={fil9 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -414,7 +538,21 @@ const Savedlist = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil10(!fil10)} className="filter-section__header">
-                <div className="filter-section__title">Количество комнат</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && "Количество комнат"
+            }
+            {
+              lan === "en" && "Number of rooms"
+            }
+            {
+              lan === "china" && "房间的数量"
+            }
+               {
+                  lan === "ar" && "عدد الغرف"
+                }   
+                  
+                  </div>
                 <div  className={fil10 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -439,8 +577,34 @@ const Savedlist = () => {
                     <div className="container">
                 <img className='mainheader__bavimgg' src={mainHeader} alt="" />
 
-                        <h1 className="catalogue-content__title">Апартаменты Москва Сити долгосрочно </h1>
-                        <p className="catalogue-content__text">1 504 из 2 345 вариантов</p>
+                        <h1 className="catalogue-content__title">
+                        {
+              lan === "ru" && " Апартаменты Москва Сити долгосрочно"
+            }
+            {
+              lan === "en" && "Moscow City apartments for long term"
+            }
+            {
+              lan === "china" && "莫斯科市长期公寓"
+            }
+               {
+                  lan === "ar" && 'شقق مدينة موسكو على المدى الطويل'
+                }   
+                          </h1>
+                        <p className="catalogue-content__text">
+                        {
+              lan === "ru" && " 1 504 из 2 345 вариантов"
+            }
+            {
+              lan === "en" && "1,504 of 2,345 options"
+            }
+            {
+              lan === "china" && "2,345 个选项中的 1,504 个"
+            }
+               {
+                  lan === "ar" && '1,504 من 2,345 خيارًا'
+                }   
+                         </p>
                     </div>
                 </div>
                 <div className="m-catalogue">
@@ -517,10 +681,50 @@ const Savedlist = () => {
                  >
                     <a className="container" href="">
                         <div className="catalogue-banner__description">
-                            <div className="catalogue-banner__title">Москва сити тест-драйв</div>
-                            <p className="catalogue-banner__text">Попробуйте пожить в 5 разных апартаментах, чтобы понять что подходит именно вам.</p>
+                            <div className="catalogue-banner__title">
+                            {
+              lan === "ru" && " Москва сити тест-драйв"
+            }
+            {
+              lan === "en" && "Moscow city test drive"
+            }
+            {
+              lan === "china" && "莫斯科市试驾"
+            }
+               {
+                  lan === "ar" && "اختبار القيادة في مدينة موسكو"
+                }   
+                              
+                              </div>
+                            <p className="catalogue-banner__text">
+                            {
+              lan === "ru" && "           Попробуйте пожить в 5 разных апартаментах, чтобы понять что подходит именно вам"
+            }
+            {
+              lan === "en" && " in 5 different apartments to see what's right for you"
+            }
+            {
+              lan === "china" && "尝试住在 5 套不同的公寓，看看什么适合您"
+            }
+               {
+                  lan === "ar" && "جرب العيش في 5 شقق مختلفة لتعرف ما هو المناسب لك"
+                }   
+                        .</p>
                         </div>
-                        <button className="learn-more">Подробнее</button>
+                        <button className="learn-more">
+                        {
+              lan === "ru" && "  Подробнее"
+            }
+            {
+              lan === "en" && "More details"
+            }
+            {
+              lan === "china" && "更多细节"
+            }
+               {
+                  lan === "ar" && 'المزيد من التفاصيل'
+                } 
+                          </button>
                     </a>
                 </div>
                 

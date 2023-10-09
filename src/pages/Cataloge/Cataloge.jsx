@@ -47,7 +47,7 @@ const Cataloge = () => {
   const [likePaginate , setLikePaginate] = useState("")
   const navigate = useNavigate()
   const {text} = useParams()
-
+ 
   useEffect(()=>{
       getCatalogOfice()
   },[refresh])
@@ -253,6 +253,7 @@ const Cataloge = () => {
   return (
  
     <main>
+      
       <section className="catalogue">
         <div className="container">
         <aside className={typefilter ? "opened catalogue-sidebar" :'catalogue-sidebar'}>
@@ -265,7 +266,21 @@ const Cataloge = () => {
          
             <div className="filter-section opened">
               <div onClick={()=>setFil1(!fil1)}  className="filter-section__header">
-                <div className="filter-section__title">Тип недвижимости</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && " Тип недвижимости"
+            }
+            {
+              lan === "en" && "Property type"
+            }
+            {
+              lan === "china" && "财产种类              "
+            }
+               {
+                  lan === "ar" && "نوع الملكية"
+                }   
+                 
+                  </div>
                 <div className={fil1 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }>
                 </div>
               </div>
@@ -287,7 +302,20 @@ const Cataloge = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil2(!fil2)} className="filter-section__header">
-                <div className="filter-section__title">Вид застройки</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && "Type of development"
+            }
+            {
+              lan === "en" && "Type of development"
+            }
+            {
+              lan === "china" && "开发类型 "
+            }
+               {
+                  lan === "ar" && "نوع التطوير"
+                }   
+                 </div>
                 <div className={fil2 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -308,7 +336,21 @@ const Cataloge = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil3(!fil3)} className="filter-section__header">
-                <div className="filter-section__title">Этап строительства</div>
+                <div className="filter-section__title">
+                 
+                  {
+              lan === "ru" && " Этап строительства"
+            }
+            {
+              lan === "en" && "Construction phase"
+            }
+            {
+              lan === "china" && "施工阶段 "
+            }
+               {
+                  lan === "ar" && "مرحلة البناء"
+                }   
+                  </div>
                 <div  className={fil3 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -328,7 +370,21 @@ const Cataloge = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil4(!fil4)} className="filter-section__header">
-                <div className="filter-section__title">Отделка</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && " Отделка"
+            }
+            {
+              lan === "en" && "Finishing"
+            }
+            {
+              lan === "china" && "精加工  "
+            }
+               {
+                  lan === "ar" && "التشطيب"
+                }   
+                 
+                  </div>
                 <div  className={fil4 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -350,7 +406,22 @@ const Cataloge = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil5(!fil5)} className="filter-section__header">
-                <div className="filter-section__title">Этап строительства</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && " Этап строительства"
+            }
+            {
+              lan === "en" && "Construction phase "
+            }
+            {
+              lan === "china" && "施工阶段  "
+            }
+               {
+                  lan === "ar" && "مرحلة البناء"
+                }   
+                 
+                  Этап строительства
+                  </div>
                 <div  className={fil5 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -386,7 +457,21 @@ const Cataloge = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil6(!fil6)} className="filter-section__header">
-                <div className="filter-section__title">Цена</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && " Цена"
+            }
+            {
+              lan === "en" && "Price "
+            }
+            {
+              lan === "china" && " 价格 "
+            }
+               {
+                  lan === "ar" && "سعر"
+                }   
+                  
+                  </div>
                 <div  className={fil6 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -410,7 +495,21 @@ const Cataloge = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil7(!fil7)} className="filter-section__header">
-                <div className="filter-section__title">Площадь</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && "Площадь"
+            }
+            {
+              lan === "en" && "Square"
+            }
+            {
+              lan === "china" && "正方形"
+            }
+               {
+                  lan === "ar" && "مربع"
+                }   
+                  
+                  </div>
                 <div className={fil7 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -432,7 +531,20 @@ const Cataloge = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil8(!fil8)} className="filter-section__header">
-                <div className="filter-section__title">Этажность</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && "Этажность"
+            }
+            {
+              lan === "en" && "Number of storeys"
+            }
+            {
+              lan === "china" && "层数"
+            }
+               {
+                  lan === "ar" && "عدد الطوابق"
+                }   
+                  </div>
                 <div className={fil8 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -454,7 +566,20 @@ const Cataloge = () => {
             </div>           
             <div className="filter-section opened">
               <div onClick={()=>setFil9(!fil9)} className="filter-section__header">
-                <div className="filter-section__title">Этап строительства</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && " Этап строительства"
+            }
+            {
+              lan === "en" && "Construction phase"
+            }
+            {
+              lan === "china" && " 施工阶段"
+            }
+               {
+                  lan === "ar" && "مرحلة البناء"
+                }   
+                 </div>
                 <div className={fil9 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -477,7 +602,21 @@ const Cataloge = () => {
             </div>
             <div className="filter-section opened">
               <div onClick={()=>setFil10(!fil10)} className="filter-section__header">
-                <div className="filter-section__title">Количество комнат</div>
+                <div className="filter-section__title">
+                {
+              lan === "ru" && "Количество комнат"
+            }
+            {
+              lan === "en" && "Number of rooms"
+            }
+            {
+              lan === "china" && "房间的数量"
+            }
+               {
+                  lan === "ar" && "عدد الغرف"
+                }   
+                  
+                  </div>
                 <div  className={fil10 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
               {
@@ -529,7 +668,19 @@ const Cataloge = () => {
                   <button className="search__btn"></button>
                 </form>
                 <button onClick={()=>setTypefilter(true)} className="button" id="m-filters">
-                  Фильтры
+                {
+              lan === "ru" && " Фильтры"
+            }
+            {
+              lan === "en" && "Filters"
+            }
+            {
+              lan === "china" && "过滤器"
+            }
+               {
+                  lan === "ar" && "المرشحات"
+                }   
+                 
                 </button>
               </div>
               <div className="">
@@ -585,15 +736,67 @@ const Cataloge = () => {
                 <img className="catalog__phone1" src={izamphone1} alt="" />
                 <img className="catalog__phone3" src={izamphone2} alt="" />
                 <div className="catalog__telef--text">
-                  <h2>Подбирайте недвижимость привычным способом</h2>
-                  <p>Наш алгоритм подберет</p>
-                  <button>Попробовать</button>
+                  <h2>
+                  {
+              lan === "ru" && "Подбирайте недвижимость привычным способом"
+            }
+            {
+              lan === "en" && "Select real estate in the usual way"
+            }
+            {
+              lan === "china" && "按常规方式选择房产"
+            }
+               {
+                  lan === "ar" && "اختر العقارات بالطريقة المعتادة"
+                }   
+                    </h2>
+                  <p>
+                  {
+              lan === "ru" && " Наш алгоритм подберет"
+            }
+            {
+              lan === "en" && "Our algorithm will select"
+            }
+            {
+              lan === "china" && "我们的算法将选择"
+            }
+               {
+                  lan === "ar" && "سوف تختار الخوارزمية لدينا"
+                }  
+                   </p>
+                  <button>
+                  {
+              lan === "ru" && "  Попробовать"
+            }
+            {
+              lan === "en" && "Try it"
+            }
+            {
+              lan === "china" && "尝试一下"
+            }
+               {
+                  lan === "ar" && "جربها"
+                }  
+                  </button>
                 </div>
               </div>
             </div>
 
             <section className="offer-section2">
-              <h2 className="offer-section2__title">Топ 7 объектов Дубай</h2>
+              <h2 className="offer-section2__title">
+              {
+              lan === "ru" && " Топ 7 объектов Дубай"
+            }
+            {
+              lan === "en" && "Top 7 Dubai properties"
+            }
+            {
+              lan === "china" && "迪拜 7 佳酒店"
+            }
+               {
+                  lan === "ar" && "أفضل 7 عقارات في دبي"
+                } 
+               </h2>
               <div className="offer-section__wrapper">
                 <ul className="apartament-list"> 
                 {
@@ -643,7 +846,20 @@ const Cataloge = () => {
             </section>
 
             <section className="categoriya__title-list">
-              <h2>Комплексы Дубай</h2>
+              <h2>
+              {
+              lan === "ru" && "  Комплексы Дубай"
+            }
+            {
+              lan === "en" && "Complexes Dubai"
+            }
+            {
+              lan === "china" && "  Комплексы Дубай"
+            }
+               {
+                  lan === "ar" && "مجمعات دبي"
+                } 
+              </h2>
                <ul className="apartament-list">
                 {
                   data?.map((item , index)=>(
@@ -711,16 +927,55 @@ const Cataloge = () => {
                 <button className="learn-more">Подробнее</button>
               </a>
             </div> */}
-                 <div className="catalogue-banner2 catalugbarner2-bag">
-              <a className="catolog-barner__route" href="">
+                 <div onClick={()=>navigate("/savedlist")}  className="catalogue-banner2 catalugbarner2-bag">
+              <div  className="catolog-barner__route" href="">
                 <div className="catalogue-banner__description">
                   <div className="catalogue-banner__title">
-                    Район Дубай марина
+                  {
+              lan === "ru" && "Район Дубай марина"
+            }
+            {
+              lan === "en" && "Dubai Marina area"
+            }
+            {
+              lan === "china" && "迪拜码头区"
+            }
+               {
+                  lan === "ar" && "منطقة دبي مارينا"
+                } 
+                    
                   </div>
-                  <p className="catalogue-banner__text">Перейти к статье</p>
+                  <p className="catalogue-banner__text">
+                  {
+              lan === "ru" && " Перейти к статье"
+            }
+            {
+              lan === "en" && "Go to article"
+            }
+            {
+              lan === "china" && "前往文章"
+            }
+               {
+                  lan === "ar" && 'انتقل إلى المادة'
+                } 
+                   </p>
                 </div>
-                <button className="learn-more">Подробнее</button>
-              </a>
+                <button className="learn-more">
+                {
+              lan === "ru" && "  Подробнее"
+            }
+            {
+              lan === "en" && "More details"
+            }
+            {
+              lan === "china" && "更多细节"
+            }
+               {
+                  lan === "ar" && 'المزيد من التفاصيل'
+                } 
+                
+                  </button>
+              </div>
             </div>
 
          

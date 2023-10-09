@@ -376,7 +376,7 @@ const Login = () => {
              </div>
             <div className="form__input">   
                 <label>
-                    <input required onChange={(e)=>setUsername(e.target.value)} name="username" placeholder="Email or username"/>
+                    <input required onChange={(e)=>setUsername(e.target.value)} name="username" placeholder="Email "/>
                 </label>
             </div>
             <div className="form__input">

@@ -305,10 +305,50 @@ const Noudfound = () => {
       </div>
       <div class="error__content">
         <img src={ble404} alt="404"/>
-        <div class="error__title">Что-то пошло не так :( </div>
-        <div class="error__descr">Страница удалена, либо ещё не создана</div>
+        <div class="error__title">
+        {
+        lan === "ru" && "  Что-то пошло не так :("
+      }
+      {
+        lan === "en" && "Something went wrong :("
+      }
+      {
+        lan === "china" && "出了些问题 ：（"
+      }
+         {
+            lan === "ar" && "هناك خطأ ما :("
+          }   
+         </div>
+        <div class="error__descr">
+        {
+        lan === "ru" && " Страница удалена, либо ещё не создана"
+      }
+      {
+        lan === "en" && "The page has been deleted or not yet created"
+      }
+      {
+        lan === "china" && "该页面已被删除或尚未创建"
+      }
+         {
+            lan === "ar" &&  `تم حذف الصفحة أو لم يتم إنشاؤها بعد`
+          }  
+         </div>
         <div class="error__btn">
-          <button onClick={()=>navigate(-1)}  href="#" class="btn">Вернуться назад</button>
+          <button onClick={()=>navigate(-1)}  href="#" class="btn">
+          {
+        lan === "ru" && "Вернуться назад"
+      }
+      {
+        lan === "en" && "come back"
+      }
+      {
+        lan === "china" && "回来"
+      }
+         {
+            lan === "ar" && "عد"
+          }   
+            
+            </button>
         </div>
       </div>
     </div>
