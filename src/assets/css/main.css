@@ -5727,3 +5727,7 @@ html {
   border-bottom: 1px solid !important;
   opacity: 0.8;
 }
+
+.filter-section__icon-rot{
+  transform: rotate(180deg) !important;
+}

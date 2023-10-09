@@ -74,13 +74,14 @@ const HomePage = () => {
     http.get(`/catalog/complex/luchshiy/?country=${typetitle}`).then((res)=>{
       console.log(res.data)
       setDataoffices(res.data)
-      if(res.status ===404){
-        navigate("/eror404")
-    }
+    
     }).catch((err)=>{
       console.log(err)
     })
   }
+
+
+
   const handleLike =(ids)=>{
 
     if(token){
@@ -117,12 +118,13 @@ const HomePage = () => {
       setRefresh(!refresh)
     }
     const [story , setStory] = useState([])
+    const [storymain , setStorymain ] = useState([])
      useEffect(()=>{
       getHistory()
      },[])
     const getHistory =()=>{
-      http.get("catalog/history/").then((res)=>{
-        setStory(res.data.results)
+      http.get("/catalog/history/").then((res)=>{
+        setStorymain(res.data)
       }).catch((err)=>{
         console.log(err)
       })
@@ -137,6 +139,10 @@ const HomePage = () => {
       setTypetitle(id)
       setRefresh(!refresh)
     }
+    const handleStory =(item)=>{
+      setStory(item)
+      setTy(true)
+    }
     return (
     <main>
             {
@@ -147,10 +153,10 @@ const HomePage = () => {
           </div>
       <div className='insta-stoooriya__wap'>
       {
-        story.length!==0  &&
+        story.length !==0  &&
          <ReactInstaStories
       stories={story.map((item , index)=>({
-        url: item.video_or_image ,
+        url: `http://164.92.172.190:8080${item.video_or_image}` ,
         type: item.image_type, // Ma'lumot turi, bu yerda rasm
       }))}
       defaultInterval={1500}
@@ -210,7 +216,10 @@ const HomePage = () => {
       <section className="stories-section">
         <div className="container">
           <ul className="stories-list">
-            <li onClick={()=>setTy(true)} className="stories-list__item" data-story="1">
+            {
+              storymain?.map((item , index)=>(
+
+            <li key={index} onClick={()=>handleStory(item.images_or_videos)} className="stories-list__item" data-story="1">
               <div className="stories-list__wrapper">
                 <div className="stories-list__border"></div>
                 <img
@@ -219,8 +228,10 @@ const HomePage = () => {
                   alt=""
                 />
               </div>
-              <p className="stories-list__title">История</p>
+              <p className="stories-list__title">{item.title}</p>
             </li>
+              ))
+            }
           </ul>
         </div>
       </section>
@@ -716,7 +727,9 @@ const HomePage = () => {
                 defaultState={{ center: [55.684758, 37.738521], zoom: 12 }}
               >
                 <ZoomControl />
-                <Placemark geometry={[55.684758, 37.738521]} />
+                <Placemark  geometry={[55.6, 37.7]} />
+      
+                
               </Map>
             </YMaps>
           </div>

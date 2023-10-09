@@ -14,6 +14,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Slider from 'react-slider';
 import { Context } from "../../Context/Context";
 import { queries } from "@testing-library/react";
+import  strelka  from "../../assets/img/strelka.svg"
 const token = localStorage.getItem("token")
 const id = localStorage.getItem("id")
 
@@ -238,6 +239,16 @@ const Cataloge = () => {
     setComnat(text)
     setRefresh(!refresh)
    }
+   const [fil1 , setFil1] = useState(false)
+   const [fil2 , setFil2] = useState(false)
+   const [fil3 , setFil3] = useState(false)
+   const [fil4 , setFil4] = useState(false)
+   const [fil5 , setFil5] = useState(false)
+   const [fil6, setFil6] = useState(false)
+   const [fil7, setFil7] = useState(false)
+   const [fil8, setFil8] = useState(false)
+   const [fil9, setFil9] = useState(false)
+   const [fil10, setFil10] = useState(false)
  
   return (
  
@@ -253,10 +264,13 @@ const Cataloge = () => {
            
          
             <div className="filter-section opened">
-              <div className="filter-section__header">
+              <div onClick={()=>setFil1(!fil1)}  className="filter-section__header">
                 <div className="filter-section__title">Тип недвижимости</div>
-                <div className="filter-section__icon"></div>
+                <div className={fil1 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }>
+                </div>
               </div>
+              {
+                fil1 ? "" : 
               <div className="filter-section__content">
                 <ul className="filter-list selected">
                   {
@@ -269,12 +283,15 @@ const Cataloge = () => {
                   
                 </ul>
               </div>
+              }
             </div>
             <div className="filter-section opened">
-              <div className="filter-section__header">
+              <div onClick={()=>setFil2(!fil2)} className="filter-section__header">
                 <div className="filter-section__title">Вид застройки</div>
-                <div className="filter-section__icon"></div>
+                <div className={fil2 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
+              {
+                fil2 ? "":
               <div className="filter-section__content">
                 <ul className="filter-list selected">
                   {
@@ -287,12 +304,15 @@ const Cataloge = () => {
                   
                 </ul>
               </div>
+              }
             </div>
             <div className="filter-section opened">
-              <div className="filter-section__header">
+              <div onClick={()=>setFil3(!fil3)} className="filter-section__header">
                 <div className="filter-section__title">Этап строительства</div>
-                <div className="filter-section__icon"></div>
+                <div  className={fil3 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
+              {
+                fil3 ? "":
               <div className="filter-section__content">
                 <ul className="filter-list selected">
                   {
@@ -304,12 +324,15 @@ const Cataloge = () => {
                   }                  
                 </ul>
               </div>
+              }
             </div>
             <div className="filter-section opened">
-              <div className="filter-section__header">
+              <div onClick={()=>setFil4(!fil4)} className="filter-section__header">
                 <div className="filter-section__title">Отделка</div>
-                <div className="filter-section__icon"></div>
+                <div  className={fil4 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
+              {
+                fil4 ? "":
               <div className="filter-section__content">
                 <ul className="filter-list selected">
                 <li onClick={()=>handleOdelka("beton")} className={otdelka==="beton" ? "filter-list__item  selected":'filter-list__item'}>
@@ -323,12 +346,15 @@ const Cataloge = () => {
                 
                 </ul>
               </div>
+              }
             </div>
             <div className="filter-section opened">
-              <div className="filter-section__header">
+              <div onClick={()=>setFil5(!fil5)} className="filter-section__header">
                 <div className="filter-section__title">Этап строительства</div>
-                <div className="filter-section__icon"></div>
+                <div  className={fil5 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
+              {
+                fil5 ? "":
               <div className="filter-section__content">
                 <ul className="filter-list selected">
 
@@ -356,12 +382,15 @@ const Cataloge = () => {
                                  
                 </ul>
               </div>
+              }
             </div>
             <div className="filter-section opened">
-              <div className="filter-section__header">
+              <div onClick={()=>setFil6(!fil6)} className="filter-section__header">
                 <div className="filter-section__title">Цена</div>
-                <div className="filter-section__icon"></div>
+                <div  className={fil6 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
+              {
+                fil6 ? "":
               <div className="filter-section__content">
           
               <Slider
@@ -377,12 +406,15 @@ const Cataloge = () => {
         <p>{pricemax}₽</p>
         </div>
               </div>
+              }
             </div>
             <div className="filter-section opened">
-              <div className="filter-section__header">
+              <div onClick={()=>setFil7(!fil7)} className="filter-section__header">
                 <div className="filter-section__title">Площадь</div>
-                <div className="filter-section__icon"></div>
+                <div className={fil7 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
+              {
+                fil7 ? "":
               <div className="filter-section__content">
               <Slider
            className="slider"
@@ -396,12 +428,15 @@ const Cataloge = () => {
         <p>{squeremax}</p>
         </div>
               </div>
+              }
             </div>
             <div className="filter-section opened">
-              <div className="filter-section__header">
+              <div onClick={()=>setFil8(!fil8)} className="filter-section__header">
                 <div className="filter-section__title">Этажность</div>
-                <div className="filter-section__icon"></div>
+                <div className={fil8 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
+              {
+                fil8 ?"" :
               <div className="filter-section__content">
               <Slider
            className="slider"
@@ -415,12 +450,15 @@ const Cataloge = () => {
         <p>{etajmax}</p>
         </div>
               </div>
+              }
             </div>           
             <div className="filter-section opened">
-              <div className="filter-section__header">
+              <div onClick={()=>setFil9(!fil9)} className="filter-section__header">
                 <div className="filter-section__title">Этап строительства</div>
-                <div className="filter-section__icon"></div>
+                <div className={fil9 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
+              {
+                fil9 ? "" :
               <div className="filter-section__content">
                 <ul className="filter-list selected">
 
@@ -435,12 +473,15 @@ const Cataloge = () => {
                       </li>                                 
                 </ul>
               </div>
+              }
             </div>
             <div className="filter-section opened">
-              <div className="filter-section__header">
+              <div onClick={()=>setFil10(!fil10)} className="filter-section__header">
                 <div className="filter-section__title">Количество комнат</div>
-                <div className="filter-section__icon"></div>
+                <div  className={fil10 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
+              {
+                fil10 ? "":
               <div className="filter-section__content">
                 <ul className="filter-list selected">
                 <li  onClick={()=>handleComnat(0)} className={comnat===0 ?  "filter-list__item selected": "filter-list__item"}>
@@ -453,8 +494,9 @@ const Cataloge = () => {
                     <li onClick={()=>handleComnat(5)} className={comnat===5 ?  "filter-list__item selected": "filter-list__item"}>5</li>
                 </ul>
               </div>
+              }
             </div>             
-          </aside>
+        </aside>
           <div className="catalogue-content">
             <div className="catalogue-content__header">
               <div className="catoluge__main-img dadd">
