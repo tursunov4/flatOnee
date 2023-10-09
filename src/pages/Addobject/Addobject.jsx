@@ -271,10 +271,20 @@ const handleChange =(evt)=>{
     http.post("/catalog/complex/" , form).then((res)=>{
       console.log(res.data)
       console.log(res.status)
-      // if(res.status ===201){
-      //   navigate("/brokermain")
-      //   window.location.reload()
-      // }
+      if(res.status ===201){
+        toast.success(  `Добавить объект !!!`, {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+        navigate("/brokermain")
+        window.location.reload()
+      }
     }).catch((err)=>{
       console.log(err)
       toast.error( 'В введенных данных ошибка!!!', {

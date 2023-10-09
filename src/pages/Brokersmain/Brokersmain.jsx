@@ -116,6 +116,9 @@ const Brokersmain = () => {
               {
               lan === "china" && "所有者"
             }
+            {
+              lan === "ar" && ""
+            }
                
               </span>
               <span><img src={Check} alt="check" /></span>
@@ -222,7 +225,7 @@ const Brokersmain = () => {
                  {
                   data?.map((item , index) =>(
                     <div className="add__apartament-item">
-                    <img className='broker-apartmenprev' src={`http://164.92.172.190:8080${item.image[0]}`} alt="" />
+                    <img className='broker-apartmenprev' src={`http://164.92.172.190:8080${item.image[0].image}`} alt="" />
                       <div onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "add__apartament-icon2 add__apartament-icon " : "add__apartament-icon" }>
                       </div>
     
@@ -230,7 +233,7 @@ const Brokersmain = () => {
                       {item.etaj1} этаж, {item.square}м2
 
                       </div>
-                      <div className="add__apartament-price">
+                      <div onClick={()=>navigate(`/product-item/${item.id}`)} className="add__apartament-price">
                          {item.price}₽/мес
                       </div>
                       <div className="add__apartament-address">
@@ -425,7 +428,7 @@ const Brokersmain = () => {
                 {
                   item.image?.map((item , index)=>(
                     <>
-                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item?.image[0]?.image}`} alt="" /></SwiperSlide>
+                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item?.image}`} alt="" /></SwiperSlide>
                     </>
                 ))
               }
@@ -440,7 +443,7 @@ const Brokersmain = () => {
                   </div>
                   <button onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
                 </div>
-                <p className="apartament-list__price">250 000₽/месяц</p>
+                <p onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__price">250 000₽/месяц</p>
                 <ul className="apartament-list__tags">
                 <li className="apartament-list__tag">{item.etaj1} этаж</li>
                     <li className="apartament-list__tag">{item.square} м2</li>

@@ -176,7 +176,7 @@ const Settings = () => {
                 <img width="26" src={arabflag} alt="flag"/>
                 <p>عرب</p>
               </div>
-              <input checked={lan ==="ru" ? true : false} onClick={()=>handleLangClick("ar")}  id='nam' name='lan' className="choose__language-input"  type="checkbox"/>
+              <input checked={lan ==="ar" ? true : false} onClick={()=>handleLangClick("ru")}  id='nam' name='lan' className="choose__language-input"  type="checkbox"/>
             </li>
              <li className='list__choose' >
               <div>

@@ -21,7 +21,7 @@ import Brokersitem from '../pages/Brokersitem/Brokersitem'
 import Brokersmain from '../pages/Brokersmain/Brokersmain'
 import Academiya from '../pages/Academiya/Academiya'
 import Noudfound from '../pages/Notfound/Noudfound'
-
+const toke
 const authenfication = () => {
   return (
     <Routes>
@@ -47,6 +47,9 @@ const authenfication = () => {
       <Route element={<Brokersitem/>} path={`/brokersitem`} /> 
       <Route element={<Brokersmain/>} path={`/brokermain`} /> 
     </Route>
+    {
+      
+    }
     <Route path='*' element={<Noudfound/>}  /> 
    
     </Routes>
