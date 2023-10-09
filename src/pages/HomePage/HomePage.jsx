@@ -71,7 +71,7 @@ const HomePage = () => {
     getDataOffice()
   },[refresh])
   const getDataOffice =()=>{
-    http.get("/catalog/complex/luchshiy/").then((res)=>{
+    http.get(`/catalog/complex/luchshiy/?country=${typetitle}`).then((res)=>{
       console.log(res.data)
       setDataoffices(res.data)
       if(res.status ===404){
@@ -132,6 +132,10 @@ const HomePage = () => {
       if (event.target.id == "myModal") {
          setTy(false)
       }
+    }
+    const handleDatabir =(id)=>{
+      setTypetitle(id)
+      setRefresh(!refresh)
     }
     return (
     <main>
@@ -584,26 +588,26 @@ const HomePage = () => {
           <div className="offer-section__mwrap">
             <ul className="offer-section__bar">
               <li
-                onClick={() => setTypetitle("ОАЭ")}
-                className={typetitle === "ОАЭ" && "offer-section__activeli"}
+                onClick={() => handleDatabir(1)}
+                className={typetitle === 1 && "offer-section__activeli"}
               >
                 ОАЭ
               </li>
               <li
-                onClick={() => setTypetitle("Индонезия")}
-                className={typetitle === "Индонезия" && "offer-section__activeli"}
+                onClick={() => handleDatabir(2)}
+                className={typetitle === 2 && "offer-section__activeli"}
               >
                 Индонезия
               </li>
               <li
-                onClick={() => setTypetitle("Тайланд")}
-                className={typetitle === "Тайланд" && "offer-section__activeli"}
+                onClick={() => handleDatabir(3)}
+                className={typetitle === 3 && "offer-section__activeli"}
               >
                 Тайланд
               </li>
               <li
-                onClick={() => setTypetitle("Турция")}
-                className={typetitle === "Турция" && "offer-section__activeli"}
+                onClick={() => handleDatabir(4)}
+                className={typetitle === 4 && "offer-section__activeli"}
               >
                 Турция
               </li>
@@ -750,7 +754,6 @@ const HomePage = () => {
             </h3>
         </div>
       </section>
-
       <section className="telefon2">
         <div className="container__main">
           <div className="telefon2__wrap">
