@@ -122,7 +122,7 @@ const Register = () => {
         lan === "en" && "Academy"
       }
       {
-        lan === "china" && "學院"
+        lan === "zh" && "學院"
       }
          {
             lan === "ar" && "الأكاديمية"
@@ -137,7 +137,7 @@ const Register = () => {
         lan === "en" && "UAE"
       }
       {
-        lan === "china" && "阿聯酋"
+        lan === "zh" && "阿聯酋"
       }
         {
             lan === "ar" && `الإمارات العربية المتحدة`
@@ -152,7 +152,7 @@ const Register = () => {
         lan === "en" && "Thailand"
       }      
       {
-        lan === "china" && '泰國'
+        lan === "zh" && '泰國'
       }
        {
             lan === "ar" && `تايلاند`
@@ -166,7 +166,7 @@ const Register = () => {
         lan === "en" && "Bali"
       }  
       {
-        lan === "china" && "峇里島"
+        lan === "zh" && "峇里島"
       }   
          {
             lan === "ar" && `بالي`
@@ -180,7 +180,7 @@ const Register = () => {
         lan === "en" && "Turkiye"
       } 
         {
-        lan === "china" && "土耳其"
+        lan === "zh" && "土耳其"
       }   
          {
             lan === "ar" && `تركيا`
@@ -195,7 +195,7 @@ const Register = () => {
         lan === "en" && "Favorites "
       }   
          {
-        lan === "china" && "收藏夾"
+        lan === "zh" && "收藏夾"
       }   
        {
             lan === "ar" && `المفضلة`
@@ -209,7 +209,7 @@ const Register = () => {
         lan === "en" && "Tenor"
       }   
          {
-        lan === "china" && "文章"
+        lan === "zh" && "文章"
       }  
         {
             lan === "ar" && `مقالات`
@@ -225,7 +225,7 @@ const Register = () => {
         lan === "en" && "Profile"
       }  
           {
-        lan === "china" && "輪廓"
+        lan === "zh" && "輪廓"
       }   
        {
             lan === "ar" && `حساب تعريفي`
@@ -257,7 +257,7 @@ const Register = () => {
         lan === "en" && "Profile"
       } 
            {
-        lan === "china" && "輪廓"
+        lan === "zh" && "輪廓"
       }   
        {
             lan === "ar" && `حساب تعريفي`
@@ -274,7 +274,7 @@ const Register = () => {
 
       }
        {
-        lan === "china" && "學院"
+        lan === "zh" && "學院"
       }
        {
             lan === "ar" && "الأكاديمية"
@@ -288,7 +288,7 @@ const Register = () => {
         lan === "en" && "UAE"
       }
        {
-        lan === "china" && "學院"
+        lan === "zh" && "學院"
       }
       {
             lan === "ar" && `الإمارات العربية المتحدة`
@@ -303,7 +303,7 @@ const Register = () => {
         lan === "en" && "Thailand"
       }  
         {
-        lan === "china" && '泰國'
+        lan === "zh" && '泰國'
       }
        {
             lan === "ar" && `تايلاند`
@@ -317,7 +317,7 @@ const Register = () => {
         lan === "en" && "Bali"
       }   
          {
-        lan === "china" && "峇里島"
+        lan === "zh" && "峇里島"
       }   
        {
             lan === "ar" && `بالي`
@@ -331,7 +331,7 @@ const Register = () => {
         lan === "en" && "Turkiye"
       } 
        {
-        lan === "china" && "土耳其"
+        lan === "zh" && "土耳其"
       } 
        {
             lan === "ar" && `تركيا`
@@ -347,7 +347,7 @@ const Register = () => {
       }   
       
       {
-        lan === "china" && "收藏夾"
+        lan === "zh" && "收藏夾"
       }   
          {
             lan === "ar" && `المفضلة`
@@ -361,7 +361,7 @@ const Register = () => {
         lan === "en" && "Tenor"
       }   
          {
-        lan === "china" && "文章"
+        lan === "zh" && "文章"
       }  
        {
             lan === "ar" && `مقالات`
@@ -397,7 +397,7 @@ const Register = () => {
         lan === "en" && "Registration"
       }   
          {
-        lan === "china" && " 登记"
+        lan === "zh" && " 登记"
       }  
        {
             lan === "ar" && `تسجيل  `
@@ -439,7 +439,7 @@ const Register = () => {
         lan === "en" && "Register"
       }   
          {
-        lan === "china" && "登记"
+        lan === "zh" && "登记"
       }  
        {
             lan === "ar" && `يسجل`
@@ -454,7 +454,7 @@ const Register = () => {
         lan === "en" && "I have an account"
       }   
          {
-        lan === "china" && " 我有一个帐户 "
+        lan === "zh" && " 我有一个帐户 "
       }  
        {
             lan === "ar" && `لدي حساب `
@@ -467,7 +467,7 @@ const Register = () => {
         lan === "en" && "Login"
       }   
          {
-        lan === "china" && "登录"
+        lan === "zh" && "登录"
       }  
        {
             lan === "ar" && `تسجيل الدخول`

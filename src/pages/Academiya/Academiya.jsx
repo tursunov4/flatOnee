@@ -26,7 +26,7 @@ const Academiya = () => {
                  lan === "en" && `Flat one AI Academy`
                 } 
                 {
-                 lan === "china" && ` 平一人工智能学院`
+                 lan === "zh" && ` 平一人工智能学院`
                 } 
           </h2>
          <p>
@@ -51,7 +51,7 @@ const Academiya = () => {
                  For real estate brokers`
                 } 
                 {
-                 lan === "china" && `
+                 lan === "zh" && `
                  对于房地产经纪人`
                 } 
                 
@@ -60,13 +60,13 @@ const Academiya = () => {
             <li className='academiya-list__item2'>
             <p> 
                  {
-                    lan === "ru" && "Для брокеров по продаже недвижимости"
+                    lan === "ru" && "Для инвесторов в недвижимость"
                  }
                 {
-                 lan === "en" && `For real estate brokers`
+                 lan === "en" && `For real estate investors`
                 } 
                 {
-                 lan === "china" && `对于房地产经纪人`
+                 lan === "zh" && ` 对于房地产投资者`
                 } 
                </p>
             </li>

@@ -113,7 +113,7 @@ const Brokersmain = () => {
               lan === "en" && " Owner"
             }
               {
-              lan === "china" && "所有者"
+              lan === "zh" && "所有者"
             }
             {
               lan === "ar" && ""
@@ -141,7 +141,7 @@ const Brokersmain = () => {
               lan === "en" && "Messages"
             }
               {
-              lan === "china" && "留言"
+              lan === "zh" && "留言"
             }
                 
                 </div>
@@ -161,7 +161,7 @@ const Brokersmain = () => {
               lan === "en" && "Favorites"
             }
               {
-              lan === "china" && `收藏夹`
+              lan === "zh" && `收藏夹`
             }
                 </div>
               <div className="add__section-right">
@@ -181,7 +181,7 @@ const Brokersmain = () => {
               lan === "en" && "Compare"
             }
               {
-              lan === "china" && `比较`
+              lan === "zh" && `比较`
             }
                 </div>
               <div className="add__section-right">
@@ -199,7 +199,7 @@ const Brokersmain = () => {
               lan === "en" && "My objects"
             }
               {
-              lan === "china" && `我的对象`
+              lan === "zh" && `我的对象`
             }
                 </div>
               <div className="add__mobile-add">
@@ -213,7 +213,7 @@ const Brokersmain = () => {
               lan === "en" && "Add object"
             }
               {
-              lan === "china" && `我的对象`
+              lan === "zh" && `我的对象`
             }
                     </span>
                 </button>
@@ -267,7 +267,7 @@ const Brokersmain = () => {
               lan === "en" && "Drafts"
             }
               {
-              lan === "china" && `草稿`
+              lan === "zh" && `草稿`
             }
                 </div>
               <div className="add__section-right">
@@ -286,7 +286,7 @@ const Brokersmain = () => {
               lan === "en" && "Add complex"
             }
               {
-              lan === "china" && `添加复合体`
+              lan === "zh" && `添加复合体`
             }
                 
                 </div>
@@ -306,7 +306,7 @@ const Brokersmain = () => {
               lan === "en" && "Notification settings"
             }
               {
-              lan === "china" && `通知设置`
+              lan === "zh" && `通知设置`
             }
             </div>
               <div className="add__section-right">
@@ -326,7 +326,7 @@ const Brokersmain = () => {
               lan === "en" && "Question answer"
             }
               {
-              lan === "china" && `问题解答`
+              lan === "zh" && `问题解答`
             }
                 
                 </div>
@@ -347,7 +347,7 @@ const Brokersmain = () => {
               lan === "en" && "Browsing history"
             }
               {
-              lan === "china" && `浏览记录`
+              lan === "zh" && `浏览记录`
             }
               </div>
               <div className="add__section-right">
@@ -369,7 +369,7 @@ const Brokersmain = () => {
               lan === "en" && "Add object"
             }
               {
-              lan === "china" && `我的对象`
+              lan === "zh" && `我的对象`
             }
               </span>
           </button>
@@ -389,7 +389,7 @@ const Brokersmain = () => {
               lan === "en" && "Drafts"
             }
               {
-              lan === "china" && `草稿`
+              lan === "zh" && `草稿`
             }
               
               
@@ -405,7 +405,7 @@ const Brokersmain = () => {
               lan === "en" && "Add complex"
             }
               {
-              lan === "china" && `添加复合体`
+              lan === "zh" && `添加复合体`
             }
             </span>
           </button>

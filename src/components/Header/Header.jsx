@@ -42,7 +42,7 @@ const Header = () => {
               lan === "en" && "Academy"
             }
             {
-              lan === "china" && "學院"
+              lan === "zh" && "學院"
             }
                {
                   lan === "ar" && "الأكاديمية"
@@ -57,7 +57,7 @@ const Header = () => {
               lan === "en" && "UAE"
             }
             {
-              lan === "china" && "阿聯酋"
+              lan === "zh" && "阿聯酋"
             }
               {
                   lan === "ar" && `الإمارات العربية المتحدة`
@@ -72,7 +72,7 @@ const Header = () => {
               lan === "en" && "Thailand"
             }      
             {
-              lan === "china" && '泰國'
+              lan === "zh" && '泰國'
             }
              {
                   lan === "ar" && `تايلاند`
@@ -86,7 +86,7 @@ const Header = () => {
               lan === "en" && "Bali"
             }  
             {
-              lan === "china" && "峇里島"
+              lan === "zh" && "峇里島"
             }   
                {
                   lan === "ar" && `بالي`
@@ -100,7 +100,7 @@ const Header = () => {
               lan === "en" && "Turkiye"
             } 
               {
-              lan === "china" && "土耳其"
+              lan === "zh" && "土耳其"
             }   
                {
                   lan === "ar" && `تركيا`
@@ -115,7 +115,7 @@ const Header = () => {
               lan === "en" && "Favorites "
             }   
                {
-              lan === "china" && "收藏夾"
+              lan === "zh" && "收藏夾"
             }   
              {
                   lan === "ar" && `المفضلة`
@@ -129,7 +129,7 @@ const Header = () => {
               lan === "en" && "Tenor"
             }   
                {
-              lan === "china" && "文章"
+              lan === "zh" && "文章"
             }  
               {
                   lan === "ar" && `مقالات`
@@ -145,7 +145,7 @@ const Header = () => {
               lan === "en" && "Profile"
             }  
                 {
-              lan === "china" && "輪廓"
+              lan === "zh" && "輪廓"
             }   
              {
                   lan === "ar" && `حساب تعريفي`
@@ -177,7 +177,7 @@ const Header = () => {
               lan === "en" && "Profile"
             } 
                  {
-              lan === "china" && "輪廓"
+              lan === "zh" && "輪廓"
             }   
              {
                   lan === "ar" && `حساب تعريفي`
@@ -194,7 +194,7 @@ const Header = () => {
 
             }
              {
-              lan === "china" && "學院"
+              lan === "zh" && "學院"
             }
              {
                   lan === "ar" && "الأكاديمية"
@@ -208,7 +208,7 @@ const Header = () => {
               lan === "en" && "UAE"
             }
              {
-              lan === "china" && "學院"
+              lan === "zh" && "學院"
             }
             {
                   lan === "ar" && `الإمارات العربية المتحدة`
@@ -223,7 +223,7 @@ const Header = () => {
               lan === "en" && "Thailand"
             }  
               {
-              lan === "china" && '泰國'
+              lan === "zh" && '泰國'
             }
              {
                   lan === "ar" && `تايلاند`
@@ -237,7 +237,7 @@ const Header = () => {
               lan === "en" && "Bali"
             }   
                {
-              lan === "china" && "峇里島"
+              lan === "zh" && "峇里島"
             }   
              {
                   lan === "ar" && `بالي`
@@ -251,7 +251,7 @@ const Header = () => {
               lan === "en" && "Turkiye"
             } 
              {
-              lan === "china" && "土耳其"
+              lan === "zh" && "土耳其"
             } 
              {
                   lan === "ar" && `تركيا`
@@ -267,7 +267,7 @@ const Header = () => {
             }   
             
             {
-              lan === "china" && "收藏夾"
+              lan === "zh" && "收藏夾"
             }   
                {
                   lan === "ar" && `المفضلة`
@@ -281,7 +281,7 @@ const Header = () => {
               lan === "en" && "Tenor"
             }   
                {
-              lan === "china" && "文章"
+              lan === "zh" && "文章"
             }  
              {
                   lan === "ar" && `مقالات`

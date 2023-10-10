@@ -64,7 +64,7 @@ const Footer = () => {
               lan === "en" && "UAE"
             }
              {
-              lan === "china" && "阿聯酋"
+              lan === "zh" && "阿聯酋"
             }
           </Link>
          <Link onClick={()=>handleReload(2)} to={"/catalog/2"} className="footer-nav__item" href="">
@@ -75,7 +75,7 @@ const Footer = () => {
               lan === "en" && "Turkiye"
             } 
                {
-              lan === "china" && "土耳其"
+              lan === "zh" && "土耳其"
             }  
          </Link>
          <Link onClick={()=>handleReload(3)} to={"/catalog/3"} className="footer-nav__item" href="">
@@ -86,7 +86,7 @@ const Footer = () => {
               lan === "en" && "Thailand"
             }      
              {
-              lan === "china" && '泰國'
+              lan === "zh" && '泰國'
             }
            
          </Link>
@@ -98,7 +98,7 @@ const Footer = () => {
               lan === "en" && "Bali"
             }   
              {
-              lan === "china" && "峇里島"
+              lan === "zh" && "峇里島"
             }  
          </Link>
          </div>
@@ -111,7 +111,7 @@ const Footer = () => {
               lan === "en" && "Favorites "
             }   
               {
-              lan === "china" && "收藏夾"
+              lan === "zh" && "收藏夾"
             }   
          </Link>
          <Link to={"/articlemain"} className="footer-nav__item" href="">
@@ -122,7 +122,7 @@ const Footer = () => {
               lan === "en" && "Tenor"
             }   
               {
-              lan === "china" && "文章"
+              lan === "zh" && "文章"
             }  
          </Link>
          <Link to={token ?  "/brokermain" :"/login"} className="footer-nav__item" href="">
@@ -131,7 +131,13 @@ const Footer = () => {
             }
             {
               lan === "en" && "Profile"
+            }  
+                {
+              lan === "zh" && "輪廓"
             }   
+             {
+                  lan === "ar" && `حساب تعريفي`
+                } 
          </Link>
          <Link to={'/academiya'} className="footer-nav__item" href="">
          {
@@ -141,7 +147,7 @@ const Footer = () => {
               lan === "en" && "Academy"
             }
               {
-              lan === "china" && "輪廓"
+              lan === "zh" && "輪廓"
             }   
          </Link>
          </div>
@@ -160,7 +166,7 @@ const Footer = () => {
               lan === "en" && "Leave a request and our specialist will answer your questions            questions"
             }   
            {
-            lan === "china" && `
+            lan === "zh" && `
             留下请求，我们的专家将回答您的问题`
            }
           </p>
@@ -192,7 +198,7 @@ const Footer = () => {
               lan === "en" && `Send`
             }   
            {
-            lan === "china" && `发送`
+            lan === "zh" && `发送`
            }
             
             </button>
@@ -204,7 +210,7 @@ const Footer = () => {
               lan === "en" && " By submitting an application you accept the user agreement."
             } 
                {
-            lan === "china" && `
+            lan === "zh" && `
             提交申请即表示您接受用户协议。`
            }
            
@@ -216,7 +222,7 @@ const Footer = () => {
               lan === "en" && "To learn more"
             }
                  {
-            lan === "china" && `    了解更多`
+            lan === "zh" && `    了解更多`
            }
             </a>
             

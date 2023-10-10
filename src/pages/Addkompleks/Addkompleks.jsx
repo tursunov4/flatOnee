@@ -11,6 +11,7 @@ import http from "../../axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import pluss from "../../assets/img/plus.svg"
 
 const Addkompleks = () => {
   const navigate = useNavigate()
@@ -387,6 +388,7 @@ const handleYandex = (e)=>{
                     <input onBlur={() => {setTimeout(()=>{setSearchList(false)},[150])}} ref={inputRef}  onChange={handleChange} type="text" placeholder="#вид на море" />
                      
                   </label>
+                  <button className="addmap__formplusbtn" ><img src={pluss} alt="" /></button>
                 </form>
                 <ul className="addobject-addhash__list">
                   {

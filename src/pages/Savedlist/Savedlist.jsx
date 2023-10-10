@@ -207,7 +207,7 @@ const Savedlist = () => {
               lan === "en" && "Property type"
             }
             {
-              lan === "china" && "财产种类              "
+              lan === "zh" && "财产种类              "
             }
                {
                   lan === "ar" && "نوع الملكية"
@@ -237,13 +237,13 @@ const Savedlist = () => {
               <div onClick={()=>setFil2(!fil2)} className="filter-section__header">
                 <div className="filter-section__title">
                 {
-              lan === "ru" && "Type of development"
+              lan === "ru" && "Вид застройки"
             }
             {
               lan === "en" && "Type of development"
             }
             {
-              lan === "china" && "开发类型 "
+              lan === "zh" && "开发类型 "
             }
                {
                   lan === "ar" && "نوع التطوير"
@@ -272,13 +272,13 @@ const Savedlist = () => {
                 <div className="filter-section__title">
                  
                   {
-              lan === "ru" && " Этап строительства"
+              lan === "ru" && "Этап строительства"
             }
             {
               lan === "en" && "Construction phase"
             }
             {
-              lan === "china" && "施工阶段 "
+              lan === "zh" && "施工阶段 "
             }
                {
                   lan === "ar" && "مرحلة البناء"
@@ -311,7 +311,7 @@ const Savedlist = () => {
               lan === "en" && "Finishing"
             }
             {
-              lan === "china" && "精加工  "
+              lan === "zh" && "精加工  "
             }
                {
                   lan === "ar" && "التشطيب"
@@ -347,13 +347,12 @@ const Savedlist = () => {
               lan === "en" && "Construction phase "
             }
             {
-              lan === "china" && "施工阶段  "
+              lan === "zh" && "施工阶段  "
             }
                {
                   lan === "ar" && "مرحلة البناء"
                 }   
                  
-                  Этап строительства
                   </div>
                 <div  className={fil5 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
@@ -398,7 +397,7 @@ const Savedlist = () => {
               lan === "en" && "Price "
             }
             {
-              lan === "china" && " 价格 "
+              lan === "zh" && " 价格 "
             }
                {
                   lan === "ar" && "سعر"
@@ -436,7 +435,7 @@ const Savedlist = () => {
               lan === "en" && "Square"
             }
             {
-              lan === "china" && "正方形"
+              lan === "zh" && "正方形"
             }
                {
                   lan === "ar" && "مربع"
@@ -472,7 +471,7 @@ const Savedlist = () => {
               lan === "en" && "Number of storeys"
             }
             {
-              lan === "china" && "层数"
+              lan === "zh" && "层数"
             }
                {
                   lan === "ar" && "عدد الطوابق"
@@ -507,7 +506,7 @@ const Savedlist = () => {
               lan === "en" && "Construction phase"
             }
             {
-              lan === "china" && " 施工阶段"
+              lan === "zh" && " 施工阶段"
             }
                {
                   lan === "ar" && "مرحلة البناء"
@@ -543,7 +542,7 @@ const Savedlist = () => {
               lan === "en" && "Number of rooms"
             }
             {
-              lan === "china" && "房间的数量"
+              lan === "zh" && "房间的数量"
             }
                {
                   lan === "ar" && "عدد الغرف"
@@ -582,7 +581,7 @@ const Savedlist = () => {
               lan === "en" && "Moscow City apartments for long term"
             }
             {
-              lan === "china" && "莫斯科市长期公寓"
+              lan === "zh" && "莫斯科市长期公寓"
             }
                {
                   lan === "ar" && 'شقق مدينة موسكو على المدى الطويل'
@@ -596,7 +595,7 @@ const Savedlist = () => {
               lan === "en" && "1,504 of 2,345 options"
             }
             {
-              lan === "china" && "2,345 个选项中的 1,504 个"
+              lan === "zh" && "2,345 个选项中的 1,504 个"
             }
                {
                   lan === "ar" && '1,504 من 2,345 خيارًا'
@@ -686,7 +685,7 @@ const Savedlist = () => {
               lan === "en" && "Moscow city test drive"
             }
             {
-              lan === "china" && "莫斯科市试驾"
+              lan === "zh" && "莫斯科市试驾"
             }
                {
                   lan === "ar" && "اختبار القيادة في مدينة موسكو"
@@ -701,7 +700,7 @@ const Savedlist = () => {
               lan === "en" && " in 5 different apartments to see what's right for you"
             }
             {
-              lan === "china" && "尝试住在 5 套不同的公寓，看看什么适合您"
+              lan === "zh" && "尝试住在 5 套不同的公寓，看看什么适合您"
             }
                {
                   lan === "ar" && "جرب العيش في 5 شقق مختلفة لتعرف ما هو المناسب لك"
@@ -716,7 +715,7 @@ const Savedlist = () => {
               lan === "en" && "More details"
             }
             {
-              lan === "china" && "更多细节"
+              lan === "zh" && "更多细节"
             }
                {
                   lan === "ar" && 'المزيد من التفاصيل'

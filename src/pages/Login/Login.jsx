@@ -91,7 +91,7 @@ const Login = () => {
         lan === "en" && "Academy"
       }
       {
-        lan === "china" && "學院"
+        lan === "zh" && "學院"
       }
          {
             lan === "ar" && "الأكاديمية"
@@ -106,7 +106,7 @@ const Login = () => {
         lan === "en" && "UAE"
       }
       {
-        lan === "china" && "阿聯酋"
+        lan === "zh" && "阿聯酋"
       }
         {
             lan === "ar" && `الإمارات العربية المتحدة`
@@ -121,7 +121,7 @@ const Login = () => {
         lan === "en" && "Thailand"
       }      
       {
-        lan === "china" && '泰國'
+        lan === "zh" && '泰國'
       }
        {
             lan === "ar" && `تايلاند`
@@ -135,7 +135,7 @@ const Login = () => {
         lan === "en" && "Bali"
       }  
       {
-        lan === "china" && "峇里島"
+        lan === "zh" && "峇里島"
       }   
          {
             lan === "ar" && `بالي`
@@ -149,7 +149,7 @@ const Login = () => {
         lan === "en" && "Turkiye"
       } 
         {
-        lan === "china" && "土耳其"
+        lan === "zh" && "土耳其"
       }   
          {
             lan === "ar" && `تركيا`
@@ -164,7 +164,7 @@ const Login = () => {
         lan === "en" && "Favorites "
       }   
          {
-        lan === "china" && "收藏夾"
+        lan === "zh" && "收藏夾"
       }   
        {
             lan === "ar" && `المفضلة`
@@ -178,7 +178,7 @@ const Login = () => {
         lan === "en" && "Tenor"
       }   
          {
-        lan === "china" && "文章"
+        lan === "zh" && "文章"
       }  
         {
             lan === "ar" && `مقالات`
@@ -194,7 +194,7 @@ const Login = () => {
         lan === "en" && "Profile"
       }  
           {
-        lan === "china" && "輪廓"
+        lan === "zh" && "輪廓"
       }   
        {
             lan === "ar" && `حساب تعريفي`
@@ -226,7 +226,7 @@ const Login = () => {
         lan === "en" && "Profile"
       } 
            {
-        lan === "china" && "輪廓"
+        lan === "zh" && "輪廓"
       }   
        {
             lan === "ar" && `حساب تعريفي`
@@ -243,7 +243,7 @@ const Login = () => {
 
       }
        {
-        lan === "china" && "學院"
+        lan === "zh" && "學院"
       }
        {
             lan === "ar" && "الأكاديمية"
@@ -257,7 +257,7 @@ const Login = () => {
         lan === "en" && "UAE"
       }
        {
-        lan === "china" && "學院"
+        lan === "zh" && "學院"
       }
       {
             lan === "ar" && `الإمارات العربية المتحدة`
@@ -272,7 +272,7 @@ const Login = () => {
         lan === "en" && "Thailand"
       }  
         {
-        lan === "china" && '泰國'
+        lan === "zh" && '泰國'
       }
        {
             lan === "ar" && `تايلاند`
@@ -286,7 +286,7 @@ const Login = () => {
         lan === "en" && "Bali"
       }   
          {
-        lan === "china" && "峇里島"
+        lan === "zh" && "峇里島"
       }   
        {
             lan === "ar" && `بالي`
@@ -300,7 +300,7 @@ const Login = () => {
         lan === "en" && "Turkiye"
       } 
        {
-        lan === "china" && "土耳其"
+        lan === "zh" && "土耳其"
       } 
        {
             lan === "ar" && `تركيا`
@@ -316,7 +316,7 @@ const Login = () => {
       }   
       
       {
-        lan === "china" && "收藏夾"
+        lan === "zh" && "收藏夾"
       }   
          {
             lan === "ar" && `المفضلة`
@@ -330,7 +330,7 @@ const Login = () => {
         lan === "en" && "Tenor"
       }   
          {
-        lan === "china" && "文章"
+        lan === "zh" && "文章"
       }  
        {
             lan === "ar" && `مقالات`
@@ -368,7 +368,7 @@ const Login = () => {
         lan === "en" && "Login"
       }   
          {
-        lan === "china" && "登录"
+        lan === "zh" && "登录"
       }  
        {
             lan === "ar" && `تسجيل الدخول`
@@ -395,7 +395,7 @@ const Login = () => {
         lan === "en" && "Login"
       }   
          {
-        lan === "china" && "进来"
+        lan === "zh" && "进来"
       }  
        {
             lan === "ar" && `ليأتي`
@@ -411,7 +411,7 @@ const Login = () => {
         lan === "en" && "I don't have an account"
       }   
          {
-        lan === "china" && " 我没有账户"
+        lan === "zh" && " 我没有账户"
       }  
        {
             lan === "ar" && `ليس لدي حساب`
@@ -424,7 +424,7 @@ const Login = () => {
                    lan === "en" && " Registration"
                     }   
                     {
-                     lan === "china" && "  登记"
+                     lan === "zh" && "  登记"
                       }  
                        {
                         lan === "ar" && `  تسجيل`
@@ -439,7 +439,7 @@ const Login = () => {
                    lan === "en" && "Forgot your password"
                     }   
                     {
-                     lan === "china" && "忘记密码了吗"
+                     lan === "zh" && "忘记密码了吗"
                       }  
                        {
                         lan === "ar" && `نسيت كلمة السر`
@@ -453,7 +453,7 @@ const Login = () => {
                    lan === "en" && " Here"
                     }   
                     {
-                     lan === "china" && "这里"
+                     lan === "zh" && "这里"
                       }  
                        {
                         lan === "ar" && `هنا`

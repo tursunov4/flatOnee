@@ -19,7 +19,7 @@ const IzminitPhone = () => {
               lan === "ar" && 'غير رقم الهاتف'
             }
                   {
-               lan === "china" && '更改電話號碼'
+               lan === "zh" && '更改電話號碼'
                 }  
                 </div>
                 <div class="edit-input">
@@ -50,7 +50,7 @@ const IzminitPhone = () => {
               lan === "ar" && 'يرسل'
             }
                           {
-               lan === "china" && '发送'
+               lan === "zh" && '发送'
                 }  
                     </button>
                 </div>

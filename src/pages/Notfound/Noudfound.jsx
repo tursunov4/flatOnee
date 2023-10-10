@@ -31,7 +31,7 @@ const Noudfound = () => {
         lan === "en" && "Academy"
       }
       {
-        lan === "china" && "學院"
+        lan === "zh" && "學院"
       }
          {
             lan === "ar" && "الأكاديمية"
@@ -46,7 +46,7 @@ const Noudfound = () => {
         lan === "en" && "UAE"
       }
       {
-        lan === "china" && "阿聯酋"
+        lan === "zh" && "阿聯酋"
       }
         {
             lan === "ar" && `الإمارات العربية المتحدة`
@@ -61,7 +61,7 @@ const Noudfound = () => {
         lan === "en" && "Thailand"
       }      
       {
-        lan === "china" && '泰國'
+        lan === "zh" && '泰國'
       }
        {
             lan === "ar" && `تايلاند`
@@ -75,7 +75,7 @@ const Noudfound = () => {
         lan === "en" && "Bali"
       }  
       {
-        lan === "china" && "峇里島"
+        lan === "zh" && "峇里島"
       }   
          {
             lan === "ar" && `بالي`
@@ -89,7 +89,7 @@ const Noudfound = () => {
         lan === "en" && "Turkiye"
       } 
         {
-        lan === "china" && "土耳其"
+        lan === "zh" && "土耳其"
       }   
          {
             lan === "ar" && `تركيا`
@@ -104,7 +104,7 @@ const Noudfound = () => {
         lan === "en" && "Favorites "
       }   
          {
-        lan === "china" && "收藏夾"
+        lan === "zh" && "收藏夾"
       }   
        {
             lan === "ar" && `المفضلة`
@@ -118,7 +118,7 @@ const Noudfound = () => {
         lan === "en" && "Tenor"
       }   
          {
-        lan === "china" && "文章"
+        lan === "zh" && "文章"
       }  
         {
             lan === "ar" && `مقالات`
@@ -134,7 +134,7 @@ const Noudfound = () => {
         lan === "en" && "Profile"
       }  
           {
-        lan === "china" && "輪廓"
+        lan === "zh" && "輪廓"
       }   
        {
             lan === "ar" && `حساب تعريفي`
@@ -166,7 +166,7 @@ const Noudfound = () => {
         lan === "en" && "Profile"
       } 
            {
-        lan === "china" && "輪廓"
+        lan === "zh" && "輪廓"
       }   
        {
             lan === "ar" && `حساب تعريفي`
@@ -183,7 +183,7 @@ const Noudfound = () => {
 
       }
        {
-        lan === "china" && "學院"
+        lan === "zh" && "學院"
       }
        {
             lan === "ar" && "الأكاديمية"
@@ -197,7 +197,7 @@ const Noudfound = () => {
         lan === "en" && "UAE"
       }
        {
-        lan === "china" && "學院"
+        lan === "zh" && "學院"
       }
       {
             lan === "ar" && `الإمارات العربية المتحدة`
@@ -212,7 +212,7 @@ const Noudfound = () => {
         lan === "en" && "Thailand"
       }  
         {
-        lan === "china" && '泰國'
+        lan === "zh" && '泰國'
       }
        {
             lan === "ar" && `تايلاند`
@@ -226,7 +226,7 @@ const Noudfound = () => {
         lan === "en" && "Bali"
       }   
          {
-        lan === "china" && "峇里島"
+        lan === "zh" && "峇里島"
       }   
        {
             lan === "ar" && `بالي`
@@ -240,7 +240,7 @@ const Noudfound = () => {
         lan === "en" && "Turkiye"
       } 
        {
-        lan === "china" && "土耳其"
+        lan === "zh" && "土耳其"
       } 
        {
             lan === "ar" && `تركيا`
@@ -256,7 +256,7 @@ const Noudfound = () => {
       }   
       
       {
-        lan === "china" && "收藏夾"
+        lan === "zh" && "收藏夾"
       }   
          {
             lan === "ar" && `المفضلة`
@@ -270,7 +270,7 @@ const Noudfound = () => {
         lan === "en" && "Tenor"
       }   
          {
-        lan === "china" && "文章"
+        lan === "zh" && "文章"
       }  
        {
             lan === "ar" && `مقالات`
@@ -313,7 +313,7 @@ const Noudfound = () => {
         lan === "en" && "Something went wrong :("
       }
       {
-        lan === "china" && "出了些问题 ：（"
+        lan === "zh" && "出了些问题 ：（"
       }
          {
             lan === "ar" && "هناك خطأ ما :("
@@ -327,7 +327,7 @@ const Noudfound = () => {
         lan === "en" && "The page has been deleted or not yet created"
       }
       {
-        lan === "china" && "该页面已被删除或尚未创建"
+        lan === "zh" && "该页面已被删除或尚未创建"
       }
          {
             lan === "ar" &&  `تم حذف الصفحة أو لم يتم إنشاؤها بعد`
@@ -342,7 +342,7 @@ const Noudfound = () => {
         lan === "en" && "come back"
       }
       {
-        lan === "china" && "回来"
+        lan === "zh" && "回来"
       }
          {
             lan === "ar" && "عد"

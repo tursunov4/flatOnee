@@ -197,7 +197,7 @@ const HomePage = () => {
               lan === "en" && `Send`
             }   
            {
-            lan === "china" && `发送`
+            lan === "zh" && `发送`
            }!
       </div>
       }
@@ -212,7 +212,7 @@ const HomePage = () => {
               lan === "en" && `Send`
             }   
            {
-            lan === "china" && `发送`
+            lan === "zh" && `发送`
            }
         </button>
         </form>
@@ -224,7 +224,7 @@ const HomePage = () => {
       <section className="main-section__update">
         <div className="container__main">
           <div className="main-section__wrapperu">
-            <div className="main-section__language"> <span className="cursorimgg"  onClick={()=>handleLanguage("ru")}>Рус </span> | <span className="cursorimgg" onClick={()=>handleLanguage("en")}>En </span>| <span className="cursorimgg" onClick={()=>handleLanguage("china")} >中國人</span></div>
+            <div className="main-section__language"> <span className="cursorimgg"  onClick={()=>handleLanguage("ru")}>Рус </span> | <span className="cursorimgg" onClick={()=>handleLanguage("en")}>En </span>| <span className="cursorimgg" onClick={()=>handleLanguage("zh")} >中國人</span></div>
             <div className="main-seciton__wrapper-inner">
               <h2>
               {
@@ -234,7 +234,7 @@ const HomePage = () => {
               lan === "en" && "Changing the world of real estate with"
             }
             {
-              lan === "china" && "用人工智慧改變房地產世界"
+              lan === "zh" && "用人工智慧改變房地產世界"
             }
            <span> 
             {
@@ -253,7 +253,7 @@ const HomePage = () => {
               lan === "en" && " We simplify all processes: from rent, purchase and delivery, to payment              utilities, due to a combination of several neural networks in              unified system"
             }
              {
-              lan === "china" && "我們透過將多個神經網路組合到一個系統中來簡化所有流程：從租賃、購買和出租到支付公用事業費用"
+              lan === "zh" && "我們透過將多個神經網路組合到一個系統中來簡化所有流程：從租賃、購買和出租到支付公用事業費用"
             }
                
               </h4>
@@ -265,7 +265,7 @@ const HomePage = () => {
               lan === "en" &&  "Find object"
               }
              {
-              lan === "china" &&  `寻找对象`        
+              lan === "zh" &&  `寻找对象`        
                  }
                
                 </button>
@@ -309,7 +309,7 @@ const HomePage = () => {
               lan === "en" && `We are a real estate agency that uses`
             }
               {
-              lan === "china" && "我們是一家使用神經網路的房地產機構"
+              lan === "zh" && "我們是一家使用神經網路的房地產機構"
             }
               <span> 
               {
@@ -335,7 +335,7 @@ const HomePage = () => {
               lan === "en" && `We suggest up to 90% of liquid objects in advance`
             }    
              {
-              lan === "china" && "我們是一家使用神經網路的房地產機構"
+              lan === "zh" && "我們是一家使用神經網路的房地產機構"
             }          
              </p>
             <div className="our-mission__newwrap">
@@ -347,7 +347,7 @@ const HomePage = () => {
               lan === "en" && '«Neurobroker»'
             }  
               {
-              lan === "china" && "《第一單元》"
+              lan === "zh" && "《第一單元》"
             }   
                  <br />
                  {
@@ -358,7 +358,7 @@ const HomePage = () => {
             }    
             
             {
-              lan === "china" && "中的“神經經紀人"
+              lan === "zh" && "中的“神經經紀人"
             }  
                 
               </h2>
@@ -370,7 +370,7 @@ const HomePage = () => {
               lan === "en" && ` We are creating a tool for instant and accurate analysis of the real estate market, which allows you to be aware of the most liquid and profitable lots.`
             }   
               {
-              lan === "china" && "我們正在創建一個即時、準確分析房地產市場的工具，讓您了解最具流動性和利潤最高的土地。"
+              lan === "zh" && "我們正在創建一個即時、準確分析房地產市場的工具，讓您了解最具流動性和利潤最高的土地。"
             }
               </h5>
             </div>
@@ -416,7 +416,7 @@ const HomePage = () => {
               lan === "en" && `What is Neurobroker?`
             }   
               {
-              lan === "china" && "什麼是神經經紀人？"
+              lan === "zh" && "什麼是神經經紀人？"
             }  
                 
               </h2>
@@ -430,7 +430,7 @@ const HomePage = () => {
               lan === "en" && `  «Neurobroker»  Flat one simplifies all actions in real estate: from purchase, rental, to payment of utilities due to a combination of several neural networks in a single system.`
             }   
               {
-              lan === "china" && "「Neurobroker」Flat one 簡化了房地產中的所有操作：由於單一系統中結合了多個神經網絡，從購買、租賃到水電費支付。"
+              lan === "zh" && "「Neurobroker」Flat one 簡化了房地產中的所有操作：由於單一系統中結合了多個神經網絡，從購買、租賃到水電費支付。"
             }  
 
                
@@ -445,7 +445,7 @@ const HomePage = () => {
               lan === "en" && `Personal assistant`
             }    
              {
-              lan === "china" && "私人助理"
+              lan === "zh" && "私人助理"
             }            
              </h2>
               <p>
@@ -462,7 +462,7 @@ const HomePage = () => {
               investments.`
             }   
               {
-              lan === "china" && "購買房產時自動分析財務風險和機會可以幫助客戶做出購買房地產的明智決策，減少分析風險和投資的時間。"
+              lan === "zh" && "購買房產時自動分析財務風險和機會可以幫助客戶做出購買房地產的明智決策，減少分析風險和投資的時間。"
             }       
                 
              
@@ -477,7 +477,7 @@ const HomePage = () => {
               lan === "en" && `Your pocket broker`
             }   
             {
-              lan === "china" && "您的袖珍经纪人"
+              lan === "zh" && "您的袖珍经纪人"
             }       
                         
                 </h2>
@@ -493,7 +493,7 @@ const HomePage = () => {
               make the best decision.`
             }     
                {
-              lan === "china" && "房地產銷售中的人工智慧可以預測您的需求並告知您市場的任何變化。 幫助您做出更好的決定。"
+              lan === "zh" && "房地產銷售中的人工智慧可以預測您的需求並告知您市場的任何變化。 幫助您做出更好的決定。"
             } 
               </p>
             </li>
@@ -511,7 +511,7 @@ const HomePage = () => {
               lan === "en" && `For whom`
             }    
               {
-              lan === "china" && "為了誰"
+              lan === "zh" && "為了誰"
             } 
            
             </h6>
@@ -525,7 +525,7 @@ const HomePage = () => {
               lan === "en" && `Who will benefit from «Neurobroker»`
             }    
                 {
-              lan === "china" && "誰將從 Neurobroker 中受益？"
+              lan === "zh" && "誰將從 Neurobroker 中受益？"
             } 
                 </h2>
               <div className="main-cont__wrap-inner">
@@ -541,7 +541,7 @@ const HomePage = () => {
                  lan === "en" && `Real estate investor`
                 }    
                  {
-              lan === "china" && "房地產投資者"
+              lan === "zh" && "房地產投資者"
             } 
            
                       </h5>
@@ -556,7 +556,7 @@ const HomePage = () => {
                  lan === "en" && `Owners renting long term`
                 }   
                          {
-              lan === "china" && "房地產投資者"
+              lan === "zh" && "房地產投資者"
             }  
                 
                       </h5>
@@ -571,7 +571,7 @@ const HomePage = () => {
                  lan === "en" && ` Buyers`
                 }    
                    {
-                 lan === "china" && "買家"
+                 lan === "zh" && "買家"
                  }  
                 
                      </h5>
@@ -586,7 +586,7 @@ const HomePage = () => {
                  lan === "en" && `  Tenants`
                 }   
                    {
-                 lan === "china" && "買家"
+                 lan === "zh" && "買家"
                  }   
                      </h5>
                   </li>
@@ -609,7 +609,7 @@ const HomePage = () => {
                  lan === "en" && `Our objects`
                 }    
                    {
-                 lan === "china" && "我們的對象"
+                 lan === "zh" && "我們的對象"
                  }  
               </h2>
             <p>
@@ -622,7 +622,7 @@ const HomePage = () => {
                  neural networks.`
                 }    
                   {
-                 lan === "china" && "我們利用神經網路分析以及與頂級開發商的合作來選擇最有利可圖的房產"
+                 lan === "zh" && "我們利用神經網路分析以及與頂級開發商的合作來選擇最有利可圖的房產"
                  }  
          
             </p>
@@ -631,27 +631,94 @@ const HomePage = () => {
         <ul className="section-list">
           <li className="section-list__item baclist1 ">
             <a className="container" href="">
-              <div className="section-list__title">Москва</div>
+              <div className="section-list__title">
+              {
+               lan === "ru" && " Москва"
+            }
+            {
+              lan === "en" && "Moscow"
+            } 
+              {
+              lan === "zh" && "莫斯科"
+            }   
+               {
+                  lan === "ar" && `موسكو`
+                } 
+               
+                </div>
             </a>
           </li>
           <li className="section-list__item  baclist2 ">
             <a className="container" href="">
-              <div className="section-list__title">Дубай</div>
+              <div className="section-list__title">
+              {
+               lan === "ru" && "  Дубай"
+            }
+            {
+              lan === "en" && "Dubai"
+            } 
+              {
+              lan === "zh" && "迪拜"
+            }   
+               {
+                  lan === "ar" && `دبي`
+                } 
+              
+                </div>
             </a>
           </li>
           <li className="section-list__item baclist3">
             <a className="container" href="">
-              <div className="section-list__title">Тайланд</div>
+              <div className="section-list__title">
+              {
+              lan === "ru" && "Тайланд"
+            }
+            {
+              lan === "en" && "Thailand"
+            }      
+            {
+              lan === "zh" && '泰國'
+            }
+             {
+                  lan === "ar" && `تايلاند`
+                } 
+                </div>
             </a>
           </li>
           <li className="section-list__item  baclist4 ">
             <a className="container" href="">
-              <div className="section-list__title">Бали</div>
+              <div className="section-list__title">
+              {
+              lan === "ru" && "Бали"
+            }
+            {
+              lan === "en" && "Bali"
+            }  
+            {
+              lan === "zh" && "峇里島"
+            }   
+               {
+                  lan === "ar" && `بالي`
+                } 
+              </div>
             </a>
           </li>
           <li className="section-list__item  baclist5">
             <a className="container" href="">
-              <div className="section-list__title">Турция</div>
+              <div className="section-list__title">
+              {
+               lan === "ru" && "Турция"
+            }
+            {
+              lan === "en" && "Turkiye"
+            } 
+              {
+              lan === "zh" && "土耳其"
+            }   
+               {
+                  lan === "ar" && `تركيا`
+                } 
+              </div>
             </a>
           </li>
         </ul>
@@ -665,25 +732,69 @@ const HomePage = () => {
                 onClick={() => handleDatabir(1)}
                 className={typetitle === 1 && "offer-section__activeli"}
               >
-                ОАЭ
+                {
+              lan === "ru" && "ОАЭ"
+            }
+            {
+              lan === "en" && "UAE"
+            }
+            {
+              lan === "zh" && "阿聯酋"
+            }
+              {
+                  lan === "ar" && `الإمارات العربية المتحدة`
+                } 
               </li>
               <li
                 onClick={() => handleDatabir(2)}
                 className={typetitle === 2 && "offer-section__activeli"}
               >
-                Индонезия
+                 {
+              lan === "ru" && "Тайланд"
+            }
+            {
+              lan === "en" && "Thailand"
+            }      
+            {
+              lan === "zh" && '泰國'
+            }
+             {
+                  lan === "ar" && `تايلاند`
+                } 
               </li>
               <li
                 onClick={() => handleDatabir(3)}
                 className={typetitle === 3 && "offer-section__activeli"}
               >
-                Тайланд
+                 {
+              lan === "ru" && "Бали"
+            }
+            {
+              lan === "en" && "Bali"
+            }  
+            {
+              lan === "zh" && "峇里島"
+            }   
+               {
+                  lan === "ar" && `بالي`
+                } 
               </li>
               <li
                 onClick={() => handleDatabir(4)}
                 className={typetitle === 4 && "offer-section__activeli"}
               >
-                Турция
+                   {
+               lan === "ru" && "Турция"
+            }
+            {
+              lan === "en" && "Turkiye"
+            } 
+              {
+              lan === "zh" && "土耳其"
+            }   
+               {
+                  lan === "ar" && `تركيا`
+                } 
               </li>
             </ul>
             <div className="offer-section__bar2">
@@ -709,7 +820,7 @@ const HomePage = () => {
                  current or fake market lots.`
                 } 
                 {
-                  lan === 'china' && `就像您一样，我们节省了时间，这对我们来说不仅重要
+                  lan === 'zh' && `就像您一样，我们节省了时间，这对我们来说不仅重要
                   用不同的句子猜测一切，并准确找到什么
                   你一直在寻找的东西，而不是浪费你的时间
                   当前或假的市场批次`
@@ -778,7 +889,7 @@ const HomePage = () => {
                  lan === "en" && `We operate in 4 countries`
                 } 
                 {
-                  lan === 'china' && "我們在 4 個國家開展業務"
+                  lan === 'zh' && "我們在 4 個國家開展業務"
                 }
             
             </h2>
@@ -809,7 +920,7 @@ const HomePage = () => {
                  Flat one is a set of solutions`
                 } 
                   {
-                  lan === 'china' && "Flat one 是一組解決方案"
+                  lan === 'zh' && "Flat one 是一組解決方案"
                 }
            
             </h2>
@@ -825,7 +936,7 @@ const HomePage = () => {
                  lan === "en" && ` We are changing the market now`
                 } 
                   {
-                  lan === 'china' && '  我们现在正在改变市场'
+                  lan === 'zh' && '  我们现在正在改变市场'
                 }
             </h3>
         </div>
@@ -842,7 +953,7 @@ const HomePage = () => {
                  lan === "en" && `  Soon you will be able to use`
                 } 
                   {
-                  lan === 'china' && ' 很快您將能夠使用成熟的應用程序，：'
+                  lan === 'zh' && ' 很快您將能夠使用成熟的應用程序，：'
                 }
               
                 <span>
@@ -861,7 +972,7 @@ const HomePage = () => {
                  lan === "en" && `where will:`
                 } 
                 {
-                  lan === 'china' && "其中包括"
+                  lan === 'zh' && "其中包括"
                 }
                  
               </h2>
@@ -876,7 +987,7 @@ const HomePage = () => {
                  lan === "en" && `More accurate predictions of price movements`
                 } 
                 {
-                  lan === "china" && "更準確預測價格走勢"
+                  lan === "zh" && "更準確預測價格走勢"
                 }
                     </h5>
                 </li>
@@ -890,7 +1001,7 @@ const HomePage = () => {
                  lan === "en" && `More indicators`
                 } 
                   {
-                  lan === "china" &&  `更多指標`
+                  lan === "zh" &&  `更多指標`
                 }
                 </h5>
                 </li>
@@ -904,7 +1015,7 @@ const HomePage = () => {
                  lan === "en" && `Simplification of all operational processes`
                 } 
                   {
-                  lan === "china" &&  `簡化所有操作流程`
+                  lan === "zh" &&  `簡化所有操作流程`
                 }
                     </h5>
                 </li>
@@ -918,7 +1029,7 @@ const HomePage = () => {
                  lan === "en" && `Neural network for interior design`
                 }
                    {
-                  lan === "china" &&  `室內設計的神經網絡`
+                  lan === "zh" &&  `室內設計的神經網絡`
                 }
                     
                    </h5>
@@ -940,7 +1051,7 @@ const HomePage = () => {
                  Follow the development of our product on Telegram`
                 }
                     {
-                  lan === "china" &&  `在 Telegram 上關注我們產品的開發`
+                  lan === "zh" &&  `在 Telegram 上關注我們產品的開發`
                 }
               </p>
             <button>
@@ -951,7 +1062,7 @@ const HomePage = () => {
               lan === "en" &&  "Subscribe"
                           }
              {
-              lan === "china" && "订阅"
+              lan === "zh" && "订阅"
             }
              </button>
           </div>
@@ -969,7 +1080,7 @@ const HomePage = () => {
                  lan === "en" && `Accurate and fast`
                 } 
                   {
-                  lan === "china" &&  `
+                  lan === "zh" &&  `
                   准确快速`
                 }
               </h2>
@@ -983,7 +1094,7 @@ const HomePage = () => {
                  volumes of information happen in seconds.`
                 }
                   {
-                  lan === "china" &&  `神经网络的准确性超过了人类。加工量大
+                  lan === "zh" &&  `神经网络的准确性超过了人类。加工量大
                   大量信息在几秒钟内发生`
                 }
             
@@ -1002,7 +1113,7 @@ const HomePage = () => {
                  lan === "en" && `Seconds`
                 } 
                  {
-                  lan === "china" &&  `秒数`
+                  lan === "zh" &&  `秒数`
                 }
                  </p>
               </span>
@@ -1020,7 +1131,7 @@ const HomePage = () => {
                  hours.`
                 } 
                {
-                  lan === "china" &&  `需要神经网络来创建一系列有利可图的
+                  lan === "zh" &&  `需要神经网络来创建一系列有利可图的
                   当一个人需要时进行物品投资
                   小时。`
                 }
@@ -1038,7 +1149,7 @@ const HomePage = () => {
                  lan === "en" && `Accuracy`
                 } 
                  {
-                  lan === "china" &&`      准确性`
+                  lan === "zh" &&`      准确性`
                 }
                   </p>
               </span>
@@ -1054,7 +1165,7 @@ const HomePage = () => {
                  professional investment broker`
                 } 
                   {
-                  lan === "china" &&`
+                  lan === "zh" &&`
                   预测准确率超过90%，媲美准确度
                                       专业投资经纪人`
                 }
@@ -1075,7 +1186,7 @@ const HomePage = () => {
                  We are recommended`
                 } 
                  {
-                  lan === "china" &&`我们被推荐`
+                  lan === "zh" &&`我们被推荐`
                 }
             </h2>
           <div className="reviews-wrapper">

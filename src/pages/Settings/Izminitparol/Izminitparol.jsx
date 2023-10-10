@@ -79,7 +79,7 @@ const Izminitparol = () => {
               lan === "ar" && 'تغيير البريد'
             }
               {
-               lan === "china" && '更改密碼'
+               lan === "zh" && '更改密碼'
                 }  
                 </div>
                     <div class="edit-input">
@@ -115,7 +115,7 @@ const Izminitparol = () => {
               lan === "ar" && 'يرسل'
             }
                           {
-               lan === "china" && '发送'
+               lan === "zh" && '发送'
                 }  
                         </button>
                     </div>

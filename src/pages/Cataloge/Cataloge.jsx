@@ -269,7 +269,7 @@ const Cataloge = () => {
               lan === "en" && "Property type"
             }
             {
-              lan === "china" && "财产种类              "
+              lan === "zh" && "财产种类              "
             }
                {
                   lan === "ar" && "نوع الملكية"
@@ -299,13 +299,13 @@ const Cataloge = () => {
               <div onClick={()=>setFil2(!fil2)} className="filter-section__header">
                 <div className="filter-section__title">
                 {
-              lan === "ru" && "Type of development"
+              lan === "ru" && "Вид застройки"
             }
             {
               lan === "en" && "Type of development"
             }
             {
-              lan === "china" && "开发类型 "
+              lan === "zh" && "开发类型 "
             }
                {
                   lan === "ar" && "نوع التطوير"
@@ -334,13 +334,13 @@ const Cataloge = () => {
                 <div className="filter-section__title">
                  
                   {
-              lan === "ru" && " Этап строительства"
+              lan === "ru" && "Этап строительства"
             }
             {
               lan === "en" && "Construction phase"
             }
             {
-              lan === "china" && "施工阶段 "
+              lan === "zh" && "施工阶段 "
             }
                {
                   lan === "ar" && "مرحلة البناء"
@@ -373,7 +373,7 @@ const Cataloge = () => {
               lan === "en" && "Finishing"
             }
             {
-              lan === "china" && "精加工  "
+              lan === "zh" && "精加工  "
             }
                {
                   lan === "ar" && "التشطيب"
@@ -409,13 +409,12 @@ const Cataloge = () => {
               lan === "en" && "Construction phase "
             }
             {
-              lan === "china" && "施工阶段  "
+              lan === "zh" && "施工阶段  "
             }
                {
                   lan === "ar" && "مرحلة البناء"
                 }   
                  
-                  Этап строительства
                   </div>
                 <div  className={fil5 ? "filter-section__icon filter-section__icon-rot " :' filter-section__icon' }></div>
               </div>
@@ -460,7 +459,7 @@ const Cataloge = () => {
               lan === "en" && "Price "
             }
             {
-              lan === "china" && " 价格 "
+              lan === "zh" && " 价格 "
             }
                {
                   lan === "ar" && "سعر"
@@ -498,7 +497,7 @@ const Cataloge = () => {
               lan === "en" && "Square"
             }
             {
-              lan === "china" && "正方形"
+              lan === "zh" && "正方形"
             }
                {
                   lan === "ar" && "مربع"
@@ -534,7 +533,7 @@ const Cataloge = () => {
               lan === "en" && "Number of storeys"
             }
             {
-              lan === "china" && "层数"
+              lan === "zh" && "层数"
             }
                {
                   lan === "ar" && "عدد الطوابق"
@@ -569,7 +568,7 @@ const Cataloge = () => {
               lan === "en" && "Construction phase"
             }
             {
-              lan === "china" && " 施工阶段"
+              lan === "zh" && " 施工阶段"
             }
                {
                   lan === "ar" && "مرحلة البناء"
@@ -605,7 +604,7 @@ const Cataloge = () => {
               lan === "en" && "Number of rooms"
             }
             {
-              lan === "china" && "房间的数量"
+              lan === "zh" && "房间的数量"
             }
                {
                   lan === "ar" && "عدد الغرف"
@@ -641,13 +640,28 @@ const Cataloge = () => {
                     <Map
                       width="98%"
                       height="100%"
+                      
                       defaultState={{
-                        center: [55.684758, 37.738521],
-                        zoom: 12,
+                        
+                        center:[25.276987, 55.296249] ,
+                      
+                        zoom: 3,
                       }}
                     >
                       <ZoomControl />
-                      <Placemark geometry={[55.684758, 37.738521]} />
+                      {
+                       text ==1 && <Placemark geometry={[25.276987, 55.296249]} />
+                      }
+                      {
+                       text ==2 && <Placemark geometry={[13.736717, 100.523186]} />
+                      }
+                      {
+                       text ==3 && <Placemark geometry={[ -8.650000, 115.216667]} />
+                      }
+                      {
+                       text ==4 && <Placemark geometry={[41.0214 ,  28.9948]} />
+                      }
+                     
                     </Map>
                   </YMaps>
                 </div>
@@ -670,12 +684,11 @@ const Cataloge = () => {
               lan === "en" && "Filters"
             }
             {
-              lan === "china" && "过滤器"
+              lan === "zh" && "过滤器"
             }
                {
                   lan === "ar" && "المرشحات"
-                }   
-                 
+                }                    
                 </button>
               </div>
               <div className="">
@@ -739,7 +752,7 @@ const Cataloge = () => {
               lan === "en" && "Select real estate in the usual way"
             }
             {
-              lan === "china" && "按常规方式选择房产"
+              lan === "zh" && "按常规方式选择房产"
             }
                {
                   lan === "ar" && "اختر العقارات بالطريقة المعتادة"
@@ -753,7 +766,7 @@ const Cataloge = () => {
               lan === "en" && "Our algorithm will select"
             }
             {
-              lan === "china" && "我们的算法将选择"
+              lan === "zh" && "我们的算法将选择"
             }
                {
                   lan === "ar" && "سوف تختار الخوارزمية لدينا"
@@ -767,7 +780,7 @@ const Cataloge = () => {
               lan === "en" && "Try it"
             }
             {
-              lan === "china" && "尝试一下"
+              lan === "zh" && "尝试一下"
             }
                {
                   lan === "ar" && "جربها"
@@ -786,7 +799,7 @@ const Cataloge = () => {
               lan === "en" && "Top 7 Dubai properties"
             }
             {
-              lan === "china" && "迪拜 7 佳酒店"
+              lan === "zh" && "迪拜 7 佳酒店"
             }
                {
                   lan === "ar" && "أفضل 7 عقارات في دبي"
@@ -849,7 +862,7 @@ const Cataloge = () => {
               lan === "en" && "Complexes Dubai"
             }
             {
-              lan === "china" && "  Комплексы Дубай"
+              lan === "zh" && "  Комплексы Дубай"
             }
                {
                   lan === "ar" && "مجمعات دبي"
@@ -933,7 +946,7 @@ const Cataloge = () => {
               lan === "en" && "Dubai Marina area"
             }
             {
-              lan === "china" && "迪拜码头区"
+              lan === "zh" && "迪拜码头区"
             }
                {
                   lan === "ar" && "منطقة دبي مارينا"
@@ -948,7 +961,7 @@ const Cataloge = () => {
               lan === "en" && "Go to article"
             }
             {
-              lan === "china" && "前往文章"
+              lan === "zh" && "前往文章"
             }
                {
                   lan === "ar" && 'انتقل إلى المادة'
@@ -963,7 +976,7 @@ const Cataloge = () => {
               lan === "en" && "More details"
             }
             {
-              lan === "china" && "更多细节"
+              lan === "zh" && "更多细节"
             }
                {
                   lan === "ar" && 'المزيد من التفاصيل'

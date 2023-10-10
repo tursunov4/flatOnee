@@ -77,7 +77,7 @@ const Izminitemail = () => {
               lan === "ar" && 'تغيير البريد'
             }
                           {
-               lan === "china" && '更改郵件'
+               lan === "zh" && '更改郵件'
                 }  
                     </div>
                     <div className="edit-input">
@@ -103,7 +103,7 @@ const Izminitemail = () => {
                                  lan === "ar" && 'يرسل'
                                  }
                                   {
-                                 lan === "china" && '发送'
+                                 lan === "zh" && '发送'
                                    }  
                          </button>
                         </div>
