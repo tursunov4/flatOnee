@@ -41,6 +41,7 @@ const Savedlist = () => {
 
     const [next , setNext] = useState("")
      const [count ,setCount ] = useState(1)
+     const {refi , setRefi} = useContext(Context)
     const navigate = useNavigate()
     useEffect(()=>{
     getData()
@@ -78,6 +79,7 @@ const Savedlist = () => {
         http.delete(`/catalog/wishlist-complex/${id}/`).then((res)=>{
             if(res.status ===204){
                 setRefresh(!refresh) 
+                setRefi(!refi)
             }
         }).catch((err)=>{
             console.log(err)

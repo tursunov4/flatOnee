@@ -31,7 +31,7 @@ const Brokersmain = () => {
   const [refresh , setRefresh] = useState(false)
   const [image , setImage] = useState([])
   const [chervak , setChervak] = useState("")
-  const {lan} = useContext(Context)
+  const {lan ,refi ,setRefi} = useContext(Context)
   useEffect(()=>{
     getDatao()
   },[refresh])
@@ -63,6 +63,7 @@ const Brokersmain = () => {
       }).then((res)=>{
       if(res.status === 201){
          setRefresh(!refresh)
+         setRefi(!refi)
       }
       }).catch((err)=>{
         console.log(err)
@@ -77,6 +78,7 @@ const Brokersmain = () => {
       http.delete(`/catalog/wishlist-complex/${ids}/`).then((res)=>{
         if(res.status === 204){
           setRefresh(!refresh)
+          setRefi(!refi)
         }
       }).catch((err)=>{
         console.log(err)
@@ -389,9 +391,7 @@ const Brokersmain = () => {
             }
               {
               lan === "zh" && `草稿`
-            }
-              
-              
+            }              
               </span>
           </button>
           <button onClick={()=>navigate("/addkompleks")} className="add__btn-add">

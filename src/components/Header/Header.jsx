@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import profile from "../../assets/img/profile.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../Context/Context";
+import http from "../../axios";
 const token = localStorage.getItem("token")
 const Header = () => {
   const [menu ,setMenu] = useState(false)
   const [scrolling, setScrolling] = useState(false);
   const {lan , setLan} =useContext(Context)
   const navigate = useNavigate()
+  const {refi} = useContext(Context)
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -25,6 +27,17 @@ const Header = () => {
     navigate(`/catalog/${id}`)
     setMenu(false)
     window.location.reload()
+  }
+  const [izab , setIzab] = useState([])
+  useEffect(()=>{
+    getIzab()
+  },[refi])
+  const getIzab =()=>{
+    http.get(`/catalog/wishlist-complex/`).then((res)=>{
+     setIzab(res.data.results)
+  }).catch((err)=>{
+      console.log(err)
+  })
   }
 
   return (
@@ -107,7 +120,7 @@ const Header = () => {
                 } 
             
           </Link>
-          <Link to={`/savedlist`} className="header-nav__item1" href="">
+          <Link to={`/savedlist`} className="header-nav__item1 izantop" href="">
           {
               lan === "ru" && "Избранное"
             }
@@ -120,6 +133,10 @@ const Header = () => {
              {
                   lan === "ar" && `المفضلة`
                 } 
+                {
+                  izab.length !==0 &&
+                <span>{izab.length}</span>
+                }
           </Link>
           <Link to={'/articlemain'} className="header-nav__item1" href="">
            {
@@ -147,11 +164,11 @@ const Header = () => {
                 {
               lan === "zh" && "輪廓"
             }   
-             {
+                {
                   lan === "ar" && `حساب تعريفي`
                 } 
-           
               </span>
+
             <img src={profile} alt="" />
           </Link>
         </nav>
@@ -258,7 +275,7 @@ const Header = () => {
                 } 
             
             </Link>
-            <Link onClick={()=>setMenu(false)}   to={`/savedlist`} className="header-nav__item1" href="">
+            <Link onClick={()=>setMenu(false)}   to={`/savedlist`} className="header-nav__item1 izantop" href="">
             {
               lan === "ru" && "Избранное"
             }
@@ -272,6 +289,10 @@ const Header = () => {
                {
                   lan === "ar" && `المفضلة`
                 } 
+                                {
+                  izab.length !==0 &&
+                <span>{izab.length}</span>
+                }
             </Link>
             <Link onClick={()=>setMenu(false)}  to={'/articlemain'} className="header-nav__item1" href="">
             {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import productimg from "../../assets/img/product-image.jpg";
 import apartmentprev from "../../assets/img/apartament-preview.jpg"
 import strelkasmall from "../../assets/img/strelkasmall.svg"
@@ -39,9 +39,11 @@ import "swiper/css/pagination";
 import 'swiper/css/navigation';
 import close from "../../assets/img/close-white.svg"
 import { toast } from 'react-toastify';
+import { Context } from '../../Context/Context';
 
 const token = localStorage.getItem("token")
   const Productitem = () => {
+    const {refi , setRefi} = useContext(Context)
   const [typevibor , setTypevibor] = useState(false)
   const [typeplan , setTypeplan] = useState(false)
   const [data, setData] = useState({})
@@ -123,6 +125,7 @@ const token = localStorage.getItem("token")
       }).then((res)=>{
       if(res.status === 201){
          setRefresh(!refresh)
+         setRefi(!refi)
       }
       }).catch((err)=>{
         console.log(err)
@@ -137,6 +140,7 @@ const token = localStorage.getItem("token")
       http.delete(`/catalog/wishlist-complex/${ids}/`).then((res)=>{
         if(res.status === 204){
           setRefresh(!refresh)
+          setRefi(!refi)
         }
       }).catch((err)=>{
         console.log(err)
@@ -260,7 +264,7 @@ const token = localStorage.getItem("token")
              {
             image[2] &&       <img  src={`http://164.92.172.190:8080${image[2].image}`}alt="" />
           }
-            {
+          {
             image[3] &&       <img  src={`http://164.92.172.190:8080${image[3].image}`}alt="" />
           }
             {
@@ -307,7 +311,7 @@ const token = localStorage.getItem("token")
                         {
                           offiseAr[0]?.data?.map((item , index)=>(
                             <li className="vibrate-section__list-item">
-                            <h6>{item?.name} <img src={strelkatepa} alt="" /></h6>
+                            <h6 onClick={()=>navigate(`/product-item/${item.id}`)} >{item?.name} <img src={strelkatepa} alt="" /></h6>
                             <span className="vibrate-section__ulcham2">{item?.price} $</span>
                             <span className="vibrate-section__ulcham2">{item?.square} м²</span>
                             <span className="vibrate-section__ulcham2"
@@ -337,7 +341,7 @@ const token = localStorage.getItem("token")
                         {
                           offiseAr[1]?.data?.map((item , index)=>(
                             <li className="vibrate-section__list-item">
-                            <h6>{item?.name} <img src={strelkatepa} alt="" /></h6>
+                            <h6 onClick={()=>navigate(`/product-item/${item.id}`)} >{item?.name} <img src={strelkatepa} alt="" /></h6>
                             <span className="vibrate-section__ulcham2">{item?.price} $</span>
                             <span className="vibrate-section__ulcham2">{item?.square} м²</span>
                             <span className="vibrate-section__ulcham2"
@@ -367,7 +371,7 @@ const token = localStorage.getItem("token")
                         {
                           offiseAr[2]?.data?.map((item , index)=>(
                             <li className="vibrate-section__list-item">
-                            <h6>{item?.name} <img src={strelkatepa} alt="" /></h6>
+                            <h6 onClick={()=>navigate(`/product-item/${item.id}`)} >{item?.name} <img src={strelkatepa} alt="" /></h6>
                             <span className="vibrate-section__ulcham2">{item?.price} $</span>
                             <span className="vibrate-section__ulcham2">{item?.square} м²</span>
                             <span className="vibrate-section__ulcham2"
@@ -397,7 +401,7 @@ const token = localStorage.getItem("token")
                         {
                           offiseAr[3]?.data?.map((item , index)=>(
                             <li className="vibrate-section__list-item">
-                            <h6>{item?.name} <img src={strelkatepa} alt="" /></h6>
+                            <h6 onClick={()=>navigate(`/product-item/${item.id}`)} >{item?.name} <img src={strelkatepa} alt="" /></h6>
                             <span className="vibrate-section__ulcham2">{item?.price} $</span>
                             <span className="vibrate-section__ulcham2">{item?.square} м²</span>
                             <span className="vibrate-section__ulcham2"
@@ -427,7 +431,7 @@ const token = localStorage.getItem("token")
                         {
                           offiseAr[4]?.data?.map((item , index)=>(
                             <li className="vibrate-section__list-item">
-                            <h6>{item?.name} <img src={strelkatepa} alt="" /></h6>
+                            <h6 onClick={()=>navigate(`/product-item/${item.id}`)} >{item?.name} <img src={strelkatepa} alt="" /></h6>
                             <span className="vibrate-section__ulcham">{item?.price} $</span>
                             <span className="vibrate-section__ulcham">{item?.square} м²</span>
                             <span className="vibrate-section__ulcham  "

@@ -130,3 +130,14 @@ line-height: 100%; /* 46px */
     z-index: -1;
     object-fit: 100%;
 }
+.izantop{
+    position: relative;
+}
+.izantop > span{
+    position: absolute;
+    padding: 0 5px;
+    background: linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.27%);
+    color:white;
+    border-radius: 6px;
+    top: -18px;
+}

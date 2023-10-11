@@ -31,7 +31,7 @@ const HomePage = () => {
   const [rekoment2 ,setRekomend2] = useState([])
   const [dataOffices , setDataoffices] = useState([])
   const [refresh , setRefresh] = useState(false)
-  const {lan, setLan} = useContext(Context)
+  const {lan, setLan, refi ,setRefi} = useContext(Context)
    useEffect(()=>{
     flatAbout()
     getFlatRecomend()
@@ -87,7 +87,8 @@ const HomePage = () => {
         complex: ids,
       }).then((res)=>{
       if(res.status === 201){
-         setRefresh(!refresh)     
+         setRefresh(!refresh)  
+         setRefi(!refi)
       }
       }).catch((err)=>{
         console.log(err)
@@ -101,6 +102,7 @@ const HomePage = () => {
         http.delete(`/catalog/wishlist-complex/${id}/`).then((res)=>{
           if(res.status === 204){
             setRefresh(!refresh)
+            setRefi(!refi)
           }
         }).catch((err)=>{
           console.log(err)

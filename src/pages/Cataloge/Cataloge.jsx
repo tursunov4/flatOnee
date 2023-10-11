@@ -20,7 +20,7 @@ const id = localStorage.getItem("id")
 
 const Cataloge = () => {
   const [typeabout, setAbout] = useState(false);
-  const {lan} = useContext(Context)
+  const {lan, refi , setRefi} = useContext(Context)
   const [next , setNext ] = useState('')
   const [prev , setPrev] = useState("")
   const [data , setData] = useState([])
@@ -104,6 +104,7 @@ const Cataloge = () => {
     }).then((res)=>{
       if(count===1){
         setRefresh(!refresh)
+        setRefi(!refi)
       }else{
           getlikePaginate()
       }
@@ -121,6 +122,7 @@ const Cataloge = () => {
         if(res.status === 204){
           if(count===1){
             setRefresh(!refresh)
+            setRefi(!refi)
           }else{
               getlikePaginate()
           }
