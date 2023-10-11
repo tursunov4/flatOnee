@@ -303,7 +303,7 @@ const token = localStorage.getItem("token")
                   </li>
                     {
                       comnat1 &&
-                       <div>
+                       <>
                         {
                           offiseAr[0]?.data?.map((item , index)=>(
                             <li className="vibrate-section__list-item">
@@ -316,7 +316,7 @@ const token = localStorage.getItem("token")
                           </li>
                           ))
                         }
-                       </div>
+                       </>
                     }
                   </>
                  }
@@ -332,7 +332,7 @@ const token = localStorage.getItem("token")
                   </h6>
                   </li>
                     {
-                      comnat1 &&
+                      comnat2 &&
                        <>
                         {
                           offiseAr[1]?.data?.map((item , index)=>(
