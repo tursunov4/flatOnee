@@ -137,8 +137,9 @@ line-height: 100%; /* 46px */
     position: absolute;
     padding: 0 5px;
     font-size: 13px;
+    line-height: 18px;
     background: linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.27%);
     color:white;
     border-radius: 8px;
-    top: -18px;
+    top: -15px;
 }
