@@ -142,7 +142,6 @@ const Cataloge = () => {
       console.log(err)
     })
   }
-  const [money, setMoney] = useState(pricemax); 
 
   const handleSliderChange = (value) => {
     setNewMaxsum(value)
@@ -642,11 +641,8 @@ const Cataloge = () => {
                     <Map
                       width="98%"
                       height="100%"
-                      
                       defaultState={{
-                        
                         center:[25.276987, 55.296249] ,
-                      
                         zoom: 3,
                       }}
                     >
@@ -795,10 +791,10 @@ const Cataloge = () => {
             <section className="offer-section2">
               <h2 className="offer-section2__title">
               {
-              lan === "ru" && " Топ 7 объектов Дубай"
+              lan === "ru" && <span>Топ 7 объектов { text-0 === 1 &&  "Дубай"} { text-0 === 2 &&  "Тайланд"} { text-0 === 3 &&  "Бали"} { text-0 === 4 &&  "Турция"}</span>
             }
             {
-              lan === "en" && "Top 7 Dubai properties"
+              lan === "en" && <span>Top 7 {text-0 ===1 && ' Dubai'} { text-0 === 2 &&  "Thailand"} { text-0 === 3 &&  "Bali"} { text-0 === 4 &&  "Turkiye"} properties</span>  
             }
             {
               lan === "zh" && "迪拜 7 佳酒店"
@@ -856,10 +852,10 @@ const Cataloge = () => {
             <section className="categoriya__title-list">
               <h2>
               {
-              lan === "ru" && "  Комплексы Дубай"
+              lan === "ru" && <span>Комплексы  { text-0 === 1 &&  "Дубай"} { text-0 === 2 &&  "Тайланд"} { text-0 === 3 &&  "Бали"} { text-0 === 4 &&  "Турция"}</span> 
             }
             {
-              lan === "en" && "Complexes Dubai"
+              lan === "en" && <span>Complexes {text-0 ===1 && ' Dubai'} { text-0 === 2 &&  "Thailand"} { text-0 === 3 &&  "Bali"} { text-0 === 4 &&  "Turkiye"}</span> 
             }
             {
               lan === "zh" && "  Комплексы Дубай"
