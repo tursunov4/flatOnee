@@ -35,7 +35,7 @@ const Footer = () => {
           inputRef2.current.value =''
         }
       }).catch((err)=>{
-        
+         console.log(err)
       })
     }
   

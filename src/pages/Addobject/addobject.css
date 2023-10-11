@@ -702,12 +702,16 @@ line-height: 135%; /* 20.25px */
     width: 80%;
 }
 }
+.addobject-addhash{
+    
+}
 .addmap__formplusbtn{
    outline: none;
    border: none;
    cursor: pointer;
    background: none;
   cursor: pointer;
-  width: 18px;
   position: absolute;
+  right: 30%;
+  top: 20px;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import productimg from "../../assets/img/product-image.jpg";
 import apartmentprev from "../../assets/img/apartament-preview.jpg"
 import strelkasmall from "../../assets/img/strelkasmall.svg"
@@ -30,6 +30,17 @@ import chat from "../../assets/img/chat.svg"
 import linkarrow from "../../assets/img/link-arrow.svg"
 import { useNavigate, useParams } from 'react-router-dom';
 import http from '../../axios';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
+import "swiper/css/pagination";
+import 'swiper/css/navigation';
+import close from "../../assets/img/close-white.svg"
+import { toast } from 'react-toastify';
+
+const token = localStorage.getItem("token")
   const Productitem = () => {
   const [typevibor , setTypevibor] = useState(false)
   const [typeplan , setTypeplan] = useState(false)
@@ -37,21 +48,37 @@ import http from '../../axios';
   const [prevnext , setPrevNext] = useState({})
   const [image , setImage] = useState([])
   const [vznos , setVznos] = useState([])
+  const [other , setOther] = useState([])
+  const [refresh , setRefresh] = useState(false)
+  const [overlay , setOverlay] = useState(false)
+  const inputRef = useRef()
+  const inputRef2 = useRef()
+  const [num , setNum] = useState("")
+  const [text , setText] = useState("")
   const { id} = useParams()
+  const [offiseId , setOfficeId] = useState("")
+  const [offiseAr , setOfficeAr] = useState([])
+  const [comnat1 ,setComnat1] = useState(false)
+  const [comnat2 ,setComnat2] = useState(false)
+  const [comnat3 ,setComnat3] = useState(false)
+  const [comnat4 ,setComnat4] = useState(false)
+  const [comnat5 ,setComnat5] = useState(false)
+  const [infraimg , setInfraImg] = useState([])
   useEffect(()=>{
       getData()
-         prevNext()
-  },[])
-  // useEffect(()=>{
-  //  getData()
-  //  prevNext()
-  // },[])
+      prevNext()
+  },[refresh])
+
+
   const  navigate = useNavigate()
   const getData = ()=>{
     http.get(`/catalog/complex/${id}/`).then((res)=>{
        setData(res.data)
        setImage(res.data.image)
        setVznos(res.data.vznos)
+       setOfficeId(res.data.office)
+       getOffices(res.data.office)
+       console.log(res.data)
     }).catch((err)=>{
       console.log(err)
     })
@@ -59,6 +86,17 @@ import http from '../../axios';
   const prevNext =()=>{
     http.get(`/catalog/next-prev/${id}/?obj=complex`).then((res)=>{
       setPrevNext(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  useEffect(()=>{
+    getOther()
+  },[refresh])
+  const getOther = ()=>{
+    http.get(`/catalog/complex/${id}/other`).then((res)=>{
+      console.log(res.data)
+      setOther(res.data)
     }).catch((err)=>{
       console.log(err)
     })
@@ -76,9 +114,120 @@ import http from '../../axios';
     }
   }
 
+  const handleLike =(ids)=>{
+
+    if(token){
+      http.post("/catalog/wishlist-complex/" , {
+        user: id-0,
+      complex: ids,
+      }).then((res)=>{
+      if(res.status === 201){
+         setRefresh(!refresh)
+      }
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }else{
+        navigate("/login")
+    }
+    }
+
+  const handleDislike =(ids)=>{
+    if(token){
+      http.delete(`/catalog/wishlist-complex/${ids}/`).then((res)=>{
+        if(res.status === 204){
+          setRefresh(!refresh)
+        }
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }else{
+      navigate("/login")
+    }
+  }
+  const [modal , setModal] = useState(false)
+  window.onclick = function(event) {
+    if (event.target.id == "myModal") {
+       setModal(false)
+    }
+  }
+  window.onclick = function(event) {
+    if (event.target.id == "overmy") {
+       setOverlay(false)
+    }
+  }
+  const handleOtprativ =(e)=>{
+      e.preventDefault()
+     if(text !== "" && num !== ""){
+      http.post("/contact/post/" ,{
+        name: text,
+        phone: num
+      }).then((res)=>{
+        if(res.status === 200){
+          toast.success(  `${res.data[0]}`, {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+          inputRef.current.value =""
+          inputRef2.current.value =''
+          setOverlay(false)
+        }
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+  
+  }
+  // useEffect(()=>{
+  //   getOffices()
+  // },[])
+  const getOffices = (id) =>{
+   
+
+      http.get(`/catalog/offices/${id}/`).then((res)=>{
+        console.log(res.data)
+        setOfficeAr(res.data.complex)
+        setInfraImg(res.data.image)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+  
   return (
     <main>
-    
+        {
+            modal &&
+        <div id="myModal" className='insta-stoooriya'>          
+       <div onClick={()=>setModal(false)} className="recistorys__img" >
+            <img width={30} src={close} alt="" />
+          </div>
+       <div className='imageModal__wrapper'>
+       <Swiper
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination , Navigation]}
+                 navigation={true}
+                  className="mySwiperimage"
+                >
+                  {
+                    image?.map((item , index)=>(
+                <SwiperSlide>
+                    <img  src={`http://164.92.172.190:8080${item?.image}`}alt="" />
+                 </SwiperSlide>
+                    ))
+                  }         
+     </Swiper>            
+       </div>            
+          </div>
+          }
+      
     <div className="product-page">
       <div className="container">
         <ul className="breadcrumbs">
@@ -95,7 +244,7 @@ import http from '../../axios';
         <div className="product-page__header">
           <h1 className="product-page__title">Дубай Марина крик</h1>
           <div className="product-interactions">
-            <button className={data.like_status ?"wishlist-btn filled" :"wishlist-btn " }></button>
+            <button onClick={data.like_status ? ()=>handleDislike(data.id)  :()=>handleLike(data.id) } className={data.like_status ?"wishlist-btn filled" :"wishlist-btn " }></button>
             <button className="share-btn"></button>
           </div>
         </div>
@@ -119,11 +268,11 @@ import http from '../../axios';
           }
            
           </div>
-          <button className="product-gallery__see-all">Все фото</button>
+          <button onClick={()=>setModal(true)} className="product-gallery__see-all">Все фото</button>
         </div>
         <div className="product-content">
           <div>
-            <section className="product-section">
+            <section id='id' className="product-section">
               <p className="product-section__p">
                 {data.name}
               </p>
@@ -135,72 +284,162 @@ import http from '../../axios';
                 }              
               </div>  
             </section>
-            <section className="product__about-setion">
+            <section id='id' className="product__about-setion">
               <div onClick={()=>setTypevibor(!typevibor)} id="vibratie-title" className="vibratie-title">
                 <h2>Варианты планировок</h2>
                 <img className={typevibor ? "pentajstrelka" :''} id="vibratestrelka" src={strelkabig} alt="" />
               </div>
               <ul id="vibrate-section__list" className={typevibor ? "planpetaj-hide" : "vibrate-section__list"}>
-                <li className="vibrate-section__list-item">
-                  <h4>Студии</h4>
-                  <span className="vibrate-section__ulcham">от 40 м²</span>
-                  <span>360 000–380 000$</span>
-                  <h6>
-                    5 предложений <img src={strelkasmall} alt="" />
+                 {
+                  offiseAr[0]?.count !==0 &&
+                  <>
+                  <li className="vibrate-section__list-item">
+                  <h4>{offiseAr[0]?.comnat} комнатные</h4>
+                  <span className="vibrate-section__ulcham">от {offiseAr[0]?.max_ploshad}  м²</span>
+                  <span>{offiseAr[0]?.min_price} $</span>
+                  <h6 onClick={()=>setComnat1(!comnat1)}>
+                    {offiseAr[0]?.count} предложений <img className={comnat1 && "rotate__strelkaa"} src={strelkasmall} alt="" />
                   </h6>
-                </li>
-                <li className="vibrate-section__list-item">
-                  <h4>2 комнатные</h4>
-                  <span className="vibrate-section__ulcham">от70 м²</span>
-                  <span>360 000–380 000$</span>
-                  <h6>
-                    20 предложений <img src={strelkasmall} alt="" />
+                  </li>
+                    {
+                      comnat1 &&
+                       <div>
+                        {
+                          offiseAr[0]?.data?.map((item , index)=>(
+                            <li className="vibrate-section__list-item">
+                            <h6>{item?.name} <img src={strelkatepa} alt="" /></h6>
+                            <span className="vibrate-section__ulcham2">{item?.price} $</span>
+                            <span className="vibrate-section__ulcham2">{item?.square} м²</span>
+                            <span className="vibrate-section__ulcham2"
+                              ><img  width={50} height={55} src={`http://164.92.172.190:8080${item?.image}`} alt=""
+                            /></span>
+                          </li>
+                          ))
+                        }
+                       </div>
+                    }
+                  </>
+                 }
+                 {
+                  offiseAr[1]?.count !==0 &&
+                  <>
+                  <li className="vibrate-section__list-item">
+                  <h4>{offiseAr[1]?.comnat} комнатные</h4>
+                  <span className="vibrate-section__ulcham">от {offiseAr[1]?.max_ploshad}  м²</span>
+                  <span>{offiseAr[1]?.min_price} $</span>
+                  <h6 onClick={()=>setComnat2(!comnat2)}>
+                    {offiseAr[1]?.count} предложений <img className={comnat2 && "rotate__strelkaa"} src={strelkasmall} alt="" />
                   </h6>
-                </li>
-                <li className="vibrate-section__list-item">
-                  <h4>3 комнатные</h4>
-                  <span className="vibrate-section__ulcham">от120 м²</span>
-                  <span>360 000–380 000$</span>
-                  <h6>
-                    2 предложений <img src={strelkasmall} alt="" />
+                  </li>
+                    {
+                      comnat1 &&
+                       <>
+                        {
+                          offiseAr[1]?.data?.map((item , index)=>(
+                            <li className="vibrate-section__list-item">
+                            <h6>{item?.name} <img src={strelkatepa} alt="" /></h6>
+                            <span className="vibrate-section__ulcham2">{item?.price} $</span>
+                            <span className="vibrate-section__ulcham2">{item?.square} м²</span>
+                            <span className="vibrate-section__ulcham2"
+                              ><img width={50} height={55} src={`http://164.92.172.190:8080${item?.image}`} alt=""
+                            /></span>
+                          </li>
+                          ))
+                        }
+                       </>
+                    }
+                  </>
+                 }
+                 {
+                  offiseAr[2]?.count !==0 &&
+                  <>
+                  <li className="vibrate-section__list-item">
+                  <h4>{offiseAr[2]?.comnat} комнатные</h4>
+                  <span className="vibrate-section__ulcham">от {offiseAr[2]?.max_ploshad}  м²</span>
+                  <span>{offiseAr[2]?.min_price} $</span>
+                  <h6 onClick={()=>setComnat3(!comnat3)}>
+                    {offiseAr[2]?.count} предложений <img className={comnat3 && "rotate__strelkaa"} src={strelkasmall} alt="" />
                   </h6>
-                </li>
-                <li className="vibrate-section__list-item">
-                  <h6>
-                    Марина крик <img src={strelkatepa} alt="" />
+                  </li>
+                    {
+                      comnat3 &&
+                       <>
+                        {
+                          offiseAr[2]?.data?.map((item , index)=>(
+                            <li className="vibrate-section__list-item">
+                            <h6>{item?.name} <img src={strelkatepa} alt="" /></h6>
+                            <span className="vibrate-section__ulcham2">{item?.price} $</span>
+                            <span className="vibrate-section__ulcham2">{item?.square} м²</span>
+                            <span className="vibrate-section__ulcham2"
+                              ><img width={50} height={55} src={`http://164.92.172.190:8080${item?.image}`} alt=""
+                            /></span>
+                          </li>
+                          ))
+                        }
+                       </>
+                    }
+                  </>
+                 }
+                 {
+                  offiseAr[3]?.count !==0 &&
+                  <>
+                  <li className="vibrate-section__list-item">
+                  <h4>{offiseAr[3]?.comnat} комнатные</h4>
+                  <span className="vibrate-section__ulcham">от {offiseAr[3]?.max_ploshad}  м²</span>
+                  <span>{offiseAr[3]?.min_price} $</span>
+                  <h6 onClick={()=>setComnat4(!comnat4)}>
+                    {offiseAr[3]?.count} предложений <img className={comnat4 && "rotate__strelkaa"} src={strelkasmall} alt="" />
                   </h6>
-                  <span className="vibrate-section__ulcham2">Сдан</span>
-                  <span className="vibrate-section__ulcham2">380 000$</span>
-                  <span className="vibrate-section__ulcham2">209,7 м²</span>
-                  <span className="vibrate-section__ulcham2"
-                    ><img src={uy} alt=""
-                  /></span>
-                </li>
-                <li className="vibrate-section__list-item">
-                  <h6>Корпус 1 <img src={strelkatepa} alt="" /></h6>
-                  <span className="vibrate-section__ulcham2">Сдан</span>
-                  <span className="vibrate-section__ulcham2">380 000$</span>
-                  <span className="vibrate-section__ulcham2">209,7 м²</span>
-                  <span className="vibrate-section__ulcham2"
-                    ><img src={uy} alt=""
-                  /></span>
-                </li>
-                <li className="vibrate-section__list-item">
-                  <h4>3 комнатные</h4>
-                  <span className="vibrate-section__ulcham">от70 м²</span>
-                  <span>360 000–380 000$</span>
-                  <h6>
-                    15 предложений <img src={strelkasmall} alt="" />
+                  </li>
+                    {
+                      comnat4 &&
+                       <>
+                        {
+                          offiseAr[3]?.data?.map((item , index)=>(
+                            <li className="vibrate-section__list-item">
+                            <h6>{item?.name} <img src={strelkatepa} alt="" /></h6>
+                            <span className="vibrate-section__ulcham2">{item?.price} $</span>
+                            <span className="vibrate-section__ulcham2">{item?.square} м²</span>
+                            <span className="vibrate-section__ulcham2"
+                              ><img width={50} height={55} src={`http://164.92.172.190:8080${item?.image}`} alt=""
+                            /></span>
+                          </li>
+                          ))
+                        }
+                       </>
+                    }
+                  </>
+                 }
+                 {
+                  offiseAr[4]?.count !==0 &&
+                  <>
+                  <li className="vibrate-section__list-item">
+                  <h4>{offiseAr[4]?.comnat} комнатные</h4>
+                  <span className="vibrate-section__ulcham">от {offiseAr[4]?.max_ploshad}  м²</span>
+                  <span>{offiseAr[4]?.min_price} $</span>
+                  <h6  onClick={()=>setComnat5(!comnat5)}>
+                    {offiseAr[4]?.count} предложений <img className={comnat5 && "rotate__strelkaa"} src={strelkasmall} alt="" />
                   </h6>
-                </li>
-                <li className="vibrate-section__list-item">
-                  <h4>3 комнатные</h4>
-                  <span className="vibrate-section__ulcham">от70 м²</span>
-                  <span>360 000–380 000$</span>
-                  <h6>
-                    3 предложений <img src={strelkasmall} alt="" />
-                  </h6>
-                </li>
+                  </li>
+                    {
+                      comnat5 &&
+                       <>
+                        {
+                          offiseAr[4]?.data?.map((item , index)=>(
+                            <li className="vibrate-section__list-item">
+                            <h6>{item?.name} <img src={strelkatepa} alt="" /></h6>
+                            <span className="vibrate-section__ulcham">{item?.price} $</span>
+                            <span className="vibrate-section__ulcham">{item?.square} м²</span>
+                            <span className="vibrate-section__ulcham  "
+                              ><img width={50} height={55} src={`http://164.92.172.190:8080${item?.image}`} alt=""
+                            /></span>
+                          </li>
+                          ))
+                        }
+                       </>
+                    }
+                  </>
+                 }
               </ul>
             </section>
             <section className="kochestva__knok">
@@ -217,7 +456,26 @@ import http from '../../axios';
               </ul>
               <div className="uyimg__kochestva">
                 <div className="uyimg__kochestva-img">
-                  <img src={uybig} alt="" />
+                <Swiper
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper"
+                >
+                {
+                  infraimg?.map((item , index)=>(
+                    <>
+                    {
+                      item?.image_type ==="infra" &&
+                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item.image}`} alt="" /></SwiperSlide>
+                    }
+                    </>
+
+                ))
+              }
+              </Swiper>
+                  {/* <img src={uybig} alt="" /> */}
                 </div>
                 <div className="uyimg__kochestva-text">
                   <h3>от 360 000 $</h3>
@@ -365,21 +623,21 @@ import http from '../../axios';
               </ul>
             </section>
             <section className="product-section">
-              <div className="product-banner">
-                  <a className="container" href="">
+              <div onClick={()=>navigate('/articlemain')} className="product-banner">
+                  <a  className="container" href="">
                       <h4 className="product-banner__title">Район Дубай марина    </h4>
                       <p className="product-banner__text">Перейти к статье</p>
                   </a>
               </div>
             </section>
-             <section className="profuct-file">
+             <a href='#id'  className="profuct-file">
               <label className="profuct-file__label" for="product">
-                <input className="profuct-file__input" id="product"  type="file"/>
+                {/* <input className="profuct-file__input" id="product"  type="file"/> */}
                 <img src={file} alt=""/>
                 <h4>21 планировка в этом ЖК</h4>
                 <p>Выбрать</p>
               </label>
-             </section>
+             </a>
              <section className="profuct__doc">
               <h2>Документация от застройщика</h2>
               <ul className="profuct-doc__list">
@@ -416,12 +674,12 @@ import http from '../../axios';
              <div className="planpetaj-wrapper">
               <ul className="planpetaj-list">
                 {
-                  vznos.map((item , index)=>(
+                  vznos?.map((item , index)=>(
                      <>
                         <li className="planpetaj-listitem">
                     <span className="planpetaj-number">{index+1}</span>
                      <div>
-                       <p className="planpetaj-text">{item} Первый взнос</p>
+                       <p className="planpetaj-text">{item}%  {index+1}-взнос</p>
                         <p className="planpetaj-text-item"></p>
                      </div>
                     </li>
@@ -439,71 +697,47 @@ import http from '../../axios';
                </div>
              </div>
             </section>
-            {/* <section className="plojkompleks">
+            <section className="plojkompleks">
               <h2>Похожие комплексы</h2>
-              <ul className="apartament-list2">
-                <li className="apartament-list__item">
-                  <div className="apartament-list__preview">
-                    <img className="current" src={apartmentprev} alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
+              <ul className="apartament-listt">
+            {
+              other?.map((item , index)=>(                
+              <li className="apartament-list__item">
+                <div className="apartament-list__preview">
+                <Swiper
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper3"
+                >
+                {
+                  item.image?.map((item , index)=>(
+                    <>
+                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item?.image}`} alt="" /></SwiperSlide>
+                    </>
+                ))
+              }
+              </Swiper>
+                </div>
+             
+                <div className="apartament-list__header">
+                  <div>
+                    <p   onClick={()=>navigate(`/product-item/${item.id}`)}  className="apartament-list__address"> {item.name}</p>
                   </div>
-                  <div className="preview-paggination">
-                    <div className="preview-paggination__item selected"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                  </div>
-                  <div className="apartament-list__header">
-                    <div>
-                      <p className="apartament-list__address">
-                        Emaar Business Park 1, Al Thanyah...
-                      </p>
-                   
-                    </div>
-                    <button className="apartament-list__favorite-btn"></button>
-                  </div>
-                  <p className="apartament-list__price">Creek Heights</p>
-                  <ul className="apartament-list__tags">
-                    <li className="apartament-list__tag">360 000–590 000 $</li>
-                    <li className="apartament-list__tag">от 40 м²</li>
-                  </ul>
-                </li>
-                <li className="apartament-list__item">
-                  <div className="apartament-list__preview">
-                    <img className="current" src={apartmentprev} alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                    <img src="img/apartament-preview.jpg" alt="" />
-                  </div>
-                  <div className="preview-paggination">
-                    <div className="preview-paggination__item selected"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                    <div className="preview-paggination__item"></div>
-                  </div>
-                  <div className="apartament-list__header">
-                    <div>
-                      <p className="apartament-list__address">
-                        Emaar Business Park 1, Al Thanyah...
-                      </p>
-                   
-                    </div>
-                    <button className="apartament-list__favorite-btn"></button>
-                  </div>
-                  <p className="apartament-list__price">Creek Heights</p>
-                  <ul className="apartament-list__tags">
-                    <li className="apartament-list__tag">360 000–590 000 $</li>
-                    <li className="apartament-list__tag">от 40 м²</li>
-                  </ul>
-                </li>               
-              </ul>
-            </section> */}
+                  <button onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
+                </div>
+                <p onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__price">250 000₽/месяц</p>
+                <ul className="apartament-list__tags">
+                <li className="apartament-list__tag">{item.etaj1} этаж</li>
+                    <li className="apartament-list__tag">{item.square} м2</li>
+                    <li className="apartament-list__tag">Сдача {item.deadline}</li>
+                </ul>
+              </li>
+              ))
+            }
+             </ul>
+            </section>
           </div>
           <aside className="product-sidebar">
             <div className="product-sidebar__top">
@@ -514,12 +748,12 @@ import http from '../../axios';
                </div>
                <a className="product-sidebar__location" href="">
                 <img src={location} alt=""/>
-               </a>
+               </a> 
               </div>
             
             </div>
             <div className="product-sidebar__buttons">
-              <button className="product-btn" id="book-btn">
+              <button onClick={()=>setOverlay(true)} className="product-btn" id="book-btn">
                 <img src={telefonproduct} alt=""/>
                 <span>Забронировать</span>
               </button>
@@ -542,88 +776,38 @@ import http from '../../axios';
         </div>
       </div>
     </div>      
-    <div className="overlay">
-      <div className="container">
-        <div className="form-overlay">
+    <div id='overmy' className={overlay ?'overlay opened' :"overlay" }>
+      <div id='overmy' className="container">
+        <div id='overmy' className={overlay ? 'form-overlay opened' :'form-overlay '}>
           <div className="container">
-            <button className="form-overlay__close"></button>
-            <form action="">
+            <button onClick={()=>setOverlay(false)} className="form-overlay__close"></button>
+            <form onSubmit={(e)=>handleOtprativ(e)} action="">
               <p className="form-overlay__text">
                 Оставьте контакты и наш специалист свяжется с вами в ближайшее
                 время.
               </p>
               <input
+                ref={inputRef}
+                onChange={(e)=>setText(e.target.value)}
                 className="form-overlay__input"
                 placeholder="Введите имя"
                 type="text"
               />
               <input
+                ref={inputRef2}
+                onChange={(e)=>setNum(e.target.value)}
                 className="form-overlay__input"
                 placeholder="+7 000 000 00 00"
                 type="tel"
               />
               <div className="form-overlay__wrapper">
-                <button className="form-overlay__back-btn">Назад</button>
-                <button className="form-overlay__confirm-btn">Отправить</button>
+                <button onClick={()=>setOverlay(false)} className="form-overlay__back-btn">Назад</button>
+                <button onClick={(e)=>handleOtprativ(e)} className="form-overlay__confirm-btn">Отправить</button>
               </div>
             </form>
           </div>
         </div>
-        <div className="gallery-overlay">
-          <div className="container">
-            <button className="gallery-overlay__close"></button>
-            <div className="gallery-overlay__center">
-              <button className="gallery-overlay__prev">
-                <img src="img/gallery-arrow.svg" alt="" />
-              </button>
-              <img
-                className="gallery-overlay__current"
-                src="img/gallery-overlay.jpg"
-                alt=""
-              />
-              <button className="gallery-overlay__next">
-                <img src="img/gallery-arrow.svg" alt="" />
-              </button>
-            </div>
-            <div className="gallery-overlay__wrapper">
-              <ul className="gallery-overlay__list">
-                <li className="gallery-overlay__item selected">
-                  <img src="img/gallery-overlay.jpg" alt="" />
-                </li>
-                <li className="gallery-overlay__item">
-                  <img src="img/apartament-preview.jpg" alt="" />
-                </li>
-                <li className="gallery-overlay__item">
-                  <img src="img/gallery-overlay.jpg" alt="" />
-                </li>
-                <li className="gallery-overlay__item">
-                  <img src="img/gallery-overlay.jpg" alt="" />
-                </li>
-                <li className="gallery-overlay__item">
-                  <img src="img/gallery-overlay.jpg" alt="" />
-                </li>
-                <li className="gallery-overlay__item">
-                  <img src="img/gallery-overlay.jpg" alt="" />
-                </li>
-                <li className="gallery-overlay__item">
-                  <img src="img/gallery-overlay.jpg" alt="" />
-                </li>
-                <li className="gallery-overlay__item">
-                  <img src="img/gallery-overlay.jpg" alt="" />
-                </li>
-                <li className="gallery-overlay__item">
-                  <img src="img/gallery-overlay.jpg" alt="" />
-                </li>
-                <li className="gallery-overlay__item">
-                  <img src="img/gallery-overlay.jpg" alt="" />
-                </li>
-                <li className="gallery-overlay__item">
-                  <img src="img/gallery-overlay.jpg" alt="" />
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      
       </div>
     </div>
   </main>

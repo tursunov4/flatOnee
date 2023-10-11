@@ -828,9 +828,7 @@ const Cataloge = () => {
               }
               </Swiper>
                     </div>
-                    <div className="preview-paggination">
-                   
-                    </div>
+                    
                     <div className="apartament-list__header">
                       <div>
                         <p  onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__address">
@@ -839,7 +837,7 @@ const Cataloge = () => {
                       </div>
                       <button onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
                     </div>
-                    <p className="apartament-list__price">{item.price}</p>
+                    <p onClick={()=>navigate(`/product-item/${item.id}`)}  className="apartament-list__price">{item.price}</p>
                     <ul className="apartament-list__tags">
                       <li className="apartament-list__tag">{item.etaj1} этажей</li>
                       <li className="apartament-list__tag">от {item.square} м2</li>
@@ -935,7 +933,7 @@ const Cataloge = () => {
                 <button className="learn-more">Подробнее</button>
               </a>
             </div> */}
-                 <div onClick={()=>navigate("/savedlist")}  className="catalogue-banner2 catalugbarner2-bag">
+                 <div onClick={()=>navigate("/articlemain")}  className="catalogue-banner2 catalugbarner2-bag">
               <div  className="catolog-barner__route" href="">
                 <div className="catalogue-banner__description">
                   <div className="catalogue-banner__title">

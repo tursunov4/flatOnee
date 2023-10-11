@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./academiya.css"
 import http from '../../axios'
 import { Context } from '../../Context/Context'
@@ -6,14 +6,15 @@ const Academiya = () => {
     useEffect(()=>{
       getData()
     }, [])
+    const {lan} = useContext(Context)
+    const [data , setData] = useState([])
    const getData =()=>{
-    http.get("/academiya/list/").then((res)=>{
-      console.log(res.data)
+    http.get(`/${lan}/academiya/list/`).then((res)=>{
+      setData(res.data)
     }).catch((err)=>{
       console.log(err)
     })
    }
-   const {lan } = useContext(Context)
   return (
     <section className='academiya'>
         <div className="container">
@@ -42,22 +43,16 @@ const Academiya = () => {
         </p>
          </div>
          <ul className="academiya-list">
+          {
+            data?.map((item ,index) =>(
             <li className='academiya-list__item1'>
-            <p> {
-                    lan === "ru" && "Для брокеров по продаже недвижимости"
-                 }
-                {
-                 lan === "en" && `
-                 For real estate brokers`
-                } 
-                {
-                 lan === "zh" && `
-                 对于房地产经纪人`
-                } 
-                
-                  </p>
+            <p>{item?.title} </p>
+            <img className='academiya-list__item1pos' src={`http://164.92.172.190:8080${item?.image}`} alt="" />
             </li>
-            <li className='academiya-list__item2'>
+
+            ))
+          }
+            {/* <li className='academiya-list__item2'>
             <p> 
                  {
                     lan === "ru" && "Для инвесторов в недвижимость"
@@ -69,7 +64,7 @@ const Academiya = () => {
                  lan === "zh" && ` 对于房地产投资者`
                 } 
                </p>
-            </li>
+            </li> */}
          </ul>
         </div>
     </section>

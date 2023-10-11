@@ -11,8 +11,8 @@ import http from "../../axios";
 import { useToast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import pluss from "../../assets/img/plus.svg"
 import 'react-toastify/dist/ReactToastify.css';
-import ReactInstaStories from "react-insta-stories";
 
 let id = localStorage.getItem("id")
 const Addobject = () => {
@@ -45,6 +45,7 @@ const Addobject = () => {
   const [gruzavoy , setGruzavoy] = useState(false)
   const [teritorita , setTeritoriya] = useState(false)
   const navigate = useNavigate()
+
  
   // ------ hashtag uchun ----- 
  const [hastagsData , setHashtagsData] = useState([])
@@ -344,6 +345,7 @@ const handleChange =(evt)=>{
                   <label className="addmap__label" >
                     <input onBlur={() =>{setTimeout(()=>{setSearchList2(false)},[150])}} ref={inputRef2}  onChange={handleChange2} type="text"  placeholder="Dubai Marina" />
                   </label>
+                 
                 </form>
               </div>
               <div className="addobject-addhash">
@@ -362,8 +364,8 @@ const handleChange =(evt)=>{
                   }
                   <label className="addmap__label" for="">
                     <input onBlur={() => {setTimeout(()=>{setSearchList(false)},[150])}} ref={inputRef}  onChange={handleChange} type="text" placeholder="#вид на море" />
-                     
                   </label>
+                  <button onClick={(e)=>handleHashtagsubmit(e)} className="addmap__formplusbtn" ><img width={22} src={pluss} alt="" /></button> 
                 </form>
                 <ul className="addobject-addhash__list">
                   {

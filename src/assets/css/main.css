@@ -4,6 +4,7 @@
   box-sizing: border-box;
   list-style: none;
   text-decoration: none;
+  scroll-behavior: smooth;
 }
 html {
     height: 100%;
@@ -1224,6 +1225,7 @@ html {
   }
   .product-gallery > img:first-child {
     width: 100%;
+    height: 590px;
   }
   .product-gallery__images {
     width: 100%;
@@ -1234,7 +1236,13 @@ html {
   }
   .product-gallery__images > img {
     width: 100%;
-    height: 100%;
+    height: 285px;
+  }
+  @media only screen and (max-width:601px){
+    .product-gallery > img:first-child {
+      width: 100%;
+      height: 310px;
+    }
   }
   .product-gallery__see-all {
     position: absolute;
@@ -2438,7 +2446,7 @@ html {
     left: 0;
   
     display: none;
-  
+    z-index: 10;
     width: 100vw;
     height: 100vh;
   }
@@ -5006,6 +5014,7 @@ html {
     font-style: normal;
     font-weight: 300;
     line-height: 135%; /* 16.2px */
+    cursor: pointer;
   }
   .kochestva__knok {
     margin-bottom: 40px;
@@ -5272,6 +5281,7 @@ html {
     }
   }
   .profuct-file {
+    display: block;
     width: 100%;
     padding: 46px 0;
     border-bottom: 1px solid #5b5b5b;
@@ -5319,6 +5329,7 @@ html {
     font-weight: 500;
     line-height: 135%; /* 20.25px */
     text-decoration-line: underline;
+    cursor: pointer;
   }
   .profuct__doc {
     margin-bottom: 60px;
@@ -5781,4 +5792,34 @@ html {
 }
 .catalogue-banner2{
   cursor: pointer;
+}
+.imageModal__wrapper{
+
+  width: 80%;
+  margin: 40px auto  ;
+ 
+}
+.mySwiperimage{
+ 
+  height: 80vh;
+}
+.form-overlay__close ,.form-overlay__back-btn , .form-overlay__confirm-btn{
+  cursor: pointer;
+}
+.rotate__strelkaa{
+  transform: rotate(180deg);
+  transform: all 0.4s;
+}
+.uyimg__kochestva-img{
+  width: 286px;
+height: 334px;
+}
+.product__about-setion{
+  margin-bottom: 20px;
+}
+@media only screen and (max-width:450px){
+  .uyimg__kochestva-img{
+    width: 286px;
+  height: 255px;
+  } 
 }

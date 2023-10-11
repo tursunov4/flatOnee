@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import profileimg from '../../assets/img/profile.png'
 import Check from "../../assets/img/check.svg"
 import setting from "../../assets/img/setings.svg"
@@ -32,7 +32,6 @@ const Brokersmain = () => {
   const [image , setImage] = useState([])
   const [chervak , setChervak] = useState("")
   const {lan} = useContext(Context)
-  const vznos = []
   useEffect(()=>{
     getDatao()
   },[refresh])
@@ -41,9 +40,9 @@ const Brokersmain = () => {
   },[])
 
   const getDatao =()=>{
-    http.get("/catalog/complex/").then((res)=>{
-      setData(res.data.results)
-     
+    http.get("/catalog/complex/me/").then((res)=>{
+      setData(res.data)
+     console.log(res.data)
     }).catch((err)=>{
       console.log(err)
     })
@@ -59,7 +58,7 @@ const Brokersmain = () => {
 
     if(token){
       http.post("/catalog/wishlist-complex/" , {
-        user: id,
+        user: id-0,
       complex: ids,
       }).then((res)=>{
       if(res.status === 201){
@@ -124,7 +123,7 @@ const Brokersmain = () => {
             </div>
           </div>
           <div className="add__user-setings  navigate-settings">
-            <img onClick={()=>navigate("/settings")} classNameName='navigate-settings ' src={setting} alt="setings" />
+            <img onClick={()=>navigate("/settings")} className='navigate-settings ' src={setting} alt="setings" />
           </div>
         </div>
         <div className="add__left-bottom">
@@ -433,9 +432,7 @@ const Brokersmain = () => {
               }
               </Swiper>
                 </div>
-                <div className="preview-paggination">
-              
-                </div>
+             
                 <div className="apartament-list__header">
                   <div>
                     <p   onClick={()=>navigate(`/product-item/${item.id}`)}  className="apartament-list__address"> {item.name}</p>
