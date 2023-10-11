@@ -838,7 +838,22 @@ const HomePage = () => {
               <li className="apartament-list__item apartimentts">
                 
               <div className="apartament-list__preview">
-               
+                <Swiper
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper"
+                >
+                {
+                  item.image?.map((item , index)=>(
+                    <>
+                     <SwiperSlide key={index}> <img    src={`http://164.92.172.190:8080${item.image}`} alt="" /></SwiperSlide>
+                    </>
+
+                ))
+              }
+              </Swiper>
               </div>
             
               <div className="apartament-list__header">
