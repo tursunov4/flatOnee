@@ -136,8 +136,9 @@ line-height: 100%; /* 46px */
 .izantop > span{
     position: absolute;
     padding: 0 5px;
+    font-size: 13px;
     background: linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.27%);
     color:white;
-    border-radius: 6px;
+    border-radius: 8px;
     top: -18px;
 }
