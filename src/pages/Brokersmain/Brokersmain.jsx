@@ -234,7 +234,7 @@ const Brokersmain = () => {
 
                       </div>
                       <div onClick={()=>navigate(`/product-item/${item.id}`)} className="add__apartament-price">
-                         {item.price}₽/мес
+                         {item.price} $
                       </div>
                       <div className="add__apartament-address">
                         {item.name}
@@ -439,7 +439,7 @@ const Brokersmain = () => {
                   </div>
                   <button onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
                 </div>
-                <p onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__price">250 000₽/месяц</p>
+                <p onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__price">250 000 $</p>
                 <ul className="apartament-list__tags">
                 <li className="apartament-list__tag">{item.etaj1} этаж</li>
                     <li className="apartament-list__tag">{item.square} м2</li>

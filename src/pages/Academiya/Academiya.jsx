@@ -38,7 +38,7 @@ const Academiya = () => {
                  lan === "en" && `This training is for investors who want to start investing in foreign real estate and earn from 30% per annum`
                 } 
                 {
-                 lan === "en" && `该培训面向想要开始投资外国房地产并年利率 30% 起的投资者`
+                 lan === "china" && `该培训面向想要开始投资外国房地产并年利率 30% 起的投资者`
                 } 
         </p>
          </div>

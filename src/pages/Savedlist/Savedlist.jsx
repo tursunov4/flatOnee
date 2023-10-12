@@ -645,7 +645,7 @@ const Savedlist = () => {
                             </div>
                             <button onClick={()=>handleDelet(item.complex)} className="apartament-list__favorite-btn filled"></button>
                         </div>
-                        <p onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__price">{item.complex_info?.price}₽/месяц</p>
+                        <p onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__price">{item.complex_info?.price} $</p>
                         <ul className="apartament-list__tags">
                             <li className="apartament-list__tag">{item.complex_info?.etaj1} этаж</li>
                             <li className="apartament-list__tag">{item.complex_info?.square} м2</li>
