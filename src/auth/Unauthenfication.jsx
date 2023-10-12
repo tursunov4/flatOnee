@@ -11,6 +11,9 @@ import Articlemain from '../pages/Articlemain/Articlemain'
 import Savedlist from '../pages/Savedlist/Savedlist'
 import Academiya from '../pages/Academiya/Academiya'
 import Noudfound from '../pages/Notfound/Noudfound'
+import ResetPassword from '../pages/ResetPassword/ResetPassword'
+import ResetIner from '../pages/ResetPassword/ResetIner/ResetIner'
+import ResertEnd from '../pages/ResetPassword/ResertEnd/ResertEnd'
 const Unauthenfication = () => {
   return (
      <Routes>
@@ -27,7 +30,10 @@ const Unauthenfication = () => {
       <Route  path={`/brokermain`} /> 
       </Route>
       <Route element={<Noudfound/>} path='/eror404' /> 
-      <Route path='*' element={<Noudfound/>}  /> 
+      <Route path='*' element={<Noudfound/>}  />
+      <Route element={<ResetPassword/>} path='/reset' /> 
+      <Route element={<ResetIner/>} path='/resetiner'/>
+      <Route element={<ResertEnd/>} path='/resetend' />
      </Routes>
   )
 }

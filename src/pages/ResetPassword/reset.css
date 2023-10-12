@@ -1,0 +1,33 @@
+.reset-errorp{
+    margin: 10px 0 20px 0;
+    color: var(--ff-928-b, #C73930);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+font-family: Inter;
+font-size: 12px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%; /* 16.2px */
+}
+.reset-notp{
+    margin: 20px 0;
+    color: var(--13, #131418);
+font-variant-numeric: lining-nums proportional-nums;
+font-feature-settings: 'ss11' on, 'ss10' on, 'ss09' on, 'ss08' on, 'ss07' on, 'ss06' on, 'ss05' on;
+
+/* 15 Л */
+font-family: Inter;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 135%; /* 20.25px */
+}
+.form{
+    position: relative;
+}
+.reset__nazad{
+    position: absolute;
+    top: 30px;
+    left: 25px;
+    cursor: pointer;
+}

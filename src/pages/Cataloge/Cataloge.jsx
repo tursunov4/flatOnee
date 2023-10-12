@@ -62,7 +62,6 @@ const Cataloge = () => {
   const getRange =()=>{
     http.get("/catalog/complex-range/ ").then((res)=>{
       setRangeNums(res.data)
-
      setPricemin(res.data.min_price-0)
      setPricemax(res.data.max_price-0)
      setQueremax(res.data.max_square)

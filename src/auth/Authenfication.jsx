@@ -22,6 +22,7 @@ import Brokersmain from '../pages/Brokersmain/Brokersmain'
 import Academiya from '../pages/Academiya/Academiya'
 import Noudfound from '../pages/Notfound/Noudfound'
 
+
 const authenfication = () => {
   return (
     <Routes>

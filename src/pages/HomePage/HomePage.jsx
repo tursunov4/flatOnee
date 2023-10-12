@@ -899,12 +899,13 @@ const HomePage = () => {
               <Map
                 width="98%"
                 height="100%"
-                defaultState={{ center: [55.684758, 37.738521], zoom: 12 }}
+                defaultState={{ center: [25.276987, 55.296249], zoom: 3 }}
               >
                 <ZoomControl />
-                <Placemark  geometry={[55.6, 37.7]} />
-      
-                
+                <Placemark geometry={[25.276987, 55.296249]} />
+                <Placemark geometry={[13.736717, 100.523186]} />
+                <Placemark geometry={[ -8.650000, 115.216667]} />
+                <Placemark geometry={[41.0214 ,  28.9948]} />
               </Map>
             </YMaps>
           </div>

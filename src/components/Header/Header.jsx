@@ -3,6 +3,7 @@ import profile from "../../assets/img/profile.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../Context/Context";
 import http from "../../axios";
+import Language from "../Language/Language";
 const token = localStorage.getItem("token")
 const Header = () => {
   const [menu ,setMenu] = useState(false)
@@ -10,9 +11,10 @@ const Header = () => {
   const {lan , setLan} =useContext(Context)
   const navigate = useNavigate()
   const {refi} = useContext(Context)
+  const [open , setOpen] = useState(false)
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
+      if (window.scrollY > 80) {
         setScrolling(true);
       } else {
         setScrolling(false);
@@ -171,6 +173,7 @@ const Header = () => {
 
             <img src={profile} alt="" />
           </Link>
+          <Language open={open} setOpen={setOpen}/>
         </nav>
         <button onClick={() => setMenu(true)} className="mm-btn">
           <span></span>
@@ -184,6 +187,9 @@ const Header = () => {
             onClick={() => setMenu(false)}
             className="m-menu__close"
           ></button>
+          <div>
+          <Language open={open} setOpen={setOpen}/>
+          </div>
           <nav className="header-nav">
             <Link onClick={()=>setMenu(false)} to={"/brokermain"} className="header-nav__item-profile" href="">
               <span>
@@ -308,6 +314,7 @@ const Header = () => {
                   lan === "ar" && `مقالات`
                 } 
             </Link>
+
           </nav>
           <form className="search">
             <input
