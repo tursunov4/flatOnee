@@ -260,13 +260,13 @@ const HomePage = () => {
               </h4>
               <button onClick={()=>handlenavigate(1)} >
               {
-              lan === "ru" && ` Найти объект`
+              lan === "ru" && `Найти Недвижимость`
             }
             {
-              lan === "en" &&  "Find object"
+              lan === "en" &&  "Find Property"
               }
              {
-              lan === "zh" &&  `寻找对象`        
+              lan === "zh" &&  `寻找房产`        
                  }
                
                 </button>
@@ -1151,7 +1151,7 @@ const HomePage = () => {
                  lan === "en" && `Accuracy`
                 } 
                  {
-                  lan === "zh" &&`      准确性`
+                  lan === "zh" &&`准确性`
                 }
                   </p>
               </span>
