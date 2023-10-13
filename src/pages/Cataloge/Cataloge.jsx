@@ -562,10 +562,10 @@ const Cataloge = () => {
               <div onClick={()=>setFil9(!fil9)} className="filter-section__header">
                 <div className="filter-section__title">
                 {
-              lan === "ru" && " Этап строительства"
+              lan === "ru" && " Формат оплаты"
             }
             {
-              lan === "en" && "Construction phase"
+              lan === "en" && "Payment format"
             }
             {
               lan === "zh" && " 施工阶段"
