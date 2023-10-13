@@ -1145,7 +1145,7 @@ const HomePage = () => {
                 <img src={img90} alt="" />
                 <p>
                 {
-                    lan === "ru" && "Точност"
+                    lan === "ru" && "Точность"
                  }
                 {
                  lan === "en" && `Accuracy`
