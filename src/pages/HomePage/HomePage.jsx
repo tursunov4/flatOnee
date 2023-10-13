@@ -928,7 +928,7 @@ const HomePage = () => {
             <div className="telefon2__text">
               <h2>
               {
-                    lan === "ru" && "  Скоро вы сможете пользоваться"
+                    lan === "ru" && "Скоро вы сможете пользоваться"
                  }
                 {
                  lan === "en" && `  Soon you will be able to use`
@@ -939,16 +939,15 @@ const HomePage = () => {
               
                 <span>
                 {
-                    lan === "ru" && "  полноценным приложением"
+                    lan === "ru" && "полноценным приложением "
                  }
                 {
-                 lan === "en" && `
-                 full-fledged application`
+                 lan === "en" && `full-fledged application`
                 } 
                  </span> ,
                  {
                     lan === "ru" && " где будет:"
-                 }
+                 } 
                 {
                  lan === "en" && `where will:`
                 } 
@@ -976,7 +975,7 @@ const HomePage = () => {
                   <span>02</span>
                   <h5>
                   {
-                    lan === "ru" && "    Больше показателей"
+                    lan === "ru" && "Больше показателей"
                  }
                 {
                  lan === "en" && `More indicators`
