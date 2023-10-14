@@ -69,6 +69,7 @@ const Savedlist = () => {
             setData(res.data.results)
             setNext(res.data.next)
             setPrev(res.data.previous)
+            console.log(res.data.results)
              setCount(1)
         }).catch((err)=>{
             console.log(err)

@@ -23,7 +23,7 @@ const Unauthenfication = () => {
       <Route element={<HomePage/>} index/>
       <Route element={<Academiya/>} path='/academiya' />
       <Route element={<Cataloge/>} path={`/catalog/:text`} />
-      <Route element={<Productitem/>} path={`/product-item`}/>
+      <Route element={<Productitem/>} path={`/product-item/:id`}/>
       <Route element={<Article/>} path={`/article/:id`} />
       <Route element={<Articlemain/>} path={`/articlemain`} /> 
       <Route element={<Savedlist/>} path={`/savedlist`} />

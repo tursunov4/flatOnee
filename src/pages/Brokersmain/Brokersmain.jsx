@@ -221,7 +221,7 @@ const Brokersmain = () => {
                
                 
               </div>
-              <div className="add__apartament-list">
+              <div className="add__apartament-list">  
                  {
                   data?.map((item , index) =>(
                     <div className="add__apartament-item">
