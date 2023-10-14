@@ -637,16 +637,15 @@ const Savedlist = () => {
               }
               </Swiper>
                         </div>
-                        <div className="preview-paggination">
-                        </div>
+                        
                         <div className="apartament-list__header">
                             <div>
-                                <p  onClick={()=>navigate(`/product-item/${item.complex_info.office}`)} className="apartament-list__address"> {item.office_info?.name}</p>
+                                <p  onClick={()=>navigate(`/product-item/${item.complex_info.id}`)} className="apartament-list__address"> {item.office_info?.name}</p>
                              
                             </div>
                             <button onClick={()=>handleDelet(item.complex)} className="apartament-list__favorite-btn filled"></button>
                         </div>
-                        <p onClick={()=>navigate(`/product-item/${item.complex_info.office}`)} className="apartament-list__price">{item.complex_info?.price} $</p>
+                        <p onClick={()=>navigate(`/product-item/${item.complex_info.id}`)} className="apartament-list__price">{item.complex_info?.price} $</p>
                         <ul className="apartament-list__tags">
                             <li className="apartament-list__tag">{item.complex_info?.etaj1} этаж</li>
                             <li className="apartament-list__tag">{item.complex_info?.square} м2</li>

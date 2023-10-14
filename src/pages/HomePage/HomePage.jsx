@@ -859,37 +859,37 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="main__map">
-        <div className="container__main">
-          <h2>
-                {
-                    lan === "ru" && "Мы работаем в 4 странах"
-                 }
-                {
-                 lan === "en" && `We operate in 4 countries`
-                } 
-                {
-                  lan === 'zh' && "我們在 4 個國家開展業務"
-                }
-            
-            </h2>
-          <div className="main__map-wrp">
-            <YMaps query={{ apikey: "ca60917c-ba3d-485a-8711-39fad57f4fe2" }}>
-              <Map
-                width="98%"
-                height="100%"
-                defaultState={{ center: [25.276987, 55.296249], zoom: 3 }}
-              >
-                <ZoomControl />
-                <Placemark geometry={[25.276987, 55.296249]} />
-                <Placemark geometry={[13.736717, 100.523186]} />
-                <Placemark geometry={[ -8.650000, 115.216667]} />
-                <Placemark geometry={[41.0214 ,  28.9948]} />
-              </Map>
-            </YMaps>
+        <section className="main__map">
+          <div className="container__main">
+            <h2>
+                  {
+                      lan === "ru" && "Мы работаем в 4 странах"
+                  }
+                  {
+                  lan === "en" && `We operate in 4 countries`
+                  } 
+                  {
+                    lan === 'zh' && "我們在 4 個國家開展業務"
+                  }
+              
+              </h2>
+            <div className="main__map-wrp">
+              <YMaps query={{ apikey: "ca60917c-ba3d-485a-8711-39fad57f4fe2" }}>
+                <Map
+                  width="98%"
+                  height="100%"
+                  defaultState={{ center: [25.276987, 55.296249], zoom: 3 }}
+                >
+                  <ZoomControl />
+                  <Placemark geometry={[25.276987, 55.296249]} />
+                  <Placemark geometry={[13.736717, 100.523186]} />
+                  <Placemark geometry={[ -8.650000, 115.216667]} />
+                  <Placemark geometry={[41.0214 ,  28.9948]} />
+                </Map>
+              </YMaps>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       <section className="flarorg">
         <div className="container__main">
@@ -939,20 +939,20 @@ const HomePage = () => {
               
                 <span>
                 {
-                    lan === "ru" && "полноценным приложением "
+                    lan === "ru" &&  " полноценным приложением "
                  }
                 {
-                 lan === "en" && `full-fledged application`
+                 lan === "en" && ` full-fledged application`
                 } 
                  </span> ,
                  {
                     lan === "ru" && " где будет:"
                  } 
                 {
-                 lan === "en" && `where will:`
+                 lan === "en" && ` where will:`
                 } 
                 {
-                  lan === 'zh' && "其中包括"
+                  lan === 'zh' && " 其中包括"
                 }
                  
               </h2>
