@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import pluss from "../../assets/img/plus.svg"
+import Loading from "../../components/Loading/Loading";
 
 const Addkompleks = () => {
   const navigate = useNavigate()
@@ -55,6 +56,7 @@ const [placmarkcord , setPlacmarkcord]= useState([])
 const [addresname , setAddresname] = useState("")
 const [yandexcenter ,setYandexcenter] = useState([55.684758, 37.738521])
 const [country , setCountry] = useState("")
+const [loading , setLoading] = useState(false)
 const [gorod , setGorod] = useState("")
 // ------- hashtag 
 const [hastagsData , setHashtagsData] = useState([])
@@ -204,6 +206,7 @@ let projectinfrastructure =[
  kids2 && "kids"
 ]
  const pushallData = (type) => {
+  setLoading(true)
   const lobb = new FormData()
   districtinfrastructure?.map((item , index)=>(
      item && lobb.append("districtinfrastructure" , item)    
@@ -253,6 +256,7 @@ let projectinfrastructure =[
   // })
     http.post('/catalog/offices/' ,lobb).then((res)=>{
       if(res.status ===201){
+        setLoading(false)
         toast.success(  `Добавить комплекс !!!`, {
           position: "top-right",
           autoClose: 1500,
@@ -266,9 +270,10 @@ let projectinfrastructure =[
         navigate("/brokermain")
         window.location.reload()
       }
-      console.log(res.data)
+     
     }).catch((err)=>{
       console.log(err)
+      setLoading(false)
       toast.error( 'В введенных данных ошибка!!!', {
         position: "top-right",
         autoClose: 2000,
@@ -306,6 +311,10 @@ const handleYandex = (e)=>{
 
   return (
     <main>
+      {
+        loading &&
+        <Loading/>
+      }
       <ToastContainer/>
       <section className="addobject">
         <div className="container">

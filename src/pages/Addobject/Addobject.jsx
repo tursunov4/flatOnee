@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import pluss from "../../assets/img/plus.svg"
 import 'react-toastify/dist/ReactToastify.css';
+import Loading from "../../components/Loading/Loading";
 
 let id = localStorage.getItem("id")
 const Addobject = () => {
@@ -44,6 +45,7 @@ const Addobject = () => {
   const [liftt , setLiftt] = useState(false)
   const [gruzavoy , setGruzavoy] = useState(false)
   const [teritorita , setTeritoriya] = useState(false)
+  const[loading , setLoading] = useState(false)
   const navigate = useNavigate()
 
  
@@ -207,6 +209,7 @@ const handleChange =(evt)=>{
   }
 
   const postAllData =(type) =>{
+    setLoading(true)
    const form  = new FormData()
   
    vznos?.map((item , index)=>(
@@ -269,9 +272,9 @@ const handleChange =(evt)=>{
 
     
     http.post("/catalog/complex/" , form).then((res)=>{
-      console.log(res.data)
-      console.log(res.status)
+     
       if(res.status ===201){
+        setLoading(false)
         toast.success(  `Добавить объект !!!`, {
           position: "top-right",
           autoClose: 1500,
@@ -287,6 +290,7 @@ const handleChange =(evt)=>{
       }
     }).catch((err)=>{
       console.log(err)
+      setLoading(false)
       toast.error( 'В введенных данных ошибка!!!', {
         position: "top-right",
         autoClose: 2000,
@@ -319,6 +323,10 @@ const handleChange =(evt)=>{
 
   return (
     <main>
+      {
+        loading &&
+      <Loading/>
+      }
       <ToastContainer/>
       <section className="addobject">
 

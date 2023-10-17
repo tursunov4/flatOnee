@@ -553,8 +553,10 @@ html {
   }
   .articles-list__title {
     font-weight: 400;
-    font-size: 46px;
-    line-height: 100%;
+    font-size: 25px;
+    line-height: 130%;
+    
+
   }
   .articles-list__text {
     max-width: 280px;

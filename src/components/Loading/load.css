@@ -1,0 +1,14 @@
+.loading__add{
+    position: fixed ;
+    top: 0 ;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255, 0.9);
+    z-index: 999;
+}
+.loading__add > img{
+    background-color: aqua;
+}
