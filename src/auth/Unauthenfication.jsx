@@ -32,7 +32,7 @@ const Unauthenfication = () => {
       <Route element={<Noudfound/>} path='/eror404' /> 
       <Route path='*' element={<Noudfound/>}  />
       <Route element={<ResetPassword/>} path='/reset' /> 
-      <Route element={<ResetIner/>} path='/resetiner'/>
+      {/* <Route element={<ResetIner/>} path='/resetiner'/> */}
       <Route element={<ResertEnd/>} path='/resetend' />
      </Routes>
   )

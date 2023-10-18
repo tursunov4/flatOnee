@@ -295,7 +295,7 @@ const Brokersmain = () => {
                 <img src={right} alt="to-righ arrow" />
               </div>
             </li>
-            <li className="add__section">
+            <li onClick={()=>navigate("/udovlena")} className="add__section">
               <div className="add__section-icon">
                 <img src={alert} alt="icon" />
               </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./reset.css"
 import { Link, useNavigate } from "react-router-dom";
 import http from "../../axios";
@@ -11,19 +11,53 @@ import Header from "../../components/Header/Header";
 const ResetPassword = () => {
   const [username, setUsername] = useState("");
   const { lan } = useContext(Context);
+  const [erroremail , setErroremail] = useState(false)
   const navigate = useNavigate();
+  const inputref = useRef()
   const handleSubmit = (e) => {
     e.preventDefault();
+    http.post("/user/request-reset-email/" , {
+        email:username,     
+        redirect_url: "string"
+    }).then((res)=>{
+  
+         inputref.current.value = ""
+        toast.success( `${res.data.success}`, {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });      
+    }).catch((err)=>{
+      console.log(err)   
+        toast.error( `${err.response.data.detail} `, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });        
+    })
   };
-
+  const changeUsername =(e) =>{
+    setErroremail(false)
+    setUsername(e.target.value)
+  }
   return (
     <>
       <ToastContainer />
       <Header/>
       <div className="wrapper">
      
-        <form className="form">
-        <div onClick={()=>navigate(-1)} className="reset__nazad">
+        <form  onSubmit={(e) => handleSubmit(e)}  className="form">
+        <div onClick={()=>navigate("/login")} className="reset__nazad">
             <img src={exit} alt="" />
         </div>
 
@@ -40,13 +74,17 @@ const ResetPassword = () => {
               <label>
                 <input
                   required
-                  onChange={(e) => setUsername(e.target.value)}
+                  ref={inputref}
+                  onChange={(e) => changeUsername(e)}
                   name="username"
                   placeholder="Email "
                 />
               </label>
             </div>
-            <p className="reset-errorp">Email не найден</p>
+            {
+              erroremail &&
+            <p  className="reset-errorp">Email не найден</p>
+            }
             <div className="form__btn">
               <button
                 className="btn"

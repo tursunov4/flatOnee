@@ -286,7 +286,9 @@ line-height: 100%;
   .add__right {
     display: none;
   }
-  
+  .add__row{
+    justify-content: center;
+  }
 
 .add__container{
   margin: 20px auto;
