@@ -497,11 +497,12 @@ const handleYandex = (e)=>{
                     width={`100%`}
                     height={"321px"}
                       defaultState={{
-                        center: placmarkcord.length === 0 ? [55.684758, 37.738521]: placmarkcord ,
-                        zoom: 5,
+                        center: placmarkcord.length === 0 ? [24.774265,  46.738586]: placmarkcord ,
+                        zoom: 2,
                       }}
                       onClick={handleMapClick}
                     >
+                      <ZoomControl/>  
                         <Placemark geometry={placmarkcord} />
                     </Map>
                   </YMaps>
