@@ -1687,7 +1687,7 @@ html {
     line-height: 25px;
     color: #f0f0f0;
   
-    background-color: #001894;
+    background: linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.27%);
     border: none;
   }
   
@@ -5169,7 +5169,7 @@ html {
     font-feature-settings: "ss11" on, "ss10" on, "ss09" on, "ss08" on, "ss07" on,
       "ss06" on, "ss05" on;
     font-family: Inter;
-    font-size: 22px;
+    font-size: 29px;
     font-style: normal;
     font-weight: 500;
     line-height: 125%; /* 27.5px */
