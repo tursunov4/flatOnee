@@ -1639,7 +1639,7 @@ html {
   }
   .form-overlay__input {
     padding: 17px 24px;
-    width: calc(100% - 48px);
+    width: calc(100% - 0px);
     display: block;
   
     font-weight: 400;
@@ -1666,7 +1666,7 @@ html {
   }
   .form-overlay__back-btn {
     padding: 18.5px 73px;
-    width: calc(100% - 37px);
+    width: calc(100% - 0px);
   
     margin-right: 19px;
   
@@ -1680,7 +1680,7 @@ html {
   }
   .form-overlay__confirm-btn {
     padding: 18.5px 73px;
-    width: calc(100% - 37px);
+    width: calc(100% - 0px);
   
     font-weight: 600;
     font-size: 21px;
