@@ -27,8 +27,8 @@ const ResertEnd = () => {
     if(errorpas ===false){
       http.patch("/user/password-reset-complete/" , {
         password: password,
-        token: 'bwag9b-a309bb92e7a81bf848fe4ce4de2b2917',
-        uidb64: "OQ"
+        token: token,
+        uidb64: uidb64
       }).then((res)=>{
         console.log(res.data)
       if(res.status === 200){
