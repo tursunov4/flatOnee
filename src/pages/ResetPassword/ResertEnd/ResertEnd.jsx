@@ -1,25 +1,19 @@
 import React, { useContext, useState } from "react";
 import exit from '../../../assets/img/exit.svg'
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import http from "../../../axios";
 import { Context } from "../../../Context/Context";
-
 import Header from "../../../components/Header/Header";
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 const ResertEnd = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState(""); 
    const [errorpas , setErrorpas] = useState(false)
-   const location = useLocation(); // Use the location hook to access the URL.
-   // Extract token and other parameters from the query string.
+   const location = useLocation(); 
    const queryParams = new URLSearchParams(location.search);
    const token = queryParams.get('token');
    const uidb64 = queryParams.get('uidb64');
-   const tokenValid = queryParams.get('token_valid');
-   const message = queryParams.get('message');
   const { lan } = useContext(Context);
   const navigate = useNavigate();
   const handleSubmit = (e) => {

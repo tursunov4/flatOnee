@@ -36,14 +36,14 @@ const Login = () => {
                     
                 navigate("/brokermain")
                   window.location.reload()
-                 
             }
             if(res.status ===404){
                 navigate("/eror404")
             }
         }).catch((err)=>{
             console.log(err)
-            if(err.response.status === 403){
+
+            if(err?.response?.status === 403){
               toast.error( err.response.data.message, {
                 position: "top-right",
                 autoClose: 2000,

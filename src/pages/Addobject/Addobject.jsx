@@ -21,7 +21,7 @@ const Addobject = () => {
   const [sana ,setSana] = useState("")
   const [ploshad ,setPloshad] = useState("")
   const [ot ,setOt] = useState("")
-  const [iz , setIz] = useState("")
+  const [iz , setIz] = useState(0)
   const [description ,setDescription] = useState('')
   const [planirovka , setPalnirovka]= useState("")
   const [planpentaj1 ,setPlanpentaj1] = useState("")
@@ -396,16 +396,14 @@ const handleChange =(evt)=>{
               <div className="addobject__etaj2">
                 <h2>Этаж</h2>
                 <div className="addobject__etajwrap2">
-                  <span>от</span>
+               
                   <label className="addobejectploshad__label" htmlFor="">
-                    <input onChange={(e)=>setOt(e.target.value)} placeholder="36" type="text" />
+                    <input onChange={(e)=>setOt(e.target.value)} placeholder="85" type="text" />
                   </label>
-                  <span>из</span>
-                  <label className="addobejectploshad__label" htmlFor="">
-                    <input onChange={(e)=>setIz(e.target.value)} placeholder="85" type="text" />
-                  </label>
+                
                 </div>
               </div>
+
 
               <div className="addobeject__tipobj">
                 <h2>Отделка</h2>
@@ -443,6 +441,27 @@ const handleChange =(evt)=>{
                     <button onClick={()=>setSnazul(5)} className={snazul===5 ? "addtip__btn1 addtip__btn1-active":'addtip__btn1'}>5</button>
                   </div>
                 </div>
+                <div className="addobject__etaj2">
+                <h2>Лифт</h2>
+                <div className="addobject__etajwrap2">
+               
+                  <label className="addobejectploshad__label" htmlFor="">
+                    <input onChange={(e)=>setLiftt(e.target.value)} placeholder="85" type="text" />
+                  </label>
+                
+                </div>
+              </div>
+              <div className="addobject__etaj2">
+                <h2>Грузовой лифт</h2>
+                <div className="addobject__etajwrap2">
+               
+                  <label className="addobejectploshad__label" htmlFor="">
+                    <input onChange={(e)=>setGruzavoy(e.target.value)} placeholder="85" type="text" />
+                  </label>
+                
+                </div>
+              </div>
+
                 <div className="addobject__ubostva">
                   <h2>Удобства</h2>
                   <ul className="object__ubostva-list">
@@ -454,14 +473,14 @@ const handleChange =(evt)=>{
                     <input defaultChecked={sovmesh} onClick={()=>setSovmesh(!sovmesh)}  type="checkbox" />
                       <p>Санузел: Совмещенный</p>
                     </li>
-                    <li className="object__ubostva-listitem">
+                    {/* <li className="object__ubostva-listitem">
                        <input defaultChecked={liftt} onClick={()=>setLiftt(!liftt)}  type="checkbox" />
                       <p>Лифт: 4</p>
-                    </li>
-                    <li className="object__ubostva-listitem">
+                    </li> */}
+                    {/* <li className="object__ubostva-listitem">
                      <input defaultChecked={gruzavoy} onClick={()=>setGruzavoy(!gruzavoy)}  type="checkbox" />
                       <p>Грузовой лифт: 4</p>
-                    </li>
+                    </li> */}
                     <li className="object__ubostva-listitem">
                        <input  defaultChecked={teritorita} onClick={()=>setTeritoriya(!teritorita)}  type="checkbox" />
                       <p>Территория: Закрытая</p>

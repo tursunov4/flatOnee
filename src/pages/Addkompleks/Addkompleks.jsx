@@ -21,7 +21,7 @@ const Addkompleks = () => {
  const [sana ,setSana] = useState("")
  const [ploshad ,setPloshad] = useState("")
  const [ot ,setOt] = useState("")
- const [iz , setIz] = useState("")
+ const [iz , setIz] = useState(0)
  const [description ,setDescription] = useState('')
  const [kompleksimage , setKompleksimage] = useState([])
  const [infirastruktura ,setInfirastruktura] = useState([])
@@ -475,11 +475,6 @@ const handleYandex = (e)=>{
               <div className="addobject__etaj2">
                 <h2>Этаж</h2>
                 <div className="addobject__etajwrap2">
-                  <span>от</span>
-                  <label className="addobejectploshad__label" htmlFor="">
-                    <input onChange={(e)=>setIz(e.target.value)} placeholder="36" type="text" />
-                  </label>
-                  <span>из</span>
                   <label className="addobejectploshad__label" htmlFor="">
                     <input onChange={(e)=>setOt(e.target.value)} placeholder="85" type="text" />
                   </label>
