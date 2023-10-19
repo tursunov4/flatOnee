@@ -12,7 +12,7 @@ import mainHeader from "../../assets/img/main-header.jpg"
 // import 'rc-slider/assets/index.css';
 // import "rsuite/dist/rsuite.css";
 
-import { Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Context } from '../../Context/Context'
 const token  = localStorage.getItem("token")
 const Savedlist = () => {
@@ -623,7 +623,8 @@ const Savedlist = () => {
                   pagination={{
                     clickable: true,
                   }}
-                  modules={[Pagination]}
+                  navigation
+                  modules={[Pagination , Navigation]}
                   className="mySwiper2" 
                 >
 

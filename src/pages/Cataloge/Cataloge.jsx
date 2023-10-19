@@ -5,7 +5,7 @@ import izamphone2 from "../../assets/img/izamphone2.svg";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import { Pagination  , Navigation} from 'swiper/modules';
 import arrowleft from "../../assets/img/arrow-left.svg";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import http from "../../axios";
@@ -812,7 +812,8 @@ const Cataloge = () => {
                   pagination={{
                     clickable: true,
                   }}
-                  modules={[Pagination]}
+                  navigation
+                  modules={[Pagination , Navigation]}
                   className="mySwiper3"
                 >
                 {
@@ -872,7 +873,8 @@ const Cataloge = () => {
                   pagination={{
                     clickable: true,
                   }}
-                  modules={[Pagination]}
+                  navigation
+                  modules={[Pagination , Navigation]}
                   className="mySwiper2"
                 >
                 {

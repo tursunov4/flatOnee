@@ -712,7 +712,8 @@ const token = localStorage.getItem("token")
                   pagination={{
                     clickable: true,
                   }}
-                  modules={[Pagination]}
+                  navigation
+                  modules={[Pagination , Navigation]}
                   className="mySwiper3"
                 >
                 {

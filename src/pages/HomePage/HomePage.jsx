@@ -14,10 +14,10 @@ import "./home.css";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import http from "../../axios";
 import axios from "axios";
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide ,  } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import { Pagination  , Navigation} from 'swiper/modules';
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../Context/Context";
 import ReactInstaStories from "react-insta-stories";
@@ -823,7 +823,8 @@ const HomePage = () => {
                   pagination={{
                     clickable: true,
                   }}
-                  modules={[Pagination]}
+                  navigation
+                  modules={[Pagination , Navigation]}
                   className="mySwiper"
                 >
                 {

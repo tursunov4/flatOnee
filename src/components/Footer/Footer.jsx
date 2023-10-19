@@ -152,6 +152,9 @@ const Footer = () => {
          </Link>
          </div>
         </nav>
+        {/* <div>
+          fashdfad
+        </div> */}
         <div className="footer__copyright">
           Copyright © 2023 Dossles design | All Rights Reserved
         </div>

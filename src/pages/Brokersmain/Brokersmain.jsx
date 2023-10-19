@@ -17,7 +17,7 @@ import  apartimen from "../../assets/img/apartament-preview.jpg"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Context } from '../../Context/Context'
 const userimage = localStorage.getItem("image")
 const firstname = localStorage.getItem("firstname")
@@ -420,7 +420,8 @@ const Brokersmain = () => {
                   pagination={{
                     clickable: true,
                   }}
-                  modules={[Pagination]}
+                  navigation
+                  modules={[Pagination , Navigation]}
                   className="mySwiper3"
                 >
                 {

@@ -268,9 +268,7 @@ const handleChange =(evt)=>{
     form.append("canuzl" , sovmesh)
     form.append("gruzovoy_lift" , gruzavoy)
     form.append("territoriya" , teritorita  )
-    form.append("office" , kompleksid)
-
-    
+    form.append("office" , kompleksid)    
     http.post("/catalog/complex/" , form).then((res)=>{
      
       if(res.status ===201){
