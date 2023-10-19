@@ -82,3 +82,21 @@
 .story__sentp{
     font-size: 12px !important;
 }
+.addhashtag__tagslist3{
+    top: 55px;
+    position: absolute;
+    display: block;
+    width: 100%;
+   height: 200px;
+   background-color: #F0F0F0;
+   overflow: auto;
+}
+.addhashtag__tagslist3  > li{
+    color: #000 !important;
+    padding: 4px 0;
+    cursor: pointer;
+}
+.addhashtag__tagslist3 > li:hover{
+    background-color: #4356BC;
+    color: #fff !important;
+}

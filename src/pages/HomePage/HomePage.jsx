@@ -167,6 +167,27 @@ const HomePage = () => {
        navigate('/catalog/1')
        window.location.reload()
     }
+    const [searchList , setSearchList] = useState(false)
+    const [kompleks , setKompleks] = useState([])
+    const inputRef = useRef()
+    const handleList =(id)=>{
+    inputRef.current.value =""
+     navigate(`/product-item/${id}`)
+    }
+    const handleChange =(evt)=>{
+      if(evt.target.value===""){
+        setSearchList(false)
+      }else{
+        setSearchList(true)
+        http.get(`/catalog/complex/?name=${evt.target.value}`).then((res)=>{
+          setKompleks(res.data.results)
+          
+          console.log(res.data)
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }
+    }
     return (
     <main>
             {
@@ -394,11 +415,25 @@ const HomePage = () => {
                 </ul>
                 <form className="search">
                   <input
+                   onBlur={() =>{setTimeout(()=>{setSearchList(false)},[150])}} ref={inputRef}  onChange={handleChange}
                     className="search__input"
                     placeholder="Найти объект"
                     type="text"
-                  />
+                  />  
                   <button className="search__btn"></button>
+                  {
+                      searchList && 
+                      kompleks.length !==0 ?
+                    <ul className="addhashtag__tagslist3">
+                     {
+                    
+                      kompleks?.map((item , index) =>(
+                        <li onClick={()=>handleList(item.id)} key={item.id} id={item.id} >{item.name}</li>
+                      ))
+                     }
+                  </ul> :""
+                  }
+
                 </form>
               </div>
             </div>
