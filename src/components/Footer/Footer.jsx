@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from 'react'
 import http from '../../axios'
+import "./footer.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -152,9 +153,12 @@ const Footer = () => {
          </Link>
          </div>
         </nav>
-        {/* <div>
-          fashdfad
-        </div> */}
+        <ul className='footer__massengers'>
+          <li className='footer__massengers-item'><a href="">YouTube</a></li>
+          <li className='footer__massengers-item' ><a href="https://www.instagram.com/flat_one_ai/">Instagram</a></li>
+          <li className='footer__massengers-item'><a href="">Telegram</a></li>
+          <li className='footer__massengers-item'><Link>FAQ</Link></li>
+        </ul>
         <div className="footer__copyright">
           Copyright © 2023 Dossles design | All Rights Reserved
         </div>

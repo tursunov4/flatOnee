@@ -5673,7 +5673,7 @@ html {
 .footer-nav2{
   display: flex;
   justify-content: space-between;
-  margin: 150px 0;
+  margin: 125px 0;
 }
 
 @media only screen and (max-width:1021px){
