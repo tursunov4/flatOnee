@@ -87,6 +87,9 @@ const Brokersmain = () => {
       navigate("/login")
     }
   }
+  const entersitProduct =(id)=>{
+    navigate(`/product-item/${id}`)
+  }
 
 
 
@@ -233,7 +236,7 @@ const Brokersmain = () => {
                       {item.etaj1} этаж, {item.square}м2
 
                       </div>
-                      <div onClick={()=>navigate(`/product-item/${item.id}`)} className="add__apartament-price">
+                      <div onClick={()=>entersitProduct(item.id)} className="add__apartament-price">
                          {item.price} $
                       </div>
                       <div className="add__apartament-address">
@@ -340,9 +343,9 @@ const Brokersmain = () => {
               <div className="add__section-icon">
                 <img src={history} alt="icon" />
               </div>
-              <div className="add__section-name">
+              <div onClick={()=>navigate('/storyview')} className="add__section-name">
               {
-              lan === "ru" && "  История просмотров"
+              lan === "ru" && "История просмотров"
             }
               {
               lan === "en" && "Browsing history"
@@ -436,11 +439,11 @@ const Brokersmain = () => {
              
                 <div className="apartament-list__header">
                   <div>
-                    <p   onClick={()=>navigate(`/product-item/${item.id}`)}  className="apartament-list__address"> {item.name}</p>
+                    <p  onClick={()=>entersitProduct(item.id)}  className="apartament-list__address"> {item.name}</p>
                   </div>
                   <button onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
                 </div>
-                <p onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__price">{item.price} $</p>
+                <p onClick={()=>entersitProduct(item.id)} className="apartament-list__price">{item.price} $</p>
                 <ul className="apartament-list__tags">
                 <li className="apartament-list__tag">{item.etaj1} этаж</li>
                     <li className="apartament-list__tag">{item.square} м2</li>

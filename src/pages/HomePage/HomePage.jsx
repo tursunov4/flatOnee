@@ -36,7 +36,7 @@ const HomePage = () => {
     flatAbout()
     getFlatRecomend()
     getFlatRecomend2()
-   },[refresh])
+   },[refresh , lan])
    const navigate = useNavigate()
   const flatAbout =()=>{
     http.get(`/${lan}/flatone/about/`).then((res)=>{
@@ -188,6 +188,11 @@ const HomePage = () => {
         })
       }
     }
+    const entersitProduct =(id)=>{
+      navigate(`/product-item/${id}`)
+    }
+  
+
     return (
     <main>
             {
@@ -875,14 +880,14 @@ const HomePage = () => {
             
               <div className="apartament-list__header">
                 <div>
-                  <p  onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__address">
+                  <p onClick={()=>entersitProduct(item.id)} className="apartament-list__address">
                      {item.name}
                   </p>
            
                 </div>
                 <button onClick={item.like_status ? ()=>handleDislike(item.id)  :()=>handleLike(item.id) } className={item.like_status ? "apartament-list__favorite-btn filled" :'apartament-list__favorite-btn'}></button>
               </div>
-              <p onClick={()=>navigate(`/product-item/${item.id}`)} className="apartament-list__price">{item.price} $</p>
+              <p onClick={()=>entersitProduct(item.id)} className="apartament-list__price">{item.price} $</p>
               <ul className="apartament-list__tags">
                 <li className="apartament-list__tag">{item.etaj1} этаж</li>
                 <li className="apartament-list__tag">{item.square} м2</li>

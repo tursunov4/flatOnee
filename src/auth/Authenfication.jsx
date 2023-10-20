@@ -21,6 +21,7 @@ import Brokersitem from '../pages/Brokersitem/Brokersitem'
 import Brokersmain from '../pages/Brokersmain/Brokersmain'
 import Academiya from '../pages/Academiya/Academiya'
 import Noudfound from '../pages/Notfound/Noudfound'
+import Storyview from '../pages/Storyview/Storyview'
 
 
 const authenfication = () => {
@@ -47,6 +48,7 @@ const authenfication = () => {
       <Route element={<Addkompleks/>} path={"/addkompleks"} />
       <Route element={<Brokersitem/>} path={`/brokersitem`} /> 
       <Route element={<Brokersmain/>} path={`/brokermain`} /> 
+      <Route element={<Storyview/>} path={`/storyview`} />
     </Route>
   
     <Route path='*' element={<Noudfound/>}  /> 
