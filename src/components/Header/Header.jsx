@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
   
-    <header className={scrolling ? 'scrolled header' : "header "}>
+    <header  className={scrolling ? 'scrolled header' : "header "}>
 
       <div className="container">
         <Link to={'/'} className="logo" href=""></Link>

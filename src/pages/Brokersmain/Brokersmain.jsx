@@ -172,7 +172,7 @@ const Brokersmain = () => {
                 <img src={right} alt="to-righ arrow" />
               </div>
             </li>
-
+{/* 
             <li className="add__section">
               <div className="add__section-icon">
                 <img src={star} alt="icon" />
@@ -191,7 +191,7 @@ const Brokersmain = () => {
               <div className="add__section-right">
                 <img src={right} alt="to-righ arrow" />
               </div>
-            </li>
+            </li> */}
 
 
             <div className="add__mobile-section">

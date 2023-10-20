@@ -1,0 +1,30 @@
+.arrowup{
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 40;
+    display: block;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background:  linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.27%);
+    animation: kataalish 1.7s infinite;
+}
+
+@keyframes kataalish {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  
