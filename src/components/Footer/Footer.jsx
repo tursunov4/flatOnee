@@ -155,7 +155,7 @@ const Footer = () => {
         </nav>
         <ul className='footer__massengers'>
           <li className='footer__massengers-item'><a href="">YouTube</a></li>
-          <li className='footer__massengers-item' ><a href="https://www.instagram.com/flat_one_ai/">Instagram</a></li>
+          <li className='footer__massengers-item' ><a href="https://www.instagram.com/flat_one_ai/d">Instagram</a></li>
           <li className='footer__massengers-item'><a href="">Telegram</a></li>
           <li className='footer__massengers-item'><Link>FAQ</Link></li>
         </ul>
