@@ -100,3 +100,19 @@
     background-color: #4356BC;
     color: #fff !important;
 }
+
+
+
+/* --- hover effect---- */
+
+.ourmis__about-list :hover {
+ 
+    background:linear-gradient(222deg, #125EF3 -4.84%, #C024E7 107.27%);
+    transition: all 1s;
+}
+
+.main-seciton__wrapper-inner > button:hover {
+
+    background: var(--Profile, linear-gradient(138deg, #125ef3 -4.84%, #c024e7 107.27%) );
+   
+}

@@ -14,6 +14,8 @@ import "./home.css";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import http from "../../axios";
 import axios from "axios";
+import Aos from "aos";
+import 'aos/dist/aos.css';
 import { Swiper, SwiperSlide ,  } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -32,6 +34,9 @@ const HomePage = () => {
   const [dataOffices , setDataoffices] = useState([])
   const [refresh , setRefresh] = useState(false)
   const {lan, setLan, refi ,setRefi} = useContext(Context)
+  useEffect(() => {
+    Aos.init();
+  }, [])
    useEffect(()=>{
     flatAbout()
     getFlatRecomend()
@@ -248,11 +253,11 @@ const HomePage = () => {
           </div>
           }
       
-      <section className="main-section__update">
+      <section  data-aos="fade-down" className="main-section__update">
         <div className="container__main">
           <div className="main-section__wrapperu">
-            <div className="main-section__language"> <span className="cursorimgg"  onClick={()=>handleLanguage("ru")}>Рус </span> | <span className="cursorimgg" onClick={()=>handleLanguage("en")}>En </span>| <span className="cursorimgg" onClick={()=>handleLanguage("zh")} >中國人</span></div>
-            <div className="main-seciton__wrapper-inner">
+            <div data-aos-duration="2000"  data-aos="fade-down"  className="main-section__language"> <span className="cursorimgg"  onClick={()=>handleLanguage("ru")}>Рус </span> | <span className="cursorimgg" onClick={()=>handleLanguage("en")}>En </span>| <span className="cursorimgg" onClick={()=>handleLanguage("zh")} >中國人</span></div>
+            <div  data-aos-duration="2000" data-aos="fade-down" className="main-seciton__wrapper-inner">
               <h2>
               {
               lan === "ru" && "Меняем мир недвижимости с помощью"
@@ -326,9 +331,9 @@ const HomePage = () => {
         </div>
       </section>
       <section className="mi-section">
-        <div className="container__main">
+        <div  className="container__main">
           <div className="mi__wrapper">
-            <h2>
+            <h2 data-aos-duration="1500" data-aos="fade-down">
             {
               lan === "ru" && `Мы — агентсво недвижимости, которое использует`
             }
@@ -350,10 +355,117 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      
+      <section  className="bistro-section">
+        <div className="container__main">
+          <div data-aos-duration="1200" data-aos="fade-down" className="bistro-text">
+            <h2 >
+            {
+                    lan === "ru" && "Точно и быстро"
+                 }
+                {
+                 lan === "en" && `Accurate and fast`
+                } 
+                  {
+                  lan === "zh" &&  `
+                  准确快速`
+                }
+              </h2>
+            <p  >
+              {
+                    lan === "ru" && `  Точность нейросетей превосходит человеческую. Обработка больших
+                    объёмов информации происходит за секунды.`
+                 }
+                {
+                 lan === "en" && `The accuracy of neural networks exceeds that of humans. Processing large
+                 volumes of information happen in seconds.`
+                }
+                  {
+                  lan === "zh" &&  `神经网络的准确性超过了人类。加工量大
+                  大量信息在几秒钟内发生`
+                }
+            
+            </p>
+          </div>
+          <ul data-aos-duration="1200" data-aos="fade-down"  className="bistro-section__list">
+            
+            <li>
+              <span className="bistro-foiz">
+                <img src={img40} alt="" />
+                <p>
+                {
+                    lan === "ru" && " Секунд"
+                 }
+                {
+                 lan === "en" && `Seconds`
+                } 
+                 {
+                  lan === "zh" &&  `秒数`
+                }
+                 </p>
+              </span>
+            </li>
+            <li>
+              <p className="bistro-text__p">
+              {
+                    lan === "ru" && `   Необходимы нейросети чтобы создать подборку выгодных для
+                    инвестиции объектов, когда человеку на это потребуется около
+                    часа.`
+                 }
+                {
+                 lan === "en" && `Neural networks are needed to create a selection of profitable
+                 investment of objects when a person will need about
+                 hours.`
+                } 
+               {
+                  lan === "zh" &&  `需要神经网络来创建一系列有利可图的
+                  当一个人需要时进行物品投资
+                  小时。`
+                }
+              </p>
+            </li>
+            <li className="bistro__line"></li>
+            <li>
+              <span className="bistro-foiz">
+                <img src={img90} alt="" />
+                <p>
+                {
+                    lan === "ru" && "Точность"
+                 }
+                {
+                 lan === "en" && `Accuracy`
+                } 
+                 {
+                  lan === "zh" &&`准确性`
+                }
+                  </p>
+              </span>
+            </li>
+            <li>
+              <p className="bistro-text__p">
+              {
+                    lan === "ru" && `  Точность предсказаний превышает 90% и сопоставима с точностью
+                    профессионального инвестиционного брокера`
+                 }
+                {
+                 lan === "en" && `The accuracy of predictions exceeds 90% and is comparable to the accuracy
+                 professional investment broker`
+                } 
+                  {
+                  lan === "zh" &&`
+                  预测准确率超过90%，媲美准确度
+                                      专业投资经纪人`
+                }
+              
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
 
       <section className="our-mission">
         <div className="container">
-          <div className="our-mission__newtext">
+          <div data-aos-duration="1100"   data-aos="fade-down"   className="our-mission__newtext">
             <p>
             {
               lan === "ru" && ` Заранее подсказываем до 90% ликвидных объектов  `
@@ -365,7 +477,7 @@ const HomePage = () => {
               lan === "zh" && "我們是一家使用神經網路的房地產機構"
             }          
              </p>
-            <div className="our-mission__newwrap">
+            <div data-aos-duration="1100"  data-aos="fade-down" className="our-mission__newwrap">
               <h2>
               {
               lan === "ru" && "«Нейроброкер»"
@@ -403,8 +515,8 @@ const HomePage = () => {
             </div>
           </div>
           <div className="our-mission__content">
-            <img className="our-mission__img" src={ourmisson} alt="" />
-            <div className="our-mission__content-wrapper">
+            <img data-aos-duration="1100"  data-aos="flip-left" className="our-mission__img" src={ourmisson} alt="" />
+            <div data-aos-duration="1100"   data-aos="fade-down"  className="our-mission__content-wrapper">
               <div>
                 <ul className="mission-stats">
                   {
@@ -448,7 +560,7 @@ const HomePage = () => {
       <section className="our-mission__about">
         <div className="container__main">
           <ul className="ourmis__about-list">
-            <li className="ourmis__about-listitem">
+            <li data-aos-duration="1200"  data-aos="flip-left"  className="ourmis__about-listitem">
               <h2>
               {
               lan === "ru" && `Что такое «Нейроброкер»`
@@ -475,7 +587,7 @@ const HomePage = () => {
                
               </p>
             </li>
-            <li className="ourmis__about-listitem">
+            <li data-aos-duration="1200"  data-aos="fade-down" className="ourmis__about-listitem">
               <h2>
               {
               lan === "ru" && "Личный помощник"
@@ -504,7 +616,7 @@ const HomePage = () => {
              
               </p>
             </li>
-            <li className="ourmis__about-listitem">
+            <li data-aos-duration="1200"  data-aos="flip-right"  className="ourmis__about-listitem">
               <h2>
               {
               lan === "ru" && "Ваш карманный брокер"
@@ -539,8 +651,8 @@ const HomePage = () => {
         <div className="container__main">
          
           <div className="main-cont__wrap">
-            <div className="main-cont__text">
-              <h2> 
+            <div  className="main-cont__text">
+                <h2 data-aos-duration="1200"  data-aos="fade-down"> 
              {
               lan === "ru" && "Кому будет полезен «Нейроброкер»"
             }
@@ -551,7 +663,7 @@ const HomePage = () => {
               lan === "zh" && "誰將從 Neurobroker 中受益？"
             } 
                 </h2>
-              <div className="main-cont__wrap-inner">
+              <div data-aos-duration="1200"   data-aos="fade-down" className="main-cont__wrap-inner">
                 <img className="telefonchiziq" src={telefoon} alt="" />
                 <ul className="main-cont__wrap-inner-text">
                   <li>
@@ -616,14 +728,14 @@ const HomePage = () => {
                 </ul>
               </div>
             </div>
-            <img className="iphone__img" src={phone} alt="" />
+            <img data-aos-duration="1200"  data-aos="flip-right" className="iphone__img" src={phone} alt="" />
           </div>
         </div>
       </section>
 
       <section className="sections">
         <div className="container__main">
-          <div className="nashobj__wrap">
+          <div data-aos-duration="1100"  data-aos="fade-down" className="nashobj__wrap">
             <h2>
                   {
                     lan === "ru" && " Наши объекты"
@@ -651,7 +763,7 @@ const HomePage = () => {
             </p>
           </div>
         </div>
-        <ul className="section-list">
+        <ul data-aos-duration="1200"   data-aos="fade-down"  className="section-list">
           <li className="section-list__item baclist1 ">
             <a className="container" href="">
               <div className="section-list__title">
@@ -750,7 +862,7 @@ const HomePage = () => {
       <section>
         <div className="container__main">
           <div className="offer-section__mwrap">
-            <ul className="offer-section__bar">
+            <ul data-aos-duration="1200"  data-aos="fade-down" className="offer-section__bar">
               <li
                 onClick={() => handleDatabir(1)}
                 className={typetitle === 1 && "offer-section__activeli"}
@@ -820,7 +932,7 @@ const HomePage = () => {
                 } 
               </li>
             </ul>
-            <div className="offer-section__bar2">
+            <div data-aos-duration="1200"  data-aos="fade-down" className="offer-section__bar2">
               <h3>
               {
                     lan === "ru" && "Лучшие предложения"
@@ -851,7 +963,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section className="offer-section">
+      <section data-aos-duration="1200"  data-aos="fade-down" className="offer-section">
         <div className="offer-section__wrapper">
           <ul className="apartament-list">
             {
@@ -902,7 +1014,7 @@ const HomePage = () => {
 
         <section className="main__map">
           <div className="container__main">
-            <h2>
+            <h2 data-aos-duration="1200"  data-aos="fade-down">
                   {
                       lan === "ru" && "Мы работаем в 4 странах"
                   }
@@ -914,7 +1026,7 @@ const HomePage = () => {
                   }
               
               </h2>
-            <div className="main__map-wrp">
+            <div data-aos-duration="1200"  data-aos="fade-down" className="main__map-wrp">
               <YMaps query={{ apikey: "ca60917c-ba3d-485a-8711-39fad57f4fe2" }}>
                 <Map
                   width="98%"
@@ -933,7 +1045,7 @@ const HomePage = () => {
         </section>
 
       <section className="flarorg">
-        <div className="container__main">
+        <div data-aos-duration="1200"  data-aos="fade-down" className="container__main">
           <h2>  {
                     lan === "ru" && " Flat one это комплекс решений"
                  }
@@ -950,7 +1062,7 @@ const HomePage = () => {
             <img className="falatorgimg" src={flatforg} alt="" />
             <img className="falatorgimg2" src={flatforg2} alt="" />
           </div>
-          <h3>
+          <h3 data-aos-duration="1200"  data-aos="fade-down">
                {
                     lan === "ru" && "Меняем рынок уже сейчас"
                  }
@@ -966,7 +1078,7 @@ const HomePage = () => {
       <section className="telefon2">
         <div className="container__main">
           <div className="telefon2__wrap">
-            <div className="telefon2__text">
+            <div data-aos-duration="1200"  data-aos="fade-down" className="telefon2__text">
               <h2>
               {
                     lan === "ru" && "Скоро вы сможете пользоваться"
@@ -1057,12 +1169,12 @@ const HomePage = () => {
                 </li>
               </ul>
             </div>
-            <div className="telfon2__imgs">
+            <div data-aos-duration="1200"  data-aos="flip-right" className="telfon2__imgs">
               <img className="telfon2__ip" src={iphone} alt="" />
               <img className="telfon2__ip2" src={iphone2} alt="" />
             </div>
           </div>
-          <div className="telefon2__btns">
+          <div data-aos-duration="1200"  data-aos="fade-down"  className="telefon2__btns">
             <p>
                {
                     lan === "ru" && `Следите за развитием нашего продукта в Telegram`
@@ -1090,115 +1202,9 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="bistro-section">
-        <div className="container__main">
-          <div className="bistro-text">
-            <h2>
-            {
-                    lan === "ru" && "Точно и быстро"
-                 }
-                {
-                 lan === "en" && `Accurate and fast`
-                } 
-                  {
-                  lan === "zh" &&  `
-                  准确快速`
-                }
-              </h2>
-            <p>
-              {
-                    lan === "ru" && `  Точность нейросетей превосходит человеческую. Обработка больших
-                    объёмов информации происходит за секунды.`
-                 }
-                {
-                 lan === "en" && `The accuracy of neural networks exceeds that of humans. Processing large
-                 volumes of information happen in seconds.`
-                }
-                  {
-                  lan === "zh" &&  `神经网络的准确性超过了人类。加工量大
-                  大量信息在几秒钟内发生`
-                }
-            
-            </p>
-          </div>
-          <ul className="bistro-section__list">
-            
-            <li>
-              <span className="bistro-foiz">
-                <img src={img40} alt="" />
-                <p>
-                {
-                    lan === "ru" && " Секунд"
-                 }
-                {
-                 lan === "en" && `Seconds`
-                } 
-                 {
-                  lan === "zh" &&  `秒数`
-                }
-                 </p>
-              </span>
-            </li>
-            <li>
-              <p className="bistro-text__p">
-              {
-                    lan === "ru" && `   Необходимы нейросети чтобы создать подборку выгодных для
-                    инвестиции объектов, когда человеку на это потребуется около
-                    часа.`
-                 }
-                {
-                 lan === "en" && `Neural networks are needed to create a selection of profitable
-                 investment of objects when a person will need about
-                 hours.`
-                } 
-               {
-                  lan === "zh" &&  `需要神经网络来创建一系列有利可图的
-                  当一个人需要时进行物品投资
-                  小时。`
-                }
-              </p>
-            </li>
-            <li className="bistro__line"></li>
-            <li>
-              <span className="bistro-foiz">
-                <img src={img90} alt="" />
-                <p>
-                {
-                    lan === "ru" && "Точность"
-                 }
-                {
-                 lan === "en" && `Accuracy`
-                } 
-                 {
-                  lan === "zh" &&`准确性`
-                }
-                  </p>
-              </span>
-            </li>
-            <li>
-              <p className="bistro-text__p">
-              {
-                    lan === "ru" && `  Точность предсказаний превышает 90% и сопоставима с точностью
-                    профессионального инвестиционного брокера`
-                 }
-                {
-                 lan === "en" && `The accuracy of predictions exceeds 90% and is comparable to the accuracy
-                 professional investment broker`
-                } 
-                  {
-                  lan === "zh" &&`
-                  预测准确率超过90%，媲美准确度
-                                      专业投资经纪人`
-                }
-              
-              </p>
-            </li>
-          </ul>
-        </div>
-      </section>
       <section className="reviews-section">
         <div className="container">
-          <h2 className="section-h2">
+          <h2 data-aos-duration="1200"  data-aos="fade-down"  className="section-h2">
           {
                     lan === "ru" && "Нас рекомендуют"
                  }
@@ -1211,7 +1217,7 @@ const HomePage = () => {
                 }
             </h2>
           <div className="reviews-wrapper">
-            <ul className="reviews-list">
+            <ul data-aos-duration="1200"  data-aos="fade-down"  className="reviews-list">
                {
                 rekoment1.map((item, index)=>(
               <li className="reviews-list__item">
@@ -1228,7 +1234,7 @@ const HomePage = () => {
                }
         
             </ul>
-            <ul className="reviews-list">
+            <ul data-aos-duration="1200"  data-aos="fade-down"  className="reviews-list">
               {
                 rekoment2.map((item, index)=>(
 
