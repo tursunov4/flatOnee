@@ -116,3 +116,9 @@
     background: var(--Profile, linear-gradient(138deg, #125ef3 -4.84%, #c024e7 107.27%) );
    
 }
+
+@media only screen and (max-width:590px){
+    .main-section__update{
+      background-position: center !important;
+    }
+}
