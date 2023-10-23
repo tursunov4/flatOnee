@@ -10,7 +10,7 @@ const Footer = () => {
   const [phone, setPhone] = useState("")
   const [text , setText] = useState("")
   const notify = (text) => toast(`${text}`);
-  const {lan , setLan} = useContext(Context)
+  const {lan , setLan ,aboutside , setAboutSide} = useContext(Context)
   const inputRef = useRef()
   const inputRef2 = useRef()
   const handleClick =(e) =>{
@@ -221,7 +221,7 @@ const Footer = () => {
             提交申请即表示您接受用户协议。`
            }
            
-            <a href="">
+            <span className='uznatbolshe' onClick={()=>setAboutSide(true)} >
             {
               lan === "ru" && "Узнать больше"
             }
@@ -231,7 +231,7 @@ const Footer = () => {
                  {
             lan === "zh" && `    了解更多`
            }
-            </a>
+            </span>
             
           </p>
         </form>
