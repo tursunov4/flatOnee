@@ -1,7 +1,7 @@
 .arrowup{
     position: fixed;
     bottom: 50px;
-    right: 50px;
+    left: 50px;
     z-index: 40;
     display: block;
     width: 60px;
