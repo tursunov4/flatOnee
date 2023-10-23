@@ -3,10 +3,10 @@ import "./academiya.css"
 import http from '../../axios'
 import { Context } from '../../Context/Context'
 const Academiya = () => {
+  const {lan} = useContext(Context)
     useEffect(()=>{
       getData()
-    }, [])
-    const {lan} = useContext(Context)
+    }, [lan])
     const [data , setData] = useState([])
    const getData =()=>{
     http.get(`/${lan}/academiya/list/`).then((res)=>{

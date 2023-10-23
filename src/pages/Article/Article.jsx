@@ -21,7 +21,7 @@ const Article = () => {
   const inputRef2 = useRef()
   useEffect(()=>{
     getData()
-  },[])
+  },[lan])
   
   const handleClick =(e) =>{
     e.preventDefault()
@@ -59,7 +59,7 @@ const Article = () => {
   }
   return (
     <main>
-            <ToastContainer
+       <ToastContainer
               autoClose={1500}           
        />
       <div className="article-page">
@@ -99,12 +99,9 @@ const Article = () => {
             </div>
           </section>
           <section className="article-section">
-            <h4 className="article-h4">О проекте</h4>
-            
-            <div dangerouslySetInnerHTML={{ __html: data.about_project }} className="article-section__newimg"></div>
-          
-
-          </section>
+            <h4 className="article-h4">О проекте</h4>            
+            <div dangerouslySetInnerHTML={{ __html: data.about_project }} className="article-section__newimg"></div>         
+           </section>
            <section className="article-ug">
             <h2>Удобства</h2>
               <ul className="acticle-ug__list">
@@ -277,41 +274,17 @@ const Article = () => {
                   }
                 </li>
               </ul>
-           </section>
-        {/* <div className="dadddd">
-        <Swiper       
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
-      </Swiper>
-        </div> */}
-     
-          <section className="article-section">
-      
+           </section>     
+          <section className="article-section">      
             <div className="article-gallery">
               {
                 data?.images?.map((item, index)=>(
                   <div key={index} className="article-gallery__item">
                   <h4>{item.title}</h4>
-                  
-                   <img src={item.images} alt="" />
+                  <img src={item.images} alt="" />
               </div>
                 ))
-              }
-             
-            
+              }            
             </div>
           </section>
           <div className="article-form">

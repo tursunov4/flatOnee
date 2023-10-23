@@ -2150,12 +2150,10 @@ html {
     margin: 189px 10% 0 10%;
   }
   .article-h1 {
-    margin-top: 16px;
-  
+    margin-top: 16px;  
     font-weight: 400;
-    font-size: 92px;
-    line-height: 100%;
-  
+    font-size: 45px;
+    line-height: 100%;  
     color: #131418;
   }
   .article-h2 {
@@ -2374,8 +2372,7 @@ html {
     position: relative;
     padding: 27px 10px;
     width: calc(100% - 20px);
-    height: calc(100% - 54px);
-  
+    height: calc(100% - 54px);  
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -2383,11 +2380,9 @@ html {
   .m-menu__close {
     position: absolute;
     top: 27px;
-    right: 10px;
-  
+    right: 10px;  
     width: 25px;
-    height: 25px;
-  
+    height: 25px;  
     border: none;
     background-color: transparent;
     background-image: url(../img/close.svg);

@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import { Outlet } from 'react-router-dom'
 import Arrowup from '../../components/Arrowup/Arrowup'
+import AboutSide from '../../components/AboutSide/AboutSide'
 const MainPage = () => {
   const [scrolling, setScrolling] = useState(false);
   useEffect(() => {
@@ -25,6 +26,9 @@ const MainPage = () => {
         scrolling &&
       <Arrowup/>
       }
+      {/* {
+        <AboutSide/>
+      } */}
       <Header/>
         <Outlet/>
        <Footer/>

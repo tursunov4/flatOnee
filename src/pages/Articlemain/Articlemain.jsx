@@ -8,10 +8,11 @@ const Articlemain = () => {
   const [data , setData] = useState([])
   const [name , setName] = useState("")
   const [refresh , setRefresh] = useState(false)
+
   const {lan} = useContext(Context)
   useEffect(()=>{
     getData()
-  }, [refresh])
+  }, [refresh , lan])
   const getData = ()=>{
       http.get(`/${lan}/articles/list/?search=${name}`).then((res) =>{
         setData(res.data.results)
