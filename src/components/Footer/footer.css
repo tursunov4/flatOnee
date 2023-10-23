@@ -31,7 +31,8 @@ text-decoration-line: underline;
 
 .swiper-button-prev, .swiper-button-next{
     color: #FAFAFD !important;
+    opacity: 0.9 !important;
 }
 .swiper-pagination-bullet-active{
-    background-color: black;
+    background-color: black !important;
 }
