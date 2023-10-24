@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./addobject.css";
 import lupa from "../../assets/img/lupa.png";
 import file from "../../assets/img/file2.svg";
@@ -69,18 +69,16 @@ const handleChange =(evt)=>{
     })
    }
   }
-   const handleChange2 =(evt) =>{
-    if(evt.target.value===""){
-      setSearchList2(false)
-    }
-    else{
-      setSearchList2(true)
-      http.get(`/catalog/offices/me/?name=${evt.target.value}`).then((res)=>{
+  useEffect(()=>{
+    handleChange2()
+  },[])
+   const handleChange2 =(evt) =>{  
+      http.get(`/catalog/offices/me/`).then((res)=>{
         setKompleks(res.data)
       }).catch((err)=>{
         console.log(err)
       })
-     }
+
    }
   const handleList =(evt)=>{
     inputRef.current.value = ""
@@ -88,8 +86,7 @@ const handleChange =(evt)=>{
     setSearchList(false)
   }
   const handleList2 =(evt)=>{
-    inputRef2.current.value = evt.target.textContent
-    setKompleksid(evt.target.id)
+    setKompleksid(evt.target.value)
   }
   const handleHashtagDelete =(id)=>{
     const indexToDelete = hashtagarraypost.findIndex(item => item.id === id);
@@ -337,21 +334,15 @@ const handleChange =(evt)=>{
               <div className="addobject-kopleks">
                 <h2 className="addobject-kopleks__h">Добавить в комплекс</h2>
                 <form action="">
-                {
-                      searchList2 && kompleks.length !==0 ?
-                    <ul className="addhashtag__tagslist2">
-                     {
-                    
-                      kompleks?.map((item , index) =>(
-                        <li onClick={handleList2} key={item.id} id={item.id} >{item.name}</li>
-                      ))
-                     }
-                  </ul> :""
-                  }
-                  <label className="addmap__label" >
-                    <input onBlur={() =>{setTimeout(()=>{setSearchList2(false)},[150])}} ref={inputRef2}  onChange={handleChange2} type="text"  placeholder="Dubai Marina" />
-                  </label>
-                 
+
+                  <select  onChange={(e)=>handleList2(e)} className="abbojectname__slect" name="" id="">
+                    <option  hidden selected value="">Dubai Marina</option>
+                    {
+                        kompleks?.map((item , index)=>(
+                          <option value={item.id}>{item.name}</option>
+                        ))
+                    }
+                  </select>
                 </form>
               </div>
               <div className="addobject-addhash">
@@ -471,14 +462,6 @@ const handleChange =(evt)=>{
                     <input defaultChecked={sovmesh} onClick={()=>setSovmesh(!sovmesh)}  type="checkbox" />
                       <p>Санузел: Совмещенный</p>
                     </li>
-                    {/* <li className="object__ubostva-listitem">
-                       <input defaultChecked={liftt} onClick={()=>setLiftt(!liftt)}  type="checkbox" />
-                      <p>Лифт: 4</p>
-                    </li> */}
-                    {/* <li className="object__ubostva-listitem">
-                     <input defaultChecked={gruzavoy} onClick={()=>setGruzavoy(!gruzavoy)}  type="checkbox" />
-                      <p>Грузовой лифт: 4</p>
-                    </li> */}
                     <li className="object__ubostva-listitem">
                        <input  defaultChecked={teritorita} onClick={()=>setTeritoriya(!teritorita)}  type="checkbox" />
                       <p>Территория: Закрытая</p>
@@ -637,7 +620,7 @@ const handleChange =(evt)=>{
                 </label>
                 </div>  
                 <div className="addobject-planpentaj">
-                  <h2>План платежей</h2>
+                  <h2>Доходность</h2>
                   <p className="planpentaj__p">Введите значения предположительного роста или снижения цены</p>
                   <img onClick={()=>addYlivznos()} className="imgcursorim"   src={planpentaj} alt="" />
                   {

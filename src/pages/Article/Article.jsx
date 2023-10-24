@@ -76,9 +76,16 @@ const Article = () => {
             </li>
           </ul>
         
-          <h1 className="article-h1">{data.title}</h1>
+          <h1 className="article-h1">
+          {data.title?.split('\r\n').map((item , index)=>(
+              <p>{item}</p>
+            ))}
+          </h1>
           <h2 className="article-h2">
-            {data?.description}
+          {data.description?.split('\r\n').map((item , index)=>(
+              <p>{item}</p>
+            ))}
+          
           </h2>
           <div className="article-banner">
             <img src={data?.banner} alt="" />
@@ -93,7 +100,9 @@ const Article = () => {
             <h3 className="article-h3">Жизнь в Дубае</h3>
             <div className="text-wrapper">
               <p className="article-p">
-                {data?.about_complex}
+                {data.about_complex?.split('\r\n').map((item , index)=>(
+              <p>{item}</p>
+            ))}
               </p>
              
             </div>

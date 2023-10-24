@@ -246,7 +246,7 @@ const token = localStorage.getItem("token")
           </li>
         </ul>
         <div className="product-page__header">
-          <h1 className="product-page__title">Дубай Марина крик</h1>
+          <h1 className="product-page__title">{data?.name}</h1>
           <div className="product-interactions">
             <button onClick={data.like_status ? ()=>handleDislike(data.id)  :()=>handleLike(data.id) } className={data.like_status ?"wishlist-btn filled" :"wishlist-btn " }></button>
             <button className="share-btn"></button>
