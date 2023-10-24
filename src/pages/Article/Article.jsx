@@ -96,7 +96,6 @@ const Article = () => {
              Комплекс состоит из высотных башен-близнецов. Башня будет иметь 38 этажей. Жилой проект предлагает 1-, 2- и 3-комнатные квартиры премиум-класса. Резиденции будут иметь прекрасный вид на башню Dubai Creek Tower и Дубайский канал. Площадь квартир колеблется от 72 до 152 кв. м., а планировка каждой собственности в комплексе включает спальню/и, гардеробную, ванную/ые, кухню, гостиную/столовую и 1 или 2 балкона.</p>
           </section>
           <section className="article-section">
-            <h4 className="article-h4">О комплексе</h4>
             <h3 className="article-h3">Жизнь в Дубае</h3>
             <div className="text-wrapper">
               <p className="article-p">
@@ -108,7 +107,7 @@ const Article = () => {
             </div>
           </section>
           <section className="article-section">
-            <h4 className="article-h4">О проекте</h4>            
+           
             <div dangerouslySetInnerHTML={{ __html: data.about_project }} className="article-section__newimg"></div>         
            </section>
            <section className="article-ug">
