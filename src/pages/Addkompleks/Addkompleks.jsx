@@ -324,7 +324,7 @@ const handleYandex = (e)=>{
             </div>
             <div className="addobject__list2">
               <div className="addobject__nazvaniya">
-                <h2>Название объекта</h2>
+                <h2>Название комплекс</h2>
                 <input onChange={(e)=>setName(e.target.value)} type="text" placeholder="Введите название" />
               </div>
               <div className="addobject__nazvaniya">
