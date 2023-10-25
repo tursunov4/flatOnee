@@ -255,8 +255,8 @@ let projectinfrastructure =[
   //    console.log(res.data)
   // })
     http.post('/catalog/offices/' ,lobb).then((res)=>{
+      setLoading(false)
       if(res.status ===201){
-        setLoading(false)
         toast.success(  `Добавить комплекс !!!`, {
           position: "top-right",
           autoClose: 1500,
@@ -270,20 +270,33 @@ let projectinfrastructure =[
         navigate("/brokermain")
         window.location.reload()
       }
-     
+      
     }).catch((err)=>{
       console.log(err)
       setLoading(false)
-      toast.error( 'В введенных данных ошибка!!!', {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
+      toast.error(
+        `${ err.response.data.country ? `Введите страну - ${err.response.data.country}` :""}
+         ${err.response.data.city ? `Введите город - ${err.response.data.city}` :""}
+         ${err.response.data.name ? `Название комплекс- ${err.response.data.name}` :""}
+         ${err.response.data.property_type ? `Тип недвижимости- ${err.response.data.property_type}` :""}
+         ${err.response.data.development_type ? ` Вид застройки- ${err.response.data.development_type}` :""}
+         ${err.response.data.construction_phase? `Этап строительства- ${err.response.data.construction_phase}` :""}
+         ${err.response.data.square ? `Общая площадь - ${err.response.data.square}` :""}
+         ${err.response.data.description ? `Описание - ${err.response.data.description}` :""}
+         ${err.response.data.deadline ? `Срок сдачи- ${err.response.data.deadline}` :""}
+         ${err.response.data.etaj1 ? `Этаж - ${err.response.data.etaj1}` :""}
+         ${err.response.data.price? `Минимальная цена - ${err.response.data.price}` :""}
+         ${err.response.data.message? `Минимальная цена - ${err.response.data.message}` :""}
+         `, {
+       position: "top-right",
+       autoClose: 2000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "light",
+       });
     })
  
 };

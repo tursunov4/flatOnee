@@ -286,16 +286,29 @@ const handleChange =(evt)=>{
     }).catch((err)=>{
       console.log(err)
       setLoading(false)
-      toast.error( 'В введенных данных ошибка!!!', {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
+      toast.error(
+        `${ err.response.data.office ? `Добавить в комплекс - ${err.response.data.office}` :""}
+         ${err.response.data.gruzovoy_lift ? `Грузовой лифт - ${err.response.data.gruzovoy_lift}` :""}
+         ${err.response.data.otdelka ? `Отделка - ${err.response.data.otdelka}` :""}
+         ${err.response.data.planirovki_count ? `Количество объектов в данной планировке - ${err.response.data.planirovki_count}` :""}
+         ${err.response.data.sanzul ? ` Количество санузлов- ${err.response.data.sanzul}` :""}
+         ${err.response.data.square ? `Общая площадь - ${err.response.data.square}` :""}
+         ${err.response.data.description ? `Описание - ${err.response.data.description}` :""}
+         ${err.response.data.posutochno ? `Прибыль с посуточной сдачи - ${err.response.data.posutochno}` :""}
+         ${err.response.data.dolgo ? `Прибыль с долгосрочной сдачи - ${err.response.data.dolgo}` :""}
+         ${err.response.data.lift ? `Лифт - ${err.response.data.lift}` :""}
+         ${err.response.data.vznos ? `План платежей - ${err.response.data.vznos}` :""}
+         ${err.response.data.sena_year ? `Доходность - ${err.response.data.sena_year}` :""}
+         `, {
+       position: "top-right",
+       autoClose: 2000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "light",
+       });
     })
   }  
   const handleDelet  =(id) =>{
