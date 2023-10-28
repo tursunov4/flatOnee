@@ -4,11 +4,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import http from "../../../axios";
 import { Context } from "../../../Context/Context";
 import Header from "../../../components/Header/Header";
+import openeye from "../../../assets/img/openeye.svg"
+import closeeye from "../../../assets/img/closeeye.svg"
 import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
+
 const ResertEnd = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState(""); 
+  const [openpas1 , setOpenpas1] = useState(false)
+  const [openpas2 , setOpenpas2] = useState(false)
    const [errorpas , setErrorpas] = useState(false)
    const location = useLocation(); 
    const queryParams = new URLSearchParams(location.search);
@@ -98,18 +104,30 @@ const ResertEnd = () => {
                   required
                   onChange={(e) => changePassword(e) }
                   name="Пароль"
-                  type="password"
+                  type={openpas1 ? "text" : "password"}
                   placeholder="Пароль"
                 />
+                 <div onClick={()=>setOpenpas1(!openpas1)} className='openclose__btn'>
+                      {
+                        openpas1 ? <img width={18} src={closeeye} alt="eyeclose" /> : 
+                     <img width={18} src={openeye} alt="eye" />
+                      }
+                    </div>
               </label>
               <label>
                 <input
                   required
-                  type="password"
+                  type={openpas2 ? "text" : "password"}
                   onChange={(e) => changePassword2(e) }
                   name="Повторите пароль"
                   placeholder="Повторите пароль"
                 />
+                 <div onClick={()=>setOpenpas2(!openpas2)} className='openclose__btn'>
+                      {
+                        openpas2 ? <img width={18} src={closeeye} alt="eyeclose" /> : 
+                     <img width={18} src={openeye} alt="eye" />
+                      }
+                    </div>
               </label>
             </div>
             {

@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./catalog.css";
-import izamphone1 from "../../assets/img/izamphone1.svg";
-import izamphone2 from "../../assets/img/izamphone2.svg";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -10,16 +8,16 @@ import arrowleft from "../../assets/img/arrow-left.svg";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import http from "../../axios";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import Slider from 'react-slider';
 import { Context } from "../../Context/Context";
-import { queries } from "@testing-library/react";
-import  strelka  from "../../assets/img/strelka.svg"
+import CatalogBarner from "../../components/CatalogCom/CatalogBarner/CatalogBarner";
+import CatalogPhone from "../../components/CatalogCom/CatalogPhone/CatalogPhone";
+import Catalogtype from "../../components/CatalogCom/Catalogtype/Catalogtype";
 const token = localStorage.getItem("token")
 const id = localStorage.getItem("id")
 
 const Cataloge = () => {
-  const [typeabout, setAbout] = useState(false);
   const {lan, refi , setRefi} = useContext(Context)
   const [next , setNext ] = useState('')
   const [prev , setPrev] = useState("")
@@ -50,15 +48,15 @@ const Cataloge = () => {
  
   useEffect(()=>{
       getCatalogOfice()
-  },[refresh])
+  },[refresh, text])
 
   useEffect(()=>{
    getTop( )
-  },[refresh])
+  },[refresh , text])
   useEffect(()=>{
     getCatalogtypes()
     getRange()
-  },[])
+  },[text])
   const getRange =()=>{
     http.get("/catalog/complex-range/ ").then((res)=>{
       setRangeNums(res.data)
@@ -68,7 +66,6 @@ const Cataloge = () => {
      setQueremin(res.data.min_square-0)
      setEtajmax(res.data.max_etaj-0)
      setEtajmin(res.data.min_etaj-0)
-
     }).catch((err)=>{
       console.log(err)
     })
@@ -663,7 +660,7 @@ const Cataloge = () => {
                   </YMaps>
                 </div>
               </div>
-              <div className="m-catalogue">
+               <div className="m-catalogue">
                 <form className="search">
                   <input
                   onChange={(e)=>handleSearch(e)}
@@ -687,104 +684,9 @@ const Cataloge = () => {
                   lan === "ar" && "المرشحات"
                 }                    
                 </button>
-              </div>
-              <div className="">
-                <ul className="catalog__hoverimg-list">
-                  <li
-                  className="baclist1"
-                  >
-                    <a className="catalog__hovera1  " href="">
-                      <div className="catalog__hover-text">ОАЭ</div>
-                    </a>
-                  </li>
-                  <li
-                  className=" baclist4 "
-                  >
-                    <a className="catalog__hovera1" href="">
-                      <div className="catalog__hover-text">Индонезия</div>
-                    </a>
-                  </li>
-                  <li
-                  className=" baclist3"
-                  >
-                    <a className="catalog__hovera1" href="">
-                      <div className="catalog__hover-text">Тайланд</div>
-                    </a>
-                  </li>
-                  <li
-                  className="baclist5"
-                  >
-                    <a className="catalog__hovera1" href="">
-                      <div className="catalog__hover-text">Турция</div>
-                    </a>
-                  </li>
-                  <li
-                   className=" baclist2 "
-                  >
-                    <a className="catalog__hovera1" href="">
-                      <div className="catalog__hover-text">Дубай</div>
-                    </a>
-                  </li>
-                  <li
-                    className=" baclist4 "
-                  >
-
-
-                    <a className="catalog__hovera1" href="">
-                      <div className="catalog__hover-text">Абу-Даби</div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="catalog__telef-sec">
-                <img className="catalog__phone1" src={izamphone1} alt="" />
-                <img className="catalog__phone3" src={izamphone2} alt="" />
-                <div className="catalog__telef--text">
-                  <h2>
-                  {
-              lan === "ru" && "Подбирайте недвижимость привычным способом"
-            }
-            {
-              lan === "en" && "Select real estate in the usual way"
-            }
-            {
-              lan === "zh" && "按常规方式选择房产"
-            }
-               {
-                  lan === "ar" && "اختر العقارات بالطريقة المعتادة"
-                }   
-                    </h2>
-                  <p>
-                  {
-              lan === "ru" && " Наш алгоритм подберет"
-            }
-            {
-              lan === "en" && "Our algorithm will select"
-            }
-            {
-              lan === "zh" && "我们的算法将选择"
-            }
-               {
-                  lan === "ar" && "سوف تختار الخوارزمية لدينا"
-                }  
-                   </p>
-                  <button>
-                  {
-              lan === "ru" && "  Попробовать"
-            }
-            {
-              lan === "en" && "Try it"
-            }
-            {
-              lan === "zh" && "尝试一下"
-            }
-               {
-                  lan === "ar" && "جربها"
-                }  
-                  </button>
-                </div>
-              </div>
+               </div>
+              <Catalogtype/>
+              <CatalogPhone/>
             </div>
 
             <section className="offer-section2">
@@ -919,70 +821,8 @@ const Cataloge = () => {
                 <img src={arrowleft} alt="" />
               </span>
             </div>  
-          }
-            {/* <div
-              className="catalogue-banner2 catalugbarner2-bag"
-              // style="background-image: url(img/categback.png)"
-            >
-              <a className="catolog-barner__route" href="">
-                <div className="catalogue-banner__description">
-                  <div className="catalogue-banner__title">Лидмагнит</div>
-                  <p className="catalogue-banner__text">Скачайте</p>
-                </div>
-                <button className="learn-more">Подробнее</button>
-              </a>
-            </div> */}
-                 <div onClick={()=>navigate("/articlemain")}  className="catalogue-banner2 catalugbarner2-bag">
-              <div  className="catolog-barner__route" href="">
-                <div className="catalogue-banner__description">
-                  <div className="catalogue-banner__title">
-                  {
-              lan === "ru" && "Район Дубай марина"
             }
-            {
-              lan === "en" && "Dubai Marina area"
-            }
-            {
-              lan === "zh" && "迪拜码头区"
-            }
-               {
-                  lan === "ar" && "منطقة دبي مارينا"
-                } 
-                    
-                  </div>
-                  <p className="catalogue-banner__text">
-                  {
-              lan === "ru" && " Перейти к статье"
-            }
-            {
-              lan === "en" && "Go to article"
-            }
-            {
-              lan === "zh" && "前往文章"
-            }
-               {
-                  lan === "ar" && 'انتقل إلى المادة'
-                } 
-                   </p>
-                </div>
-                <button className="learn-more">
-                {
-              lan === "ru" && "  Подробнее"
-            }
-            {
-              lan === "en" && "More details"
-            }
-            {
-              lan === "zh" && "更多细节"
-            }
-               {
-                  lan === "ar" && 'المزيد من التفاصيل'
-                } 
-                
-                  </button>
-              </div>
-            </div>
-
+             <CatalogBarner/>
          
           </div>
         </div>

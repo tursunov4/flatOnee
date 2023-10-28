@@ -28,7 +28,7 @@ const Header = () => {
   const handleReload =(id)=>{
     navigate(`/catalog/${id}`)
     setMenu(false)
-    window.location.reload()
+    // window.location.reload()
   }
   const [izab , setIzab] = useState([])
   useEffect(()=>{

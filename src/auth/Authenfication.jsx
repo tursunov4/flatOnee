@@ -22,6 +22,7 @@ import Brokersmain from '../pages/Brokersmain/Brokersmain'
 import Academiya from '../pages/Academiya/Academiya'
 import Noudfound from '../pages/Notfound/Noudfound'
 import Storyview from '../pages/Storyview/Storyview'
+import ResertEnd from '../pages/ResetPassword/ResertEnd/ResertEnd'
 
 
 const authenfication = () => {
@@ -49,9 +50,9 @@ const authenfication = () => {
       <Route element={<Brokersitem/>} path={`/brokersitem`} /> 
       <Route element={<Brokersmain/>} path={`/brokermain`} /> 
       <Route element={<Storyview/>} path={`/storyview`} />
-    </Route>
+    </Route>    
+    <Route path='*' element={<Noudfound/>}  />
   
-    <Route path='*' element={<Noudfound/>}  /> 
    
     </Routes>
   )

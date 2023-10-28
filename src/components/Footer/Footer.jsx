@@ -44,7 +44,7 @@ const Footer = () => {
   const navigate = useNavigate()
   const handleReload =(id)=>{
     navigate(`/catalog/${id}`)
-    window.location.reload()
+    // window.location.reload()
   }
   return (
     <>

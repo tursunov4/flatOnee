@@ -13,7 +13,6 @@ import close from '../../assets/img/close-white.svg'
 import "./home.css";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import http from "../../axios";
-import axios from "axios";
 import Aos from "aos";
 import 'aos/dist/aos.css';
 import { Swiper, SwiperSlide ,  } from 'swiper/react';
@@ -250,8 +249,8 @@ const HomePage = () => {
         </form>
       </div>
       </div>
-          </div>
-          }
+       </div>
+         }
       
       <section  data-aos="fade-down" className="main-section__update">
         <div className="container__main">
@@ -303,9 +302,7 @@ const HomePage = () => {
                 </button>
             </div>
           </div>
-        </div>
-
-       
+        </div>       
       </section>
 
       <section className="stories-section">
@@ -330,6 +327,7 @@ const HomePage = () => {
           </ul>
         </div>
       </section>
+
       <section className="mi-section">
         <div  className="container__main">
           <div className="mi__wrapper">
@@ -454,7 +452,7 @@ const HomePage = () => {
                   {
                   lan === "zh" &&`
                   预测准确率超过90%，媲美准确度
-                                      专业投资经纪人`
+                    专业投资经纪人`
                 }
               
               </p>
@@ -557,6 +555,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
       <section className="our-mission__about">
         <div className="container__main">
           <ul className="ourmis__about-list">
@@ -963,6 +962,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
       <section data-aos-duration="1200"  data-aos="fade-down" className="offer-section">
         <div className="offer-section__wrapper">
           <ul className="apartament-list">
@@ -1012,7 +1012,7 @@ const HomePage = () => {
         </div>
       </section>
 
-        <section className="main__map">
+      <section className="main__map">
           <div className="container__main">
             <h2 data-aos-duration="1200"  data-aos="fade-down">
                   {
@@ -1042,7 +1042,7 @@ const HomePage = () => {
               </YMaps>
             </div>
           </div>
-        </section>
+      </section>
 
       <section className="flarorg">
         <div data-aos-duration="1200"  data-aos="fade-down" className="container__main">
@@ -1075,6 +1075,7 @@ const HomePage = () => {
             </h3>
         </div>
       </section>
+    
       <section className="telefon2">
         <div className="container__main">
           <div className="telefon2__wrap">

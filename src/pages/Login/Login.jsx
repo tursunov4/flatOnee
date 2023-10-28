@@ -5,10 +5,14 @@ import http from '../../axios'
 import { Context } from '../../Context/Context';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import openeye from "../../assets/img/openeye.svg"
+import closeeye from "../../assets/img/closeeye.svg"
 import Header from '../../components/Header/Header';
 const Login = () => {
     const [username , setUsername ] = useState("")
     const [password , setPassword] = useState("")
+    const [openpas , setOpenpas] = useState(false)
+
     const {lan} = useContext(Context)
     const navigate = useNavigate()
     const handleSubmit =(e)=>{
@@ -100,7 +104,13 @@ const Login = () => {
             </div>
             <div className="form__input">
                 <label>
-                    <input required onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder="Пароль"/>
+                    <input required onChange={(e) => setPassword(e.target.value)} type={openpas ? "text" : "password"} name="password" placeholder="Пароль"/>
+                    <div onClick={()=>setOpenpas(!openpas)} className='openclose__btn'>
+                      {
+                        openpas ? <img width={18} src={closeeye} alt="eyeclose" /> : 
+                     <img width={18} src={openeye} alt="eye" />
+                      }
+                    </div>
                 </label>
             </div>
             <div className="form__btn">

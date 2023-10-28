@@ -29,7 +29,6 @@ const Addkompleks = () => {
  const [videov ,setVideos] = useState([])
  const [dakument , setDakument] = useState([])
  const [money , setMoney] = useState("")
-//  ----- infra struktura rayona --
  const [kids ,setKids] = useState(false)
  const [cafe ,setCafe] = useState(false)
  const [school , setSchool] = useState(false)
@@ -39,8 +38,7 @@ const Addkompleks = () => {
  const [hospital , setHospital] = useState(false)
  const [metro , setMetro] = useState(false)     
  const [plyaj, setPlayj] = useState(false)
- const [tz, setTz] = useState(false)
-// --- infra proekta 
+ const [tz, setTz] = useState(false) 
 const [restaran2 ,setRestaran2] = useState(false)
 const [park2 ,setPark2] = useState(false)
 const [kids2 ,setKids2] = useState(false)
@@ -58,7 +56,6 @@ const [yandexcenter ,setYandexcenter] = useState([55.684758, 37.738521])
 const [country , setCountry] = useState("")
 const [loading , setLoading] = useState(false)
 const [gorod , setGorod] = useState("")
-// ------- hashtag 
 const [hastagsData , setHashtagsData] = useState([])
 const [searchList , setSearchList] = useState(false)
 const [hashtagarraypost ,setHashtagarrayPost] = useState([])
@@ -342,7 +339,7 @@ const handleYandex = (e)=>{
               </div>
               <div className="addobject__nazvaniya">
                 <h2>Введите страну</h2>
-                  <select onChange={(e)=>setCountry(e.target.value)} name="" id="" >
+                <select onChange={(e)=>setCountry(e.target.value)} name="" id="" >
                     {
                     
                        <option  selected hidden  value="Введите страну">Введите страну</option>
@@ -351,7 +348,7 @@ const handleYandex = (e)=>{
                     <option value="2">Индонезия</option>
                     <option value="3">Тайланд</option>
                     <option value="4">Турция</option>  
-                  </select>
+                </select>
               </div>
               <div className="addobject__nazvaniya">
                 <h2>Введите город</h2>
@@ -497,8 +494,7 @@ const handleYandex = (e)=>{
                 <h2>Объект на карте</h2>
                 <div className="addmap__mapwrap">
                   <div className="mapouter">
-                  <YMaps
-                  
+                  <YMaps                  
                     query={{ apikey: "ca60917c-ba3d-485a-8711-39fad57f4fe2" }}
                   >
                     <Map
@@ -606,7 +602,7 @@ const handleYandex = (e)=>{
                   <p>Добавить документ</p>
                 </label>
                 <ul className="addobject-addhash__list">
-                  {
+                   {
                     dakument?.map((item, index)=>(
                       <li key={index} className="addobject-addhash__list-item">
                       <p>

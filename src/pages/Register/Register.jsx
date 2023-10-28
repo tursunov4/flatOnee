@@ -5,6 +5,8 @@ import http from '../../axios'
 import { Context } from '../../Context/Context';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import openeye from "../../assets/img/openeye.svg"
+import closeeye from "../../assets/img/closeeye.svg"
 import Header from '../../components/Header/Header';
 const Register = () => {
     const [phone , setPhone] = useState('')
@@ -13,6 +15,8 @@ const Register = () => {
     const [firstname , setFirsname] = useState("")
     const [password, setPassword] = useState("")
     const [password2 ,setPassword2] = useState('')
+    const [openpas1 , setOpenpas1] = useState(false)
+    const [openpas2 , setOpenpas2] = useState(false)
     const {lan , setLan} = useContext(Context)
     const navigate =  useNavigate()
     const handleClick =(e) =>{
@@ -140,12 +144,24 @@ const Register = () => {
            
             <div className="form__input">
                 <label>
-                    <input onChange={(e)=>setPassword(e.target.value)} type="password"  placeholder="Пароль"/>
+                    <input onChange={(e)=>setPassword(e.target.value)} type={openpas1 ? "text" : "password"}  placeholder="Пароль"/>
+                    <div onClick={()=>setOpenpas1(!openpas1)} className='openclose__btn'>
+                      {
+                        openpas1 ? <img width={18} src={closeeye} alt="eyeclose" /> : 
+                     <img width={18} src={openeye} alt="eye" />
+                      }
+                    </div>
                 </label>
             </div>
             <div className="form__input">
                 <label>
-                    <input onChange={(e)=>setPassword2(e.target.value)} type="password"  placeholder="Повторите пароль"/>
+                    <input onChange={(e)=>setPassword2(e.target.value)} type={openpas2 ? "text" : "password"}  placeholder="Повторите пароль"/>
+                    <div onClick={()=>setOpenpas2(!openpas2)} className='openclose__btn'>
+                      {
+                        openpas2 ? <img width={18} src={closeeye} alt="eyeclose" /> : 
+                     <img width={18} src={openeye} alt="eye" />
+                      }
+                    </div>
                 </label>
             </div>
             <div className="form__btn">

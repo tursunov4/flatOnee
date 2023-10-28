@@ -117,3 +117,13 @@
       max-width: 300px;
     }
   }
+
+  .form__input > label{
+    position: relative;
+  }
+  .openclose__btn{
+    position: absolute;
+    top: 20%;
+    right: 10px;
+    cursor: pointer;
+  }
