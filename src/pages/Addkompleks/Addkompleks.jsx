@@ -283,6 +283,11 @@ let projectinfrastructure =[
          ${err.response.data.deadline ? `Срок сдачи- ${err.response.data.deadline}` :""}
          ${err.response.data.etaj1 ? `Этаж - ${err.response.data.etaj1}` :""}
          ${err.response.data.price? `Минимальная цена - ${err.response.data.price}` :""}
+         ${err.response.data.vid? `Фото видов - ${err.response.data.vid}` :""}
+         ${err.response.data.documents? `Документация - ${err.response.data.documents}` :""}
+         ${err.response.data.complex? `Фото комплекса - ${err.response.data.complex}` :""}
+         ${err.response.data.infra? `Фото инфраструктуры - ${err.response.data.infra}` :""}
+         ${err.response.data.lobbi? `Фото лобби - ${err.response.data.lobbi}` :""}
          ${err.response.data.message? `Минимальная цена - ${err.response.data.message}` :""}
          `, {
        position: "top-right",

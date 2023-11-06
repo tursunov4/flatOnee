@@ -51,9 +51,7 @@ const authenfication = () => {
       <Route element={<Brokersmain/>} path={`/brokermain`} /> 
       <Route element={<Storyview/>} path={`/storyview`} />
     </Route>    
-    <Route path='*' element={<Noudfound/>}  />
-  
-   
+    <Route path='*' element={<Noudfound/>}  />   
     </Routes>
   )
 }

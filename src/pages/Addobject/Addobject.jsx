@@ -299,6 +299,12 @@ const handleChange =(evt)=>{
          ${err.response.data.lift ? `Лифт - ${err.response.data.lift}` :""}
          ${err.response.data.vznos ? `План платежей - ${err.response.data.vznos}` :""}
          ${err.response.data.sena_year ? `Доходность - ${err.response.data.sena_year}` :""}
+         ${err.response.data.vid ? `Фото видов - ${err.response.data.vid}` :""}
+         ${err.response.data.documents ? `Документация - ${err.response.data.documents}` :""}
+         ${err.response.data.kuxni ? `Фото кухни - ${err.response.data.kuxni}` :""}
+         ${err.response.data.komnat ? `Фото комнаты - ${err.response.data.komnat}` :""}
+         ${err.response.data.spalni ? ` Фото спальни - ${err.response.data.spalni}` :""}
+         ${err.response.data.planirovki ? `Доходность - ${err.response.data.planirovki}` :""}
          `, {
        position: "top-right",
        autoClose: 2000,
